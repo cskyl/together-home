@@ -1,3 +1,4 @@
+import { money,studyCredit,setFocus } from './browser-helpers.mjs';
 import {chromium,expect} from '@playwright/test';
 import {createStore} from '../backend/store.mjs';
 import {createApi} from '../backend/server.mjs';
@@ -6,12 +7,12 @@ if(server)await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({channel:'msedge',headless:true}),contexts=await Promise.all([browser.newContext({viewport:{width:1440,height:1100}}),browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true})]),[a,b]=await Promise.all(contexts.map(c=>c.newPage()));
 const errors=[];for(const page of [a,b]){page.setDefaultTimeout(22000);page.on('pageerror',e=>errors.push(e.message));if(server)await page.route('**/cloud-config.json*',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({apiUrl:`http://127.0.0.1:${server.address().port}`})}));}
 const snapshot=page=>page.evaluate(()=>JSON.parse(localStorage.getItem('together-home-session-v1')).cached);
-async function study(page,n){await page.locator('#study-open').click();await page.locator('#minutes').fill(String(n));await page.locator('#study-form button[type=submit]').click();await expect(page.locator('#study-dialog')).not.toBeVisible();}
+async function study(page,n){await page.locator('#study-open').click();await page.locator('#minutes').fill(String(n));await setFocus(page,100);await page.locator('#study-form button[type=submit]').click();await expect(page.locator('#study-dialog')).not.toBeVisible();}
 async function rename(page,name){await page.locator('#design-name').fill(name);await page.locator('#design-name').press('Tab');}
 try{
   await a.goto(url);await a.locator('#connect-name').fill('设计测试甲');await a.locator('#create-room').click();await expect(a.locator('#cloud-connected')).toBeVisible();await a.locator('#make-invite').click();await expect(a.locator('#invite-output')).toBeVisible();const invite=await a.locator('#invite-link').inputValue();await a.locator('#close-cloud').click();
   await b.goto(invite);await b.locator('#connect-name').fill('设计测试乙');await b.locator('#join-room').click();await expect(b.locator('#connected-summary')).toContainText('两个人都加入了');await b.locator('#close-cloud').click();
-  await study(a,100);await a.locator('#invest').click();await expect(b.locator('#balance')).toHaveText('$500');
+  await study(a,100);await a.locator('#invest').click();await expect(b.locator('#balance')).toHaveText(money(studyCredit(await snapshot(a))-500));
   await a.locator('#design-open').click();await a.locator('[data-design-template=cozy]').click();await rename(a,'联机自定义房');await a.locator('#design-save').click();await expect(a.locator('#designer-dialog')).not.toBeVisible();await expect(b.locator('#plan-title')).toHaveText('联机自定义房');const original=(await snapshot(b)).customPlans[0];
   await b.locator('#edit-design').tap();await rename(b,'手机里的草稿');
   await b.locator('[data-design-tool=draw]').tap();const touch=await contexts[1].newCDPSession(b);
@@ -21,13 +22,13 @@ try{
   await b.locator('#design-save').click();await expect(b.locator('#design-message')).toContainText('对方刚更新');await expect(b.locator('#designer-dialog')).toBeVisible();await expect(b.locator('#design-name')).toHaveValue('手机里的草稿');await b.locator('#design-save-copy').click();await expect(b.locator('#designer-dialog')).not.toBeVisible();await expect(a.locator('#plan-title')).toHaveText('手机里的草稿 副本');
   const copy=(await snapshot(b)).customPlans.find(d=>d.id!==original.id);expect(copy.version).toBe(1);expect(copy.rooms).toHaveLength(10);expect((await snapshot(b)).customPlans.find(d=>d.id===original.id).rooms[0].paint).toBe('blue');
   console.log('PASS: saved designs and finishes sync; stale phone drafts are preserved and can be saved as a separate design');
-  await b.locator('#invest').click();await expect(a.locator('#build-percent')).toHaveText('9%');await study(b,50);await expect(a.locator('#balance')).toHaveText('$500');
+  await b.locator('#invest').click();await expect(a.locator('#build-percent')).toHaveText('9%');await study(b,50);await expect(a.locator('#balance')).toHaveText(money(studyCredit(await snapshot(b))-1000));
   await b.locator('[data-category=decor]').click();await b.locator('[data-item=decor-plant]').click();await b.locator('#buy-item').click();const studyRoom=copy.rooms.find(r=>r.type==='study');await b.locator('#placement-room').selectOption(studyRoom.id);await b.locator('#free-position-u').fill('23');await b.locator('#free-position-v').fill('64');await b.locator('#rotate-item').click();await b.locator('#place-item').click();await expect(b.locator('#item-dialog')).not.toBeVisible();await expect(a.locator('#owned-count')).toHaveText('1');await expect(a.locator('#scene canvas')).toHaveAttribute('data-placed','1');expect((await snapshot(a)).placements[0]).toMatchObject({u:23,v:64,rotation:1,plan:copy.id,room:studyRoom.id});
   console.log('PASS: custom-house construction and free furniture position/rotation sync from touch phone to desktop');
   await a.locator(`[data-custom-edit="${original.id}"]`).click();await rename(a,'断线也保留的设计');let dropped=false;
   await contexts[0].route('**/v1/action',async route=>{if(!dropped&&route.request().postDataJSON()?.action?.type==='design'){dropped=true;await route.fetch();await route.abort('failed');}else await route.continue();});
   await a.locator('#design-save').click();await expect(a.locator('#design-message')).toContainText('未确认');await a.locator('#design-save').click();await expect(a.locator('#designer-dialog')).not.toBeVisible();
-  const after=await snapshot(a);expect(after.customPlans).toHaveLength(2);expect(after.customPlans.find(d=>d.id===original.id).version).toBe(3);expect(after.events.filter(e=>e.type==='study')).toHaveLength(2);expect(after.events.filter(e=>e.type==='purchase')).toHaveLength(1);expect(after.events.filter(e=>e.type==='build').map(e=>e.amount)).toEqual([500,500]);await expect(a.locator('#balance')).toHaveText('$400');
+  const after=await snapshot(a);expect(after.customPlans).toHaveLength(2);expect(after.customPlans.find(d=>d.id===original.id).version).toBe(3);expect(after.events.filter(e=>e.type==='study')).toHaveLength(2);expect(after.events.filter(e=>e.type==='purchase')).toHaveLength(1);expect(after.events.filter(e=>e.type==='build').map(e=>e.amount)).toEqual([500,500]);await expect(a.locator('#balance')).toHaveText(money(studyCredit(after)-1100));
   await b.locator(`[data-custom-select="${copy.id}"]`).click();await b.reload();await expect(b.locator('#plan-title')).toHaveText('手机里的草稿 副本');await expect(b.locator('#build-percent')).toHaveText('9%');await expect(b.locator('#scene canvas')).toHaveAttribute('data-placed','1');
   await b.locator('.plan-select[data-plan=riverside]').click();await expect(b.locator('#build-percent')).toHaveText('9%');await expect(b.locator('#market-price')).toHaveText('$456,900 起');expect(errors).toEqual([]);
   console.log(`DESIGNER ONLINE PASSED (${live?'public API':'isolated API'}): `+url);

@@ -14,6 +14,7 @@
     "test:shop-online": "node tests/shop-online.mjs",
     "test:designer": "node tests/designer-browser.mjs",
     "test:designer-online": "node tests/designer-online.mjs",
+    "test:rewards": "node tests/rewards-browser.mjs",
     "host": "node backend/server.mjs"
   },
   "dependencies": {

@@ -1,16 +1,17 @@
 import { allPlans, phases, totalCost } from './plans.js';
 import { getItem, quote, placementRooms, placementSlots } from './items.js';
 import { validateDesign,normalizeDesign,MAX_DESIGNS } from './designs.js';
+import { DEFAULT_FOCUS, makeReward, studyReward, validateStudyReward } from './rewards.js';
 export const STORAGE_KEY = 'together-home-v1';
 export const freshState = () => ({version:1,selected:'riverside',names:['我','你'],events:[]});
-export const earned = s => s.events.filter(e=>e.type==='study').reduce((n,e)=>n+e.minutes*10,0);
+export const earned = s => s.events.filter(e=>e.type==='study').reduce((n,e)=>n+studyReward(e),0);
 export const balance = s => earned(s)-s.events.filter(e=>e.type==='build'||e.type==='purchase').reduce((n,e)=>n+e.amount,0);
 export const inventory = s => s.events.filter(e=>e.type==='purchase');
 export const invested = (s,id=s.selected) => s.events.filter(e=>e.type==='build'&&e.plan===id).reduce((n,e)=>n+e.amount,0);
 export function progress(amount) { let remainder=amount; return phases.map(p=>{ const paid=Math.max(0,Math.min(p.cost,remainder)); remainder-=p.cost; return {...p,paid,ratio:paid/p.cost}; }); }
-export function study(s,{person,minutes,note=''}) { if (![0,1].includes(person)||!Number.isInteger(minutes)||minutes<1||minutes>480||typeof note!=='string'||note.length>120) throw Error('请输入 1–480 分钟的学习时长，备注不超过 120 字。');return {...s,events:[...s.events,{id:crypto.randomUUID(),type:'study',person,minutes,note,at:new Date().toISOString()}]}; }
+export function study(s,{person,minutes,note='',focus=DEFAULT_FOCUS},{id=crypto.randomUUID(),roll=randomChoice}={}) { if (![0,1].includes(person)||!Number.isInteger(minutes)||minutes<1||minutes>480||typeof note!=='string'||note.length>120) throw Error('请输入 1–480 分钟的学习时长，备注不超过 120 字。');const reward=makeReward(minutes,focus,roll);return {...s,events:[...s.events,{id,type:'study',person,minutes,note,...reward,at:new Date().toISOString()}]}; }
 export function build(s) { const next=progress(invested(s)).find(p=>p.ratio<1); if (!next) throw Error('这栋家已全部建成。'); const amount=Math.min(balance(s),next.cost-next.paid);if(amount<=0)throw Error('先记录一次学习，就有资金可以投入啦。');return {...s,events:[...s.events,{id:crypto.randomUUID(),type:'build',plan:s.selected,amount,at:new Date().toISOString()}]}; }
-export function undoStudy(s) { const event=s.events.findLast(e=>e.type==='study');if(!event)throw Error('还没有可以撤销的学习记录。');if(balance(s)<event.minutes*10)throw Error('这次学习的资金已投入建设或购买物品，无法撤销。');const next={...s,events:s.events.filter(e=>e.id!==event.id)};validate(next);return next; }
+export function undoStudy(s) { const event=s.events.findLast(e=>e.type==='study');if(!event)throw Error('还没有可以撤销的学习记录。');if(balance(s)<studyReward(event))throw Error('这次学习的资金已投入建设或购买物品，无法撤销。');const next={...s,events:s.events.filter(e=>e.id!==event.id)};validate(next);return next; }
 export function randomChoice(count) {
   const limit=Math.floor(4294967296/count)*count,bytes=new Uint32Array(1);let value;
   do {crypto.getRandomValues(bytes);value=bytes[0];} while(value>=limit);
@@ -50,7 +51,7 @@ export function validate(s) {
   for(const e of s.events){
     if(!e||typeof e.id!=='string'||ids.has(e.id)||typeof e.at!=='string'||!Number.isFinite(Date.parse(e.at)))throw Error('记录无效。');ids.add(e.id);
     if(e.type==='study'){
-      if(![0,1].includes(e.person)||!Number.isInteger(e.minutes)||e.minutes<1||e.minutes>480||typeof e.note!=='string'||e.note.length>120)throw Error('学习记录无效。');funds+=e.minutes*10;
+      if(![0,1].includes(e.person)||!Number.isInteger(e.minutes)||e.minutes<1||e.minutes>480||typeof e.note!=='string'||e.note.length>120)throw Error('学习记录无效。');validateStudyReward(e);funds+=studyReward(e);
     }else if(e.type==='build'){
       if(!plans.some(p=>p.id===e.plan)||!Number.isInteger(e.amount)||e.amount<=0)throw Error('建设记录无效。');funds-=e.amount;used[e.plan]=(used[e.plan]||0)+e.amount;if(used[e.plan]>totalCost)throw Error('建设资金超出上限。');
     }else if(e.type==='purchase'){

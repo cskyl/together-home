@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { freshState,study,build,balance,invested,progress,undoStudy,validate } from '../src/state.js';
+import { freshState,study as recordStudy,build,balance,invested,progress,undoStudy,validate } from '../src/state.js';
 import { plans } from '../src/plans.js';
+// Keep unrelated ledger fixtures deterministic; rewards.test.js covers all reward outcomes.
+const study=(state,entry)=>recordStudy(state,entry,{roll:()=>500});
 
 test('旧版存档接入新增户型后仍保留原余额、学习记录和施工进度',()=>{
   const legacy={version:1,selected:'riverside',names:['甲','乙'],events:[

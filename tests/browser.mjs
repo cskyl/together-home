@@ -1,3 +1,4 @@
+import { money,localState } from './browser-helpers.mjs';
 import { chromium, expect } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import { plans } from '../src/plans.js';
@@ -41,22 +42,22 @@ try {
   await page.locator('[data-person="1"]').click();
   await page.locator('#study-note').fill('一起学会了一道题 <3');
   await page.locator('#study-form button[type=submit]').click();
-  await expect(page.locator('#balance')).toHaveText('$250');
+  const firstReward=(await localState(page)).events.at(-1).reward;expect(firstReward).toBeGreaterThanOrEqual(238);expect(firstReward).toBeLessThanOrEqual(263);const builtPercent=Math.round(firstReward/5500*100)+'%';await expect(page.locator('#balance')).toHaveText(money(firstReward));
   await expect(page.locator('.journal-entry').first()).toContainText('你 学习了 25 分钟');
   await page.locator('#invest').click();
   await expect(page.locator('#balance')).toHaveText('$0');
   await expect(page.locator('canvas')).toHaveAttribute('data-mode','construction');
-  await expect(page.locator('#build-percent')).toHaveText('5%');
+  await expect(page.locator('#build-percent')).toHaveText(builtPercent);
   await page.locator('#undo').click();
   await expect(page.locator('#toast')).toContainText('已投入');
   await page.locator('.plan-select[data-plan="fremont"]').click();
   await expect(page.locator('canvas')).toHaveAttribute('data-plan','fremont');
   await expect(page.locator('#build-percent')).toHaveText('0%');
   await page.locator('.plan-select[data-plan="riverside"]').click();
-  await expect(page.locator('#build-percent')).toHaveText('5%');
+  await expect(page.locator('#build-percent')).toHaveText(builtPercent);
   await page.reload();
   console.log('Checking reload, source floorplan, room selection');
-  await expect(page.locator('#build-percent')).toHaveText('5%');
+  await expect(page.locator('#build-percent')).toHaveText(builtPercent);
   await page.locator('[data-flat=true]').click();
   await expect(page.locator('#floor-image')).toBeVisible();
   await expect(page.locator('#floor-image')).toHaveAttribute('src',/riverside-floor/);
@@ -80,7 +81,7 @@ try {
     if(['ashland','grandview','anthem'].includes(plan.id))await page.locator('.model-panel').screenshot({path:`test-results/${plan.id}-model.png`});
   }
   await page.locator('.plan-select[data-plan=riverside]').click();
-  await expect(page.locator('#build-percent')).toHaveText('5%');
+  await expect(page.locator('#build-percent')).toHaveText(builtPercent);
   await page.locator('#cutaway').click();
   await page.locator('.switch-label').click();
   await expect(page.locator('#labels-toggle')).not.toBeChecked();
@@ -93,7 +94,7 @@ try {
   await page.locator('#study-open').click();
   await page.locator('#minutes').fill('50');
   await page.locator('#study-form button[type=submit]').click();
-  await expect(page.locator('#balance')).toHaveText('$500');
+  const secondReward=(await localState(page)).events.at(-1).reward;await expect(page.locator('#balance')).toHaveText(money(secondReward));
   await page.locator('#undo').click();
   await expect(page.locator('#balance')).toHaveText('$0');
   expect(errors).toEqual([]);

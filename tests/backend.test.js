@@ -4,8 +4,10 @@ import { randomBytes,randomUUID } from 'node:crypto';
 import { mkdtempSync,rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { createStore } from '../backend/store.mjs';
+import { createStore as openStore } from '../backend/store.mjs';
 import { createApi } from '../backend/server.mjs';
+import { balance } from '../src/state.js';
+const createStore=path=>openStore(path,{studyRoll:()=>500});
 const secret=()=>randomBytes(32).toString('hex');
 const act=(store,token,action,id=randomUUID())=>store.action(token,{requestId:id,action});
 function pair(store){const a=secret(),b=secret(),invite=secret();store.create(a,{name:'甲',invite});store.join(b,{name:'乙',invite});return {a,b,invite};}
@@ -21,7 +23,7 @@ test('新增户型支持双人选房和施工，旧户型与余额不被重置',
     const current=s.snapshot(b).state;
     assert.deepEqual(current.events.slice(0,2),oldEvents);
     assert.equal(current.events.filter(e=>e.type==='build').length,4);
-    assert.equal(current.events.reduce((sum,e)=>sum+(e.type==='study'?e.minutes*10:-e.amount),0),0);
+    assert.equal(balance(current),0);
     act(s,b,{type:'select',plan:'riverside'});assert.equal(s.snapshot(a).state.events[1].amount,500);
   }finally{s.close();}
 });

@@ -7,6 +7,7 @@ export function createCloud({onSnapshot,onStatus}) {
   async function config(){const r=await fetch(`${import.meta.env.BASE_URL}cloud-config.json?t=${Math.floor(Date.now()/60000)}`,{cache:'no-store'});if(!r.ok)throw Error('无法读取联机配置。');const c=await r.json();if(c.apiUrl){const url=new URL(c.apiUrl);if(url.protocol!=='https:'&&!['localhost','127.0.0.1'].includes(url.hostname))throw Error('联机地址必须使用 HTTPS。');api=url.origin;}lastConfig=Date.now();return !!api;}
   async function request(path,body={},token=session?.token){if(!api)throw Error('联机服务还没有配置。');const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);try{const r=await fetch(api+'/v1/'+path,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify(body),signal:controller.signal});let data;try{data=await r.json();}catch{throw Error('主机暂时离线，请稍后重试。');}if(!r.ok){const e=Error(data.error||'同步失败，请稍后重试。');e.status=r.status;throw e;}return data;}catch(e){if(e.name==='AbortError'||e instanceof TypeError){onStatus('offline');throw Error('暂时连接不到主机；本次操作未确认，可在恢复后重试。');}throw e;}finally{clearTimeout(timeout);}}
   function save(){localStorage.setItem(SESSION_KEY,JSON.stringify(session));}
+  function clearPending(requestId){if(session?.pending?.requestId===requestId){session.pending=null;save();}}
   function accept(data){validate(data.state);if(!session)return;if(data.roomId===session.roomId&&data.revision<revision)return;session.roomId=data.roomId;session.slot=data.slot;session.memberCount=data.memberCount;session.cached=data.state;save();if(data.revision!==revision){revision=data.revision;onSnapshot(data);}onStatus('connected',session);}
   async function poll(){if(!session||inflight||stopped)return;inflight=true;try{accept(await request('snapshot'));}catch(e){onStatus('offline',session);if(e.status===401)onStatus('invalid',session);if(Date.now()-lastConfig>60000)try{await config();}catch{}}finally{inflight=false;schedule();}}
   function schedule(){clearTimeout(timer);if(session&&!stopped)timer=setTimeout(poll,document.hidden?25000:4000);}
@@ -24,7 +25,7 @@ export function createCloud({onSnapshot,onStatus}) {
     async action(action){if(!session?.roomId)throw Error('先创建或加入一个房间。');const pending=session.pending;
       if(pending&&JSON.stringify(pending.action)!==JSON.stringify(action))throw Error('上一笔操作还未确认，请先重试上一笔操作或重新连接。');
       const body=pending||{requestId:crypto.randomUUID(),action};session.pending=body;save();
-      try{const result=await request('action',body);session.pending=null;accept(result);schedule();return {...result,requestId:body.requestId};}catch(e){if(e.status){session.pending=null;save();}throw e;}},
+      try{const result=await request('action',body);clearPending(body.requestId);accept(result);schedule();return {...result,requestId:body.requestId};}catch(e){if(e.status)clearPending(body.requestId);throw e;}},
     async retry(){if(session?.pending)return this.action(session.pending.action);await config();await poll();},
     async invitation(){if(!session?.roomId)throw Error('先创建一个房间。');if(session.memberCount>=2)throw Error('房间里已经有两个人了。');const invite=secret();await request('invite',{invite});session.invite=invite;save();return invite;},
     disconnect(){stopped=true;clearTimeout(timer);session=null;localStorage.removeItem(SESSION_KEY);},

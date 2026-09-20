@@ -2,13 +2,14 @@ import { DatabaseSync } from 'node:sqlite';
 import { createHash, randomUUID, randomInt } from 'node:crypto';
 import { freshState, validate, balance, study, build, purchase, placeItem, saveDesign } from '../src/state.js';
 import { allPlans } from '../src/plans.js';
+import { studyReward } from '../src/rewards.js';
 
 export class ApiError extends Error { constructor(message,status=400){super(message);this.status=status;} }
 const hash=s=>createHash('sha256').update(s).digest('hex');
 const key=s=>{if(typeof s!=='string'||!/^[a-f0-9]{64}$/.test(s))throw new ApiError('访问凭证不正确。',401);return hash(s);};
 const name=s=>{if(typeof s!=='string'||!s.trim()||s.trim().length>16)throw new ApiError('称呼需要 1–16 个字。');return s.trim();};
 
-export function createStore(path=':memory:') {
+export function createStore(path=':memory:',{studyRoll=randomInt}={}) {
   const db=new DatabaseSync(path);db.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;
     CREATE TABLE IF NOT EXISTS rooms (id TEXT PRIMARY KEY,state TEXT NOT NULL,revision INTEGER NOT NULL DEFAULT 1,invite_hash TEXT UNIQUE,invite_expires INTEGER,created_at INTEGER NOT NULL);
     CREATE TABLE IF NOT EXISTS members (key_hash TEXT PRIMARY KEY,room_id TEXT NOT NULL REFERENCES rooms(id),slot INTEGER NOT NULL CHECK(slot IN(0,1)), UNIQUE(room_id,slot));
@@ -35,14 +36,14 @@ export function createStore(path=':memory:') {
     invite(token,{invite}){const ih=key(invite);return transaction(()=>{const m=member(token);if(m.slot!==0)throw new ApiError('只有创建者可以邀请。',403);if(snapshotBy(m).memberCount>=2)throw new ApiError('两位成员已经到齐，无需再次邀请。',409);db.prepare('UPDATE rooms SET invite_hash=?,invite_expires=? WHERE id=?').run(ih,Date.now()+7*86400000,m.room_id);return snapshotBy(m);});},
     action(token,{requestId,action}){if(typeof requestId!=='string'||!/^[0-9a-f-]{36}$/.test(requestId)||!action||typeof action!=='object')throw new ApiError('操作格式不正确。');return transaction(()=>{const m=member(token),before=snapshotBy(m),fp=hash(JSON.stringify(action));const previous=db.prepare('SELECT * FROM operations WHERE room_id=? AND request_id=?').get(m.room_id,requestId);if(previous){if(previous.member_hash!==m.key_hash||previous.fingerprint!==fp)throw new ApiError('操作编号已被使用，请重试。',409);return before;}
       let state=before.state;if(state.events.length>=50000&&action.type==='study')throw new ApiError('记录已达到容量上限，请先导出备份。');
-      if(action.type==='study'){state=study(state,{person:m.slot,minutes:action.minutes,note:action.note??''});state.events.at(-1).id=requestId;}
+      if(action.type==='study'){try{state=study(state,{person:m.slot,minutes:action.minutes,note:action.note??'',focus:action.focus},{id:requestId,roll:studyRoll});}catch(e){throw new ApiError(e.message);}}
       else if(action.type==='build'){if(!allPlans(state).some(p=>p.id===action.plan))throw new ApiError('请选择一个有效户型。');state=build({...state,selected:action.plan});state.events.at(-1).id=requestId;}
       else if(action.type==='purchase'){try{state=purchase(state,{item:action.item,config:action.config,person:m.slot},{id:requestId,roll:randomInt});}catch(e){throw new ApiError(e.message);}}
       else if(action.type==='place'){try{state=placeItem(state,{id:action.id,position:action.position});}catch(e){throw new ApiError(e.message);}}
       else if(action.type==='select'){if(!allPlans(state).some(p=>p.id===action.plan))throw new ApiError('请选择一个有效户型。');state={...state,selected:action.plan};}
       else if(action.type==='design'){try{state=saveDesign(state,{design:action.design,expectedVersion:action.expectedVersion});}catch(e){throw new ApiError(e.message,e.message.includes('对方刚更新')?409:400);}}
       else if(action.type==='rename'){state={...state,names:state.names.map((n,i)=>i===m.slot?name(action.name):n)};}
-      else if(action.type==='undo'){const event=state.events.findLast(e=>e.type==='study'&&e.person===m.slot);if(!event)throw new ApiError('你还没有可以撤销的学习记录。');if(balance(state)<event.minutes*10)throw new ApiError('这次学习的资金已投入建设或购买物品，无法撤销。');state={...state,events:state.events.filter(e=>e.id!==event.id)};try{validate(state);}catch{throw new ApiError('这次学习的资金已用于之前的建设或购买物品，无法撤销。');}}
+      else if(action.type==='undo'){const event=state.events.findLast(e=>e.type==='study'&&e.person===m.slot);if(!event)throw new ApiError('你还没有可以撤销的学习记录。');if(balance(state)<studyReward(event))throw new ApiError('这次学习的资金已投入建设或购买物品，无法撤销。');state={...state,events:state.events.filter(e=>e.id!==event.id)};try{validate(state);}catch{throw new ApiError('这次学习的资金已用于之前的建设或购买物品，无法撤销。');}}
       else throw new ApiError('不支持的操作。');
       validate(state);db.prepare('UPDATE rooms SET state=?,revision=revision+1 WHERE id=?').run(JSON.stringify(state),m.room_id);
       db.prepare('INSERT INTO operations(room_id,request_id,member_hash,fingerprint) VALUES(?,?,?,?)').run(m.room_id,requestId,m.key_hash,fp);return snapshotBy(m);});}
