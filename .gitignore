@@ -1,0 +1,10 @@
+node_modules/
+dist/
+research/*.html
+test-results/
+data/
+runtime/
+tools/
+.env*
+research/*.png
+*.log

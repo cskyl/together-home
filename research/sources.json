@@ -1,0 +1,20 @@
+﻿[
+    {
+        "url":  "https://www.mihomes.com/new-homes/ohio/columbus/fremont-plan",
+        "floor":  "https://dam.mihomes.com/media/508112/50421.jpeg",
+        "id":  "fremont",
+        "photo":  "https://dam.mihomes.com/media/1181146/50421.jpeg"
+    },
+    {
+        "url":  "https://www.mihomes.com/new-homes/ohio/columbus/riverside-plan",
+        "floor":  "https://dam.mihomes.com/media/71266/50421.jpeg",
+        "id":  "riverside",
+        "photo":  "https://dam.mihomes.com/media/999893/50421.jpeg"
+    },
+    {
+        "url":  "https://www.mihomes.com/new-homes/ohio/columbus/naperville-plan",
+        "floor":  "https://dam.mihomes.com/media/123850/50421.jpeg",
+        "id":  "naperville",
+        "photo":  "https://dam.mihomes.com/media/123846/50421.jpeg"
+    }
+]
