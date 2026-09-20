@@ -3,7 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { mkdir } from 'node:fs/promises';
 import { createStore } from '../backend/store.mjs';
 import { createApi } from '../backend/server.mjs';
-import { money,localState,cloudState,setFocus } from './browser-helpers.mjs';
+import { buildPercent,money,localState,cloudState,setFocus } from './browser-helpers.mjs';
 
 const url=process.env.TEST_URL||'http://localhost:4178/';
 const live=process.env.REWARDS_LIVE_API==='1',store=live?null:createStore(),server=live?null:createApi(store,{rateLimit:false});
@@ -23,7 +23,7 @@ try{
   await mkdir('test-results',{recursive:true});
   await local.route('**/cloud-config.json*',route=>route.fulfill({contentType:'application/json',body:'{"apiUrl":""}'}));
   await local.addInitScript(state=>{if(!localStorage.getItem('together-home-v1'))localStorage.setItem('together-home-v1',JSON.stringify(state));},initial);
-  await local.goto(url,{waitUntil:'domcontentloaded'});await expect(local.locator('#balance')).toHaveText('$500');await expect(local.locator('#build-percent')).toHaveText('9%');expect(await localState(local)).toEqual(initial);
+  await local.goto(url,{waitUntil:'domcontentloaded'});await expect(local.locator('#balance')).toHaveText('$500');await expect(local.locator('#build-percent')).toHaveText(buildPercent(500));expect(await localState(local)).toEqual(initial);
   await local.locator('#study-open').click();await expect(local.locator('#study-focus')).toHaveValue('50');await expect(local.locator('#focus-value')).toHaveText('正常发挥 · 50');await expect(local.locator('#reward-amount,#reward-average')).toHaveCount(0);await expect(local.locator('#study-dialog')).not.toContainText('预计入账');
   await setFocus(local,0);await expect(local.locator('#focus-value')).toHaveText('有点分心 · 0');
   await setFocus(local,100);await expect(local.locator('#focus-value')).toHaveText('很投入 · 100');
@@ -31,7 +31,7 @@ try{
   await local.locator('#minutes').fill('50');await expect(local.locator('[data-minutes="50"]')).toHaveClass('selected');await expect(local.locator('#reward-amount,#reward-average')).toHaveCount(0);
   await local.locator('#minutes').fill('25');await setFocus(local,0);await local.locator('#study-note').fill('低投入也记一下');await local.locator('#study-dialog').screenshot({path:'test-results/reward-desktop-slider.png'});await local.locator('#study-form button[type=submit]').click();await expect(local.locator('#study-dialog')).not.toBeVisible();
   const saved=await localState(local),reward=saved.events.at(-1);checkReward(reward);expect(reward.focus).toBe(0);await expect(local.locator('#balance')).toHaveText(money(500+reward.reward));await expect(local.locator('.journal-entry').first()).toContainText(money(reward.reward));await expect(local.locator('.journal-entry').first().locator('.study-details')).toContainText('%');expect(saved.events.slice(0,2)).toEqual(initial.events);
-  await local.reload({waitUntil:'domcontentloaded'});expect(await localState(local)).toEqual(saved);await expect(local.locator('#balance')).toHaveText(money(500+reward.reward));await local.locator('#undo').click();await expect(local.locator('#balance')).toHaveText('$500');expect(await localState(local)).toEqual(initial);await expect(local.locator('#build-percent')).toHaveText('9%');
+  await local.reload({waitUntil:'domcontentloaded'});expect(await localState(local)).toEqual(saved);await expect(local.locator('#balance')).toHaveText(money(500+reward.reward));await local.locator('#undo').click();await expect(local.locator('#balance')).toHaveText('$500');expect(await localState(local)).toEqual(initial);await expect(local.locator('#build-percent')).toHaveText(buildPercent(500));
   console.log('PASS: keyboard slider without a pre-submit estimate, recorded credit, reload, actual-amount undo and unmodified legacy progress');
 
   await a.goto(url,{waitUntil:'domcontentloaded'});await a.locator('#connect-name').fill('投入测试甲');await a.locator('#create-room').click();await expect(a.locator('#cloud-connected')).toBeVisible();await a.locator('#make-invite').click();await expect(a.locator('#invite-output')).toBeVisible();const invite=await a.locator('#invite-link').inputValue();await a.locator('#close-cloud').click();

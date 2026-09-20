@@ -15,6 +15,7 @@
     "test:designer": "node tests/designer-browser.mjs",
     "test:designer-online": "node tests/designer-online.mjs",
     "test:rewards": "node tests/rewards-browser.mjs",
+    "test:construction": "node tests/construction-browser.mjs",
     "host": "node backend/server.mjs"
   },
   "dependencies": {

@@ -49,7 +49,7 @@ export const plans = [
   }
 ];
 // Official Columbus plan-page starting prices, read directly on this date.
-// These are display metadata only; game balances and construction costs stay separate.
+// Each catalog price is also the game's complete construction target for this plan.
 const startingPrices = {riverside:456900,fremont:400900,naperville:400900,ashland:390900,grandview:441900,anthem:473900};
 for (const plan of plans) {
   plan.price = {amount:startingPrices[plan.id],currency:'USD',kind:'starting',checkedAt:'2026-09-20',source:plan.source};
@@ -57,11 +57,3 @@ for (const plan of plans) {
 }
 export const allPlans = state => [...plans,...(state?.customPlans||[]).map(designToPlan)];
 export const getPlan = (id,state) => {const official=plans.find(p=>p.id===id);if(official)return official;const custom=state?.customPlans?.find(p=>p.id===id);return custom?designToPlan(custom):plans[0];};
-export const phases = [
-  {id:'foundation',name:'地基与地坪',short:'地基',cost:500,detail:'先打好地基，铺上地坪。'},
-  {id:'frame',name:'木结构框架',short:'框架',cost:1000,detail:'搭起框架，房子的轮廓就出来了。'},
-  {id:'walls',name:'墙体与门窗',short:'墙体',cost:1500,detail:'装上墙体、门和窗。'},
-  {id:'roof',name:'屋顶与外立面',short:'屋顶',cost:1000,detail:'加上屋顶，完成外墙。'},
-  {id:'finish',name:'室内与家具',short:'入住',cost:1500,detail:'摆好家具，最后收个尾。'}
-];
-export const totalCost = phases.reduce((s,p)=>s+p.cost,0);

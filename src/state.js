@@ -1,4 +1,5 @@
-import { allPlans, phases, totalCost } from './plans.js';
+import { allPlans, getPlan } from './plans.js';
+import { constructionTotal, constructionPhases, constructionProgress } from './construction.js';
 import { getItem, quote, placementRooms, placementSlots } from './items.js';
 import { validateDesign,normalizeDesign,MAX_DESIGNS } from './designs.js';
 import { DEFAULT_FOCUS, makeReward, studyReward, validateStudyReward } from './rewards.js';
@@ -8,9 +9,9 @@ export const earned = s => s.events.filter(e=>e.type==='study').reduce((n,e)=>n+
 export const balance = s => earned(s)-s.events.filter(e=>e.type==='build'||e.type==='purchase').reduce((n,e)=>n+e.amount,0);
 export const inventory = s => s.events.filter(e=>e.type==='purchase');
 export const invested = (s,id=s.selected) => s.events.filter(e=>e.type==='build'&&e.plan===id).reduce((n,e)=>n+e.amount,0);
-export function progress(amount) { let remainder=amount; return phases.map(p=>{ const paid=Math.max(0,Math.min(p.cost,remainder)); remainder-=p.cost; return {...p,paid,ratio:paid/p.cost}; }); }
+export function progress(amount,plan=getPlan('riverside')) { return constructionProgress(amount,plan); }
 export function study(s,{person,minutes,note='',focus=DEFAULT_FOCUS},{id=crypto.randomUUID(),roll=randomChoice}={}) { if (![0,1].includes(person)||!Number.isInteger(minutes)||minutes<1||minutes>480||typeof note!=='string'||note.length>120) throw Error('请输入 1–480 分钟的学习时长，备注不超过 120 字。');const reward=makeReward(minutes,focus,roll);return {...s,events:[...s.events,{id,type:'study',person,minutes,note,...reward,at:new Date().toISOString()}]}; }
-export function build(s) { const next=progress(invested(s)).find(p=>p.ratio<1); if (!next) throw Error('这栋家已全部建成。'); const amount=Math.min(balance(s),next.cost-next.paid);if(amount<=0)throw Error('先记录一次学习，就有资金可以投入啦。');return {...s,events:[...s.events,{id:crypto.randomUUID(),type:'build',plan:s.selected,amount,at:new Date().toISOString()}]}; }
+export function build(s,{person}={}) { if(person!==undefined&&![0,1].includes(person))throw Error('施工成员无效。');const plan=getPlan(s.selected,s),next=progress(invested(s),plan).find(p=>p.ratio<1); if (!next) throw Error('这栋家已全部建成。'); const amount=Math.min(balance(s),next.cost-next.paid);if(amount<=0)throw Error('先记录一次学习，就有资金可以投入啦。');return {...s,events:[...s.events,{id:crypto.randomUUID(),type:'build',plan:s.selected,stage:next.id,...(person===undefined?{}:{person}),amount,at:new Date().toISOString()}]}; }
 export function undoStudy(s) { const event=s.events.findLast(e=>e.type==='study');if(!event)throw Error('还没有可以撤销的学习记录。');if(balance(s)<studyReward(event))throw Error('这次学习的资金已投入建设或购买物品，无法撤销。');const next={...s,events:s.events.filter(e=>e.id!==event.id)};validate(next);return next; }
 export function randomChoice(count) {
   const limit=Math.floor(4294967296/count)*count,bytes=new Uint32Array(1);let value;
@@ -53,7 +54,8 @@ export function validate(s) {
     if(e.type==='study'){
       if(![0,1].includes(e.person)||!Number.isInteger(e.minutes)||e.minutes<1||e.minutes>480||typeof e.note!=='string'||e.note.length>120)throw Error('学习记录无效。');validateStudyReward(e);funds+=studyReward(e);
     }else if(e.type==='build'){
-      if(!plans.some(p=>p.id===e.plan)||!Number.isInteger(e.amount)||e.amount<=0)throw Error('建设记录无效。');funds-=e.amount;used[e.plan]=(used[e.plan]||0)+e.amount;if(used[e.plan]>totalCost)throw Error('建设资金超出上限。');
+      const plan=plans.find(p=>p.id===e.plan);
+      if(!plan||!Number.isSafeInteger(e.amount)||e.amount<=0||(e.person!==undefined&&![0,1].includes(e.person))||(e.stage!==undefined&&!constructionPhases(plan).some(p=>p.id===e.stage)))throw Error('建设记录无效。');funds-=e.amount;used[e.plan]=(used[e.plan]||0)+e.amount;if(used[e.plan]>constructionTotal(plan))throw Error('建设资金超出房子总价。');
     }else if(e.type==='purchase'){
       const priced=quote(e.item,e.config);
       if(![0,1].includes(e.person)||e.amount!==priced.amount||Object.keys(priced.config).some(k=>e.config?.[k]!==priced.config[k])||(priced.item.variants?!priced.item.variants.some(v=>v.id===e.variant):e.variant!==undefined))throw Error('购买记录无效。');
@@ -71,8 +73,10 @@ export function validate(s) {
 }
 export function saveDesign(s,{design,expectedVersion}){
   const clean=normalizeDesign(design),old=(s.customPlans||[]).find(d=>d.id===clean.id);
+  if(design.budget===undefined&&old?.budget!==undefined)clean.budget=old.budget;
   if(!Number.isSafeInteger(expectedVersion)||expectedVersion!==(old?.version||0))throw Error('对方刚更新了这个户型。你的草稿还在，可以另存一份，或载入最新版本。');
   if(!old&&(s.customPlans||[]).length>=MAX_DESIGNS)throw Error('最多保存 8 个自定义户型，可以继续编辑已有户型。');
+  if(clean.budget<invested(s,clean.id))throw Error('房子总预算不能低于已经投入的施工资金。');
   const saved={...clean,version:(old?.version||0)+1},next={...s,selected:saved.id,customPlans:[...(s.customPlans||[]).filter(d=>d.id!==saved.id),saved]};
   if(s.placements){const plans=allPlans(next);next.placements=s.placements.filter(p=>{if(p.plan!==saved.id)return true;try{validPlacement(next,p,plans);return true;}catch{return false;}});}
   return next;

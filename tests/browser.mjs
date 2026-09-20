@@ -1,4 +1,4 @@
-import { money,localState } from './browser-helpers.mjs';
+import { buildPercent,money,localState } from './browser-helpers.mjs';
 import { chromium, expect } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import { plans } from '../src/plans.js';
@@ -42,7 +42,7 @@ try {
   await page.locator('[data-person="1"]').click();
   await page.locator('#study-note').fill('一起学会了一道题 <3');
   await page.locator('#study-form button[type=submit]').click();
-  const firstReward=(await localState(page)).events.at(-1).reward;expect(firstReward).toBeGreaterThanOrEqual(238);expect(firstReward).toBeLessThanOrEqual(263);const builtPercent=Math.round(firstReward/5500*100)+'%';await expect(page.locator('#balance')).toHaveText(money(firstReward));
+  const firstReward=(await localState(page)).events.at(-1).reward;expect(firstReward).toBeGreaterThanOrEqual(238);expect(firstReward).toBeLessThanOrEqual(263);const builtPercent=buildPercent(firstReward);await expect(page.locator('#balance')).toHaveText(money(firstReward));
   await expect(page.locator('.journal-entry').first()).toContainText('你 学习了 25 分钟');
   await page.locator('#invest').click();
   await expect(page.locator('#balance')).toHaveText('$0');

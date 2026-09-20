@@ -29,7 +29,7 @@ test('拒绝重叠房间、越界和非网格尺寸、未知装修、无效或�
   assert.throws(()=>validateDesign(designTemplate()),/1–20/);
 });
 test('自定义户型与官方户型独立建设，保存装修不会改变旧进度、学习记录或余额',()=>{
-  let s=build(study(freshState(),{person:0,minutes:200}));const original=structuredClone(s),design=designTemplate('studio');
+  let s=study(build(study(freshState(),{person:0,minutes:50})),{person:1,minutes:150});const original=structuredClone(s),design={...designTemplate('studio'),budget:25000};
   s=saveDesign(s,{design,expectedVersion:0});validate(s);assert.equal(allPlans(s).length,7);assert.equal(getPlan(design.id,s).custom,true);assert.deepEqual(s.events,original.events);assert.equal(balance(s),1500);
   s=build(s);assert.equal(invested(s,design.id),500);assert.equal(invested(s,'riverside'),500);assert.equal(balance(s),1000);
   const edit=structuredClone(s.customPlans[0]);edit.rooms[0].paint='blue';edit.rooms[0].floor='walnut';edit.rooms[0].furnished=false;const after=saveDesign(s,{design:edit,expectedVersion:1});assert.equal(after.customPlans[0].version,2);assert.deepEqual(after.events,s.events);assert.equal(balance(after),1000);assert.equal(invested(after),500);assert.deepEqual(validate(JSON.parse(JSON.stringify(after))),after);

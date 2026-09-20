@@ -72,7 +72,7 @@ test('历史固定金额不被重算，旧记录可和随机奖励及建设混�
   assert.equal(studyReward(legacy.events[0]),1000);
   assert.deepEqual(validate(legacy),original);
   const mixed=study(build(legacy),{person:1,minutes:25,focus:0},{roll:()=>0});
-  assert.equal(earned(mixed),1200);assert.equal(balance(mixed),700);
+  assert.equal(earned(mixed),1200);assert.equal(balance(mixed),200);
   assert.deepEqual(mixed.events[0],original.events[0]);
   assert.deepEqual(validate(JSON.parse(JSON.stringify(mixed))),mixed);
   assert.deepEqual(legacy,original);
@@ -149,7 +149,7 @@ test('HTTP 同时学习分别结算并累加实际奖励，事务建设不能透
     assert.deepEqual(before.events.map(event=>event.reward).sort((a,b)=>a-b),[238,263]);
     assert.deepEqual(before.events.map(event=>event.person).sort(),[0,1]);
     const builds=await Promise.all([post(a,{type:'build',plan:'riverside'}),post(b,{type:'build',plan:'riverside'})]);
-    assert.ok(builds.every(result=>result.status===200));
+    assert.deepEqual(builds.map(result=>result.status).sort(),[200,400]);
     const after=store.snapshot(b).state;assert.equal(balance(after),0);
     assert.equal(after.events.filter(event=>event.type==='build').reduce((sum,event)=>sum+event.amount,0),501);validate(after);
     assert.equal((await post(a,{type:'build',plan:'riverside'})).status,400);

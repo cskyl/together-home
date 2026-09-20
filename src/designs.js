@@ -1,4 +1,5 @@
 // One design unit is 0.5 m. Geometry and validation are shared with the server.
+import { DEFAULT_CUSTOM_BUDGET } from './construction.js';
 export const GRID=48,MAX_ROOMS=20,MAX_DESIGNS=8;
 export const roomTypes=[['living','客厅'],['bed','卧室'],['study','书房'],['kitchen','厨房'],['dining','餐厅'],['bath','浴室'],['hall','走廊 / 玄关'],['garage','车库'],['utility','洗衣房'],['closet','储藏间']];
 export const floors=[['oak','浅橡木','#c6ad87'],['walnut','深木色','#967453'],['tile','浅色瓷砖','#deded2'],['stone','水泥灰','#b8bfba'],['sage','鼠尾草绿','#a8b5a0'],['cream','奶油色','#e7dcc5']];
@@ -27,6 +28,7 @@ export function validOpenings(rooms,openings){const walls=designWalls(rooms);ret
 export function validateDesign(d,{empty=false,saved=false}={}){
   if(!d||typeof d.id!=='string'||!/^custom-[a-f0-9-]{36}$/.test(d.id)||typeof d.name!=='string'||!d.name.trim()||d.name.length>30||!Array.isArray(d.rooms)||d.rooms.length>MAX_ROOMS||(!empty&&!d.rooms.length)||!Array.isArray(d.openings)||d.openings.length>80)throw Error('户型格式不正确：需要名称和 1–20 个房间。');
   if(saved&&(!Number.isSafeInteger(d.version)||d.version<1))throw Error('户型版本无效。');
+  if(d.budget!==undefined&&(!Number.isSafeInteger(d.budget)||d.budget<1000||d.budget>100000000))throw Error('房子总预算需要是 1,000–100,000,000 之间的整数。');
   const ids=new Set();
   for(const r of d.rooms){
     if(!r||typeof r.id!=='string'||!/^r-[a-f0-9-]{36}$/.test(r.id)||ids.has(r.id)||typeof r.name!=='string'||!r.name.trim()||r.name.length>24||!roomTypes.some(t=>t[0]===r.type)||!floors.some(f=>f[0]===r.floor)||!paints.some(p=>p[0]===r.paint)||typeof r.furnished!=='boolean')throw Error('房间名称、类型或装修选项无效。');
@@ -42,13 +44,13 @@ export function validateDesign(d,{empty=false,saved=false}={}){
 }
 export function normalizeDesign(d){
   validateDesign(d);
-  return {id:d.id,name:d.name.trim(),rooms:d.rooms.map(r=>({id:r.id,name:r.name.trim(),type:r.type,x:r.x,z:r.z,w:r.w,d:r.d,floor:r.floor,paint:r.paint,furnished:r.furnished})),openings:d.openings.map(o=>({id:o.id,kind:o.kind,axis:o.axis,x:o.x,z:o.z,width:o.width}))};
+  return {id:d.id,name:d.name.trim(),budget:d.budget??DEFAULT_CUSTOM_BUDGET,rooms:d.rooms.map(r=>({id:r.id,name:r.name.trim(),type:r.type,x:r.x,z:r.z,w:r.w,d:r.d,floor:r.floor,paint:r.paint,furnished:r.furnished})),openings:d.openings.map(o=>({id:o.id,kind:o.kind,axis:o.axis,x:o.x,z:o.z,width:o.width}))};
 }
 export function designToPlan(d){
   const bounds=[Math.min(...d.rooms.map(r=>r.x)),Math.min(...d.rooms.map(r=>r.z)),Math.max(...d.rooms.map(r=>r.x+r.w)),Math.max(...d.rooms.map(r=>r.z+r.d))];
   const areaM2=d.rooms.reduce((n,r)=>n+r.w*r.d/4,0),wallSegments=designWalls(d.rooms),g=d.rooms.find(r=>r.type==='garage');
   return {id:d.id,name:d.name,custom:true,version:d.version||0,title:'自己画的，随时可以调整',description:`${d.rooms.length} 个房间 · ${areaM2.toLocaleString('zh-CN')} m² · 墙色、地板和家具由你们选择。`,tag:'自定义 · 单层',area:Math.round(areaM2*10.7639).toLocaleString('en-US'),areaM2,beds:String(d.rooms.filter(r=>r.type==='bed').length),baths:String(d.rooms.filter(r=>r.type==='bath').length),width:(bounds[2]-bounds[0])*.5,depth:(bounds[3]-bounds[1])*.5,bounds,rooms:d.rooms,wallSegments,openings:d.openings,
-    outline:[[bounds[0],bounds[1]],[bounds[2],bounds[1]],[bounds[2],bounds[3]],[bounds[0],bounds[3]]],outlines:d.rooms.map(r=>[[r.x,r.z],[r.x+r.w,r.z],[r.x+r.w,r.z+r.d],[r.x,r.z+r.d]]),walls:wallSegments.map(w=>[...w.a,...w.b]),porch:null,garage:g?[g.x,g.z,g.w,g.d]:null,windows:[],doors:[],source:null,price:null};
+    outline:[[bounds[0],bounds[1]],[bounds[2],bounds[1]],[bounds[2],bounds[3]],[bounds[0],bounds[3]]],outlines:d.rooms.map(r=>[[r.x,r.z],[r.x+r.w,r.z],[r.x+r.w,r.z+r.d],[r.x,r.z+r.d]]),walls:wallSegments.map(w=>[...w.a,...w.b]),porch:null,garage:g?[g.x,g.z,g.w,g.d]:null,windows:[],doors:[],source:null,price:null,budget:d.budget??DEFAULT_CUSTOM_BUDGET};
 }
 export function planSVG(d){
   const p=designToPlan(d),b=p.bounds,w=b[2]-b[0]+3,h=b[3]-b[1]+3;

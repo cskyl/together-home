@@ -1,4 +1,4 @@
-import { money,studyCredit,setFocus } from './browser-helpers.mjs';
+import { buildPercent,money,studyCredit,setFocus } from './browser-helpers.mjs';
 import { chromium,expect } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import { items } from '../src/items.js';
@@ -13,9 +13,9 @@ async function place(room,slot=0){await page.locator('#placement-room').selectOp
 try{
   await mkdir('test-results',{recursive:true});
   await page.route('**/cloud-config.json*',route=>route.fulfill({contentType:'application/json',body:'{"apiUrl":""}'}));
-  await page.goto(url);await expect(page.locator('.shop-card')).toHaveCount(8);await page.locator('#shop-more').click();await expect(page.locator('.shop-card')).toHaveCount(21);
+  await page.addInitScript(()=>{if(!localStorage.getItem('together-home-v1'))localStorage.setItem('together-home-v1',JSON.stringify({version:1,selected:'riverside',names:['我','你'],events:[{id:'old-study',type:'study',person:0,minutes:50,note:'旧记录',at:'2026-09-01T12:00:00.000Z'},{id:'old-build',type:'build',plan:'riverside',amount:500,at:'2026-09-01T12:01:00.000Z'}]}));});await page.goto(url);await expect(page.locator('.shop-card')).toHaveCount(8);await page.locator('#shop-more').click();await expect(page.locator('.shop-card')).toHaveCount(21);
   await page.locator('#shop-grid img').evaluateAll(imgs=>Promise.all(imgs.map(i=>i.decode())));console.log('PASS: 21 official LEGO reference images decode');
-  await page.locator('#study-open').click();await page.locator('#minutes').fill('480');await setFocus(page,100);await page.locator('#study-form button[type=submit]').click();await page.locator('#invest').click();const credited=studyCredit(await data());await expect(page.locator('#balance')).toHaveText(money(credited-500));
+  await page.locator('#study-open').click();await page.locator('#minutes').fill('480');await setFocus(page,100);await page.locator('#study-form button[type=submit]').click();const credited=studyCredit(await data());await expect(page.locator('#balance')).toHaveText(money(credited-500));
   await open('car-coupe');const before=await page.locator('#item-preview canvas').screenshot();
   const config={paint:'red',wheels:'bronze',cabin:'ivory',roof:'open',trim:'sport'};for(const [key,value] of Object.entries(config))await page.locator(`[data-option=${key}]`).selectOption(value);
   await expect(page.locator('.checkout-total strong')).toHaveText('$3,400');expect(before.equals(await page.locator('#item-preview canvas').screenshot())).toBe(false);
@@ -25,14 +25,14 @@ try{
   await open('lego-10182');await page.locator('[data-option=display]').selectOption('lit');await page.locator('#buy-item').click();await place('study',0);await expect(page.locator('#balance')).toHaveText(money(credited-4400));
   await open('box-forest');await expect(page.locator('.variant')).toHaveCount(6);await expect(page.locator('.odds-note')).toContainText('没有隐藏款');await page.locator('#buy-item').click();await expect(page.locator('#item-eyebrow')).toContainText('开到了');const variant=(await data()).events.at(-1).variant;await page.locator('#rotate-item').click();await place('study',1);await expect(page.locator('#balance')).toHaveText(money(credited-4520));
   await open('plush-bear');await page.locator('#buy-item').click();await place('study',12);await expect(page.locator('#balance')).toHaveText(money(credited-4700));
-  await open('decor-plant');await page.locator('#buy-item').click();await place('study',13);await expect(page.locator('#balance')).toHaveText(money(credited-4800));await expect(page.locator('#scene canvas')).toHaveAttribute('data-placed','5');await expect(page.locator('#build-percent')).toHaveText('9%');
+  await open('decor-plant');await page.locator('#buy-item').click();await place('study',13);await expect(page.locator('#balance')).toHaveText(money(credited-4800));await expect(page.locator('#scene canvas')).toHaveAttribute('data-placed','5');await expect(page.locator('#build-percent')).toHaveText(buildPercent(500));
   await page.locator('.model-panel').screenshot({path:'test-results/shop-decorated-room.png'});
   await page.locator('#undo').click();await expect(page.locator('#toast')).toContainText('购买物品');
   console.log('PASS: purchases, live 3D options, opening, placement, shared funds and undo guard');
   const saved=await data();await page.reload();expect(await data()).toEqual(saved);expect((await data()).events.find(e=>e.item==='box-forest').variant).toBe(variant);
   await category('lego');await page.locator('#shop-inventory').click();await page.locator('[data-owned]').click();await page.locator('#placement-plan').selectOption('anthem');await page.locator('#placement-room').selectOption('study');await page.locator('#rotate-item').click();await page.locator('#place-item').click();await expect(page.locator('#plan-title')).toHaveText('Anthem');await expect(page.locator('#scene canvas')).toHaveAttribute('data-placed','1');
   await page.locator('[data-owned]').click();await page.locator('#store-item').click();await expect(page.locator('#scene canvas')).toHaveAttribute('data-placed','0');expect((await data()).events.filter(e=>e.type==='purchase')).toHaveLength(5);
-  await page.locator('.plan-select[data-plan=riverside]').click();await expect(page.locator('#build-percent')).toHaveText('9%');
+  await page.locator('.plan-select[data-plan=riverside]').click();await expect(page.locator('#build-percent')).toHaveText(buildPercent(500));
   console.log('PASS: reload, collection persistence, relocation between houses and return to inventory');
   // Exercise every procedural model and dispose each temporary WebGL preview.
   for(const item of items){await open(item.id);await expect(page.locator('#item-preview canvas')).toBeVisible();await page.locator('#item-close').click();}

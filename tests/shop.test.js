@@ -15,7 +15,7 @@ const act=(s,token,action,id=randomUUID())=>s.action(token,{requestId:id,action}
 const pair=s=>{const a=secret(),b=secret(),invite=secret();s.create(a,{name:'甲',invite});s.join(b,{name:'乙',invite});return {a,b};};
 
 test('旧存档购买后保留学习和建设；余额统一结算，已消费学习不能撤销',()=>{
-  const old=build(study(freshState(),{person:0,minutes:100})),snapshot=structuredClone(old);
+  const old={...freshState(),events:[{id:randomUUID(),type:'study',person:0,minutes:100,note:'旧版资金',at:'2026-09-01T12:00:00.000Z'},{id:randomUUID(),type:'build',plan:'riverside',amount:500,at:'2026-09-01T12:01:00.000Z'}]},snapshot=structuredClone(old);
   assert.deepEqual(validate(old),snapshot);
   const s=purchase(old,{item:'lego-10182',person:1});
   assert.equal(balance(s),100);assert.equal(invested(s),500);assert.deepEqual(s.events.slice(0,2),snapshot.events);assert.deepEqual(old,snapshot);
