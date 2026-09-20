@@ -1,8 +1,10 @@
 import * as T from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { progress } from './state.js';
+import { getItem } from './items.js';
+import { createItemModel } from './item-mesh.js';
 
-export function createScene(host, onSelect) {
+export function createScene(host, onSelect, onSelectItem=()=>{}) {
   const scene = new T.Scene(); scene.background = new T.Color('#e8ede6');
   const camera = new T.PerspectiveCamera(38,1,.1,180);
   let renderer;
@@ -11,7 +13,7 @@ export function createScene(host, onSelect) {
   renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
   renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=.95;
   host.appendChild(renderer.domElement);renderer.domElement.setAttribute('aria-label','房屋 3D 模型，拖动旋转，滚轮或双指缩放');
-  const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.08;controls.maxPolarAngle=Math.PI*.48;controls.minDistance=7;controls.maxDistance=58;controls.target.set(0,.5,0);
+  const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.08;controls.maxPolarAngle=Math.PI*.48;controls.minDistance=1.5;controls.maxDistance=58;controls.target.set(0,.5,0);
   scene.add(new T.HemisphereLight(0xfff9eb,0x869881,1.8));
   const sun=new T.DirectionalLight(0xfff2d5,3.2);sun.position.set(-12,22,12);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-23,right:23,top:23,bottom:-23,near:1,far:70});sun.shadow.normalBias=.04;sun.shadow.bias=-.0002;scene.add(sun);
   const fill=new T.DirectionalLight(0xc8ddf0,.9);fill.position.set(12,8,-10);scene.add(fill);
@@ -60,16 +62,29 @@ export function createScene(host, onSelect) {
       p.walls.forEach((w,i)=>{if(i/p.walls.length<walls)wall([w[0],w[1]],[w[2],w[3]],height,'#e5e2d6');});}
     if(roofRatio>0&&!o.interior){const rw=(p.bounds[2]-p.bounds[0])*roofRatio;roof(p.bounds[0],p.bounds[1],rw,p.garage[1]-p.bounds[1]+10,3.02);roof(p.garage[0],p.garage[1],p.garage[2]*roofRatio,p.garage[3],2.96);const garageRight=p.garage[0]+p.garage[2];const wingX=p.garage[0]>p.bounds[0]?p.bounds[0]:garageRight;const wingWidth=p.garage[0]>p.bounds[0]?p.garage[0]-p.bounds[0]:p.bounds[2]-garageRight;const wingEnd=Math.max(...p.rooms.filter(r=>r.type!=='garage').map(r=>r.z+r.d));if(wingWidth>0&&wingEnd>p.garage[1])roof(wingX,p.garage[1],wingWidth*roofRatio,wingEnd-p.garage[1],3.02);}
     if(finish>.5){tree(-p.width/2-1.6,-depth/2+1,1.2);tree(p.width/2+1.5,depth/2-2,.85);for(let i=0;i<7;i++){box(root,-p.width/2-1,.25,-depth/2+3+i*.85,.7,.5,.7,'#8b9f79');}}
-    select(selection);renderer.domElement.dataset.plan=p.id;renderer.domElement.dataset.mode=o.preview?'preview':'construction';renderer.domElement.dataset.objects=String(root.children.length);
+    let placedCount=0;
+    if(foundation>0)for(const placement of o.placements||[]){
+      if(placement.plan!==p.id)continue;
+      const owned=o.inventory?.find(e=>e.id===placement.id),r=p.rooms.find(r=>r.id===placement.room);if(!owned||!r)continue;
+      const item=getItem(owned.item),onDesk=r.type==='study'&&placement.slot<6&&item.category!=='cars'&&finish>p.rooms.indexOf(r)/p.rooms.length,model=createItemModel(owned,{displayStand:!onDesk}),w=r.w*scale,d=r.d*scale;
+      let x,z;
+      if(item.category==='cars'){x=(placement.slot===0?-.25:.25)*w;z=d*.04;const sideways=placement.rotation%2===1,fit=Math.min(1,(w*.43)/(sideways?3.8:1.85),(d*.75)/(sideways?1.85:3.8));model.scale.setScalar(fit);}
+      else if(placement.slot<12){const i=placement.slot%6;x=(i-2.5)*w*.125;z=(onDesk?-.25:placement.slot<6?-.36:.36)*d;const fit=Math.min(1,(w*.118)/.85);model.scale.setScalar(fit);}
+      else{const i=placement.slot-12;x=(i%2===0?-.32:.32)*w;z=(i<2?-.3:.3)*d;if(r.type==='study'){x=(i%2===0?-1:1)*w*(i<2?.2:.38);z=d*(i<2?.36:.02);}const fit=Math.min(1,w*.24/1.4,d*.24/1.3);model.scale.setScalar(fit);}
+      model.position.set(X(r.x+r.w/2)+x,onDesk?1.04:.24,Z(r.z+r.d/2)+z);model.rotation.y=placement.rotation*Math.PI/2;
+      model.userData.ownedId=owned.id;model.userData.room=r.id;model.traverse(n=>{if(n.isMesh){n.userData.item=owned.id;n.userData.room=r.id;pickables.push(n);}});root.add(model);placedCount++;
+    }
+    select(selection);renderer.domElement.dataset.plan=p.id;renderer.domElement.dataset.mode=o.preview?'preview':'construction';renderer.domElement.dataset.objects=String(root.children.length);renderer.domElement.dataset.placed=String(placedCount);
   }
   function select(id){selection=id;if(highlight){root.remove(highlight);highlight.geometry.dispose();highlight.material.dispose();highlight=null;}const r=plan?.rooms.find(r=>r.id===id);if(r){highlight=rect(root,r.x,r.z,r.w,r.d,.242,.015,new T.MeshBasicMaterial({color:'#d7b977',transparent:true,opacity:.38,depthWrite:false}));}labels.forEach(l=>l.el.classList.toggle('selected',l.el.dataset.room===id));}
   function home(){const fit=Math.max(1,1.15/camera.aspect);camera.position.set(18,21,24).multiplyScalar(fit);controls.target.set(0,.4,0);controls.update();}
   function top(){camera.position.set(0,36/Math.min(1,camera.aspect),.01);controls.target.set(0,0,0);controls.update();}
   function zoom(f){camera.position.sub(controls.target).multiplyScalar(f).add(controls.target);controls.update();}
+  function focusItem(id){const model=root.children.find(m=>m.userData.ownedId===id);if(!model)return;const bounds=new T.Box3().setFromObject(model),target=bounds.getCenter(new T.Vector3()),size=bounds.getSize(new T.Vector3()),distance=Math.max(2.5,Math.max(size.x,size.y,size.z)*1.7)/Math.min(1,camera.aspect),room=plan.rooms.find(r=>r.id===model.userData.room);const direction=new T.Vector3(X(room.x+room.w/2)-target.x,0,Z(room.z+room.d/2)-target.z);if(direction.length()<.2)direction.set(1,0,1);direction.normalize().multiplyScalar(distance*.45);direction.y=distance*.95;controls.target.copy(target);camera.position.copy(target).add(direction);controls.update();}
   const ray=new T.Raycaster();const pointer=new T.Vector2();let start;
   renderer.domElement.addEventListener('pointerdown',e=>{start=[e.clientX,e.clientY];});
-  renderer.domElement.addEventListener('pointerup',e=>{if(!start||Math.hypot(e.clientX-start[0],e.clientY-start[1])>5)return;const r=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(pointer,camera);const hit=ray.intersectObjects(pickables).find(h=>h.object.visible);if(hit)onSelect(hit.object.userData.room);});
+  renderer.domElement.addEventListener('pointerup',e=>{if(!start||Math.hypot(e.clientX-start[0],e.clientY-start[1])>5)return;const r=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(pointer,camera);const hit=ray.intersectObjects(pickables).find(h=>h.object.visible);if(hit){if(hit.object.userData.item)onSelectItem(hit.object.userData.item);else onSelect(hit.object.userData.room);}});
   let lastAspect=null;const observer=new ResizeObserver(()=>{const w=host.clientWidth,h=host.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();if(lastAspect===null||Math.abs(lastAspect-camera.aspect)>.2)home();lastAspect=camera.aspect;});observer.observe(host);
   home();let elapsed=0;renderer.setAnimationLoop(time=>{controls.update();if(time-elapsed>40){for(const l of labels){const v=l.position.clone().project(camera);l.el.style.transform=`translate(-50%,-50%) translate(${(v.x*.5+.5)*host.clientWidth}px,${(-v.y*.5+.5)*host.clientHeight}px)`;l.el.hidden=v.z>1||v.x<-1||v.x>1||v.y<-1||v.y>1||!options?.interior;}elapsed=time;}renderer.render(scene,camera);});
-  return {update,home,zoom,top,select};
+  return {update,home,zoom,top,select,focusItem};
 }

@@ -1,0 +1,136 @@
+{
+  "checkedAt": "2026-09-20",
+  "sources": [
+    "https://www.lego.com/en-us/categories/modular-buildings/about",
+    "https://www.lego.com/en-us/categories/modular-buildings"
+  ],
+  "note": "Official LEGO reference thumbnails. All shop prices are invented game-currency values; 3D meshes are simplified procedural models. Other collections and vehicles are original.",
+  "images": [
+    {
+      "set": 10182,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blt3e6a5cfa5385d6b3/Modular-Page-202303-Grid-Image-01.jpg?format=webply&quality=80&dpr=1",
+      "name": "Café Corner, 2007",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10190,
+      "url": "https://www.lego.com/cdn/cs/set/assets/bltab91d563c941dfba/Modular-Page-202303-Grid-Image-02.jpg?format=webply&quality=80&dpr=1",
+      "name": "Market Street, 2007",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10185,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blt67e97705b981638d/Modular-Page-202303-Grid-Image-03.jpg?format=webply&quality=80&dpr=1",
+      "name": "Green Grocer, 2008",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10197,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blt4dfe4147c0367cf8/Modular-Page-202303-Grid-Image-04.jpg?format=webply&quality=80&dpr=1",
+      "name": "Fire Brigade, 2009",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10211,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blte1f8361a4bb41c9c/Modular-Page-202303-Grid-Image-05.jpg?format=webply&quality=80&dpr=1",
+      "name": "Grand Emporium, 2010",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10218,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blt45cfb0791bbe448b/Modular-Page-202303-Grid-Image-06.jpg?format=webply&quality=80&dpr=1",
+      "name": "Pet Shop, 2011",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10224,
+      "url": "https://www.lego.com/cdn/cs/set/assets/bltce367832b164fe17/Modular-Page-202303-Grid-Image-07.jpg?format=webply&quality=80&dpr=1",
+      "name": "Town Hall, 2012",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10232,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blt523c311546ca4589/Modular-Page-202303-Grid-Image-08.jpg?format=webply&quality=80&dpr=1",
+      "name": "Palace Cinema, 2013",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10243,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blt7d78b7621b35d0a0/Modular-Page-202303-Grid-Image-09.jpg?format=webply&quality=80&dpr=1",
+      "name": "Parisian Restaurant, 2014",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10246,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blt921af96f764fc782/Modular-Page-202303-Grid-Image-10.jpg?format=webply&quality=80&dpr=1",
+      "name": "Detective&#x27;s Office, 2015",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10251,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blt7e9308073a9f7e2b/Modular-Page-202303-Grid-Image-11.jpg?format=webply&quality=80&dpr=1",
+      "name": "Brick Bank, 2016",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10255,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blt542b29a89de3ce6d/Modular-Page-202303-Grid-Image-12.jpg?format=webply&quality=80&dpr=1",
+      "name": "Assembly Square, 2017",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10260,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blte0cea4d3ca62863e/Modular-Page-202303-Grid-Image-13.jpg?format=webply&quality=80&dpr=1",
+      "name": "Downtown Diner, 2018",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10264,
+      "url": "https://www.lego.com/cdn/cs/set/assets/bltc17d9102ca4d2e43/Modular-Page-202303-Grid-Image-14.jpg?format=webply&quality=80&dpr=1",
+      "name": "Corner Garage, 2019",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10270,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blt5fd066ae7d0ce9cf/Modular-Page-202303-Grid-Image-15.jpg?format=webply&quality=80&dpr=1",
+      "name": "Bookshop, 2020",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10278,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blt4f34949083d734d6/Modular-Page-202303-Grid-Image-16.jpg?format=webply&quality=80&dpr=1",
+      "name": "Police Station, 2021",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10297,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blteb7d8e8d64991278/Modular-Page-202303-Grid-Image-17.jpg?format=webply&quality=80&dpr=1",
+      "name": "Boutique Hotel, 2022",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10312,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blt8e653f03776fbe20/Modular-Page-202303-Grid-Image-18.jpg?format=webply&quality=80&dpr=1",
+      "name": "Jazz Club, 2023",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10326,
+      "url": "https://www.lego.com/cdn/cs/set/assets/bltc237280e7e6dc227/Modular-Page-2308-Grid-Image-19.jpg?format=webply&quality=80&dpr=1",
+      "name": "Natural History Museum, 2023",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 10350,
+      "url": "https://www.lego.com/cdn/cs/set/assets/bltc38b5911d77d1733/10350_Prod.png?fit=bounds&format=jpg&quality=80&width=320&height=320&dpr=1",
+      "name": "Tudor Corner",
+      "type": "image/jpeg"
+    },
+    {
+      "set": 11371,
+      "url": "https://www.lego.com/cdn/cs/set/assets/blt0fab61b6fb67d00c/11371_Prod_en-gb.png?fit=bounds&format=jpg&quality=80&width=320&height=320&dpr=1",
+      "name": "Shopping Street",
+      "type": "image/jpeg"
+    }
+  ]
+}
