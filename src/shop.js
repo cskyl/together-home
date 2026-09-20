@@ -1,6 +1,6 @@
 import './shop.css';
 import { items,categories,getItem,quote,optionGroups,itemName,configName,placementRooms,placementSlots } from './items.js';
-import { plans,getPlan } from './plans.js';
+import { allPlans,getPlan as resolvePlan } from './plans.js';
 import { inventory,balance,purchase,placeItem } from './state.js';
 import { createItemPreview } from './item-mesh.js';
 
@@ -23,6 +23,7 @@ function thumbnail(item,owned){
 
 export function createShop({getState,mutate,getPerson,getError,showInRoom,toast}){
   const $=s=>document.querySelector(s);
+  const getPlan=id=>resolvePlan(id,getState());
   let category='lego',ownedView=false,expanded=false,search='',lastKey='',preview=null,active=null,config={},purchaseBusy=false,position=null;
   $('#journal').insertAdjacentHTML('beforebegin',`<section class="shop" id="shop" aria-labelledby="shop-title"><div class="shop-heading"><div><span class="eyebrow">A FEW NICE THINGS</span><h2 id="shop-title">给房间添点东西</h2><p>逛逛街景，配辆车，拆个盲盒。买完在 3D 房间里摆一下。</p></div><div class="shop-wallet"><span>共同游戏资金</span><strong id="shop-balance"></strong></div></div><div class="shop-bar"><div class="segmented shop-view"><button id="shop-catalog" class="active">逛商店</button><button id="shop-inventory">我的物品 <span id="owned-count">0</span></button></div><label class="shop-search"><span>搜索</span><input id="item-search" type="search" placeholder="名称 / LEGO 编号" aria-label="搜索物品"></label></div><div class="shop-categories" role="group" aria-label="商品分类">${categories.map(([id,name])=>`<button data-category="${id}" aria-pressed="${id===category}">${name}<small>${items.filter(i=>i.category===id).length}</small></button>`).join('')}</div><div class="collection-line"><span id="collection-progress"></span><span id="shop-context"></span></div><div class="shop-grid" id="shop-grid"></div><button id="shop-more" class="shop-more" hidden></button><p class="shop-footnote">全部使用学习获得的游戏资金，不会产生真实订单。乐高按主街景系列收录 21 套（含 Market Street，截至 2026 年）；3D 是简化模型。其余车型、盲盒和娃娃为原创设计。</p></section>
   <dialog id="item-dialog" class="item-dialog" aria-labelledby="item-title"><div class="dialog-heading"><div><span class="eyebrow" id="item-eyebrow">SHOP</span><h2 id="item-title"></h2></div><button type="button" id="item-close" class="icon-button" aria-label="关闭物品详情">×</button></div><div class="item-dialog-grid"><div><div class="item-preview" id="item-preview"></div><p class="preview-hint">拖动旋转 · 滚轮 / 双指缩放</p><div id="item-reference"></div></div><div class="item-detail"><p id="item-description"></p><div id="item-options"></div><div id="item-variants"></div><div id="item-placement"></div><div class="item-checkout" id="item-checkout"></div><p class="form-error" id="item-error" role="alert"></p></div></div></dialog>`);
@@ -37,7 +38,7 @@ export function createShop({getState,mutate,getPerson,getError,showInRoom,toast}
   document.querySelectorAll('[data-category]').forEach(b=>b.onclick=()=>{category=b.dataset.category;expanded=false;render(true);});
   function locationText(owned){const p=(getState().placements||[]).find(p=>p.id===owned.id);return p?`${getPlan(p.plan).name} · ${getPlan(p.plan).rooms.find(r=>r.id===p.room).name}`:'仓库 · 还没摆放';}
   function render(force=false){
-    const state=getState(),all=inventory(state),key=JSON.stringify([state.selected,balance(state),all,state.placements,ownedView,category,expanded,search]);
+    const state=getState(),all=inventory(state),key=JSON.stringify([state.selected,balance(state),all,state.placements,state.customPlans,ownedView,category,expanded,search]);
     $('#shop-balance').textContent=money(balance(state));$('#owned-count').textContent=all.length;
     if(!force&&key===lastKey)return;lastKey=key;
     $('#shop-catalog').classList.toggle('active',!ownedView);$('#shop-inventory').classList.toggle('active',ownedView);
@@ -84,9 +85,9 @@ export function createShop({getState,mutate,getPerson,getError,showInRoom,toast}
     const owned=inventory(getState()).find(e=>e.id===id);if(!owned)return;
     const item=getItem(owned.item);config=owned.config;setupDialog(item,owned);active={mode:'owned',item,owned};$('#item-eyebrow').textContent=revealed?'开到了 · 已放入仓库':'YOUR COLLECTION';
     $('#item-description').textContent=`${revealed?'这款已经保存，重复打开页面不会重新抽取。 ':''}${configName(owned)||item.description}`;
-    const saved=(getState().placements||[]).find(p=>p.id===id),plan=getPlan(getState().selected),rooms=placementRooms(plan,item);
+    const saved=(getState().placements||[]).find(p=>p.id===id),plans=allPlans(getState()).filter(p=>placementRooms(p,item).length),plan=plans.find(p=>p.id===getState().selected)||plans[0],rooms=placementRooms(plan,item);
     position=saved?.plan===plan.id?{...saved}:{plan:plan.id,room:rooms[0].id,slot:placementSlots(item)[0],rotation:0};
-    $('#item-placement').innerHTML=`<h3>摆进哪个房间？</h3><p class="placement-location">现在：${esc(locationText(owned))}</p><label class="item-option">房子<select id="placement-plan" aria-label="摆放的房子">${plans.map(p=>`<option value="${p.id}" ${p.id===plan.id?'selected':''}>${p.name}</option>`).join('')}</select></label><label class="item-option">房间<select id="placement-room" aria-label="摆放的房间"></select></label><div class="slot-heading"><span>${item.category==='cars'?'停车位':placementSlots(item)[0]<12?'展示位 · 上排靠后墙，下排靠前墙':'地面位置 · 选一个空位'}</span><button type="button" id="rotate-item">旋转 90° ↻</button></div><div class="placement-slots ${item.category==='cars'?'parking':placementSlots(item)[0]<12?'display-slots':'floor-slots'}" id="placement-slots" role="group" aria-label="摆放位置"></div><p class="placement-note" id="placement-note"></p>`;
+    $('#item-placement').innerHTML=`<h3>摆进哪个房间？</h3><p class="placement-location">现在：${esc(locationText(owned))}</p><label class="item-option">房子<select id="placement-plan" aria-label="摆放的房子">${plans.map(p=>`<option value="${p.id}" ${p.id===plan.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select></label><label class="item-option">房间<select id="placement-room" aria-label="摆放的房间"></select></label><div class="slot-heading"><span id="placement-mode-label">${item.category==='cars'?'停车位':placementSlots(item)[0]<12?'展示位 · 上排靠后墙，下排靠前墙':'地面位置 · 选一个空位'}</span><button type="button" id="rotate-item">旋转 90° ↻</button></div><div class="placement-slots ${item.category==='cars'?'parking':placementSlots(item)[0]<12?'display-slots':'floor-slots'}" id="placement-slots" role="group" aria-label="摆放位置"></div><div id="free-placement-wrap" hidden><svg id="free-placement" class="free-placement" viewBox="0 0 100 100" role="img" aria-label="自由摆放位置，点按或拖动设置"></svg><div class="free-position-controls"><label>左右 <input id="free-position-u" type="range" min="10" max="90" step="1" aria-label="物品左右位置"></label><label>前后 <input id="free-position-v" type="range" min="10" max="90" step="1" aria-label="物品前后位置"></label></div><p class="free-position-help">点按、拖动或用滑块选位置。这里是房间俯视图，绿色是当前物品，灰色是已摆放物品；靠墙时模型会适当缩小。</p></div><p class="placement-note" id="placement-note"></p>`;
     function roomsChanged(){const p=getPlan(position.plan),rs=placementRooms(p,item);if(!rs.some(r=>r.id===position.room))position.room=rs[0].id;$('#placement-room').innerHTML=rs.map(r=>`<option value="${r.id}" ${r.id===position.room?'selected':''}>${esc(r.name)}</option>`).join('');chooseFree();refreshSlots();}
     $('#placement-plan').onchange=e=>{position.plan=e.target.value;roomsChanged();};
     $('#placement-room').onchange=e=>{position.room=e.target.value;chooseFree();refreshSlots();};
@@ -95,7 +96,7 @@ export function createShop({getState,mutate,getPerson,getError,showInRoom,toast}
     $('#item-checkout').innerHTML=`<button class="primary" id="place-item">保存摆放位置</button><div class="owned-actions"><button type="button" id="store-item">收回仓库</button><button type="button" id="see-item">在房间里看</button></div><p class="checkout-note">摆放免费，不改变施工进度。预览模式下可以随时布置。</p>`;
     $('#place-item').onclick=async()=>{
       const button=$('#place-item');button.disabled=true;$('#item-error').textContent='';
-      const target={plan:position.plan,room:position.room,slot:position.slot,rotation:position.rotation};
+      const target={plan:position.plan,room:position.room,rotation:position.rotation,...(getPlan(position.plan).custom?{u:position.u,v:position.v}:{slot:position.slot})};
       const result=await mutate(s=>placeItem(s,{id,position:target}),{type:'place',id,position:target});
       if(result){dialog.close();toast('位置已保存。');await showInRoom(id,target.plan);}else{$('#item-error').textContent=getError();button.disabled=false;}
     };
@@ -103,10 +104,21 @@ export function createShop({getState,mutate,getPerson,getError,showInRoom,toast}
     $('#see-item').onclick=async()=>{const p=(getState().placements||[]).find(p=>p.id===id);if(!p){$('#item-error').textContent='这件还在仓库，先选一个位置保存。';return;}dialog.close();await showInRoom(id,p.plan);};
     refreshSlots();
   }
-  const occupied=slot=>(getState().placements||[]).some(p=>p.id!==active.owned.id&&p.plan===position.plan&&p.room===position.room&&p.slot===slot);
-  function chooseFree(){const slots=placementSlots(active.item);if(occupied(position.slot))position.slot=slots.find(s=>!occupied(s))??slots[0];}
+  const occupied=slot=>(getState().placements||[]).some(p=>p.id!==active.owned.id&&p.plan===position.plan&&p.room===position.room&&(getPlan(position.plan).custom?p.u===position.u&&p.v===position.v:p.slot===slot));
+  function chooseFree(){if(getPlan(position.plan).custom){position.u??=50;position.v??=50;delete position.slot;for(const u of [50,30,70,20,80]){if(!occupied())break;position.u=u;}return;}delete position.u;delete position.v;const slots=placementSlots(active.item);if(!slots.includes(position.slot)||occupied(position.slot))position.slot=slots.find(s=>!occupied(s))??slots[0];}
   function refreshSlots(){
     if(!active||active.mode!=='owned'||!$('#placement-slots'))return;
+    const free=!!getPlan(position.plan).custom;$('#free-placement-wrap').hidden=!free;$('#placement-slots').hidden=free;
+    if(free){
+      $('#placement-mode-label').textContent='自由摆放 · 房间俯视图';
+      const others=(getState().placements||[]).filter(p=>p.id!==active.owned.id&&p.plan===position.plan&&p.room===position.room&&p.u!==undefined);
+      const svg=$('#free-placement');svg.innerHTML=`<rect x="4" y="4" width="92" height="92" rx="2" fill="#e1e7d6" stroke="#a9b99b" stroke-width="1.2"/><path d="M4 50h92M50 4v92" stroke="#c9d5bd" stroke-dasharray="2 2" stroke-width=".5"/>${others.map(p=>`<circle cx="${p.u}" cy="${p.v}" r="4" fill="#a8b39f"/>`).join('')}<g transform="translate(${position.u} ${position.v}) rotate(${position.rotation*90})"><rect x="-5" y="-5" width="10" height="10" rx="2" fill="${occupied()?'#b38e77':'#698958'}"/><path d="M0 3V-3m-2 2 2-2 2 2" fill="none" stroke="#fffde9" stroke-width="1"/></g>`;
+      for(const axis of ['u','v']){const input=$('#free-position-'+axis);input.value=position[axis];input.oninput=()=>{position[axis]=Number(input.value);refreshSlots();};}
+      const move=e=>{const point=new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());position.u=Math.max(10,Math.min(90,Math.round(point.x)));position.v=Math.max(10,Math.min(90,Math.round(point.y)));refreshSlots();};
+      svg.onpointerdown=e=>{svg.setPointerCapture(e.pointerId);move(e);};svg.onpointermove=e=>{if(svg.hasPointerCapture(e.pointerId))move(e);};svg.onpointerup=e=>{if(svg.hasPointerCapture(e.pointerId))svg.releasePointerCapture(e.pointerId);};
+      $('#placement-note').textContent=`朝向 ${position.rotation*90}° · ${occupied()?'这个点已经有物品了，挪开一点即可。':'位置和朝向保存后会同步。'}`;
+      if($('#place-item'))$('#place-item').disabled=occupied();$('.placement-location').textContent='现在：'+locationText(active.owned);return;
+    }
     const slots=placementSlots(active.item);
     $('#placement-slots').innerHTML=slots.map((slot,i)=>`<button type="button" data-slot="${slot}" ${occupied(slot)?'disabled':''} aria-pressed="${position.slot===slot}" aria-label="位置 ${i+1}${occupied(slot)?' 已占用':''}"><span>${occupied(slot)?'已占':String(i+1).padStart(2,'0')}</span>${position.slot===slot?`<i style="transform:rotate(${position.rotation*90}deg)">↑</i>`:''}</button>`).join('');
     $('#placement-slots').querySelectorAll('button').forEach(b=>b.onclick=()=>{position.slot=Number(b.dataset.slot);refreshSlots();});

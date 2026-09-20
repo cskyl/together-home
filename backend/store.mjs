@@ -1,7 +1,7 @@
 import { DatabaseSync } from 'node:sqlite';
 import { createHash, randomUUID, randomInt } from 'node:crypto';
-import { freshState, validate, balance, study, build, purchase, placeItem } from '../src/state.js';
-import { plans } from '../src/plans.js';
+import { freshState, validate, balance, study, build, purchase, placeItem, saveDesign } from '../src/state.js';
+import { allPlans } from '../src/plans.js';
 
 export class ApiError extends Error { constructor(message,status=400){super(message);this.status=status;} }
 const hash=s=>createHash('sha256').update(s).digest('hex');
@@ -36,10 +36,11 @@ export function createStore(path=':memory:') {
     action(token,{requestId,action}){if(typeof requestId!=='string'||!/^[0-9a-f-]{36}$/.test(requestId)||!action||typeof action!=='object')throw new ApiError('操作格式不正确。');return transaction(()=>{const m=member(token),before=snapshotBy(m),fp=hash(JSON.stringify(action));const previous=db.prepare('SELECT * FROM operations WHERE room_id=? AND request_id=?').get(m.room_id,requestId);if(previous){if(previous.member_hash!==m.key_hash||previous.fingerprint!==fp)throw new ApiError('操作编号已被使用，请重试。',409);return before;}
       let state=before.state;if(state.events.length>=50000&&action.type==='study')throw new ApiError('记录已达到容量上限，请先导出备份。');
       if(action.type==='study'){state=study(state,{person:m.slot,minutes:action.minutes,note:action.note??''});state.events.at(-1).id=requestId;}
-      else if(action.type==='build'){if(!plans.some(p=>p.id===action.plan))throw new ApiError('请选择一个有效户型。');state=build({...state,selected:action.plan});state.events.at(-1).id=requestId;}
+      else if(action.type==='build'){if(!allPlans(state).some(p=>p.id===action.plan))throw new ApiError('请选择一个有效户型。');state=build({...state,selected:action.plan});state.events.at(-1).id=requestId;}
       else if(action.type==='purchase'){try{state=purchase(state,{item:action.item,config:action.config,person:m.slot},{id:requestId,roll:randomInt});}catch(e){throw new ApiError(e.message);}}
       else if(action.type==='place'){try{state=placeItem(state,{id:action.id,position:action.position});}catch(e){throw new ApiError(e.message);}}
-      else if(action.type==='select'){if(!plans.some(p=>p.id===action.plan))throw new ApiError('请选择一个有效户型。');state={...state,selected:action.plan};}
+      else if(action.type==='select'){if(!allPlans(state).some(p=>p.id===action.plan))throw new ApiError('请选择一个有效户型。');state={...state,selected:action.plan};}
+      else if(action.type==='design'){try{state=saveDesign(state,{design:action.design,expectedVersion:action.expectedVersion});}catch(e){throw new ApiError(e.message,e.message.includes('对方刚更新')?409:400);}}
       else if(action.type==='rename'){state={...state,names:state.names.map((n,i)=>i===m.slot?name(action.name):n)};}
       else if(action.type==='undo'){const event=state.events.findLast(e=>e.type==='study'&&e.person===m.slot);if(!event)throw new ApiError('你还没有可以撤销的学习记录。');if(balance(state)<event.minutes*10)throw new ApiError('这次学习的资金已投入建设或购买物品，无法撤销。');state={...state,events:state.events.filter(e=>e.id!==event.id)};try{validate(state);}catch{throw new ApiError('这次学习的资金已用于之前的建设或购买物品，无法撤销。');}}
       else throw new ApiError('不支持的操作。');

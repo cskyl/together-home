@@ -91,7 +91,7 @@ export const itemName = owned => {
 };
 export const configName = owned => Object.entries(optionGroups(getItem(owned.item))).map(([key,group])=>group.values.find(v=>v.id===owned.config[key])?.name).join(' · ');
 export function placementRooms(plan,item) {
-  return plan.rooms.filter(r=>item.category==='cars'?r.type==='garage':['living','bed','study','dining'].includes(r.type));
+  return plan.rooms.filter(r=>item.category==='cars'?r.type==='garage':plan.custom||['living','bed','study','dining'].includes(r.type));
 }
 // A shared slot reserves real space: small collectibles use display ledges; furniture uses floor zones.
 export function placementSlots(item) {

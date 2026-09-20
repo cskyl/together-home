@@ -18,7 +18,7 @@ export function createApi(store,{origins=['https://cskyl.github.io','http://loca
     try{
       if(rateLimit){const identity=String(req.headers['cf-connecting-ip']||req.socket.remoteAddress),now=Date.now(),entry=limits.get(identity)||{since:now,count:0};if(now-entry.since>60000){entry.since=now;entry.count=0;}entry.count++;if(limits.size>5000)limits.clear();limits.set(identity,entry);if(entry.count>180)throw new ApiError('操作太频繁，请稍后再试。',429);}
       if(!req.headers['content-type']?.startsWith('application/json'))throw new ApiError('请求需要 JSON 格式。',415);
-      const chunks=[];let size=0;for await(const chunk of req){size+=chunk.length;if(size>16384)throw new ApiError('请求内容过大。',413);chunks.push(chunk);}
+      const chunks=[];let size=0;for await(const chunk of req){size+=chunk.length;if(size>32768)throw new ApiError('请求内容过大。',413);chunks.push(chunk);}
       let body;try{body=JSON.parse(Buffer.concat(chunks).toString('utf8')||'{}');if(!body||Array.isArray(body)||typeof body!=='object')throw Error();}catch{throw new ApiError('请求格式不正确。');}
       const token=req.headers.authorization?.replace(/^Bearer /,'');
       const method=path.slice(4);const result=store[method](token,body);reply(200,result);

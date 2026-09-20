@@ -1,5 +1,6 @@
-import { plans, phases, totalCost } from './plans.js';
+import { allPlans, phases, totalCost } from './plans.js';
 import { getItem, quote, placementRooms, placementSlots } from './items.js';
+import { validateDesign,normalizeDesign,MAX_DESIGNS } from './designs.js';
 export const STORAGE_KEY = 'together-home-v1';
 export const freshState = () => ({version:1,selected:'riverside',names:['我','你'],events:[]});
 export const earned = s => s.events.filter(e=>e.type==='study').reduce((n,e)=>n+e.minutes*10,0);
@@ -24,22 +25,27 @@ export function purchase(s,{item,config={},person=0},{id=crypto.randomUUID(),rol
   if(priced.item.variants)event.variant=priced.item.variants[roll(priced.item.variants.length)].id;
   return {...s,events:[...s.events,event]};
 }
-function validPlacement(s,p) {
-  const owned=inventory(s).find(e=>e.id===p?.id),item=getItem(owned?.item),plan=plans.find(v=>v.id===p?.plan);
-  if(!owned||!plan||!placementRooms(plan,item).some(r=>r.id===p.room)||!placementSlots(item).includes(p.slot)||!Number.isInteger(p.rotation)||p.rotation<0||p.rotation>3)throw Error('物品摆放位置无效。');
+function validPlacement(s,p,available=allPlans(s)) {
+  const owned=inventory(s).find(e=>e.id===p?.id),item=getItem(owned?.item),plan=available.find(v=>v.id===p?.plan);
+  if(!owned||!plan||!placementRooms(plan,item).some(r=>r.id===p.room)||!Number.isInteger(p.rotation)||p.rotation<0||p.rotation>3)throw Error('物品摆放位置无效。');
+  if(p.u!==undefined||p.v!==undefined){if(!plan.custom||!Number.isInteger(p.u)||!Number.isInteger(p.v)||p.u<10||p.u>90||p.v<10||p.v>90||p.slot!==undefined)throw Error('自由摆放位置无效。');}
+  else if(!placementSlots(item).includes(p.slot))throw Error('物品摆放位置无效。');
 }
+const placementKey=p=>`${p.plan}:${p.room}:`+(p.u!==undefined?`free:${p.u}:${p.v}`:`slot:${p.slot}`);
 export function placeItem(s,{id,position}) {
   if(!inventory(s).some(e=>e.id===id))throw Error('仓库里没有这件物品。');
   const placements=(s.placements||[]).filter(p=>p.id!==id);
   if(position!==null){
-    const p={id,plan:position?.plan,room:position?.room,slot:position?.slot,rotation:position?.rotation};validPlacement(s,p);
-    if(placements.some(v=>v.plan===p.plan&&v.room===p.room&&v.slot===p.slot))throw Error('这个位置已有物品，请换个位置。');
+    const p={id,plan:position?.plan,room:position?.room,rotation:position?.rotation,...(position?.u!==undefined||position?.v!==undefined?{u:position.u,v:position.v}:{slot:position?.slot})};validPlacement(s,p);
+    if(placements.some(v=>placementKey(v)===placementKey(p)))throw Error('这个位置已有物品，请换个位置。');
     placements.push(p);
   }
   return {...s,placements};
 }
 export function validate(s) {
-  if(!s||s.version!==1||!plans.some(p=>p.id===s.selected)||!Array.isArray(s.names)||s.names.length!==2||s.names.some(n=>typeof n!=='string'||!n.trim()||n.length>16)||!Array.isArray(s.events)||s.events.length>100000)throw Error('存档格式不正确。');
+  if(!s||s.version!==1||!Array.isArray(s.names)||s.names.length!==2||s.names.some(n=>typeof n!=='string'||!n.trim()||n.length>16)||!Array.isArray(s.events)||s.events.length>100000)throw Error('存档格式不正确。');
+  if(s.customPlans!==undefined){if(!Array.isArray(s.customPlans)||s.customPlans.length>MAX_DESIGNS)throw Error('自定义户型数量无效。');const ids=new Set();for(const d of s.customPlans){validateDesign(d,{saved:true});if(ids.has(d.id))throw Error('自定义户型编号重复。');ids.add(d.id);}}
+  const plans=allPlans(s);if(!plans.some(p=>p.id===s.selected))throw Error('存档户型无效。');
   let funds=0;const used={},ids=new Set();
   for(const e of s.events){
     if(!e||typeof e.id!=='string'||ids.has(e.id)||typeof e.at!=='string'||!Number.isFinite(Date.parse(e.at)))throw Error('记录无效。');ids.add(e.id);
@@ -58,7 +64,15 @@ export function validate(s) {
   if(s.placements!==undefined){
     if(!Array.isArray(s.placements)||s.placements.length>300)throw Error('物品摆放存档无效。');
     const owned=new Set(),positions=new Set();
-    for(const p of s.placements){validPlacement(s,p);const key=`${p.plan}:${p.room}:${p.slot}`;if(owned.has(p.id)||positions.has(key))throw Error('物品摆放重复。');owned.add(p.id);positions.add(key);}
+    for(const p of s.placements){validPlacement(s,p,plans);const key=placementKey(p);if(owned.has(p.id)||positions.has(key))throw Error('物品摆放重复。');owned.add(p.id);positions.add(key);}
   }
   return s;
+}
+export function saveDesign(s,{design,expectedVersion}){
+  const clean=normalizeDesign(design),old=(s.customPlans||[]).find(d=>d.id===clean.id);
+  if(!Number.isSafeInteger(expectedVersion)||expectedVersion!==(old?.version||0))throw Error('对方刚更新了这个户型。你的草稿还在，可以另存一份，或载入最新版本。');
+  if(!old&&(s.customPlans||[]).length>=MAX_DESIGNS)throw Error('最多保存 8 个自定义户型，可以继续编辑已有户型。');
+  const saved={...clean,version:(old?.version||0)+1},next={...s,selected:saved.id,customPlans:[...(s.customPlans||[]).filter(d=>d.id!==saved.id),saved]};
+  if(s.placements){const plans=allPlans(next);next.placements=s.placements.filter(p=>{if(p.plan!==saved.id)return true;try{validPlacement(next,p,plans);return true;}catch{return false;}});}
+  return next;
 }

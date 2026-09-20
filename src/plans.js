@@ -1,5 +1,6 @@
 // Coordinates are manually traced from linked public FIRST FLOOR illustrations.
 // Rounded / simplified room boundaries; these are study-game models, not CAD plans.
+import { designToPlan } from './designs.js';
 const room = (id, name, type, x, z, w, d) => ({ id, name, type, x, z, w, d });
 export const plans = [
   { id: 'riverside', name: 'Riverside', title: '客厅宽敞，主卧在后侧', area: '1,805–1,965', beds: '3', baths: '2–3', width: 12.19, depth: 19.61,
@@ -54,7 +55,8 @@ for (const plan of plans) {
   plan.price = {amount:startingPrices[plan.id],currency:'USD',kind:'starting',checkedAt:'2026-09-20',source:plan.source};
   plan.floorFile ||= `${plan.id}-floor.jpg`;
 }
-export const getPlan = id => plans.find(p=>p.id===id) || plans[0];
+export const allPlans = state => [...plans,...(state?.customPlans||[]).map(designToPlan)];
+export const getPlan = (id,state) => {const official=plans.find(p=>p.id===id);if(official)return official;const custom=state?.customPlans?.find(p=>p.id===id);return custom?designToPlan(custom):plans[0];};
 export const phases = [
   {id:'foundation',name:'地基与地坪',short:'地基',cost:500,detail:'先打好地基，铺上地坪。'},
   {id:'frame',name:'木结构框架',short:'框架',cost:1000,detail:'搭起框架，房子的轮廓就出来了。'},

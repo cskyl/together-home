@@ -2,6 +2,7 @@ import * as T from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { progress } from './state.js';
 import { getItem } from './items.js';
+import { floors,paints,wallForOpening } from './designs.js';
 import { createItemModel } from './item-mesh.js';
 
 export function createScene(host, onSelect, onSelectItem=()=>{}) {
@@ -9,7 +10,7 @@ export function createScene(host, onSelect, onSelectItem=()=>{}) {
   const camera = new T.PerspectiveCamera(38,1,.1,180);
   let renderer;
   try { renderer = new T.WebGLRenderer({antialias:true,alpha:false}); }
-  catch { host.innerHTML='<div class="webgl-error">此浏览器暂时无法显示 3D。请开启硬件加速，或用支持 WebGL 的 Chrome / Safari 打开；仍可在户型卡片查看原始平面图。</div>';return {update(){},home(){},zoom(){},top(){},select(){}}; }
+  catch { host.innerHTML='<div class="webgl-error">此浏览器暂时无法显示 3D。请开启硬件加速，或用支持 WebGL 的 Chrome / Safari 打开；仍可在户型卡片查看原始平面图。</div>';return {update(){},home(){},zoom(){},top(){},select(){},dispose(){host.replaceChildren();}}; }
   renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
   renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=.95;
   host.appendChild(renderer.domElement);renderer.domElement.setAttribute('aria-label','房屋 3D 模型，拖动旋转，滚轮或双指缩放');
@@ -47,28 +48,39 @@ export function createScene(host, onSelect, onSelectItem=()=>{}) {
   }
   function roof(x,z,w,d,y){const ww=w*scale/2+.25,dd=d*scale+.5,h=ww*.44;const shape=new T.Shape();shape.moveTo(-ww,0);shape.lineTo(0,h);shape.lineTo(ww,0);shape.closePath();const geo=new T.ExtrudeGeometry(shape,{depth:dd,bevelEnabled:false});const m=new T.Mesh(geo,mat('#5a6059'));m.position.set(X(x+w/2),y,Z(z)-.25);m.castShadow=true;root.add(m);}
   function tree(x,z,size=1){const g=new T.Group();g.position.set(x,0,z);root.add(g);box(g,0,.8,0,.15,1.6,.15,'#917455');for(const [a,b,c,r]of[[0,2,0,.8],[-.35,1.8,.2,.6],[.3,1.65,-.3,.6]]){const m=new T.Mesh(new T.IcosahedronGeometry(r*size,2),mat('#7e9270'));m.position.set(a,b*size,c);m.castShadow=true;g.add(m);}}
-  function update(p,o){plan=p;options=o;pickables=[];labels=[];labelsHost.replaceChildren();scene.remove(root);root.traverse(n=>{n.geometry?.dispose();if(n.material&&!materials.has(n.material.color?.getStyle())&&!Array.from(materials.values()).includes(n.material)&&n.material!==wood&&n.material!==tile)n.material.dispose?.();});root=new T.Group();scene.add(root);
+  function update(p,o){plan=p;options=o;pickables=[];labels=[];labelsHost.replaceChildren();scene.remove(root);disposeRoot();highlight=null;root=new T.Group();scene.add(root);
     center=[(p.bounds[0]+p.bounds[2])/2,(p.bounds[1]+p.bounds[3])/2];scale=p.width/(p.bounds[2]-p.bounds[0]);const depth=(p.bounds[3]-p.bounds[1])*scale;
     const stages=progress(o.preview?5500:o.amount);const foundation=stages[0].ratio,frame=stages[1].ratio,walls=stages[2].ratio,roofRatio=stages[3].ratio,finish=stages[4].ratio;
     box(root,0,-.27,0,p.width+7,.45,depth+6,'#bcc8af');box(root,0,-.56,0,p.width+7.06,.15,depth+6.06,'#a4b498');
-    rect(root,...p.garage,.006,.035,'#b6b7aa');rect(root,p.garage[0],p.garage[1]+p.garage[3],p.garage[2],170,.005,.035,'#c8c8b8');
-    line(root,[...p.outline,p.outline[0]],'#819887');p.walls.forEach(w=>line(root,[[w[0],w[1]],[w[2],w[3]]],'#96ab9b'));
-    if(foundation>0){shapeFloor(p.outline,.02,.16*foundation,'#cecac0');rect(root,...p.porch,.06,.1,'#c4c2b5');}
-    for(const [i,r]of p.rooms.entries()){const complete=finish>i/p.rooms.length;const floor=rect(root,r.x,r.z,r.w,r.d,.205,.035,complete?(r.type==='bath'||r.type==='garage'||r.type==='utility'?tile:wood):'#cecec0',r.id);floor.visible=foundation>0; if(complete)furnish(r);
+    if(p.garage){rect(root,...p.garage,.006,.035,'#b6b7aa');if(!p.custom)rect(root,p.garage[0],p.garage[1]+p.garage[3],p.garage[2],170,.005,.035,'#c8c8b8');}
+    if(!p.custom)line(root,[...p.outline,p.outline[0]],'#819887');p.walls.forEach(w=>line(root,[[w[0],w[1]],[w[2],w[3]]],'#96ab9b'));
+    if(foundation>0){for(const outline of p.outlines||[p.outline])shapeFloor(outline,.02,.16*foundation,'#cecac0');if(p.porch)rect(root,...p.porch,.06,.1,'#c4c2b5');}
+    for(const [i,r]of p.rooms.entries()){const complete=finish>i/p.rooms.length;const floor=rect(root,r.x,r.z,r.w,r.d,.205,.035,complete?(p.custom?(r.floor==='oak'?wood:r.floor==='tile'?tile:floors.find(f=>f[0]===r.floor)[2]):(r.type==='bath'||r.type==='garage'||r.type==='utility'?tile:wood)):'#cecec0',r.id);floor.visible=foundation>0; if(complete&&r.furnished!==false)furnish(r);
       if(o.labels&&o.interior){const el=document.createElement('button');el.className='room-label';el.textContent=r.name;el.dataset.room=r.id;el.addEventListener('click',()=>onSelect(r.id));labelsHost.appendChild(el);labels.push({el,position:new T.Vector3(X(r.x+r.w/2),.28,Z(r.z+r.d*.77))});}}
-    if(frame>0&&walls<1){const all=[...p.outline.map((a,i)=>[...a,...p.outline[(i+1)%p.outline.length]]),...p.walls];all.forEach((w,i)=>{if(i/all.length>=frame)return;const len=Math.hypot(w[2]-w[0],w[3]-w[1])*scale;const n=Math.max(2,Math.round(len/.6));for(let k=0;k<=n;k++){const f=k/n;box(root,X(w[0]+(w[2]-w[0])*f),.22+(o.interior?1.25:2.74)/2,Z(w[1]+(w[3]-w[1])*f),.06,o.interior?1.25:2.74,.06,'#bda079');}if(walls===0)wall([w[0],w[1]],[w[2],w[3]],.08,'#bc9b70');});}
-    if(walls>0){const exterior=p.outline.map((a,i)=>[a,p.outline[(i+1)%p.outline.length]]);const height=o.interior?1.22:2.74;
+    if(frame>0&&walls<1){const all=p.custom?p.walls:[...p.outline.map((a,i)=>[...a,...p.outline[(i+1)%p.outline.length]]),...p.walls];all.forEach((w,i)=>{if(i/all.length>=frame)return;const len=Math.hypot(w[2]-w[0],w[3]-w[1])*scale;const n=Math.max(2,Math.round(len/.6));for(let k=0;k<=n;k++){const f=k/n;box(root,X(w[0]+(w[2]-w[0])*f),.22+(o.interior?1.25:2.74)/2,Z(w[1]+(w[3]-w[1])*f),.06,o.interior?1.25:2.74,.06,'#bda079');}if(walls===0)wall([w[0],w[1]],[w[2],w[3]],.08,'#bc9b70');});}
+    if(walls>0&&p.custom){
+      const height=o.interior?1.22:2.74;
+      p.wallSegments.forEach((segment,i)=>{if(i/p.wallSegments.length>=walls)return;
+        const color=id=>paints.find(v=>v[0]===p.rooms.find(r=>r.id===id)?.paint)?.[2]||'#e5e2d6';
+        const colors=[mat('#e6e1d3'),mat('#e6e1d3'),mat('#eee9db'),mat('#eee9db'),mat(color(segment.positive)),mat(color(segment.negative))];
+        const openings=p.openings.filter(h=>wallForOpening(h,[segment])).map(h=>({t:((h.axis==='x'?h.x:h.z)-segment.start)*scale,w:h.width*scale,bottom:h.kind==='window'?.84:0,top:2.2,type:h.kind==='door'&&h.width>=5?'garage':h.kind}));
+        wall(segment.a,segment.b,height,colors,openings);
+      });
+    }
+    if(walls>0&&!p.custom){const exterior=p.outline.map((a,i)=>[a,p.outline[(i+1)%p.outline.length]]);const height=o.interior?1.22:2.74;
       exterior.forEach(([a,b],i)=>{if(i/exterior.length>=walls)return;const len=Math.hypot(b[0]-a[0],b[1]-a[1]);const openings=[];for(const [x,z,w,axis='x']of [...p.windows.map(v=>[...v]),...p.doors.map(v=>[...v])]){const horiz=a[1]===b[1];if((horiz&&axis==='x'&&Math.abs(z-a[1])<2&&x>=Math.min(a[0],b[0])&&x<=Math.max(a[0],b[0]))||(!horiz&&axis==='z'&&Math.abs(x-a[0])<2&&z>=Math.min(a[1],b[1])&&z<=Math.max(a[1],b[1]))){const door=p.doors.some(v=>v[0]===x&&v[1]===z);openings.push({t:Math.hypot(x-a[0],z-a[1])*scale,w:w*scale,bottom:door?0:.84,top:door?2.2:2.2,type:door?(w*scale>2.5?'garage':'door'):'window'});}}wall(a,b,height,'#f1eee2',openings);});
       p.walls.forEach((w,i)=>{if(i/p.walls.length<walls)wall([w[0],w[1]],[w[2],w[3]],height,'#e5e2d6');});}
-    if(roofRatio>0&&!o.interior){const rw=(p.bounds[2]-p.bounds[0])*roofRatio;roof(p.bounds[0],p.bounds[1],rw,p.garage[1]-p.bounds[1]+10,3.02);roof(p.garage[0],p.garage[1],p.garage[2]*roofRatio,p.garage[3],2.96);const garageRight=p.garage[0]+p.garage[2];const wingX=p.garage[0]>p.bounds[0]?p.bounds[0]:garageRight;const wingWidth=p.garage[0]>p.bounds[0]?p.garage[0]-p.bounds[0]:p.bounds[2]-garageRight;const wingEnd=Math.max(...p.rooms.filter(r=>r.type!=='garage').map(r=>r.z+r.d));if(wingWidth>0&&wingEnd>p.garage[1])roof(wingX,p.garage[1],wingWidth*roofRatio,wingEnd-p.garage[1],3.02);}
+    if(roofRatio>0&&!o.interior&&p.custom){for(const [i,r]of p.rooms.entries())if(i/p.rooms.length<roofRatio)rect(root,r.x,r.z,r.w,r.d,3.04,.18,'#697669');}
+    if(roofRatio>0&&!o.interior&&!p.custom){const rw=(p.bounds[2]-p.bounds[0])*roofRatio;roof(p.bounds[0],p.bounds[1],rw,p.garage[1]-p.bounds[1]+10,3.02);roof(p.garage[0],p.garage[1],p.garage[2]*roofRatio,p.garage[3],2.96);const garageRight=p.garage[0]+p.garage[2];const wingX=p.garage[0]>p.bounds[0]?p.bounds[0]:garageRight;const wingWidth=p.garage[0]>p.bounds[0]?p.garage[0]-p.bounds[0]:p.bounds[2]-garageRight;const wingEnd=Math.max(...p.rooms.filter(r=>r.type!=='garage').map(r=>r.z+r.d));if(wingWidth>0&&wingEnd>p.garage[1])roof(wingX,p.garage[1],wingWidth*roofRatio,wingEnd-p.garage[1],3.02);}
     if(finish>.5){tree(-p.width/2-1.6,-depth/2+1,1.2);tree(p.width/2+1.5,depth/2-2,.85);for(let i=0;i<7;i++){box(root,-p.width/2-1,.25,-depth/2+3+i*.85,.7,.5,.7,'#8b9f79');}}
     let placedCount=0;
     if(foundation>0)for(const placement of o.placements||[]){
       if(placement.plan!==p.id)continue;
       const owned=o.inventory?.find(e=>e.id===placement.id),r=p.rooms.find(r=>r.id===placement.room);if(!owned||!r)continue;
-      const item=getItem(owned.item),onDesk=r.type==='study'&&placement.slot<6&&item.category!=='cars'&&finish>p.rooms.indexOf(r)/p.rooms.length,model=createItemModel(owned,{displayStand:!onDesk}),w=r.w*scale,d=r.d*scale;
+      const item=getItem(owned.item),onDesk=r.furnished!==false&&r.type==='study'&&placement.u===undefined&&placement.slot<6&&item.category!=='cars'&&finish>p.rooms.indexOf(r)/p.rooms.length,model=createItemModel(owned,{displayStand:!onDesk}),w=r.w*scale,d=r.d*scale;
       let x,z;
-      if(item.category==='cars'){x=(placement.slot===0?-.25:.25)*w;z=d*.04;const sideways=placement.rotation%2===1,fit=Math.min(1,(w*.43)/(sideways?3.8:1.85),(d*.75)/(sideways?1.85:3.8));model.scale.setScalar(fit);}
+      if(placement.u!==undefined){x=(placement.u/100-.5)*w;z=(placement.v/100-.5)*d;model.rotation.y=placement.rotation*Math.PI/2;model.updateMatrixWorld(true);const size=new T.Box3().setFromObject(model).getSize(new T.Vector3()),availableW=2*Math.min(placement.u/100,1-placement.u/100)*w-.15,availableD=2*Math.min(placement.v/100,1-placement.v/100)*d-.15,fit=Math.min(1,availableW/size.x,availableD/size.z);model.scale.multiplyScalar(Math.max(.05,fit));}
+      else if(item.category==='cars'){x=(placement.slot===0?-.25:.25)*w;z=d*.04;const sideways=placement.rotation%2===1,fit=Math.min(1,(w*.43)/(sideways?3.8:1.85),(d*.75)/(sideways?1.85:3.8));model.scale.setScalar(fit);}
       else if(placement.slot<12){const i=placement.slot%6;x=(i-2.5)*w*.125;z=(onDesk?-.25:placement.slot<6?-.36:.36)*d;const fit=Math.min(1,(w*.118)/.85);model.scale.setScalar(fit);}
       else{const i=placement.slot-12;x=(i%2===0?-.32:.32)*w;z=(i<2?-.3:.3)*d;if(r.type==='study'){x=(i%2===0?-1:1)*w*(i<2?.2:.38);z=d*(i<2?.36:.02);}const fit=Math.min(1,w*.24/1.4,d*.24/1.3);model.scale.setScalar(fit);}
       model.position.set(X(r.x+r.w/2)+x,onDesk?1.04:.24,Z(r.z+r.d/2)+z);model.rotation.y=placement.rotation*Math.PI/2;
@@ -77,14 +89,16 @@ export function createScene(host, onSelect, onSelectItem=()=>{}) {
     select(selection);renderer.domElement.dataset.plan=p.id;renderer.domElement.dataset.mode=o.preview?'preview':'construction';renderer.domElement.dataset.objects=String(root.children.length);renderer.domElement.dataset.placed=String(placedCount);
   }
   function select(id){selection=id;if(highlight){root.remove(highlight);highlight.geometry.dispose();highlight.material.dispose();highlight=null;}const r=plan?.rooms.find(r=>r.id===id);if(r){highlight=rect(root,r.x,r.z,r.w,r.d,.242,.015,new T.MeshBasicMaterial({color:'#d7b977',transparent:true,opacity:.38,depthWrite:false}));}labels.forEach(l=>l.el.classList.toggle('selected',l.el.dataset.room===id));}
-  function home(){const fit=Math.max(1,1.15/camera.aspect);camera.position.set(18,21,24).multiplyScalar(fit);controls.target.set(0,.4,0);controls.update();}
+  function home(){const fit=Math.max(1,1.15/camera.aspect)*(plan?.custom?Math.max(.4,Math.max(plan.width,plan.depth)/18):1);camera.position.set(18,21,24).multiplyScalar(fit);controls.target.set(0,.4,0);controls.update();}
   function top(){camera.position.set(0,36/Math.min(1,camera.aspect),.01);controls.target.set(0,0,0);controls.update();}
   function zoom(f){camera.position.sub(controls.target).multiplyScalar(f).add(controls.target);controls.update();}
   function focusItem(id){const model=root.children.find(m=>m.userData.ownedId===id);if(!model)return;const bounds=new T.Box3().setFromObject(model),target=bounds.getCenter(new T.Vector3()),size=bounds.getSize(new T.Vector3()),distance=Math.max(2.5,Math.max(size.x,size.y,size.z)*1.7)/Math.min(1,camera.aspect),room=plan.rooms.find(r=>r.id===model.userData.room);const direction=new T.Vector3(X(room.x+room.w/2)-target.x,0,Z(room.z+room.d/2)-target.z);if(direction.length()<.2)direction.set(1,0,1);direction.normalize().multiplyScalar(distance*.45);direction.y=distance*.95;controls.target.copy(target);camera.position.copy(target).add(direction);controls.update();}
   const ray=new T.Raycaster();const pointer=new T.Vector2();let start;
   renderer.domElement.addEventListener('pointerdown',e=>{start=[e.clientX,e.clientY];});
   renderer.domElement.addEventListener('pointerup',e=>{if(!start||Math.hypot(e.clientX-start[0],e.clientY-start[1])>5)return;const r=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(pointer,camera);const hit=ray.intersectObjects(pickables).find(h=>h.object.visible);if(hit){if(hit.object.userData.item)onSelectItem(hit.object.userData.item);else onSelect(hit.object.userData.room);}});
-  let lastAspect=null;const observer=new ResizeObserver(()=>{const w=host.clientWidth,h=host.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();if(lastAspect===null||Math.abs(lastAspect-camera.aspect)>.2)home();lastAspect=camera.aspect;});observer.observe(host);
+  let lastAspect=null;const observer=new ResizeObserver(()=>{const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();if(lastAspect===null||Math.abs(lastAspect-camera.aspect)>.2)home();lastAspect=camera.aspect;});observer.observe(host);
   home();let elapsed=0;renderer.setAnimationLoop(time=>{controls.update();if(time-elapsed>40){for(const l of labels){const v=l.position.clone().project(camera);l.el.style.transform=`translate(-50%,-50%) translate(${(v.x*.5+.5)*host.clientWidth}px,${(-v.y*.5+.5)*host.clientHeight}px)`;l.el.hidden=v.z>1||v.x<-1||v.x>1||v.y<-1||v.y>1||!options?.interior;}elapsed=time;}renderer.render(scene,camera);});
-  return {update,home,zoom,top,select,focusItem};
+  function disposeRoot(){const cached=new Set([...materials.values(),wood,tile]),used=new Set();root.traverse(n=>{n.geometry?.dispose();if(n.material)for(const m of Array.isArray(n.material)?n.material:[n.material])if(!cached.has(m))used.add(m);});used.forEach(m=>m.dispose());}
+  function dispose(){observer.disconnect();renderer.setAnimationLoop(null);controls.dispose();disposeRoot();for(const m of materials.values())m.dispose();wood.dispose();tile.dispose();textures.forEach(t=>t.dispose());renderer.dispose();renderer.forceContextLoss();host.replaceChildren();}
+  return {update,home,zoom,top,select,focusItem,dispose};
 }
