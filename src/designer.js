@@ -55,7 +55,7 @@ export function createDesigner({getState,mutate,getError,getScope,onSaved,onDeco
   }
   function renderPreview(){
     if(view!=='3d')return;if(!draft.rooms.length){preview?.dispose();preview=null;$('#design-preview').textContent='先加一个房间，再来看看 3D。';return;}
-    if(!preview){$('#design-preview').replaceChildren();preview=createScene($('#design-preview'),id=>{selected=id;selectedOpening=null;renderInspector();renderList();});}
+    if(!preview){$('#design-preview').replaceChildren();preview=createScene($('#design-preview'),id=>{selected=id;selectedOpening=null;preview?.select(id);renderInspector();renderList();});}
     preview.update(designToPlan(draft),{preview:true,interior:!$('#design-roof').checked,labels:true,amount:5500,inventory:inventory(getState()),placements:getState().placements||[]});preview.select(selected);
   }
   function renderList(){$('#design-room-list').innerHTML=draft.rooms.length?draft.rooms.map(r=>`<button data-design-pick="${r.id}" class="${r.id===selected?'active':''}"><span>${esc(r.name)}</span><small>${r.w*r.d/4} m²</small></button>`).join(''):'<p>还没画房间。</p>';$('#design-room-list').querySelectorAll('button').forEach(b=>b.onclick=()=>{selected=b.dataset.designPick;selectedOpening=null;renderInspector();renderBoard();renderList();preview?.select(selected);});}
