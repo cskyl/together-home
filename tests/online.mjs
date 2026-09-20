@@ -15,7 +15,7 @@ try{
   await expect(a.locator('#balance')).toHaveText('$750',{timeout:25000});await expect(b.locator('#balance')).toHaveText('$750',{timeout:25000});
   await Promise.all([a.locator('#invest').click(),b.locator('#invest').click()]);await expect(a.locator('#balance')).toHaveText('$0',{timeout:25000});await expect(b.locator('#balance')).toHaveText('$0',{timeout:25000});await expect(a.locator('#build-percent')).toHaveText('14%');await expect(b.locator('#build-percent')).toHaveText('14%');
   console.log('PASS: concurrent study and construction share one consistent wallet');
-  await a.locator('[data-plan=fremont]').click();await expect(b.locator('#plan-title')).toHaveText('Fremont',{timeout:25000});await b.reload();await expect(b.locator('#sync-open')).toContainText('已联机',{timeout:25000});await expect(b.locator('#plan-title')).toHaveText('Fremont');await expect(b.locator('#cloud-dialog')).not.toBeVisible();
+  await a.locator('.plan-select[data-plan=anthem]').click();await expect(b.locator('#plan-title')).toHaveText('Anthem',{timeout:25000});await b.reload();await expect(b.locator('#sync-open')).toContainText('已联机',{timeout:25000});await expect(b.locator('#plan-title')).toHaveText('Anthem');await expect(b.locator('#cloud-dialog')).not.toBeVisible();
   await b.locator('#study-open').click();await expect(b.locator('[data-person="0"]')).toBeDisabled();await b.locator('#study-dialog .close-dialog').click();
   await a.locator('#undo').click();await expect(a.locator('#toast')).toContainText('已投入');
   console.log('PASS: shared selection, refresh persistence, identity restrictions and undo guards');
@@ -25,6 +25,9 @@ try{
   console.log('PASS: a third member is rejected; the original member can recover on a new device');
   let dropped=false;await aContext.route('**/v1/action',async route=>{if(!dropped){dropped=true;await route.fetch();await route.abort('failed');}else await route.continue();});
   await a.locator('#study-open').click();await a.locator('#minutes').fill('25');await a.locator('#study-note').fill('响应丢失后安全重试');await a.locator('#study-form button[type=submit]').click();await expect(a.locator('#toast')).toContainText('未确认');await a.locator('#study-dialog .close-dialog').click();await a.locator('#sync-open').click();await a.locator('#retry-sync').click();await expect(a.locator('#balance')).toHaveText('$250',{timeout:25000});await expect(b.locator('#balance')).toHaveText('$250',{timeout:25000});await a.locator('#close-cloud').click();await expect(a.locator('.journal-entry').filter({hasText:'响应丢失后安全重试'})).toHaveCount(1);
+  await b.locator('#invest').click();await expect(a.locator('#balance')).toHaveText('$0',{timeout:25000});await expect(b.locator('#build-percent')).toHaveText('5%');
+  await a.locator('.plan-select[data-plan=riverside]').click();await expect(b.locator('#plan-title')).toHaveText('Riverside',{timeout:25000});await expect(b.locator('#build-percent')).toHaveText('14%');
+  console.log('PASS: new Anthem construction syncs while prior Riverside progress remains intact');
   const width=await b.evaluate(()=>({scroll:document.documentElement.scrollWidth,width:innerWidth}));expect(width.scroll).toBeLessThanOrEqual(width.width);expect(errors).toEqual([]);
   await mkdir('test-results',{recursive:true});await a.screenshot({path:'test-results/online-desktop.png',fullPage:true});await b.screenshot({path:'test-results/online-mobile.png',fullPage:true});
   console.log('PASS: a committed operation with a lost response retries exactly once; mobile layout and browser errors checked');

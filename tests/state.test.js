@@ -1,6 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { freshState,study,build,balance,invested,progress,undoStudy,validate } from '../src/state.js';
+import { plans } from '../src/plans.js';
+
+test('旧版存档接入新增户型后仍保留原余额、学习记录和施工进度',()=>{
+  const legacy={version:1,selected:'riverside',names:['甲','乙'],events:[
+    {id:'legacy-study',type:'study',person:0,minutes:100,note:'保留这条备注',at:'2026-09-19T10:00:00.000Z'},
+    {id:'legacy-build',type:'build',plan:'riverside',amount:500,at:'2026-09-19T10:01:00.000Z'},
+  ]};
+  assert.deepEqual(validate(structuredClone(legacy)),legacy);
+  for(const plan of plans){
+    const next=validate({...structuredClone(legacy),selected:plan.id});
+    assert.equal(balance(next),500);assert.equal(invested(next,'riverside'),500);
+    assert.deepEqual(next.events,legacy.events);assert.deepEqual(next.names,legacy.names);
+    if(['ashland','grandview','anthem'].includes(plan.id)){
+      const built=build(next);assert.equal(invested(built,plan.id),500);
+      assert.equal(invested(built,'riverside'),500);assert.equal(balance(built),0);
+      assert.deepEqual(built.events.slice(0,2),legacy.events);
+    }
+  }
+});
 test('两个人的学习合并为共同资金，资金不能重复花费',()=>{let s=freshState();s=study(s,{person:0,minutes:25});s=study(s,{person:1,minutes:50});assert.equal(balance(s),750);s=build(s);assert.equal(invested(s),500);assert.equal(balance(s),250);assert.equal(progress(invested(s))[0].ratio,1);s=build(s);assert.equal(balance(s),0);assert.equal(invested(s),750);assert.throws(()=>build(s),/先记录/);validate(s);});
 test('更换户型保留独立施工记录和同一个钱包',()=>{let s=study(freshState(),{person:0,minutes:100});s=build(s);s={...s,selected:'fremont'};s=build(s);assert.equal(balance(s),0);assert.equal(invested(s,'fremont'),500);assert.equal(invested(s,'riverside'),500);validate(s);});
 test('所有建设按阶段推进，完工时仍保留多余资金',()=>{let s=study(freshState(),{person:0,minutes:480});s=study(s,{person:1,minutes:480});for(let i=0;i<5;i++)s=build(s);assert.equal(invested(s),5500);assert.equal(balance(s),4100);assert.ok(progress(invested(s)).every(p=>p.ratio===1));assert.throws(()=>build(s),/全部建成/);});

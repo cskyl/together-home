@@ -1,5 +1,6 @@
 import { chromium, expect } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
+import { plans } from '../src/plans.js';
 await mkdir('test-results',{recursive:true});
 const browser=await chromium.launch({channel:'msedge',headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:1100}});
@@ -8,6 +9,19 @@ const errors=[];page.on('pageerror',e=>errors.push(e.message));
 try {
   await page.route('**/cloud-config.json*',route=>route.fulfill({contentType:'application/json',body:'{"apiUrl":""}'}));
   await page.goto(process.env.TEST_URL||'http://localhost:4178');
+  console.log('Checking official prices, budget filter and sorting');
+  await expect(page.locator('.plan-card')).toHaveCount(6);
+  await expect(page.locator('#market-price')).toHaveText('$456,900 起');
+  await expect(page.locator('#price-source')).toHaveAttribute('href','https://www.mihomes.com/new-homes/ohio/columbus/riverside-plan');
+  await page.locator('#plan-sort').selectOption('price-asc');
+  await expect(page.locator('.plan-select').first()).toHaveAttribute('data-plan','ashland');
+  await page.locator('#plan-budget').selectOption('under-450');
+  await expect(page.locator('.plan-card')).toHaveCount(4);
+  await expect(page.locator('#plan-title')).toHaveText('Riverside');
+  await page.locator('#plan-budget').selectOption('over-450');
+  await expect(page.locator('.plan-card')).toHaveCount(2);
+  await page.locator('#plan-budget').selectOption('all');
+  await page.locator('#plan-sort').selectOption('default');
   console.log('Checking study credit and construction');
   await expect(page.locator('canvas')).toHaveAttribute('data-mode','preview');
   const beforeOrbit=await page.locator('canvas').screenshot();
@@ -35,10 +49,10 @@ try {
   await expect(page.locator('#build-percent')).toHaveText('5%');
   await page.locator('#undo').click();
   await expect(page.locator('#toast')).toContainText('已投入');
-  await page.locator('[data-plan="fremont"]').click();
+  await page.locator('.plan-select[data-plan="fremont"]').click();
   await expect(page.locator('canvas')).toHaveAttribute('data-plan','fremont');
   await expect(page.locator('#build-percent')).toHaveText('0%');
-  await page.locator('[data-plan="riverside"]').click();
+  await page.locator('.plan-select[data-plan="riverside"]').click();
   await expect(page.locator('#build-percent')).toHaveText('5%');
   await page.reload();
   console.log('Checking reload, source floorplan, room selection');
@@ -54,7 +68,19 @@ try {
   await page.locator('#exterior').click();
   console.log('Checking alternate plans and mobile');
   await page.locator('.model-panel').screenshot({path:'test-results/exterior.png'});
-  for(const id of ['fremont','naperville','riverside']){await page.locator(`[data-plan=${id}]`).click();await expect(page.locator('canvas')).toHaveAttribute('data-plan',id);}
+  await page.locator('#cutaway').click();
+  for(const plan of plans){
+    await page.locator(`.plan-select[data-plan=${plan.id}]`).click();
+    await expect(page.locator('canvas')).toHaveAttribute('data-plan',plan.id);
+    await expect(page.locator('#market-price')).toHaveText('$'+plan.price.amount.toLocaleString('en-US')+' 起');
+    await page.locator('[data-flat=true]').click();
+    await expect(page.locator('#floor-image')).toHaveAttribute('src',new RegExp(plan.floorFile));
+    await page.locator('#floor-image').evaluate(img=>img.decode());
+    await page.locator('[data-flat=false]').click();
+    if(['ashland','grandview','anthem'].includes(plan.id))await page.locator('.model-panel').screenshot({path:`test-results/${plan.id}-model.png`});
+  }
+  await page.locator('.plan-select[data-plan=riverside]').click();
+  await expect(page.locator('#build-percent')).toHaveText('5%');
   await page.locator('#cutaway').click();
   await page.locator('.switch-label').click();
   await expect(page.locator('#labels-toggle')).not.toBeChecked();
@@ -71,5 +97,5 @@ try {
   await page.locator('#undo').click();
   await expect(page.locator('#balance')).toHaveText('$0');
   expect(errors).toEqual([]);
-  console.log('PASS: 3D rendering, study credit, spending, undo guards, separate plans, persistence, floor images, room picking, mobile layout; no browser errors.');
+  console.log('PASS: all 6 floorplans, real starting prices, filters, 3D rendering, study credit, spending, undo guards, preserved progress, floor images, room picking and mobile layout; no browser errors.');
 } finally {await browser.close();}

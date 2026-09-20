@@ -9,6 +9,22 @@ import { createApi } from '../backend/server.mjs';
 const secret=()=>randomBytes(32).toString('hex');
 const act=(store,token,action,id=randomUUID())=>store.action(token,{requestId:id,action});
 function pair(store){const a=secret(),b=secret(),invite=secret();store.create(a,{name:'甲',invite});store.join(b,{name:'乙',invite});return {a,b,invite};}
+
+test('新增户型支持双人选房和施工，旧户型与余额不被重置',()=>{
+  const s=createStore();try{
+    const {a,b}=pair(s);act(s,a,{type:'study',minutes:200});act(s,a,{type:'build',plan:'riverside'});
+    const oldEvents=structuredClone(s.snapshot(a).state.events);
+    for(const plan of ['ashland','grandview','anthem']){
+      act(s,b,{type:'select',plan});assert.equal(s.snapshot(a).state.selected,plan);
+      act(s,a,{type:'build',plan});
+    }
+    const current=s.snapshot(b).state;
+    assert.deepEqual(current.events.slice(0,2),oldEvents);
+    assert.equal(current.events.filter(e=>e.type==='build').length,4);
+    assert.equal(current.events.reduce((sum,e)=>sum+(e.type==='study'?e.minutes*10:-e.amount),0),0);
+    act(s,b,{type:'select',plan:'riverside'});assert.equal(s.snapshot(a).state.events[1].amount,500);
+  }finally{s.close();}
+});
 test('两位独立身份、一次性邀请、未知访问者不能读取数据',()=>{const s=createStore();try{const {a,b,invite}=pair(s);assert.equal(s.snapshot(a).memberCount,2);assert.equal(s.snapshot(b).slot,1);assert.throws(()=>s.snapshot(secret()),/凭证无效/);assert.throws(()=>s.join(secret(),{name:'第三位',invite}),/邀请已使用/);assert.throws(()=>s.invite(b,{invite:secret()}),/只有创建者/);assert.throws(()=>s.invite(a,{invite:secret()}),/已经到齐/);assert.equal(s.db.prepare('SELECT count(*) n FROM members WHERE key_hash IN (?,?)').get(a,b).n,0);}finally{s.close();}});
 test('后端决定成员与兑换金额，重复提交只执行一次',()=>{const s=createStore();try{const {a,b}=pair(s),id=randomUUID();const action={type:'study',minutes:25,person:1,amount:999999,note:'hello'};act(s,a,action,id);act(s,a,action,id);let state=s.snapshot(b).state;assert.equal(state.events.length,1);assert.equal(state.events[0].person,0);assert.equal(state.events[0].minutes,25);assert.throws(()=>act(s,b,action,id),/编号已被使用/);act(s,b,{type:'study',minutes:50,note:''});act(s,a,{type:'build',plan:'riverside',amount:999999});state=s.snapshot(b).state;assert.equal(state.events.at(-1).amount,500);assert.equal(state.events.filter(e=>e.type==='study').length,2);}finally{s.close();}});
 test('只能撤销自己的未花费学习，不能透支',()=>{const s=createStore();try{const {a,b}=pair(s);act(s,a,{type:'study',minutes:25});assert.throws(()=>act(s,b,{type:'undo'}),/你还没有/);act(s,b,{type:'build',plan:'riverside'});assert.throws(()=>act(s,a,{type:'undo'}),/已投入/);assert.throws(()=>act(s,b,{type:'build',plan:'riverside'}),/先记录/);act(s,b,{type:'study',minutes:50});act(s,b,{type:'undo'});assert.equal(s.snapshot(a).state.events.length,2);}finally{s.close();}});

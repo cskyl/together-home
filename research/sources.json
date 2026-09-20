@@ -1,20 +1,94 @@
-﻿[
-    {
-        "url":  "https://www.mihomes.com/new-homes/ohio/columbus/fremont-plan",
-        "floor":  "https://dam.mihomes.com/media/508112/50421.jpeg",
-        "id":  "fremont",
-        "photo":  "https://dam.mihomes.com/media/1181146/50421.jpeg"
-    },
-    {
-        "url":  "https://www.mihomes.com/new-homes/ohio/columbus/riverside-plan",
-        "floor":  "https://dam.mihomes.com/media/71266/50421.jpeg",
-        "id":  "riverside",
-        "photo":  "https://dam.mihomes.com/media/999893/50421.jpeg"
-    },
-    {
-        "url":  "https://www.mihomes.com/new-homes/ohio/columbus/naperville-plan",
-        "floor":  "https://dam.mihomes.com/media/123850/50421.jpeg",
-        "id":  "naperville",
-        "photo":  "https://dam.mihomes.com/media/123846/50421.jpeg"
+[
+  {
+    "url": "https://www.mihomes.com/new-homes/ohio/columbus/fremont-plan",
+    "floor": "https://dam.mihomes.com/media/508112/50421.jpeg",
+    "id": "fremont",
+    "photo": "https://dam.mihomes.com/media/1181146/50421.jpeg",
+    "price": {
+      "amount": 400900,
+      "currency": "USD",
+      "kind": "starting",
+      "checkedAt": "2026-09-20",
+      "source": "https://www.mihomes.com/new-homes/ohio/columbus/fremont-plan",
+      "sourceLabel": "Starting at: $400,900",
+      "scope": "Columbus plan-page starting price; not an individual home listing or community minimum"
     }
+  },
+  {
+    "url": "https://www.mihomes.com/new-homes/ohio/columbus/riverside-plan",
+    "floor": "https://dam.mihomes.com/media/71266/50421.jpeg",
+    "id": "riverside",
+    "photo": "https://dam.mihomes.com/media/999893/50421.jpeg",
+    "price": {
+      "amount": 456900,
+      "currency": "USD",
+      "kind": "starting",
+      "checkedAt": "2026-09-20",
+      "source": "https://www.mihomes.com/new-homes/ohio/columbus/riverside-plan",
+      "sourceLabel": "Starting at: $456,900",
+      "scope": "Columbus plan-page starting price; not an individual home listing or community minimum"
+    }
+  },
+  {
+    "url": "https://www.mihomes.com/new-homes/ohio/columbus/naperville-plan",
+    "floor": "https://dam.mihomes.com/media/123850/50421.jpeg",
+    "id": "naperville",
+    "photo": "https://dam.mihomes.com/media/123846/50421.jpeg",
+    "price": {
+      "amount": 400900,
+      "currency": "USD",
+      "kind": "starting",
+      "checkedAt": "2026-09-20",
+      "source": "https://www.mihomes.com/new-homes/ohio/columbus/naperville-plan",
+      "sourceLabel": "Starting at: $400,900",
+      "scope": "Columbus plan-page starting price; not an individual home listing or community minimum"
+    }
+  },
+  {
+    "id": "ashland",
+    "url": "https://www.mihomes.com/new-homes/ohio/columbus/ashland-plan",
+    "photo": "https://dam.mihomes.com/media/999872/50421.jpeg",
+    "floor": "https://dam.mihomes.com/media/71225/50421.jpeg",
+    "price": {
+      "amount": 390900,
+      "currency": "USD",
+      "kind": "starting",
+      "checkedAt": "2026-09-20",
+      "source": "https://www.mihomes.com/new-homes/ohio/columbus/ashland-plan",
+      "sourceLabel": "Starting at: $390,900",
+      "scope": "Columbus plan-page starting price; not an individual home listing or community minimum"
+    }
+  },
+  {
+    "id": "grandview",
+    "url": "https://www.mihomes.com/new-homes/ohio/columbus/grandview-plan",
+    "photo": "https://dam.mihomes.com/media/999891/50421.jpeg",
+    "floor": "https://dam.mihomes.com/media/117616/50421.jpeg",
+    "price": {
+      "amount": 441900,
+      "currency": "USD",
+      "kind": "starting",
+      "checkedAt": "2026-09-20",
+      "source": "https://www.mihomes.com/new-homes/ohio/columbus/grandview-plan",
+      "sourceLabel": "Starting at: $441,900",
+      "scope": "Columbus plan-page starting price; not an individual home listing or community minimum"
+    }
+  },
+  {
+    "id": "anthem",
+    "url": "https://www.mihomes.com/new-homes/ohio/columbus/anthem-plan",
+    "photo": "https://dam.mihomes.com/media/1717614/50421.jpeg",
+    "floor": "https://argo.ml3ds-stage.com/productdata/MI%20Homes_8/Premier%20Collection_138233/Premier%20Collection_163116/Anthem-Smart%20Series_500998/First%20Floor_634876.svg",
+    "interactiveFloor": "https://rifp.ml3ds-iconstage.com/#/floorplan/500998",
+    "localFloor": "anthem-floor.svg",
+    "price": {
+      "amount": 473900,
+      "currency": "USD",
+      "kind": "starting",
+      "checkedAt": "2026-09-20",
+      "source": "https://www.mihomes.com/new-homes/ohio/columbus/anthem-plan",
+      "sourceLabel": "Starting at: $473,900",
+      "scope": "Columbus plan-page starting price; not an individual home listing or community minimum"
+    }
+  }
 ]

@@ -39,13 +39,16 @@ npm ci
 
 也可以双击项目中的 `Start Together Home.cmd`。需要此电脑已有仓库推送权限。脚本仅提交 `public/cloud-config.json`，不会提交数据、日志或凭证。
 
+更新后端或户型目录前，可运行 `node scripts/backup-host.mjs` 在线备份 SQLite；备份位于 `data/backups/`，不会上传 GitHub。备份使用 SQLite 备份接口，包含已提交的 WAL 数据，并执行完整性检查。
+
 这次配置没有更改电脑休眠设置，也没有安装开机自启服务。电脑重启后，请重新运行启动脚本。查看 `runtime/api.err.log` 和 `runtime/tunnel.err.log` 排查主机或隧道问题。
 
 开发前端：`npm run dev`，然后打开 http://localhost:4178/ 。单独启动后端：`npm run host`（默认仅监听 `127.0.0.1:4180`）。
 
 ## 功能与数据规则
 
-- Columbus 的 Riverside / Fremont / Naperville 公开户型参考，3D 旋转缩放、剖切室内、外观、房间选取、原始平面图。
+- Columbus 的 Riverside / Fremont / Naperville / Ashland / Grandview / Anthem 六套公开户型参考，3D 旋转缩放、剖切室内、外观、房间选取、原始平面图。
+- 官方户型起价、查询日期与原网页；按价格、面积排序，按起价预算筛选。真实价格仅用于参考，不改变游戏目标或旧进度。
 - 1 分钟学习 = 10 美元虚拟资金；每次可记录 1–480 分钟。
 - 共同资金，三个项目独立施工进度。地基 → 框架 → 墙体 → 屋顶 → 室内。
 - 服务器根据成员凭证决定贡献者，客户端不能冒充另一人或自定入账金额。
@@ -58,13 +61,18 @@ npm ci
 
 ## 户型来源
 
-2026-09-20 核对。3D 依照公开户型手工简化重建，仅展示一层；地下室未建模，层高、门窗、外观、屋顶、家具和部分尺寸为示意。面积为官方不同选配范围，不是简化模型的精确测量值。每个模型将一间次卧用作共同书房。
+2026-09-20 直接读取官方网页核对价格。以下金额为 Columbus 户型页的美元起价，非指定现房挂牌价；社区、地块及选配可能改变最终报价，页面不会自动刷新市场价格。模型和官方外观图可能含不同选配，不能据此判断选配已包含在起价内。
 
-| 模板 | 官方页面 | 原始一层图 |
-| --- | --- | --- |
-| Riverside | https://www.mihomes.com/new-homes/ohio/columbus/riverside-plan | https://dam.mihomes.com/media/71266/50421.jpeg |
-| Fremont | https://www.mihomes.com/new-homes/ohio/columbus/fremont-plan | https://dam.mihomes.com/media/508112/50421.jpeg |
-| Naperville | https://www.mihomes.com/new-homes/ohio/columbus/naperville-plan | https://dam.mihomes.com/media/123850/50421.jpeg |
+3D 依照公开户型手工简化重建，仅展示一层；地下室未建模，层高、门窗、外观、屋顶、家具和部分尺寸为示意。面积为官方不同选配范围，不是简化模型的精确测量值。每个模型将一间次卧用作共同书房。
+
+| 模板 | 官方起价（USD） | 原始一层图 |
+| --- | ---: | --- |
+| [Fremont](https://www.mihomes.com/new-homes/ohio/columbus/fremont-plan) | $400,900 起 | [原图](https://dam.mihomes.com/media/508112/50421.jpeg) |
+| [Riverside](https://www.mihomes.com/new-homes/ohio/columbus/riverside-plan) | $456,900 起 | [原图](https://dam.mihomes.com/media/71266/50421.jpeg) |
+| [Naperville](https://www.mihomes.com/new-homes/ohio/columbus/naperville-plan) | $400,900 起 | [原图](https://dam.mihomes.com/media/123850/50421.jpeg) |
+| [Ashland](https://www.mihomes.com/new-homes/ohio/columbus/ashland-plan) | $390,900 起 | [原图](https://dam.mihomes.com/media/71225/50421.jpeg) |
+| [Grandview](https://www.mihomes.com/new-homes/ohio/columbus/grandview-plan) | $441,900 起 | [原图](https://dam.mihomes.com/media/117616/50421.jpeg) |
+| [Anthem](https://www.mihomes.com/new-homes/ohio/columbus/anthem-plan) | $473,900 起 | [原图](https://argo.ml3ds-stage.com/productdata/MI%20Homes_8/Premier%20Collection_138233/Premier%20Collection_163116/Anthem-Smart%20Series_500998/First%20Floor_634876.svg) |
 
 原始图像版权归相应权利人所有；引用来源保留于网页和 `research/sources.json`。
 
