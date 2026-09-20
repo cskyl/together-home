@@ -28,7 +28,7 @@ try {
   await page.locator('#study-note').fill('一起学会了一道题 <3');
   await page.locator('#study-form button[type=submit]').click();
   await expect(page.locator('#balance')).toHaveText('$250');
-  await expect(page.locator('.journal-entry').first()).toContainText('你 专注了 25 分钟');
+  await expect(page.locator('.journal-entry').first()).toContainText('你 学习了 25 分钟');
   await page.locator('#invest').click();
   await expect(page.locator('#balance')).toHaveText('$0');
   await expect(page.locator('canvas')).toHaveAttribute('data-mode','construction');
@@ -50,7 +50,7 @@ try {
   await page.locator('.switch-label').click();
   await expect(page.locator('#labels-toggle')).toBeChecked();
   await page.locator('.room-label[data-room=study]').click();
-  await expect(page.locator('#room-detail')).toContainText('我们的书房');
+  await expect(page.locator('#room-detail')).toContainText('双人书房');
   await page.locator('#exterior').click();
   console.log('Checking alternate plans and mobile');
   await page.locator('.model-panel').screenshot({path:'test-results/exterior.png'});

@@ -21,12 +21,12 @@ export function createCloud({onSnapshot,onStatus}) {
     async create(name){return attach('create',{name,token:session&&!session.roomId?session.token:undefined,invite:session&&!session.roomId?session.invite:undefined});},
     async join(name,invite){return attach('join',{name,invite,token:session&&!session.roomId?session.token:undefined});},
     async restore(token){const clean=token.trim().replace(/^TH1-/,'');if(!/^[a-f0-9]{64}$/.test(clean))throw Error('恢复码格式不正确。');const data=await request('snapshot',{},clean);session={token:clean};revision=-1;accept(data);schedule();return data;},
-    async action(action){if(!session?.roomId)throw Error('请先创建或加入你们的家。');const pending=session.pending;
+    async action(action){if(!session?.roomId)throw Error('先创建或加入一个房间。');const pending=session.pending;
       if(pending&&JSON.stringify(pending.action)!==JSON.stringify(action))throw Error('上一笔操作还未确认，请先重试上一笔操作或重新连接。');
       const body=pending||{requestId:crypto.randomUUID(),action};session.pending=body;save();
       try{const result=await request('action',body);session.pending=null;accept(result);schedule();return result;}catch(e){if(e.status){session.pending=null;save();}throw e;}},
     async retry(){if(session?.pending)return this.action(session.pending.action);await config();await poll();},
-    async invitation(){if(!session?.roomId)throw Error('请先创建你们的家。');if(session.memberCount>=2)throw Error('你们已经连接到同一个家。');const invite=secret();await request('invite',{invite});session.invite=invite;save();return invite;},
+    async invitation(){if(!session?.roomId)throw Error('先创建一个房间。');if(session.memberCount>=2)throw Error('房间里已经有两个人了。');const invite=secret();await request('invite',{invite});session.invite=invite;save();return invite;},
     disconnect(){stopped=true;clearTimeout(timer);session=null;localStorage.removeItem(SESSION_KEY);},
   };
 }
