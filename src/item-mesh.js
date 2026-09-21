@@ -1,6 +1,7 @@
 import * as T from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { getItem, quote, paintOptions, carOptions } from './items.js';
+import { createFurnitureModel } from './furniture-mesh.js';
 
 export function createItemModel(owned,{displayStand=false}={}) {
   const item=getItem(owned.item||owned.id),config=quote(item.id,owned.config).config;
@@ -14,7 +15,9 @@ export function createItemModel(owned,{displayStand=false}={}) {
   const box=(x,y,z,w,h,d,c,extra)=>mesh(new T.BoxGeometry(w,h,d),c,x,y,z,extra);
   const ball=(x,y,z,rx,ry,rz,c,extra)=>{const m=mesh(new T.SphereGeometry(1,16,12),c,x,y,z,extra);m.scale.set(rx,ry,rz);return m;};
   const cylinder=(x,y,z,rt,rb,h,c)=>mesh(new T.CylinderGeometry(rt,rb,h,16),c,x,y,z);
-  if(item.category==='lego'){
+  if(item.category==='furniture'||item.category==='cats'){
+    root.add(createFurnitureModel(item));
+  }else if(item.category==='lego'){
     const wide=[10255,10326,11371].includes(item.set),w=wide?1.48:1.06,d=.79;
     box(0,.03,0,w+.15,.06,d+.22,'#777f78');box(0,.077,.39,w+.15,.045,.18,'#b1b4ab');
     const split=[10218,10246,10255,10270,10312,11371].includes(item.set),columns=split?2:1;
@@ -109,7 +112,7 @@ export function createItemModel(owned,{displayStand=false}={}) {
   return root;
 }
 
-export function disposeModel(root){const geometries=new Set(),materials=new Set();root.traverse(o=>{if(o.geometry)geometries.add(o.geometry);if(o.material)materials.add(o.material);});geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());}
+export function disposeModel(root){const geometries=new Set(),materials=new Set();root.traverse(o=>{if(o.geometry)geometries.add(o.geometry);if(o.material)for(const material of Array.isArray(o.material)?o.material:[o.material])materials.add(material);});geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());}
 
 export function createItemPreview(host,owned){
   let renderer;

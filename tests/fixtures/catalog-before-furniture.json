@@ -1,0 +1,462 @@
+{
+  "items": [
+    {
+      "id": "lego-10182",
+      "price": 400,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10190",
+      "price": 300,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10185",
+      "price": 420,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10197",
+      "price": 380,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10211",
+      "price": 420,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10218",
+      "price": 340,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10224",
+      "price": 480,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10232",
+      "price": 420,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10243",
+      "price": 380,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10246",
+      "price": 380,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10251",
+      "price": 400,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10255",
+      "price": 600,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10260",
+      "price": 380,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10264",
+      "price": 420,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10270",
+      "price": 380,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10278",
+      "price": 450,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10297",
+      "price": 450,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10312",
+      "price": 450,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10326",
+      "price": 600,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-10350",
+      "price": 480,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "lego-11371",
+      "price": 520,
+      "defaultConfig": {
+        "display": "open"
+      }
+    },
+    {
+      "id": "car-coupe",
+      "price": 2600,
+      "defaultConfig": {
+        "paint": "cream",
+        "wheels": "classic",
+        "cabin": "tan",
+        "roof": "solid",
+        "trim": "standard"
+      }
+    },
+    {
+      "id": "car-sedan",
+      "price": 1800,
+      "defaultConfig": {
+        "paint": "cream",
+        "wheels": "classic",
+        "cabin": "tan",
+        "roof": "solid",
+        "trim": "standard"
+      }
+    },
+    {
+      "id": "car-suv",
+      "price": 2400,
+      "defaultConfig": {
+        "paint": "cream",
+        "wheels": "classic",
+        "cabin": "tan",
+        "roof": "solid",
+        "trim": "standard"
+      }
+    },
+    {
+      "id": "car-offroad",
+      "price": 2800,
+      "defaultConfig": {
+        "paint": "cream",
+        "wheels": "classic",
+        "cabin": "tan",
+        "roof": "solid",
+        "trim": "standard"
+      }
+    },
+    {
+      "id": "car-wagon",
+      "price": 2200,
+      "defaultConfig": {
+        "paint": "cream",
+        "wheels": "classic",
+        "cabin": "tan",
+        "roof": "solid",
+        "trim": "standard"
+      }
+    },
+    {
+      "id": "car-compact",
+      "price": 1500,
+      "defaultConfig": {
+        "paint": "cream",
+        "wheels": "classic",
+        "cabin": "tan",
+        "roof": "solid",
+        "trim": "standard"
+      }
+    },
+    {
+      "id": "box-forest",
+      "price": 120,
+      "defaultConfig": {}
+    },
+    {
+      "id": "box-space",
+      "price": 150,
+      "defaultConfig": {}
+    },
+    {
+      "id": "box-dessert",
+      "price": 100,
+      "defaultConfig": {}
+    },
+    {
+      "id": "box-cats",
+      "price": 120,
+      "defaultConfig": {}
+    },
+    {
+      "id": "plush-bear",
+      "price": 180,
+      "defaultConfig": {}
+    },
+    {
+      "id": "plush-rabbit",
+      "price": 180,
+      "defaultConfig": {}
+    },
+    {
+      "id": "plush-cat",
+      "price": 160,
+      "defaultConfig": {}
+    },
+    {
+      "id": "plush-capybara",
+      "price": 200,
+      "defaultConfig": {}
+    },
+    {
+      "id": "plush-fox",
+      "price": 180,
+      "defaultConfig": {}
+    },
+    {
+      "id": "plush-panda",
+      "price": 220,
+      "defaultConfig": {}
+    },
+    {
+      "id": "decor-plant",
+      "price": 100,
+      "defaultConfig": {}
+    },
+    {
+      "id": "decor-lamp",
+      "price": 180,
+      "defaultConfig": {}
+    },
+    {
+      "id": "decor-shelf",
+      "price": 280,
+      "defaultConfig": {}
+    },
+    {
+      "id": "decor-chair",
+      "price": 220,
+      "defaultConfig": {}
+    },
+    {
+      "id": "decor-rug",
+      "price": 100,
+      "defaultConfig": {}
+    },
+    {
+      "id": "decor-record",
+      "price": 250,
+      "defaultConfig": {}
+    },
+    {
+      "id": "decor-piano",
+      "price": 600,
+      "defaultConfig": {}
+    },
+    {
+      "id": "decor-table",
+      "price": 180,
+      "defaultConfig": {}
+    },
+    {
+      "id": "decor-aquarium",
+      "price": 240,
+      "defaultConfig": {}
+    },
+    {
+      "id": "decor-flowers",
+      "price": 80,
+      "defaultConfig": {}
+    }
+  ],
+  "options": {
+    "lego": {
+      "display": {
+        "name": "展示方式",
+        "values": [
+          {
+            "id": "open",
+            "name": "开放展示",
+            "price": 0
+          },
+          {
+            "id": "case",
+            "name": "透明防尘罩",
+            "price": 60
+          },
+          {
+            "id": "lit",
+            "name": "防尘罩 + 暖光",
+            "price": 100
+          }
+        ]
+      }
+    },
+    "cars": {
+      "paint": {
+        "name": "车漆",
+        "values": [
+          {
+            "id": "cream",
+            "name": "奶油白",
+            "color": "#eee9db",
+            "price": 0
+          },
+          {
+            "id": "green",
+            "name": "森林绿",
+            "color": "#456653",
+            "price": 80
+          },
+          {
+            "id": "blue",
+            "name": "海盐蓝",
+            "color": "#769bab",
+            "price": 80
+          },
+          {
+            "id": "red",
+            "name": "酒红",
+            "color": "#963f46",
+            "price": 100
+          },
+          {
+            "id": "silver",
+            "name": "银灰",
+            "color": "#aab4b7",
+            "price": 100
+          },
+          {
+            "id": "black",
+            "name": "曜石黑",
+            "color": "#343a3f",
+            "price": 80
+          }
+        ]
+      },
+      "wheels": {
+        "name": "轮毂",
+        "values": [
+          {
+            "id": "classic",
+            "name": "经典银色",
+            "price": 0
+          },
+          {
+            "id": "sport",
+            "name": "运动黑色",
+            "price": 120
+          },
+          {
+            "id": "bronze",
+            "name": "古铜轮毂",
+            "price": 160
+          }
+        ]
+      },
+      "cabin": {
+        "name": "内饰",
+        "values": [
+          {
+            "id": "tan",
+            "name": "焦糖色",
+            "color": "#b88958",
+            "price": 0
+          },
+          {
+            "id": "ivory",
+            "name": "米白",
+            "color": "#e5ddc9",
+            "price": 100
+          },
+          {
+            "id": "dark",
+            "name": "深灰",
+            "color": "#484d50",
+            "price": 80
+          }
+        ]
+      },
+      "roof": {
+        "name": "车顶",
+        "values": [
+          {
+            "id": "solid",
+            "name": "同色车顶",
+            "price": 0
+          },
+          {
+            "id": "glass",
+            "name": "全景玻璃",
+            "price": 180
+          },
+          {
+            "id": "open",
+            "name": "敞篷",
+            "price": 240
+          }
+        ]
+      },
+      "trim": {
+        "name": "外观套件",
+        "values": [
+          {
+            "id": "standard",
+            "name": "标准版",
+            "price": 0
+          },
+          {
+            "id": "sport",
+            "name": "尾翼 + 侧裙",
+            "price": 200
+          }
+        ]
+      }
+    }
+  }
+}

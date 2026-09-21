@@ -36,7 +36,7 @@ try{
   console.log('PASS: reload, collection persistence, relocation between houses and return to inventory');
   // Exercise every procedural model and dispose each temporary WebGL preview.
   for(const item of items){await open(item.id);await expect(page.locator('#item-preview canvas')).toBeVisible();await page.locator('#item-close').click();}
-  console.log('PASS: all 47 product models open and close');
+  console.log(`PASS: all ${items.length} product models open and close`);
   await page.setViewportSize({width:390,height:844});await open('car-suv');await page.locator('[data-option=paint]').selectOption('blue');await expect(page.locator('#buy-item')).toBeDisabled();
   const overflow=await page.evaluate(()=>({page:document.documentElement.scrollWidth,viewport:innerWidth,dialog:document.querySelector('#item-dialog').scrollWidth,client:document.querySelector('#item-dialog').clientWidth}));expect(overflow.page).toBeLessThanOrEqual(overflow.viewport);expect(overflow.dialog).toBeLessThanOrEqual(overflow.client);
   await page.locator('#item-dialog').screenshot({path:'test-results/shop-mobile-dialog.png'});await page.locator('#item-close').click();await category('lego');await page.locator('#shop').screenshot({path:'test-results/shop-mobile.png'});

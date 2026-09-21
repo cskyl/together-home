@@ -1,6 +1,6 @@
 // Prices are fixed game-currency prices, never retail prices.
 export const categories = [
-  ['lego','乐高街景'],['cars','车库'],['blind','盲盒'],['plush','娃娃'],['decor','家具装饰']
+  ['lego','乐高街景'],['cars','车库'],['furniture','家具'],['cats','猫猫家具'],['blind','盲盒'],['plush','娃娃'],['decor','装饰摆件']
 ];
 const history = 'https://www.lego.com/en-us/categories/modular-buildings/about';
 const modulars = [
@@ -67,7 +67,33 @@ export const items = [
     ['rug','圆形地毯',100,'#b4b7a3'],['record','黑胶唱片柜',250,'#99795b'],
     ['piano','立式钢琴',600,'#505b56'],['table','圆边茶几',180,'#bd9c72'],
     ['aquarium','小鱼缸',240,'#8eafb2'],['flowers','花瓶与花',80,'#c2a6b2']
-  ].map(([shape,name,price,color])=>({id:`decor-${shape}`,category:'decor',shape,name,price,color,description:'放在客厅、卧室或书房，位置和朝向都可以调整。'}))
+  ].map(([shape,name,price,color])=>({id:`decor-${shape}`,category:'decor',shape,name,price,color,description:'放在客厅、卧室或书房，位置和朝向都可以调整。'})),
+  ...[
+    ['sofa','双人布艺沙发',800,'#9caf9c','两人位沙发，带靠垫和扶手，放在客厅或猫房都行。'],
+    ['armchair','扶手单人椅',380,'#c3ac90','宽扶手和软坐垫，给角落留一个坐着看书的位置。'],
+    ['bed','木框双人床',1000,'#b99b78','木质床架、床头板和双人床垫，适合放在卧室。'],
+    ['wardrobe','双门衣柜',850,'#c9b28e','两扇柜门和一排拉手，给衣服留点收纳空间。'],
+    ['dresser','三抽收纳柜',480,'#ba9675','三层抽屉，矮柜台面还可以留作展示。'],
+    ['nightstand','床头小柜',180,'#d2bf9e','床边的小抽屉柜，抬手就能放下东西。'],
+    ['desk','宽面书桌',420,'#be9f7d','宽桌面和侧边抽屉，书房或卧室都能安排。'],
+    ['officechair','转椅',320,'#899c9d','带靠背、扶手和脚轮的书桌椅。'],
+    ['diningtable','四人餐桌',600,'#b58e69','圆角木桌，餐椅可以按需要另外购买。'],
+    ['diningchair','木质餐椅',160,'#bdad90','带木质靠背和坐垫的单把餐椅，可以买几把搭配餐桌。'],
+    ['tvstand','矮电视柜',450,'#ae9277','低矮收纳柜，中间留有开放格，放客厅比较合适。'],
+    ['bookcase','开放书柜',520,'#a88c70','开放层板和几格书本，摆在书房或客厅。']
+  ].map(([shape,name,price,color,description])=>({id:`furniture-${shape}`,category:'furniture',shape,name,price,color,description})),
+  ...[
+    ['tree','多层猫爬架',650,'#bea786','几层跳台、抓柱和躲猫小窝，给猫安排一块上下活动的地方。'],
+    ['condo','双层猫屋',420,'#ccb795','带两个圆洞的小猫屋，上下两层都能窝着。'],
+    ['bed','圆窝猫床',160,'#c8b3a7','一圈软边和中间的小垫子，放在安静的角落。'],
+    ['litter','带盖猫砂盆',240,'#9eada5','带顶盖和前侧入口，给猫房留一个独立角落。'],
+    ['feeder','双碗喂食台',120,'#c8a789','低矮木台配两只碗，吃饭喝水各放一边。'],
+    ['fountain','循环饮水机',180,'#91adb1','浅水盘和小喷泉的造型，放在喂食区附近。'],
+    ['scratcher','立式猫抓柱',100,'#c1ae8b','圆底座和缠绳抓柱，小空间也能摆。'],
+    ['tunnel','三通猫隧道',220,'#a7b3a2','三个入口连在一起，给地面留一段钻来钻去的路线。'],
+    ['perch','窗边猫躺台',200,'#c5b28f','带软垫的小平台，靠窗摆着看外面。'],
+    ['toys','猫玩具小篮',80,'#b7a184','小球、羽毛棒和收纳篮，放在活动区就行。']
+  ].map(([shape,name,price,color,description])=>({id:`cat-${shape}`,category:'cats',shape,name,price,color,description}))
 ];
 export const getItem = id => items.find(i=>i.id===id);
 export function optionGroups(item) {
@@ -91,7 +117,7 @@ export const itemName = owned => {
 };
 export const configName = owned => Object.entries(optionGroups(getItem(owned.item))).map(([key,group])=>group.values.find(v=>v.id===owned.config[key])?.name).join(' · ');
 export function placementRooms(plan,item) {
-  return plan.rooms.filter(r=>item.category==='cars'?r.type==='garage':plan.custom||['living','bed','study','dining'].includes(r.type));
+  return plan.rooms.filter(r=>item.category==='cars'?r.type==='garage':plan.custom||['living','bed','study','dining','cat'].includes(r.type));
 }
 // A shared slot reserves real space: small collectibles use display ledges; furniture uses floor zones.
 export function placementSlots(item) {

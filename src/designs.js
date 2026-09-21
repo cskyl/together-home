@@ -1,12 +1,12 @@
 // One design unit is 0.5 m. Geometry and validation are shared with the server.
 import { DEFAULT_CUSTOM_BUDGET } from './construction.js';
 export const GRID=48,MAX_ROOMS=20,MAX_DESIGNS=8;
-export const roomTypes=[['living','客厅'],['bed','卧室'],['study','书房'],['kitchen','厨房'],['dining','餐厅'],['bath','浴室'],['hall','走廊 / 玄关'],['garage','车库'],['utility','洗衣房'],['closet','储藏间']];
+export const roomTypes=[['living','客厅'],['bed','卧室'],['study','书房'],['cat','猫房'],['kitchen','厨房'],['dining','餐厅'],['bath','浴室'],['hall','走廊 / 玄关'],['garage','车库'],['utility','洗衣房'],['closet','储藏间']];
 export const floors=[['oak','浅橡木','#c6ad87'],['walnut','深木色','#967453'],['tile','浅色瓷砖','#deded2'],['stone','水泥灰','#b8bfba'],['sage','鼠尾草绿','#a8b5a0'],['cream','奶油色','#e7dcc5']];
 export const paints=[['white','暖白','#f1eee2'],['linen','亚麻','#d9cdb7'],['sage','浅绿','#b5c5ad'],['blue','灰蓝','#b4c4ce'],['clay','陶土','#d1aa94'],['rose','浅粉','#d4bcc0']];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const newDesignId=()=>`custom-${crypto.randomUUID()}`;
-export const newRoom=(type='living',x=4,z=4,w=8,d=8)=>({id:'r-'+crypto.randomUUID(),name:roomTypes.find(t=>t[0]===type)?.[1]||'房间',type,x,z,w,d,floor:['bath','garage','utility'].includes(type)?'tile':'oak',paint:'white',furnished:true});
+export const newRoom=(type='living',x=4,z=4,w=8,d=8)=>({id:'r-'+crypto.randomUUID(),name:roomTypes.find(t=>t[0]===type)?.[1]||'房间',type,x,z,w,d,floor:['bath','garage','utility'].includes(type)?'tile':'oak',paint:'white',furnished:type!=='cat'});
 export const overlaps=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.z<b.z+b.d&&a.z+a.d>b.z;
 export function roomError(room,rooms=[]){
   if(!['x','z','w','d'].every(k=>Number.isInteger(room[k]))||room.x<0||room.z<0||room.w<2||room.d<2||room.x+room.w>GRID||room.z+room.d>GRID)return '房间尺寸至少 1 米，位置要在 24 × 24 米画布内，按 0.5 米调整。';
@@ -58,7 +58,7 @@ export function planSVG(d){
 }
 export const planImage=d=>'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(planSVG(d));
 export function designTemplate(kind='blank'){
-  const d={id:newDesignId(),name:kind==='cozy'?'我的单层小屋':kind==='studio'?'我的小公寓':'新户型',rooms:[],openings:[]};
+  const d={id:newDesignId(),name:kind==='cozy'?'我的单层小屋':kind==='studio'?'我的小公寓':kind==='cat-home'?'带猫房的小屋':'新户型',rooms:[],openings:[]};
   const add=(type,name,x,z,w,depth)=>{const r=newRoom(type,x,z,w,depth);r.name=name;d.rooms.push(r);};
   const opening=(kind,axis,x,z,width=2)=>d.openings.push({id:'o-'+crypto.randomUUID(),kind,axis,x,z,width});
   if(kind==='cozy'){
@@ -66,6 +66,12 @@ export function designTemplate(kind='blank'){
     add('living','客厅',4,16,12,8);add('kitchen','厨房',16,16,6,8);add('bath','浴室',22,16,6,8);add('garage','车库',4,24,12,12);add('hall','玄关',16,24,12,4);
     for(const x of [8,16,24]){opening('door','x',x,12);opening('window','x',x,4,3);}
     opening('opening','x',10,16,4);opening('door','x',19,16);opening('door','x',25,16);opening('door','x',19,24);opening('door','x',23,28);opening('door','z',16,26);opening('door','x',10,36,8);opening('window','z',4,20,4);
+  }else if(kind==='cat-home'){
+    add('living','客厅 / 餐厅',8,8,24,8);add('bed','卧室',8,16,8,8);add('bath','浴室',16,16,4,8);add('kitchen','厨房',20,16,6,8);add('cat','猫房',26,16,6,8);
+    d.rooms.at(-1).paint='sage';
+    opening('door','x',20,8);opening('window','x',13,8,4);opening('window','x',27,8,4);
+    opening('door','x',12,16);opening('door','x',18,16);opening('opening','x',23,16,4);opening('door','x',29,16);
+    opening('window','x',12,24,3);opening('window','x',29,24,3);opening('window','z',32,20,3);
   }else if(kind==='studio'){
     add('living','客厅 / 工作区',8,8,16,8);add('bed','卧室',8,16,8,8);add('bath','浴室',16,16,4,8);add('kitchen','厨房',20,16,4,8);
     opening('door','x',16,8);opening('window','z',8,12,4);opening('door','x',12,16);opening('door','x',18,16);opening('opening','x',22,16,2);opening('window','x',12,24,3);
