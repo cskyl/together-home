@@ -6,13 +6,14 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createStore as openStore } from '../backend/store.mjs';
 import { createApi } from '../backend/server.mjs';
-import { items,quote } from '../src/items.js';
+import { items,getItem,quote,optionGroups } from '../src/items.js';
 import { freshState,study as recordStudy,build,purchase,placeItem,validate,balance,invested,inventory,undoStudy } from '../src/state.js';
 const study=(state,entry)=>recordStudy(state,entry,{roll:()=>500});
 const createStore=path=>openStore(path,{studyRoll:()=>500});
 const secret=()=>randomBytes(32).toString('hex');
 const act=(s,token,action,id=randomUUID())=>s.action(token,{requestId:id,action});
 const pair=s=>{const a=secret(),b=secret(),invite=secret();s.create(a,{name:'甲',invite});s.join(b,{name:'乙',invite});return {a,b};};
+const fund=amount=>{let state=freshState();while(balance(state)<amount)state=study(state,{person:0,minutes:480});return state;};
 
 test('旧存档购买后保留学习和建设；余额统一结算，已消费学习不能撤销',()=>{
   const old={...freshState(),events:[{id:randomUUID(),type:'study',person:0,minutes:100,note:'旧版资金',at:'2026-09-01T12:00:00.000Z'},{id:randomUUID(),type:'build',plan:'riverside',amount:500,at:'2026-09-01T12:01:00.000Z'}]},snapshot=structuredClone(old);
@@ -24,10 +25,10 @@ test('旧存档购买后保留学习和建设；余额统一结算，已消费�
 });
 test('车辆选配逐项计价，全部街景可购买，盲盒六款都能保存',()=>{
   const cfg={paint:'red',wheels:'bronze',cabin:'ivory',roof:'open',trim:'sport'};
-  assert.equal(quote('car-coupe',cfg).amount,3400);
-  assert.throws(()=>quote('car-coupe',{paint:'free'}),/选配/);assert.throws(()=>quote('car-coupe',{amount:1}),/选配/);
+  assert.equal(quote('car-coupe',cfg,1).amount,3400);
+  assert.throws(()=>quote('car-coupe',{paint:'free'},1),/选配|不适用/);assert.throws(()=>quote('car-coupe',{amount:1},1),/选配/);
   assert.equal(items.filter(i=>i.category==='lego').length,21);
-  for(const item of items){const s=purchase(study(freshState(),{person:0,minutes:480}),{item:item.id});validate(s);assert.equal(inventory(s)[0].amount,item.price);}
+  for(const item of items.filter(item=>!item.archived)){const amount=quote(item.id).amount,s=purchase(fund(amount),{item:item.id});validate(s);assert.equal(inventory(s)[0].amount,amount);assert.equal(inventory(s)[0].priceVersion,3);}
   for(const item of items.filter(i=>i.variants))for(let roll=0;roll<6;roll++){
     const s=purchase(study(freshState(),{person:1,minutes:100}),{item:item.id,person:1},{roll:()=>roll});assert.equal(inventory(s)[0].variant,String(roll));validate(s);
   }
@@ -49,11 +50,28 @@ test('后端决定购买价格和身份，盲盒响应丢失重试不会多扣�
     const first=act(s,a,action,id),owned=inventory(first.state)[0];assert.equal(owned.person,0);assert.equal(owned.amount,120);assert.match(owned.variant,/^[0-5]$/);
     for(let i=0;i<4;i++){const retry=act(s,a,action,id);assert.equal(retry.revision,first.revision);assert.deepEqual(inventory(retry.state),[owned]);}
     assert.equal(balance(s.snapshot(b).state),4680);assert.throws(()=>act(s,b,action,id),/编号已被使用/);
-    const config={paint:'red',wheels:'bronze',cabin:'ivory',roof:'open',trim:'sport'};act(s,b,{type:'purchase',item:'car-coupe',config,amount:1});
-    const car=inventory(s.snapshot(a).state).at(-1);assert.equal(car.amount,3400);assert.equal(car.person,1);assert.deepEqual(car.config,config);
+    const item=getItem('vehicle-honda-civic'),config={...quote(item.id).config},groups=optionGroups(item);
+    for(const key of ['paint','wheels']){const upgrade=groups[key].values.find(value=>value.price>0&&(!value.trims||value.trims.includes(config.trim)));assert.ok(upgrade);config[key]=upgrade.id;}
+    const priced=quote(item.id,config);assert.ok(priced.amount>item.price);
+    while(balance(s.snapshot(a).state)<priced.amount)act(s,a,{type:'study',minutes:480});
+    act(s,b,{type:'purchase',item:item.id,config,amount:1,priceVersion:1,person:0});
+    const car=inventory(s.snapshot(a).state).at(-1);assert.equal(car.amount,priced.amount);assert.equal(car.person,1);assert.deepEqual(car.config,config);assert.equal(car.priceVersion,3);
     act(s,b,{type:'place',id:car.id,position:{plan:'riverside',room:'garage',slot:0,rotation:1}});
     assert.equal(s.snapshot(a).state.placements.length,1);
     assert.throws(()=>act(s,a,{type:'place',id:car.id,position:{plan:'riverside',room:'study',slot:0,rotation:0}}),/位置无效/);
+  }finally{s.close();}
+});
+test('历史第一版游戏车可继续由两人摆放，无法通过购买接口再次购入',()=>{
+  const s=createStore();try{
+    const {a,b}=pair(s),before=s.snapshot(a),config={paint:'red',wheels:'bronze',cabin:'ivory',roof:'open',trim:'sport'};
+    const saved={...before.state,events:[
+      {id:'archived-funds',type:'study',person:0,minutes:480,note:'旧存档',at:'2026-09-19T12:00:00Z'},
+      {id:'archived-car',type:'purchase',person:1,item:'car-coupe',config,amount:3400,priceVersion:1,at:'2026-09-19T12:01:00Z'}
+    ]};validate(saved);s.db.prepare('UPDATE rooms SET state=? WHERE id=?').run(JSON.stringify(saved),before.roomId);
+    const position={plan:'riverside',room:'garage',slot:0,rotation:1};act(s,b,{type:'place',id:'archived-car',position});
+    act(s,a,{type:'place',id:'archived-car',position:{...position,slot:1,rotation:3}});
+    const placed=s.snapshot(b);assert.deepEqual(placed.state.events,saved.events);assert.equal(balance(placed.state),1400);assert.equal(placed.state.placements[0].rotation,3);
+    assert.throws(()=>act(s,a,{type:'purchase',item:'car-coupe',config,priceVersion:1}),/下架/);assert.deepEqual(s.snapshot(b),placed);
   }finally{s.close();}
 });
 test('双人可搬动共同物品，不能使用其他房间物品或占同一个展示位',()=>{

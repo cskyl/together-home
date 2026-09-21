@@ -1,5 +1,9 @@
-// Current game-currency prices are independent of real retail references.
+// Furniture uses game prices; real vehicles use the documented USD MSRP snapshot.
 import { GAME_PRICE_VERSION, legacyPrices } from './prices.js';
+import { pricesV2 } from './prices-v2.js';
+import { furnitureExpansion } from './furniture-expansion.js';
+import { expansionReferences } from './expansion-references.js';
+import { vehicles } from './vehicles.js';
 import { furnitureAdditions } from './furniture-catalog.js';
 import { furnitureReferences } from './furniture-references.js';
 import { carReferences } from './car-references.js';
@@ -59,7 +63,7 @@ export const items = [
     ['coupe','双门跑车',2600,'#963f46'],['sedan','城市轿车',1800,'#eee9db'],
     ['suv','电动 SUV',2400,'#769bab'],['offroad','方盒子越野车',2800,'#456653'],
     ['wagon','旅行车',2200,'#aab4b7'],['compact','复古小车',1500,'#d3bc75']
-  ].map(([shape,name,price,color])=>({id:`car-${shape}`,category:'cars',shape,name,price,color,description:'可选游戏车漆、轮毂、内饰、车顶和运动套件，变化会显示在 3D 模型上。买好后停进车库。'})),
+  ].map(([shape,name,price,color])=>({id:`car-${shape}`,category:'cars',archived:true,shape,name,price,color,description:'可选游戏车漆、轮毂、内饰、车顶和运动套件，变化会显示在 3D 模型上。买好后停进车库。'})),
   {id:'box-forest',category:'blind',name:'森林下班了',price:120,color:'#91aa87',shape:'box',description:'6 只森林小动物，随机开出一款。',variants:variants(['围巾小熊','奶油兔','灰蓝猫','打盹水豚','莓果狐狸','苔藓小熊'],softColors,['bear','rabbit','cat','capybara','fox','bear'])},
   {id:'box-space',category:'blind',name:'太空摸鱼队',price:150,color:'#929dbc',shape:'box',description:'6 个戴头盔的太空伙伴，换个星球继续摸鱼。',variants:variants(['月球熊','星云兔','轨道猫','土星熊','银河兔','薄荷猫'],['#ded4b8','#b6a4cc','#9cbbcf','#e0ae85','#bd8da2','#9ec5ad'],['astro-bear','astro-rabbit','astro-cat','astro-bear','astro-rabbit','astro-cat'])},
   {id:'box-dessert',category:'blind',name:'甜品休息站',price:100,color:'#d3afb3',shape:'box',description:'6 款甜品配色的小摆件，每款概率相同。',variants:variants(['草莓布丁','抹茶团子','蓝莓蛋糕','焦糖可可','芋泥泡芙','香草奶冻'],['#d5a4ad','#a5b68a','#9fabc5','#b58c64','#baa3bd','#ded4b4'],['pudding','pudding','pudding','pudding','pudding','pudding'])},
@@ -102,23 +106,27 @@ export const items = [
     ['perch','窗边猫躺台',200,'#c5b28f','带软垫的小平台，靠窗摆着看外面。'],
     ['toys','猫玩具小篮',80,'#b7a184','小球、羽毛棒和收纳篮，放在活动区就行。']
   ].map(([shape,name,price,color,description])=>({id:`cat-${shape}`,category:'cats',shape,name,price,color,description})),
-  ...furnitureAdditions
-].map(item=>({...item,price:Object.hasOwn(legacyPrices,item.id)&&['furniture','cats','decor'].includes(item.category)?Math.max(15,Math.round(legacyPrices[item.id]*.3/5)*5):item.price,...(item.category==='furniture'?{roomGroup:item.roomGroup||originalRoomGroups[item.shape]}:{}),reference:furnitureReferences[item.id]||carReferences[item.id]||decorReferences[item.id]}));
+  ...furnitureAdditions,
+  ...furnitureExpansion,
+  ...vehicles
+].map(item=>({...item,price:Object.hasOwn(pricesV2,item.id)&&['furniture','cats','decor'].includes(item.category)?Math.max(5,Math.round(pricesV2[item.id]*.4/5)*5):item.price,...(item.category==='furniture'?{roomGroup:item.roomGroup||originalRoomGroups[item.shape]}:{}),reference:item.reference||expansionReferences[item.id]||furnitureReferences[item.id]||carReferences[item.id]||decorReferences[item.id]}));
 export const getItem = id => items.find(i=>i.id===id);
 export function optionGroups(item) {
-  if(item.category==='cars')return carOptions;
+  if(item.category==='cars')return item.optionGroups||carOptions;
   if(item.category==='lego')return {display:{name:'展示方式',values:[{id:'open',name:'开放展示',price:0},{id:'case',name:'透明防尘罩',price:60},{id:'lit',name:'防尘罩 + 暖光',price:100}]}};
   return {};
 }
 export function quote(id,input={},priceVersion=GAME_PRICE_VERSION) {
   const item=getItem(id);
   if(!item||!input||typeof input!=='object'||Array.isArray(input))throw Error('物品或选配无效。');
-  if(![1,GAME_PRICE_VERSION].includes(priceVersion)||(priceVersion===1&&!Object.hasOwn(legacyPrices,id)))throw Error('购买价格版本无效。');
-  const groups=optionGroups(item),config={};let amount=priceVersion===1?legacyPrices[id]:item.price;
+  const history=priceVersion===1?legacyPrices:priceVersion===2?pricesV2:null;
+  if(![1,2,GAME_PRICE_VERSION].includes(priceVersion)||(history&&!Object.hasOwn(history,id)))throw Error('购买价格版本无效。');
+  const groups=optionGroups(item),config={};let amount=history?history[id]:item.price;
   if(Object.keys(input).some(k=>!Object.hasOwn(groups,k)))throw Error('物品选配无效。');
   for(const [key,group] of Object.entries(groups)){
-    const value=group.values.find(v=>v.id===(input[key]??group.values[0].id));
-    if(!value)throw Error('物品选配无效。');config[key]=value.id;amount+=value.price;
+    const trim=input.trim??groups.trim?.values[0]?.id,defaultValue=group.values.find(v=>!v.trims||v.trims.includes(trim));
+    const value=group.values.find(v=>v.id===(input[key]??defaultValue?.id));
+    if(!value||(value.trims&&!value.trims.includes(input.trim??groups.trim?.values[0].id)))throw Error('这项选配不适用于当前版本。');config[key]=value.id;amount+=value.price;
   }
   return {item,config,amount,priceVersion};
 }

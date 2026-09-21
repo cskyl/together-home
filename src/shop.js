@@ -8,7 +8,17 @@ import { createItemPreview } from './item-mesh.js';
 
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>'$'+n.toLocaleString('en-US');
+function optionDetails(key,value){
+  if(!value)return '';
+  return (value.description?`<small class="option-description">${esc(value.description)}</small>`:'')+(key!=='trim'&&value.image?`<details class="option-reference"><summary>看这项的官方参考图</summary><img src="${import.meta.env.BASE_URL}${esc(value.image)}" loading="lazy" alt="${esc(value.name)} 官方参考图"><span>图中车辆版本可能不同，以所选版本和配置名称为准。</span></details>`:'');
+}
+function vehicleBreakdown(item,priced){
+  const rows=[['基础车型 MSRP',item.price],...Object.entries(optionGroups(item)).map(([key,group])=>{const v=group.values.find(v=>v.id===priced.config[key]);return [group.name+' · '+v.name,v.price];})];
+  return `<div class="vehicle-price-breakdown"><span class="eyebrow">美元车价明细</span><dl>${rows.map(([name,price])=>`<div><dt>${esc(name)}</dt><dd>${money(price)}</dd></div>`).join('')}</dl><p>${esc(item.reference?.retailPrice?.note||'美国官网建议零售价；不含税费、牌照、经销商加价及运费。')} 从游戏资金中扣除对应金额。</p></div>`;
+}
 function thumbnail(item,owned){
+  const variantPhoto=owned&&item.optionGroups?.trim?.values.find(v=>v.id===owned.config.trim)?.image;
+  if(variantPhoto)item={...item,reference:{...item.reference,image:variantPhoto}};
   if(item.reference?.image)return referencePhoto(item);
   if(item.category==='furniture'||item.category==='cats')return furnitureThumbnail(item);
   if(item.image)return `<img src="${import.meta.env.BASE_URL}${item.image}" loading="lazy" alt="LEGO ${item.set} ${esc(item.name)} 官方参考图">`;
@@ -29,7 +39,7 @@ export function createShop({getState,mutate,getPerson,getError,showInRoom,toast}
   const $=s=>document.querySelector(s);
   const getPlan=id=>resolvePlan(id,getState());
   let category='lego',ownedView=false,expanded=false,search='',roomGroup='all',sort='catalog',budget='',lastKey='',preview=null,active=null,config={},purchaseBusy=false,position=null;
-  $('#journal').insertAdjacentHTML('beforebegin',`<section class="shop" id="shop" aria-labelledby="shop-title"><div class="shop-heading"><div><span class="eyebrow">A FEW NICE THINGS</span><h2 id="shop-title">给房间添点东西</h2><p>按房间挑家具，看看真实商品图片和参数，再用游戏资金布置。猫房和车库也有得选。</p></div><div class="shop-wallet"><span>共同游戏资金</span><strong id="shop-balance"></strong></div></div><div class="shop-bar"><div class="segmented shop-view"><button id="shop-catalog" class="active">逛商店</button><button id="shop-inventory">我的物品 <span id="owned-count">0</span></button></div><label class="shop-search"><span>搜索</span><input id="item-search" type="search" placeholder="名称 / 品牌 / 型号" aria-label="搜索物品"></label></div><div class="shop-categories" role="group" aria-label="商品分类">${categories.map(([id,name])=>`<button data-category="${id}" aria-pressed="${id===category}">${name}<small>${items.filter(i=>i.category===id).length}</small></button>`).join('')}</div><div id="furniture-filters" class="furniture-filters" role="group" aria-label="按房间挑家具" hidden>${furnitureGroups.map(([id,name])=>`<button data-furniture-group="${id}" aria-pressed="${id===roomGroup}">${name}</button>`).join('')}</div><div class="shop-filter-row"><label>排序<select id="shop-sort"><option value="catalog">默认顺序</option><option value="price-asc">游戏价从低到高</option><option value="price-desc">游戏价从高到低</option><option value="name">名称</option></select></label><label>最多花费<input id="shop-budget" type="number" min="0" step="1" placeholder="不限" aria-label="游戏资金预算上限"></label><span>筛选和标价均为游戏资金</span></div><div class="collection-line"><span id="collection-progress"></span><span id="shop-context"></span></div><div class="shop-grid" id="shop-grid"></div><button id="shop-more" class="shop-more" hidden></button><p class="shop-footnote">全部使用学习获得的游戏资金，不会产生真实订单。乐高按主街景系列收录 21 套（含 Market Street，截至 2026 年）；3D 是简化模型。家具与车辆附官方实物参考，3D 使用同类商品的简化示意。盲盒和娃娃为原创设计。家具、猫用品及装饰已调低游戏价；以前的购买保留原成交金额，购物支出仍与施工分开记账。</p></section>
+  $('#journal').insertAdjacentHTML('beforebegin',`<section class="shop" id="shop" aria-labelledby="shop-title"><div class="shop-heading"><div><span class="eyebrow">A FEW NICE THINGS</span><h2 id="shop-title">给房间添点东西</h2><p>按房间挑家具，看看真实商品图片和参数，再用游戏资金布置。猫房和车库也有得选。</p></div><div class="shop-wallet"><span>共同游戏资金</span><strong id="shop-balance"></strong></div></div><div class="shop-bar"><div class="segmented shop-view"><button id="shop-catalog" class="active">逛商店</button><button id="shop-inventory">我的物品 <span id="owned-count">0</span></button></div><label class="shop-search"><span>搜索</span><input id="item-search" type="search" placeholder="名称 / 品牌 / 型号" aria-label="搜索物品"></label></div><div class="shop-categories" role="group" aria-label="商品分类">${categories.map(([id,name])=>`<button data-category="${id}" aria-pressed="${id===category}">${name}<small>${items.filter(i=>i.category===id&&!i.archived).length}</small></button>`).join('')}</div><div id="furniture-filters" class="furniture-filters" role="group" aria-label="按房间挑家具" hidden>${furnitureGroups.map(([id,name])=>`<button data-furniture-group="${id}" aria-pressed="${id===roomGroup}">${name}</button>`).join('')}</div><div class="shop-filter-row"><label>排序<select id="shop-sort"><option value="catalog">默认顺序</option><option value="price-asc">游戏价从低到高</option><option value="price-desc">游戏价从高到低</option><option value="name">名称</option></select></label><label>最多花费<input id="shop-budget" type="number" min="0" step="1" placeholder="不限" aria-label="游戏资金预算上限"></label><span>筛选和标价均为游戏资金</span></div><div class="collection-line"><span id="collection-progress"></span><span id="shop-context"></span></div><div class="shop-grid" id="shop-grid"></div><button id="shop-more" class="shop-more" hidden></button><p class="shop-footnote">全部使用学习获得的游戏资金，不会产生真实订单。乐高按主街景系列收录 21 套（含 Market Street，截至 2026 年）；3D 是简化模型。汽车按美国官网美元 MSRP 与已核实的原厂配置计价；税费和运费口径见详情。家具附官方实物参考，3D 使用同类商品的简化示意。盲盒和娃娃为原创设计。家具、猫用品及装饰已调低游戏价；以前的购买保留原成交金额，购物支出仍与施工分开记账。</p></section>
   <dialog id="item-dialog" class="item-dialog" aria-labelledby="item-title"><div class="dialog-heading"><div><span class="eyebrow" id="item-eyebrow">SHOP</span><h2 id="item-title"></h2></div><button type="button" id="item-close" class="icon-button" aria-label="关闭物品详情">×</button></div><div class="item-dialog-grid"><div><div class="item-preview" id="item-preview"></div><p class="preview-hint">拖动旋转 · 滚轮 / 双指缩放</p><div id="item-reference"></div></div><div class="item-detail"><p id="item-description"></p><div id="item-product-data"></div><div id="item-options"></div><div id="item-variants"></div><div id="item-placement"></div><div class="item-checkout" id="item-checkout"></div><p class="form-error" id="item-error" role="alert"></p></div></div></dialog>`);
   const dialog=$('#item-dialog');
   function dispose(){preview?.dispose();preview=null;active=null;}
@@ -52,9 +62,9 @@ export function createShop({getState,mutate,getPerson,getError,showInRoom,toast}
     document.querySelectorAll('[data-category]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.category===category));
     $('#furniture-filters').hidden=category!=='furniture';
     document.querySelectorAll('[data-furniture-group]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.furnitureGroup===roomGroup));
-    const catalog=items.filter(i=>i.category===category),collected=new Set(all.filter(e=>getItem(e.item).category===category).map(e=>e.item));
+    const catalog=items.filter(i=>i.category===category&&!i.archived),collected=new Set(all.filter(e=>getItem(e.item).category===category&&!getItem(e.item).archived).map(e=>e.item));
     $('#collection-progress').textContent=`${categories.find(c=>c[0]===category)[1]} · 已收集 ${collected.size} / ${catalog.length} ${category==='blind'?'个系列':'款'}`;
-    $('#shop-context').textContent=ownedView?'双方共用仓库，物品可以换房间摆放':category==='cars'?'真实车型图与参数 · 5 类游戏选配':category==='blind'?'每盒 6 款 · 每款 1/6 · 会有重复款':category==='cats'?'猫房、客厅都能摆 · 位置和朝向可调整':category==='furniture'?'全屋家具 · 官网图片与规格 · 更低游戏价':'金额均为游戏资金';
+    $('#shop-context').textContent=ownedView?'双方共用仓库，物品可以换房间摆放':category==='cars'?'真实品牌与原厂配置 · 美国官网美元价':category==='blind'?'每盒 6 款 · 每款 1/6 · 会有重复款':category==='cats'?'猫房、客厅都能摆 · 位置和朝向可调整':category==='furniture'?'全屋家具 · 官网图片与规格 · 更低游戏价':'金额均为游戏资金';
     const list=(ownedView?all.filter(e=>getItem(e.item).category===category):catalog).filter(v=>{const i=ownedView?getItem(v.item):v;return (category!=='furniture'||roomGroup==='all'||i.roomGroup===roomGroup)&&(budget===''||!Number.isFinite(Number(budget))||i.price<=Math.max(0,Number(budget)))&&`${i.name} ${i.english||''} ${i.set||''} ${i.reference?.brand||''} ${i.reference?.name||''} ${ownedView?itemName(v):''}`.toLocaleLowerCase().includes(search);});
     if(sort!=='catalog')list.sort((a,b)=>{const x=ownedView?getItem(a.item):a,y=ownedView?getItem(b.item):b;return sort==='name'?x.name.localeCompare(y.name,'zh-CN'):(x.price-y.price)*(sort==='price-desc'?-1:1);});
     const visible=expanded?list:list.slice(0,8);
@@ -67,22 +77,40 @@ export function createShop({getState,mutate,getPerson,getError,showInRoom,toast}
     if(active?.mode==='owned')refreshSlots();
   }
   function setupDialog(item,owned=null){
-    dispose();$('#item-error').textContent='';$('#item-title').textContent=owned?itemName(owned):item.name;
+    dispose();dialog.classList.toggle('real-vehicle-dialog',!!item.optionGroups);$('#item-error').textContent='';$('#item-title').textContent=owned?itemName(owned):item.name;
     $('#item-description').textContent=item.description;$('#item-options').innerHTML='';$('#item-variants').innerHTML='';$('#item-placement').innerHTML='';$('#item-checkout').innerHTML='';$('#item-product-data').innerHTML=productDetails(item);$('#item-reference').innerHTML=item.reference?.image?`<details class="reference-details"><summary>查看真实商品图 · ${esc(item.reference.brand)}</summary>${referencePhoto(item)}<p class="reference-note">图片对应官方参考款，游戏配色和选配不会改变这张照片。</p></details>`:item.image?`<details class="reference-details"><summary>查看官方商品图 · LEGO ${item.set}</summary>${thumbnail(item)}<a href="${item.source}" target="_blank" rel="noopener noreferrer">LEGO 官方来源 ↗</a></details>`:'';
     if(!dialog.open)dialog.showModal();preview=createItemPreview($('#item-preview'),owned||{item:item.id,config});
   }
   function openProduct(id){
-    const item=getItem(id);config=quote(id).config;setupDialog(item);active={mode:'buy',item};$('#item-eyebrow').textContent=item.category==='blind'?'PICK A BOX':'MAKE IT YOURS';
-    const groups=optionGroups(item);
-    $('#item-options').innerHTML=Object.entries(groups).map(([key,group])=>`<label class="item-option">${group.name}<select data-option="${key}" aria-label="${group.name}">${group.values.map(v=>`<option value="${v.id}">${v.name}${v.price?' +'+money(v.price):' · 标配'}</option>`).join('')}</select></label>`).join('');
-    $('#item-options').querySelectorAll('select').forEach(input=>input.onchange=()=>{config={...config,[input.dataset.option]:input.value};preview.update({item:id,config});refreshCheckout();});
+    const item=getItem(id);if(!item||item.archived)return;config=quote(id).config;setupDialog(item);active={mode:'buy',item};$('#item-eyebrow').textContent=item.category==='blind'?'PICK A BOX':'MAKE IT YOURS';
+    renderOptions(item);
+    if(item.optionGroups&&$('#item-reference details'))$('#item-reference details').open=true;
     if(item.variants){const collection=new Set(inventory(getState()).filter(e=>e.item===id).map(e=>e.variant));$('#item-variants').innerHTML=`<div class="variant-heading"><b>系列图鉴 ${collection.size} / 6</b><span>每款 1/6（约 16.67%）</span></div><div class="variant-grid">${item.variants.map(v=>`<div class="variant ${collection.has(v.id)?'collected':''}" style="--variant:${v.color}"><i></i><span>${v.name}</span><small>${collection.has(v.id)?'已收集':'未收集'}</small></div>`).join('')}</div><p class="odds-note">本游戏等概率抽取，没有隐藏款。可能重复，重复款会各自保留。开盒后直接进仓库。</p>`;}
     refreshCheckout();
+  }
+  function renderOptions(item){
+    const groups=optionGroups(item),trim=config.trim;
+    for(const [key,group]of Object.entries(groups)){
+      const values=group.values.filter(v=>!v.trims||v.trims.includes(trim));
+      if(!values.some(v=>v.id===config[key]))config[key]=values[0]?.id;
+    }
+    $('#item-options').innerHTML=Object.entries(groups).map(([key,group])=>`<label class="item-option">${esc(group.name)}<select data-option="${key}" aria-label="${esc(group.name)}">${group.values.filter(v=>!v.trims||v.trims.includes(config.trim)).map(v=>`<option value="${esc(v.id)}" ${config[key]===v.id?'selected':''}>${esc(v.name)}${v.price?' +'+money(v.price):' · 标配'}</option>`).join('')}</select>${optionDetails(key,group.values.find(v=>v.id===config[key]))}</label>`).join('');
+    $('#item-options').querySelectorAll('select').forEach(input=>input.onchange=()=>{config={...config,[input.dataset.option]:input.value};renderOptions(item);preview.update({item:item.id,config});refreshCheckout();});
+    refreshVehicleDetails(item);
+  }
+  function refreshVehicleDetails(item){
+    if(!item.optionGroups)return;
+    const selected=item.optionGroups.trim?.values.find(v=>v.id===config.trim);
+    const reference={...item.reference,...(selected?{name:item.name+' · '+selected.name,specs:selected.specs||item.reference.specs,image:selected.image||item.reference.image,url:selected.source&&!selected.source.includes('/api/')?selected.source:item.reference.url,retailPrice:{...item.reference.retailPrice,amount:selected.totalPrice??item.price+selected.price}}:{})};
+    const configured={...item,reference};
+    $('#item-product-data').innerHTML=productDetails(configured);
+    const wasOpen=$('#item-reference details')?.open||active===null;
+    $('#item-reference').innerHTML=`<details class="reference-details" ${wasOpen?'open':''}><summary>查看官方车型图 · ${esc(reference.brand)}</summary>${referencePhoto(configured)}<p class="reference-note">官方车型参考图；具体版本和图中选配可能不同，详见商品说明。3D 是摆放示意。</p></details>`;
   }
   function refreshCheckout(){
     if(!active||active.mode!=='buy')return;
     const {item}=active,priced=quote(item.id,config),funds=balance(getState());
-    $('#item-checkout').innerHTML=`<div class="checkout-total"><span>本次花费 <small>游戏资金</small></span><strong>${money(priced.amount)}</strong></div><p class="checkout-balance">共同余额 ${money(funds)}${funds>=priced.amount?' · 购买后剩 '+money(funds-priced.amount):' · 还差 '+money(priced.amount-funds)}</p><button class="primary" id="buy-item" ${funds<priced.amount||purchaseBusy?'disabled':''}>${purchaseBusy?'正在保存…':item.variants?'买一盒并打开':'买下这件'}</button><p class="checkout-note">从双方共同余额扣除，买到的物品双方都能使用。</p>`;
+    $('#item-checkout').innerHTML=`${item.optionGroups?vehicleBreakdown(item,priced):''}<div class="checkout-total"><span>本次花费 <small>游戏资金</small></span><strong>${money(priced.amount)}</strong></div><p class="checkout-balance">共同余额 ${money(funds)}${funds>=priced.amount?' · 购买后剩 '+money(funds-priced.amount):' · 还差 '+money(priced.amount-funds)}</p><button class="primary" id="buy-item" ${funds<priced.amount||purchaseBusy?'disabled':''}>${purchaseBusy?'正在保存…':item.variants?'买一盒并打开':'买下这件'}</button><p class="checkout-note">从双方共同余额扣除，买到的物品双方都能使用。</p>`;
     $('#buy-item').onclick=async()=>{
       if(purchaseBusy)return;purchaseBusy=true;$('#item-error').textContent='';const chosen={...config};refreshCheckout();
       try{
@@ -94,7 +122,7 @@ export function createShop({getState,mutate,getPerson,getError,showInRoom,toast}
   }
   function openOwned(id,revealed=false){
     const owned=inventory(getState()).find(e=>e.id===id);if(!owned)return;
-    const item=getItem(owned.item);config=owned.config;setupDialog(item,owned);active={mode:'owned',item,owned};$('#item-eyebrow').textContent=revealed?'开到了 · 已放入仓库':'YOUR COLLECTION';
+    const item=getItem(owned.item);config=owned.config;setupDialog(item,owned);refreshVehicleDetails(item);active={mode:'owned',item,owned};$('#item-eyebrow').textContent=revealed?'开到了 · 已放入仓库':'YOUR COLLECTION';
     $('#item-description').textContent=`${revealed?'这款已经保存，重复打开页面不会重新抽取。 ':''}${configName(owned)||item.description} · 当时花费 ${money(owned.amount)} 游戏资金`;
     const saved=(getState().placements||[]).find(p=>p.id===id),plans=allPlans(getState()).filter(p=>placementRooms(p,item).length),plan=plans.find(p=>p.id===getState().selected)||plans[0],rooms=placementRooms(plan,item);
     position=saved?.plan===plan.id?{...saved}:{plan:plan.id,room:rooms[0].id,slot:placementSlots(item)[0],rotation:0};

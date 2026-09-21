@@ -8,3 +8,5 @@ tools/
 .env*
 research/*.png
 *.log
+
+research/vehicle-raw/

@@ -1,0 +1,840 @@
+{
+  "checkedAt": "2026-09-20",
+  "sources": {
+    "furniture-clothesrack": {
+      "brand": "IKEA",
+      "name": "RIGGA Clothes rack - white",
+      "url": "https://www.ikea.com/us/en/p/rigga-clothes-rack-white-50231630/",
+      "image": "items/furniture-more/furniture-clothesrack.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "参考款式",
+          "Clothes rack, white"
+        ],
+        [
+          "官方尺寸",
+          "宽 43 3/4 \" × 深 20 1/8 \" × 最低高度 49 5/8 \" × 最高高度 68 7/8 \""
+        ],
+        [
+          "部分材质",
+          "Steel, Epoxy/polyester powder coating；Polypropylene"
+        ],
+        [
+          "产品编号",
+          "502.316.30"
+        ]
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/rigga-clothes-rack-white__0710721_pe727742_s5.jpg",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "retailPrice": {
+        "amount": 19.99,
+        "currency": "USD",
+        "note": "官网页面标价，不含税运；游戏购买价另计"
+      },
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-clothesrack.jpg",
+        "bytes": 8359,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product JSON-LD and product measurement/material data",
+      "productNumber": "502.316.30"
+    },
+    "furniture-singlebed": {
+      "brand": "IKEA",
+      "name": "NEIDEN Bed frame - pine/Luröy Twin",
+      "url": "https://www.ikea.com/us/en/p/neiden-bed-frame-pine-luroey-s59248607/",
+      "image": "items/furniture-more/furniture-singlebed.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "参考款式",
+          "Bed frame, pine/Luröy, Twin"
+        ],
+        [
+          "官方尺寸",
+          "长 76 3/4 \" × 宽 39 3/4 \""
+        ],
+        [
+          "部分材质",
+          "Solid pine；Layer-glued wood veneer, Adhesive resin as coating"
+        ],
+        [
+          "产品编号",
+          "592.486.07"
+        ]
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/neiden-bed-frame-pine-luroey__0749132_pe745501_s5.jpg",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。 实物床垫另售，图中参考为床架与排骨架。",
+      "retailPrice": {
+        "amount": 89,
+        "currency": "USD",
+        "note": "官网页面标价，不含税运；游戏购买价另计"
+      },
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-singlebed.jpg",
+        "bytes": 12964,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product JSON-LD and product measurement/material data",
+      "productNumber": "592.486.07"
+    },
+    "furniture-consolecabinet": {
+      "brand": "IKEA",
+      "name": "IDANÄS Sideboard - white 48 7/8x19 5/8x37 3/8 \"",
+      "url": "https://www.ikea.com/us/en/p/idanaes-sideboard-white-60509627/",
+      "image": "items/furniture-more/furniture-consolecabinet.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "参考款式",
+          "Sideboard, white, 48 7/8x19 5/8x37 3/8 \""
+        ],
+        [
+          "官方尺寸",
+          "深 19 5/8 \" × 高 37 3/8 \" × 宽 48 7/8 \""
+        ],
+        [
+          "部分材质",
+          "Fiberboard and honeycomb paper filling (100% recycled paper), Acrylic paint；Particleboard, Acrylic paint, Plastic edging"
+        ],
+        [
+          "产品编号",
+          "605.096.27"
+        ]
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/idanaes-sideboard-white__1009040_pe827429_s5.jpg",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "retailPrice": {
+        "amount": 399,
+        "currency": "USD",
+        "note": "官网页面标价，不含税运；游戏购买价另计"
+      },
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-consolecabinet.jpg",
+        "bytes": 18372,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product JSON-LD and product measurement/material data",
+      "productNumber": "605.096.27"
+    },
+    "furniture-recliner": {
+      "brand": "IKEA",
+      "name": "SKULNÄS Recliner rocker and swivel armchair - Hakebo beige",
+      "url": "https://www.ikea.com/us/en/p/skulnaes-recliner-rocker-and-swivel-armchair-hakebo-beige-70613911/",
+      "image": "items/furniture-more/furniture-recliner.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "参考款式",
+          "Recliner rocker and swivel armchair, Hakebo beige"
+        ],
+        [
+          "官方尺寸",
+          "宽 34 5/8 \" × 深 38 1/4 \" × 高 42 1/8 \""
+        ],
+        [
+          "部分材质",
+          "Solid pine, Plywood, Fiberboard, Polyurethane foam 1.2 lb/cu.ft., Polyurethane foam 1.5 lb/cu.ft., Polyester wadding"
+        ],
+        [
+          "产品编号",
+          "706.139.11"
+        ]
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/skulnaes-recliner-rocker-and-swivel-armchair-hakebo-beige__1426050_pe979674_s5.jpg",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "retailPrice": {
+        "amount": 499,
+        "currency": "USD",
+        "note": "官网页面标价，不含税运；游戏购买价另计"
+      },
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-recliner.jpg",
+        "bytes": 20001,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product JSON-LD and product measurement/material data",
+      "productNumber": "706.139.11"
+    },
+    "furniture-plantstand": {
+      "brand": "IKEA",
+      "name": "OLIVBLAD Plant stand - indoor/outdoor black 22 ¾ \"",
+      "url": "https://www.ikea.com/us/en/p/olivblad-plant-stand-indoor-outdoor-black-50486650/",
+      "image": "items/furniture-more/furniture-plantstand.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "参考款式",
+          "Plant stand, indoor/outdoor black, 22 ¾ \""
+        ],
+        [
+          "官方尺寸",
+          "高 22 ¾ \" × 直径 17 ¾ \""
+        ],
+        [
+          "部分材质",
+          "Steel, Polyester powder coating；Polypropylene"
+        ],
+        [
+          "产品编号",
+          "504.866.50"
+        ]
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/olivblad-plant-stand-indoor-outdoor-black__1010787_pe828336_s5.jpg",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "retailPrice": {
+        "amount": 29.99,
+        "currency": "USD",
+        "note": "官网页面标价，不含税运；游戏购买价另计"
+      },
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-plantstand.jpg",
+        "bytes": 13086,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product JSON-LD and product measurement/material data",
+      "productNumber": "504.866.50"
+    },
+    "furniture-arclamp": {
+      "brand": "IKEA",
+      "name": "SKOTTORP / SKAFTET Floor lamp, arched - light gray",
+      "url": "https://www.ikea.com/us/en/p/skottorp-skaftet-floor-lamp-arched-light-gray-s59387542/",
+      "image": "items/furniture-more/furniture-arclamp.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "参考款式",
+          "Floor lamp, arched, light gray"
+        ],
+        [
+          "官方尺寸",
+          "高 84 \" × 长 69 \""
+        ],
+        [
+          "部分材质",
+          "Steel, Epoxy/polyester powder coating；Polystyrene, 70% rPET 30 % linen"
+        ],
+        [
+          "产品编号",
+          "593.875.42"
+        ]
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/skottorp-skaftet-floor-lamp-arched-light-gray__0856912_pe780859_s5.jpg",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "retailPrice": {
+        "amount": 144.98,
+        "currency": "USD",
+        "note": "官网页面标价，不含税运；游戏购买价另计"
+      },
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-arclamp.jpg",
+        "bytes": 7769,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product JSON-LD and product measurement/material data",
+      "productNumber": "593.875.42"
+    },
+    "furniture-makeupstool": {
+      "brand": "IKEA",
+      "name": "KYRRE Stool - birch",
+      "url": "https://www.ikea.com/us/en/p/kyrre-stool-birch-60416925/",
+      "image": "items/furniture-more/furniture-makeupstool.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "参考款式",
+          "Stool, birch"
+        ],
+        [
+          "官方尺寸",
+          "宽 16 1/2 \" × 深 18 7/8 \" × 高 17 3/4 \""
+        ],
+        [
+          "部分材质",
+          "Plywood, Birch veneer, Tinted lacquer；Layer-glued wood veneer, Birch veneer, Tinted lacquer"
+        ],
+        [
+          "产品编号",
+          "604.169.25"
+        ]
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/kyrre-stool-birch__1488024_pe1003293_s5.jpg",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "retailPrice": {
+        "amount": 19.99,
+        "currency": "USD",
+        "note": "官网页面标价，不含税运；游戏购买价另计"
+      },
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-makeupstool.jpg",
+        "bytes": 12580,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product JSON-LD and product measurement/material data",
+      "productNumber": "604.169.25"
+    },
+    "furniture-pantry": {
+      "brand": "IKEA",
+      "name": "SEKTION High cabinet with shelves/2 doors - white/Ringhult white 24x24x80 \"",
+      "url": "https://www.ikea.com/us/en/p/sektion-high-cabinet-with-shelves-2-doors-white-ringhult-white-s59458643/",
+      "image": "items/furniture-more/furniture-pantry.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "参考款式",
+          "High cabinet with shelves/2 doors, white/Ringhult white, 24x24x80 \""
+        ],
+        [
+          "官方尺寸",
+          "宽 24 \" × 深 24 3/4 \""
+        ],
+        [
+          "部分材质",
+          "Fiberboard；Plastic foil (min. 70% recycled)"
+        ],
+        [
+          "产品编号",
+          "594.586.43"
+        ]
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/sektion-high-cabinet-with-shelves-2-doors-white-ringhult-white__0305530_pe511919_s5.jpg",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "retailPrice": {
+        "amount": 709,
+        "currency": "USD",
+        "note": "官网页面标价，不含税运；游戏购买价另计"
+      },
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-pantry.jpg",
+        "bytes": 5359,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product JSON-LD and product measurement/material data",
+      "productNumber": "594.586.43"
+    },
+    "furniture-displaycase": {
+      "brand": "IKEA",
+      "name": "MILSBO Glass-door cabinet - white 28 3/4x68 7/8 \"",
+      "url": "https://www.ikea.com/us/en/p/milsbo-glass-door-cabinet-white-00396416/",
+      "image": "items/furniture-more/furniture-displaycase.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "参考款式",
+          "Glass-door cabinet, white, 28 3/4x68 7/8 \""
+        ],
+        [
+          "官方尺寸",
+          "宽 28 3/4 \" × 深 16 1/2 \" × 高 68 7/8 \""
+        ],
+        [
+          "部分材质",
+          "Tempered glass；Steel, Epoxy/polyester powder coating"
+        ],
+        [
+          "产品编号",
+          "003.964.16"
+        ]
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/milsbo-glass-door-cabinet-white__0647476_pe704494_s5.jpg",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "retailPrice": {
+        "amount": 349.99,
+        "currency": "USD",
+        "note": "官网页面标价，不含税运；游戏购买价另计"
+      },
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-displaycase.jpg",
+        "bytes": 14358,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product JSON-LD and product measurement/material data",
+      "productNumber": "003.964.16"
+    },
+    "furniture-patiochaise": {
+      "brand": "IKEA",
+      "name": "NÄMMARÖ Chaise - outdoor light brown stained/Frösön/Duvholmen beige",
+      "url": "https://www.ikea.com/us/en/p/naemmaroe-chaise-outdoor-light-brown-stained-froesoen-duvholmen-beige-s29534889/",
+      "image": "items/furniture-more/furniture-patiochaise.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "参考款式",
+          "Chaise, outdoor light brown stained/Frösön/Duvholmen beige"
+        ],
+        [
+          "官方尺寸",
+          "最高高度 30 3/4 \""
+        ],
+        [
+          "部分材质",
+          "Solid acacia wood, Acrylic stain；Thermoplastic elastomer"
+        ],
+        [
+          "产品编号",
+          "295.348.89"
+        ]
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/naemmaroe-chaise-outdoor-light-brown-stained-froesoen-duvholmen-beige__1213457_pe911149_s5.jpg",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "retailPrice": {
+        "amount": 344.99,
+        "currency": "USD",
+        "note": "官网页面标价，不含税运；游戏购买价另计"
+      },
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-patiochaise.jpg",
+        "bytes": 16507,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product JSON-LD and product measurement/material data",
+      "productNumber": "295.348.89"
+    },
+    "furniture-fridge": {
+      "brand": "LG",
+      "name": "LRSXS2706S · 27 cu. ft. Side-by-Side Refrigerator with Smooth Touch Ice Dispenser",
+      "url": "https://www.lg.com/us/refrigerators/lg-lrsxs2706s-side-by-side-refrigerator",
+      "image": "items/furniture-more/furniture-fridge.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "总容量",
+          "27.2 cu.ft."
+        ],
+        [
+          "宽度",
+          "35.88\""
+        ],
+        [
+          "含把手深度",
+          "33.5\""
+        ],
+        [
+          "搁板材质",
+          "Tempered Glass"
+        ]
+      ],
+      "imageSource": "https://media.us.lg.com/transform/ecomm-PDPGallery-1100x730/9c8427eb-f8f9-4a0e-a413-f5836c07160c/Refrigerator-LRSXS2706S-gallery-01_5000x5000",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-fridge.jpg",
+        "bytes": 21502,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product page productData, selected SKU mediaAssets and allInfo specification tables",
+      "sku": "LRSXS2706S",
+      "imageAlt": "27 cu. ft. Side-by-Side Refrigerator with Smooth Touch Ice Dispenser",
+      "sourceFacts": [
+        {
+          "term": "Total Capacity (cu.ft.)",
+          "value": "27.2 cu.ft."
+        },
+        {
+          "term": "Width",
+          "value": "35.88\""
+        },
+        {
+          "term": "Depth with Handles",
+          "value": "33.5\""
+        },
+        {
+          "term": "Shelf Construction",
+          "value": "Tempered Glass"
+        }
+      ]
+    },
+    "furniture-microwave": {
+      "brand": "LG",
+      "name": "MSER1590S · 1.5 cu. ft. NeoChef™ Countertop Microwave with Smart Inverter and Sensor Cooking",
+      "url": "https://www.lg.com/us/cooking-appliances/lg-mser1590s-counter-top-microwave",
+      "image": "items/furniture-more/furniture-microwave.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "容量",
+          "1.5 cu.ft."
+        ],
+        [
+          "尺寸（宽 × 高 × 深）",
+          "21.41\" x 12.13\" x 17\""
+        ],
+        [
+          "微波输出功率",
+          "1200W"
+        ],
+        [
+          "功率档位",
+          "10"
+        ]
+      ],
+      "imageSource": "https://media.us.lg.com/transform/ecomm-PDPGallery-1100x730/54d7660b-c263-4de9-9875-fcb9f62bd6b3/Microwave-MSER1590S-gallery-01_5000x5000",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。 官方照片和参数仅对应微波炉，游戏附带的操作小台不包含在该实物型号中。",
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-microwave.jpg",
+        "bytes": 24098,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product page productData, selected SKU mediaAssets and allInfo specification tables",
+      "sku": "MSER1590S",
+      "imageAlt": "1.5 cu. ft. NeoChef™ Countertop Microwave with Smart Inverter and Sensor Cooking",
+      "sourceFacts": [
+        {
+          "term": "Total Capacity",
+          "value": "1.5 cu.ft."
+        },
+        {
+          "term": "Exterior (WxHxD)",
+          "value": "21.41\" x 12.13\" x 17\""
+        },
+        {
+          "term": "Output (Watts) Microwave",
+          "value": "1200W"
+        },
+        {
+          "term": "Microwave Power Levels",
+          "value": "10"
+        }
+      ]
+    },
+    "furniture-tv": {
+      "brand": "LG",
+      "name": "OLED55C5PUA · 55 Inch Class LG OLED evo AI C5 4K Smart TV 2025",
+      "url": "https://www.lg.com/us/tvs/lg-oled55c5pua-oled-4k-tv",
+      "image": "items/furniture-more/furniture-tv.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "屏幕尺寸",
+          "55\""
+        ],
+        [
+          "面板",
+          "4K OLED"
+        ],
+        [
+          "分辨率",
+          "4K Ultra HD (3,840 x 2,160)"
+        ],
+        [
+          "刷新率",
+          "120Hz Native (VRR 144Hz)"
+        ]
+      ],
+      "imageSource": "https://media.us.lg.com/transform/ecomm-PDPGallery-1100x730/d5c53949-7059-42de-9381-da7cf17ca71b/TV_OLED55C5PUA_gallery_01_3000x3000",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。 官方照片和参数仅对应电视，游戏附带的矮柜不包含在该实物型号中。",
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-tv.jpg",
+        "bytes": 76031,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product page productData, selected SKU mediaAssets and allInfo specification tables",
+      "sku": "OLED55C5PUA",
+      "imageAlt": "LG OLED evo Al\r\nWORLD'S No.\r\nOLED TV FOR 12 YEARS",
+      "sourceFacts": [
+        {
+          "term": "Size",
+          "value": "55\""
+        },
+        {
+          "term": "Display Type",
+          "value": "4K OLED"
+        },
+        {
+          "term": "Display Resolution",
+          "value": "4K Ultra HD (3,840 x 2,160)"
+        },
+        {
+          "term": "Refresh Rate",
+          "value": "120Hz Native (VRR 144Hz)"
+        }
+      ]
+    },
+    "furniture-dishwasher": {
+      "brand": "LG",
+      "name": "LDFN4542S · 24 Inch 48 dBA Front Control Dishwasher with QuadWash™ and 3rd Rack",
+      "url": "https://www.lg.com/us/dishwashers/lg-ldfn4542s-front-control-dishwasher",
+      "image": "items/furniture-more/furniture-dishwasher.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "尺寸（宽 × 高 × 深）",
+          "23 3/4\" x 33 5/8\" x 24 5/8\""
+        ],
+        [
+          "内胆材质",
+          "NeveRust™ Stainless Steel"
+        ]
+      ],
+      "imageSource": "https://media.us.lg.com/transform/ecomm-PDPGallery-1100x730/dc2498f1-4e62-47da-b991-7963b7531af4/Dishwasher_LDFN4542S_gallery_01_5000x5000",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-dishwasher.jpg",
+        "bytes": 26861,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product page productData, selected SKU mediaAssets and allInfo specification tables",
+      "sku": "LDFN4542S",
+      "imageAlt": "Front view of the 24-inch Wide QuadWash™ Front Control Dishwasher - Stainless Steel - LDFN4542S. Includes a graphic logo that says, Brought to you by America’s Most Reliable Line of Appliances.",
+      "sourceFacts": [
+        {
+          "term": "Product Dimensions (in) (W x H x D)",
+          "value": "23 3/4\" x 33 5/8\" x 24 5/8\""
+        },
+        {
+          "term": "Tub Material",
+          "value": "NeveRust™ Stainless Steel"
+        }
+      ]
+    },
+    "furniture-washingmachine": {
+      "brand": "LG",
+      "name": "WM4000HWA · 4.5 cu. ft. Ultra Large Capacity Front Load Washer - White",
+      "url": "https://www.lg.com/us/washers-dryers/lg-wm4000hwa-front-load-washer",
+      "image": "items/furniture-more/furniture-washingmachine.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "容量",
+          "4.5 cu. ft."
+        ],
+        [
+          "不锈钢滚筒",
+          "Yes"
+        ],
+        [
+          "电源类型",
+          "Electric"
+        ]
+      ],
+      "imageSource": "https://media.us.lg.com/transform/ecomm-PDPGallery-1100x730/a18a7451-361e-4ec5-8028-3f087a75f779/Washer-WM4000HWA-Front-gallery_5000x5000",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-washingmachine.jpg",
+        "bytes": 41452,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product page productData, selected SKU mediaAssets and allInfo specification tables",
+      "sku": "WM4000HWA",
+      "imageAlt": "LG WM4000HWA Front Load Washer - Door Open with Drum Interior",
+      "sourceFacts": [
+        {
+          "term": "Capacity",
+          "value": "4.5 cu. ft."
+        },
+        {
+          "term": "NeveRust™ Stainless Steel Drum",
+          "value": "Yes"
+        },
+        {
+          "term": "Washer Power Source Type",
+          "value": "Electric"
+        }
+      ]
+    },
+    "furniture-dryer": {
+      "brand": "LG",
+      "name": "DLEX4000W · 7.4 cu. ft. Large Capacity Front Load Electric Dryer - White",
+      "url": "https://www.lg.com/us/washers-dryers/lg-dlex4000w-front-load-electric-dryer",
+      "image": "items/furniture-more/furniture-dryer.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "容量",
+          "7.4 cu.ft."
+        ],
+        [
+          "镀铝合金钢滚筒",
+          "Yes"
+        ],
+        [
+          "电源类型",
+          "Electric"
+        ],
+        [
+          "滚筒照明",
+          "Yes"
+        ]
+      ],
+      "imageSource": "https://media.us.lg.com/transform/ecomm-PDPGallery-1100x730/288b9c1a-b65f-4d02-8ce9-2940729eb9e2/Dryer-DLEX4000W-Front-gallery_5000x5000",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-dryer.jpg",
+        "bytes": 39778,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product page productData, selected SKU mediaAssets and allInfo specification tables",
+      "sku": "DLEX4000W",
+      "imageAlt": "LG DLEX4000W Dryer with Sensor Dry and Steam Cycle options - Front View",
+      "sourceFacts": [
+        {
+          "term": "Dryer Capacity",
+          "value": "7.4 cu.ft."
+        },
+        {
+          "term": "Aluminized Alloy Steel Drum",
+          "value": "Yes"
+        },
+        {
+          "term": "Dryer Power Source Type",
+          "value": "Electric"
+        },
+        {
+          "term": "Drum Light",
+          "value": "Yes"
+        }
+      ]
+    },
+    "furniture-patiosofa": {
+      "brand": "IKEA",
+      "name": "NÄMMARÖ Loveseat - outdoor with armrest/light brown stained Kuddarna light gray-beige 57 7/8 \"",
+      "url": "https://www.ikea.com/us/en/p/naemmaroe-loveseat-outdoor-with-armrest-light-brown-stained-kuddarna-light-gray-beige-s99575428/",
+      "image": "items/furniture-more/furniture-patiosofa.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "参考款式",
+          "Loveseat, outdoor with armrest/light brown stained Kuddarna light gray-beige, 57 7/8 \""
+        ],
+        [
+          "官方尺寸",
+          "宽 57 7/8 \" × 深 29 \" × 高 32 1/4 \""
+        ],
+        [
+          "部分材质",
+          "Solid acacia wood, Acrylic stain；Solid acacia wood, Acrylic stain, Solid acacia wood, Acrylic stain"
+        ],
+        [
+          "产品编号",
+          "995.754.28"
+        ]
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/naemmaroe-loveseat-outdoor-with-armrest-light-brown-stained-kuddarna-light-gray-beige__1573638_pe1031559_s5.jpg",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "retailPrice": {
+        "amount": 360,
+        "currency": "USD",
+        "note": "官网页面标价，不含税运；游戏购买价另计"
+      },
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-patiosofa.jpg",
+        "bytes": 31420,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product JSON-LD and product measurement/material data",
+      "productNumber": "995.754.28"
+    },
+    "furniture-oven": {
+      "brand": "LG",
+      "name": "LREL6323S · 6.3 cu. ft. Smart Wi-Fi Enabled Fan Convection Electric Range with Air Fry & EasyClean®",
+      "url": "https://www.lg.com/us/cooking-appliances/lg-lrel6323s-electric-range-with-air-fryer",
+      "image": "items/furniture-more/furniture-oven.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "烤箱容量",
+          "6.3 cu.ft."
+        ],
+        [
+          "灶区数量",
+          "5"
+        ],
+        [
+          "前左灶区",
+          "3200W (9\") / 1400W (6\")  (UltraHeat™)"
+        ]
+      ],
+      "imageSource": "https://media.us.lg.com/transform/ecomm-PDPGallery-1100x730/fada6374-c29a-4c8c-aa8c-dde8ead5530c/Ranges-LREL6323S-gallery-01_5000x5000",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-oven.jpg",
+        "bytes": 33052,
+        "mime": "image/jpeg"
+      },
+      "method": "Official US product page productData, selected SKU mediaAssets and allInfo specification tables",
+      "sku": "LREL6323S",
+      "imageAlt": "Front view of the 6.3 cu ft. Smart Wi-Fi Enabled Fan Convection Electric Range with Air Fry & EasyClean® - LREL6323S.",
+      "sourceFacts": [
+        {
+          "term": "Total Capacity",
+          "value": "6.3 cu.ft."
+        },
+        {
+          "term": "No. of Burners",
+          "value": "5"
+        },
+        {
+          "term": "Element Size/Wattage - Left Front",
+          "value": "3200W (9\") / 1400W (6\")  (UltraHeat™)"
+        }
+      ]
+    },
+    "furniture-toilet": {
+      "brand": "KOHLER",
+      "name": "Cimarron The Complete Solution K-31648-0",
+      "url": "https://www.kohler.com/en/products/toilets/shop-toilets/cimarron-comfort-height-the-complete-solution-two-piece-elongated-1-28-gpf-chair-height-toilet-with-slow-close-seat-31648?skuId=31648-0",
+      "image": "items/furniture-more/furniture-toilet.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "型号 / 颜色",
+          "K-31648-0 / White"
+        ],
+        [
+          "每次冲水",
+          "1.28 gpf（4.8 L）"
+        ],
+        [
+          "安装坑距",
+          "12 in（305 mm）"
+        ],
+        [
+          "结构",
+          "分体式加长坐便器，缓降座圈"
+        ]
+      ],
+      "imageSource": "https://kohler.scene7.com/is/image/PAWEB/31621-0_ISO_d2c0025459_rgb",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。",
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-toilet.jpg",
+        "bytes": 7727,
+        "mime": "image/jpeg"
+      },
+      "method": "Official product page model, specifications and official product gallery"
+    },
+    "furniture-shower": {
+      "brand": "KOHLER",
+      "name": "Awaken HydroRail-S K-76471-G-CP",
+      "url": "https://www.kohler.com/en/products/showers/shop-shower-heads/awaken-hydrorail-s-shower-column-kit-1-75-gpm-76471-g-76471-g?skuId=76471-G-CP",
+      "image": "items/furniture-more/furniture-shower.jpg",
+      "checkedAt": "2026-09-20",
+      "specs": [
+        [
+          "型号",
+          "K-76471-G-CP"
+        ],
+        [
+          "额定流量",
+          "1.75 gpm"
+        ],
+        [
+          "表面处理",
+          "Polished Chrome"
+        ],
+        [
+          "组成",
+          "顶喷、手持花洒、HydroRail-S 柱和软管"
+        ]
+      ],
+      "imageSource": "https://kohler.scene7.com/is/image/PAWEB/zab95259_rgb",
+      "note": "图片与参数来自品牌官网实物；游戏模型是简化摆放示意，尺寸和颜色未按实物精确复刻。游戏价格另计。 实物为墙面安装的花洒柱组件；游戏以独立支架展示，不模拟水路施工。",
+      "downloadedImage": {
+        "image": "items/furniture-more/furniture-shower.jpg",
+        "bytes": 9896,
+        "mime": "image/jpeg"
+      },
+      "method": "Official product page model, specifications and official product gallery"
+    }
+  },
+  "errors": []
+}

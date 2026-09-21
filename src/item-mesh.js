@@ -1,10 +1,15 @@
 import * as T from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { getItem, quote, paintOptions, carOptions } from './items.js';
+import { getItem, quote, paintOptions, carOptions, optionGroups } from './items.js';
 import { createFurnitureModel } from './furniture-mesh.js';
 
 export function createItemModel(owned,{displayStand=false}={}) {
-  const item=getItem(owned.item||owned.id),config=quote(item.id,owned.config).config;
+  const item=getItem(owned.item||owned.id);let config=quote(item.id,owned.config).config;
+  if(item.optionGroups){
+    const model={paint:item.color,seat:'#484d50',roof:'solid',wheels:'classic',trim:'standard',...item.model};
+    for(const [key,group]of Object.entries(optionGroups(item))){const value=group.values.find(v=>v.id===config[key]);Object.assign(model,value?.model||{});if(key==='paint'&&value?.color)model.paint=value.color;if(key==='cabin'&&value?.color)model.seat=value.color;}
+    config=model;
+  }
   const variant=item.variants?.find(v=>v.id===owned.variant);
   const shape=variant?.shape||item.shape,color=variant?.color||item.color;
   const root=new T.Group(),materials=new Map();
@@ -50,7 +55,7 @@ export function createItemModel(owned,{displayStand=false}={}) {
     if(config.display!=='open')box(0,.84,0,w+.28,1.63,1.11,'#c4e0da',{transparent:true,opacity:.13,roughness:.05,depthWrite:false});
     root.scale.setScalar(.48);
   }else if(item.category==='cars'){
-    const paint=paintOptions.find(v=>v.id===config.paint).color,seat=carOptions.cabin.values.find(v=>v.id===config.cabin).color;
+    const paint=item.optionGroups?config.paint:paintOptions.find(v=>v.id===config.paint).color,seat=item.optionGroups?config.seat:carOptions.cabin.values.find(v=>v.id===config.cabin).color;
     const suv=['suv','offroad'].includes(shape),small=shape==='compact',long=shape==='wagon',w=1.48,l=small?2.8:long?3.7:3.45,bodyY=suv?.67:.5;
     box(0,bodyY,0,w,.46,l,paint,{metalness:.25,roughness:.3});box(0,.27,0,w*.86,.14,l*.94,'#303839');
     const cabinH=suv?.78:.56,cabinY=bodyY+.22+cabinH/2,cz=shape==='coupe'?-.25:-.13,cl=l*(small?.47:.5);

@@ -151,3 +151,11 @@ npm run test:online
 推送 `main` 后，`.github/workflows/pages.yml` 执行检查和构建，再部署到 GitHub Pages。仓库 Pages Source 设为 GitHub Actions。
 
 参考：[GitHub Pages 工作流](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)、[Cloudflare Quick Tunnels](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/trycloudflare/)。
+
+## 商店价格与实物资料
+
+家具、猫用品、装饰使用便宜的游戏价格；汽车以美国官网车型 MSRP 加上已核实的原厂选配金额扣除游戏资金。都不会下真实订单。车辆详情注明价格日期、运费/税费口径和官方来源；官网调价不会自动改动游戏目录。版本、车漆等存在适用范围，切换车型版本后会重置不兼容的选项。
+
+新一轮家具包括 58 件全屋家具、家电及卫浴，另有 10 件猫用品和 10 件装饰。官方商品图、参数和现实参考价与游戏家具价分别展示，房内模型为简化示意。
+
+购买记录保存当时成交金额：无价格版本为原始版（1），第二版价格冻结于 src/prices-v2.js，新购买采用第三版（3）。改价格不退差价、不改余额、不改历史账单。以前购买的六种游戏车型保留在仓库并可继续摆放，新商店改为实际品牌车型。施工与购物仍分别记账。

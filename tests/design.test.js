@@ -6,6 +6,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {designTemplate,newRoom,designWalls,validateDesign,designToPlan,planSVG} from '../src/designs.js';
 import {freshState,study as recordStudy,build,saveDesign,purchase,placeItem,inventory,balance,invested,validate} from '../src/state.js';
+import {quote} from '../src/items.js';
 import {allPlans,getPlan} from '../src/plans.js';
 import {createStore as openStore} from '../backend/store.mjs';
 import {createApi} from '../backend/server.mjs';
@@ -36,7 +37,7 @@ test('自定义户型与官方户型独立建设，保存装修不会改变旧�
   assert.throws(()=>validate({...after,customPlans:[]}),/户型/);
 });
 test('自由摆放可以移动与旋转，删房间或将车库改为卧室时仅收回物品',()=>{
-  const design=designTemplate('cozy');let s=saveDesign(study(freshState(),{person:0,minutes:480}),{design,expectedVersion:0});s=purchase(s,{item:'car-compact'});const car=inventory(s)[0],garage=design.rooms.find(r=>r.type==='garage');
+  const design=designTemplate('cozy');let s=saveDesign(study(freshState(),{person:0,minutes:480}),{design,expectedVersion:0});s={...s,events:[...s.events,{id:randomUUID(),type:'purchase',person:0,item:'car-compact',config:quote('car-compact',{},1).config,amount:1500,at:'2026-09-19T12:00:00Z'}]};const car=inventory(s)[0],garage=design.rooms.find(r=>r.type==='garage');
   const position={plan:design.id,room:garage.id,u:35,v:70,rotation:1};s=placeItem(s,{id:car.id,position});validate(s);
   for(const patch of [{u:5},{v:91},{u:30.1},{rotation:4},{room:design.rooms[0].id},{plan:'riverside'}])assert.throws(()=>placeItem(s,{id:car.id,position:{...position,...patch}}));
   const edited=structuredClone(s.customPlans[0]);edited.rooms.find(r=>r.id===garage.id).type='bed';const after=saveDesign(s,{design:edited,expectedVersion:1});assert.deepEqual(after.events,s.events);assert.equal(after.placements.length,0);assert.equal(inventory(after).length,1);assert.equal(balance(after),3300);

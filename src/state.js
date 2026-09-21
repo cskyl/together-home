@@ -20,6 +20,7 @@ export function randomChoice(count) {
 }
 export function purchase(s,{item,config={},person=0},{id=crypto.randomUUID(),roll=randomChoice}={}) {
   const priced=quote(item,config);
+  if(priced.item.archived)throw Error('这款已从商店下架，已拥有的物品仍可摆放。');
   if(![0,1].includes(person))throw Error('购买成员无效。');
   if(inventory(s).length>=300)throw Error('仓库已有 300 件物品，暂时不能继续购买。');
   if(balance(s)<priced.amount)throw Error('游戏资金不足，先记一次学习再来。');

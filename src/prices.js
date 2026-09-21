@@ -1,5 +1,5 @@
 // Original checkout prices: never edit these saved-history values.
-export const GAME_PRICE_VERSION = 2;
+export const GAME_PRICE_VERSION = 3;
 export const legacyPrices = Object.freeze({
   "lego-10182": 400,
   "lego-10190": 300,

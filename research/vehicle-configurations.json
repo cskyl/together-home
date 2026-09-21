@@ -1,0 +1,2320 @@
+{
+  "checkedAt": "2026-09-20",
+  "market": "US",
+  "currency": "USD",
+  "pricing": "Real vehicle MSRP plus verified manufacturer option/accessory deltas. Excludes tax, registration, destination/handling/order charges, dealer charges and accessory installation unless explicitly noted. Options are a verified subset, not a full live configurator.",
+  "imageNote": "Official manufacturer images downloaded to public/items/vehicles-real; reference and option imageSource retain originals. Simplified 3D is illustrative.",
+  "vehicles": [
+    {
+      "id": "vehicle-tesla-model3",
+      "checkedAt": "2026-09-20",
+      "primarySources": [
+        "https://www.tesla.com/en_sg/model3-performance",
+        "https://www.tesla.com/en_pr/model3/design?redirect=no",
+        "https://shop.tesla.com/product/model-3-all-weather-interior-liners",
+        "https://shop.tesla.com/product/model-3-all-weather-front-trunk-liner"
+      ],
+      "priceBasis": "US Compare Model 3 table embedded in Tesla official page (despite en_sg path): USD 36990/42490/47490/54990. Table explicitly excludes Destination and Order Fees; fee-included amounts 38630/44130/49130/56630. Use US EPA comparison rows, not Singapore WLTP rows. Accessories separate OEM retail, not factory installed.",
+      "options": {
+        "trim": {
+          "name": "原厂版本 / 驱动",
+          "values": [
+            {
+              "id": "rwd",
+              "name": "Rear-Wheel Drive",
+              "totalPrice": 36990,
+              "price": 0,
+              "source": "https://www.tesla.com/en_sg/model3-performance",
+              "specs": [
+                [
+                  "版本",
+                  "Rear-Wheel Drive"
+                ],
+                [
+                  "驱动",
+                  "后驱"
+                ],
+                [
+                  "EPA 预估续航",
+                  "321 mi（标配轮毂）"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸 Prismata"
+                ]
+              ],
+              "image": "items/vehicles-real/tesla-model3.jpg",
+              "imageSource": "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Homepage-Card-Model-3-Desktop-US-v2.jpg",
+              "description": "官方照片展示红色 Model 3 Performance，作为车型系列参考，不代表所选版本或车漆。",
+              "model": {
+                "wheels": "classic",
+                "roof": "glass"
+              }
+            },
+            {
+              "id": "premium-rwd",
+              "name": "Premium Rear-Wheel Drive",
+              "totalPrice": 42490,
+              "price": 5500,
+              "source": "https://www.tesla.com/en_sg/model3-performance",
+              "specs": [
+                [
+                  "版本",
+                  "Premium Rear-Wheel Drive"
+                ],
+                [
+                  "驱动",
+                  "后驱"
+                ],
+                [
+                  "EPA 预估续航",
+                  "363 mi（标配轮毂）"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸 Photon"
+                ]
+              ],
+              "image": "items/vehicles-real/tesla-model3.jpg",
+              "imageSource": "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Homepage-Card-Model-3-Desktop-US-v2.jpg",
+              "description": "官方照片展示红色 Model 3 Performance，作为车型系列参考，不代表所选版本或车漆。",
+              "model": {
+                "wheels": "classic",
+                "roof": "glass"
+              }
+            },
+            {
+              "id": "premium-awd",
+              "name": "Premium All-Wheel Drive",
+              "totalPrice": 47490,
+              "price": 10500,
+              "source": "https://www.tesla.com/en_sg/model3-performance",
+              "specs": [
+                [
+                  "版本",
+                  "Premium All-Wheel Drive"
+                ],
+                [
+                  "驱动",
+                  "双电机四驱"
+                ],
+                [
+                  "EPA 预估续航",
+                  "346 mi（标配轮毂）"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸 Photon"
+                ]
+              ],
+              "image": "items/vehicles-real/tesla-model3.jpg",
+              "imageSource": "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Homepage-Card-Model-3-Desktop-US-v2.jpg",
+              "description": "官方照片展示红色 Model 3 Performance，作为车型系列参考，不代表所选版本或车漆。",
+              "model": {
+                "wheels": "classic",
+                "roof": "glass"
+              }
+            },
+            {
+              "id": "performance",
+              "name": "Performance All-Wheel Drive",
+              "totalPrice": 54990,
+              "price": 18000,
+              "source": "https://www.tesla.com/en_sg/model3-performance",
+              "specs": [
+                [
+                  "版本",
+                  "Performance All-Wheel Drive"
+                ],
+                [
+                  "驱动",
+                  "双电机四驱"
+                ],
+                [
+                  "EPA 预估续航",
+                  "309 mi（标配轮毂）"
+                ],
+                [
+                  "标配轮毂",
+                  "20 英寸 Warp"
+                ]
+              ],
+              "image": "items/vehicles-real/tesla-model3.jpg",
+              "imageSource": "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Homepage-Card-Model-3-Desktop-US-v2.jpg",
+              "description": "官方照片展示红色 Model 3 Performance，作为车型系列参考，不代表所选版本或车漆。",
+              "model": {
+                "wheels": "sport",
+                "roof": "glass"
+              }
+            }
+          ]
+        },
+        "floor": {
+          "name": "原厂附件 · 车内脚垫",
+          "values": [
+            {
+              "id": "standard",
+              "name": "不加购",
+              "price": 0
+            },
+            {
+              "id": "all-weather-interior-liners",
+              "name": "Model 3 全天候车内脚垫（三件）",
+              "price": 225,
+              "source": "https://shop.tesla.com/product/model-3-all-weather-interior-liners",
+              "image": "items/vehicles-real/tesla-model3-liners.jpg",
+              "imageSource": "https://digitalassets-shop.tesla.com/image/upload/f_auto%2Cq_auto/v1/content/dam/tesla/studio/CAR_ACCESSORIES/MODEL_3/INTERIOR/1974087-00-A_01_2000_1.jpg",
+              "description": "Tesla Shop 原厂附件，适配 2024 年起生产的 Model 3；单独购买，非出厂选装。"
+            }
+          ]
+        },
+        "frunk": {
+          "name": "原厂附件 · 前备厢垫",
+          "values": [
+            {
+              "id": "standard",
+              "name": "不加购",
+              "price": 0
+            },
+            {
+              "id": "all-weather-front-trunk-liner",
+              "name": "Model 3 全天候前备厢垫",
+              "price": 80,
+              "source": "https://shop.tesla.com/product/model-3-all-weather-front-trunk-liner",
+              "image": "items/vehicles-real/tesla-model3-frunk.png",
+              "imageSource": "https://digitalassets-shop.tesla.com/image/upload/f_auto%2Cq_auto/v1/content/dam/tesla/CAR_ACCESSORIES/MODEL_3/INTERIOR/1988455-00-A-5-01.png",
+              "description": "Tesla Shop 原厂附件，适配 2024 年起生产的 Model 3；单独购买，非出厂选装。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "vehicle-tesla-modely",
+      "checkedAt": "2026-09-20",
+      "primarySources": [
+        "https://www.tesla.com/inventory/new/my",
+        "https://www.tesla.com/my/order/7SAYGDEF8PF913039?referral=devin56027"
+      ],
+      "priceBasis": "Official US new inventory listings: RWD grey 39990, RWD white 40990, RWD black 41490, RWD grey+tow 40990, RWD white+tow 41990, AWD grey41990. AWD white demo41730+1260 explicitly advertised adjustment=42990 unadjusted. Deltas derived by comparing equivalent factory configurations; demo reductions excluded. No old 2024 option prices used. Tow and black limited to verified RWD builds.",
+      "options": {
+        "trim": {
+          "name": "原厂版本 / 驱动",
+          "values": [
+            {
+              "id": "rwd",
+              "name": "Rear-Wheel Drive",
+              "totalPrice": 39990,
+              "price": 0,
+              "source": "https://www.tesla.com/inventory/new/my",
+              "image": "items/vehicles-real/tesla-modely.jpg",
+              "imageSource": "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Homepage-Card-Model-Y-Desktop-US-v2.jpg",
+              "description": "官方照片展示银色 Model Y Premium，作为车型系列参考，不代表所选 Standard 版本或车漆。",
+              "specs": [
+                [
+                  "版本",
+                  "Rear-Wheel Drive"
+                ],
+                [
+                  "EPA 预估续航",
+                  "321 mi"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸 Aperture"
+                ],
+                [
+                  "座舱",
+                  "黑色内饰 · 5 座"
+                ]
+              ],
+              "model": {
+                "roof": "solid",
+                "wheels": "classic"
+              }
+            },
+            {
+              "id": "awd",
+              "name": "All-Wheel Drive",
+              "totalPrice": 41990,
+              "price": 2000,
+              "source": "https://www.tesla.com/inventory/new/my",
+              "image": "items/vehicles-real/tesla-modely.jpg",
+              "imageSource": "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Homepage-Card-Model-Y-Desktop-US-v2.jpg",
+              "description": "官方照片展示银色 Model Y Premium，作为车型系列参考，不代表所选 Standard 版本或车漆。",
+              "specs": [
+                [
+                  "版本",
+                  "All-Wheel Drive"
+                ],
+                [
+                  "EPA 预估续航",
+                  "294 mi"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸 Aperture"
+                ],
+                [
+                  "座舱",
+                  "黑色内饰 · 5 座"
+                ]
+              ],
+              "model": {
+                "roof": "solid",
+                "wheels": "classic"
+              }
+            }
+          ]
+        },
+        "paint": {
+          "name": "原厂车漆",
+          "values": [
+            {
+              "id": "stealth-grey",
+              "name": "Stealth Grey",
+              "price": 0,
+              "source": "https://www.tesla.com/inventory/new/my",
+              "model": {
+                "paint": "#696c70"
+              }
+            },
+            {
+              "id": "pearl-white",
+              "name": "Pearl White Multi-Coat",
+              "price": 1000,
+              "source": "https://www.tesla.com/inventory/new/my",
+              "model": {
+                "paint": "#eeeeeb"
+              }
+            },
+            {
+              "id": "diamond-black",
+              "name": "Diamond Black",
+              "price": 1500,
+              "trims": [
+                "rwd"
+              ],
+              "source": "https://www.tesla.com/inventory/new/my",
+              "model": {
+                "paint": "#151619"
+              }
+            }
+          ]
+        },
+        "tow": {
+          "name": "原厂拖车钩",
+          "values": [
+            {
+              "id": "standard",
+              "name": "不加装",
+              "price": 0
+            },
+            {
+              "id": "tow-hitch",
+              "name": "Tow Hitch",
+              "price": 1000,
+              "trims": [
+                "rwd"
+              ],
+              "source": "https://www.tesla.com/inventory/new/my",
+              "description": "已核实 Rear-Wheel Drive 官方现车配置加价；不含后装服务报价。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "vehicle-honda-civic",
+      "primarySources": [
+        "https://automobiles.honda.com/civic-sedan",
+        "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan"
+      ],
+      "modelYear": 2026,
+      "checkedAt": "2026-09-20",
+      "priceBasis": "Model.MSRP; paint ColorComboList.PriceDelta; accessory NavigationItems.Price; availability BuildAndPriceOptions.NotAvailable/Hidden.",
+      "options": {
+        "trim": {
+          "name": "原厂版本 / 驱动",
+          "values": [
+            {
+              "id": "fe2f2tew",
+              "name": "LX FWD",
+              "price": 0,
+              "totalPrice": 24695,
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "版本",
+                  "LX FWD"
+                ],
+                [
+                  "动力",
+                  "150 hp · 2.0 L 汽油"
+                ],
+                [
+                  "标配轮毂",
+                  "16 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "image": "items/vehicles-real/honda-civic-fe2f2tew.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/AW/Carshot/carshot_CivicSedan_front_CIVIC4DLX_2026_CrystalBlackPearl_FE2F2TEW_NH-731P.png?w=960",
+              "model": {
+                "roof": "solid",
+                "wheels": "classic"
+              }
+            },
+            {
+              "id": "fe2f5tew",
+              "name": "Sport FWD",
+              "price": 2000,
+              "totalPrice": 26695,
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "版本",
+                  "Sport FWD"
+                ],
+                [
+                  "动力",
+                  "150 hp · 2.0 L 汽油"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "image": "items/vehicles-real/honda-civic-fe2f5tew.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/AW/Carshot/carshot_CivicSedan_front_CIVIC4DSPORT_2026_CrystalBlackPearl_FE2F5TEW_NH-731P.png?w=960",
+              "model": {
+                "roof": "solid",
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "fe4f8tjw",
+              "name": "Sport Hybrid FWD",
+              "price": 4700,
+              "totalPrice": 29395,
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "版本",
+                  "Sport Hybrid FWD"
+                ],
+                [
+                  "动力",
+                  "200 hp 双电机混动"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "image": "items/vehicles-real/honda-civic-fe4f8tjw.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/AW/Carshot/carshot_CivicSedan_front_CIVIC4DHYBSPORT_2026_CrystalBlackPearl_FE4F8TJW_NH-731P.png?w=960",
+              "model": {
+                "roof": "glass",
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "fe4f8tknw",
+              "name": "Sport Touring Hybrid FWD",
+              "price": 7700,
+              "totalPrice": 32395,
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "版本",
+                  "Sport Touring Hybrid FWD"
+                ],
+                [
+                  "动力",
+                  "200 hp 双电机混动"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "image": "items/vehicles-real/honda-civic-fe4f8tknw.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/AW/Carshot/carshot_CivicSedan_front_CIVIC4DHYBSPTRG_2026_CrystalBlackPearl_FE4F8TKNW_NH-731P.png?w=960",
+              "model": {
+                "roof": "glass",
+                "wheels": "sport"
+              }
+            }
+          ]
+        },
+        "paint": {
+          "name": "原厂车漆",
+          "values": [
+            {
+              "id": "nh-731p",
+              "name": "Crystal Black",
+              "price": 0,
+              "trims": [
+                "fe2f2tew",
+                "fe2f5tew",
+                "fe4f8tjw",
+                "fe4f8tknw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "image": "items/vehicles-real/honda-civic-paint-nh-731p.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/AW/Carshot/carshot_CivicSedan_front_CIVIC4DLX_2026_CrystalBlackPearl_FE2F2TEW_NH-731P.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#000000"
+              }
+            },
+            {
+              "id": "nh-932m",
+              "name": "Solar Silver",
+              "price": 0,
+              "trims": [
+                "fe2f2tew",
+                "fe2f5tew",
+                "fe4f8tjw",
+                "fe4f8tknw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "image": "items/vehicles-real/honda-civic-paint-nh-932m.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/AW/Carshot/carshot_CivicSedan_front_CIVIC4DLX_2026_SolarSilverMetallic_FE2F2TEW_NH-932M.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#CCD0D3"
+              }
+            },
+            {
+              "id": "nh-904m",
+              "name": "Meteorite Gray",
+              "price": 0,
+              "trims": [
+                "fe2f2tew",
+                "fe2f5tew",
+                "fe4f8tjw",
+                "fe4f8tknw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "image": "items/vehicles-real/honda-civic-paint-nh-904m.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/AW/Carshot/carshot_CivicSedan_front_CIVIC4DLX_2026_MeteoriteGrayMetallic_FE2F2TEW_NH-904M.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#37424C"
+              }
+            },
+            {
+              "id": "r-513",
+              "name": "Rallye Red",
+              "price": 0,
+              "trims": [
+                "fe2f2tew",
+                "fe2f5tew",
+                "fe4f8tjw",
+                "fe4f8tknw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "image": "items/vehicles-real/honda-civic-paint-r-513.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/AW/Carshot/carshot_CivicSedan_front_CIVIC4DLX_2026_RallyeRed_FE2F2TEW_R-513.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#DA0101"
+              }
+            },
+            {
+              "id": "nh-883p",
+              "name": "Platinum White",
+              "price": 455,
+              "trims": [
+                "fe2f2tew",
+                "fe2f5tew",
+                "fe4f8tjw",
+                "fe4f8tknw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "image": "items/vehicles-real/honda-civic-paint-nh-883p.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/AW/Carshot/carshot_CivicSedan_front_CIVIC4DLX_2026_PlatinumWhitePearl_FE2F2TEW_NH-883P.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#E5E5E5"
+              }
+            },
+            {
+              "id": "b-645p",
+              "name": "Blue Lagoon Pearl",
+              "price": 455,
+              "trims": [
+                "fe2f2tew",
+                "fe2f5tew",
+                "fe4f8tjw",
+                "fe4f8tknw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "image": "items/vehicles-real/honda-civic-paint-b-645p.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/AW/Carshot/carshot_CivicSedan_front_CIVIC4DLX_2026_BlueLagoonPearl_FE2F2TEW_B-645P.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#253757"
+              }
+            },
+            {
+              "id": "nh-912p",
+              "name": "Urban Gray",
+              "price": 455,
+              "trims": [
+                "fe2f5tew",
+                "fe4f8tjw",
+                "fe4f8tknw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "image": "items/vehicles-real/honda-civic-paint-nh-912p.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/AW/Carshot/carshot_CivicSedan_front_CIVIC4DSPORT_2026_UrbanGrayPearl_FE2F5TEW_NH-912P.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#999999"
+              }
+            }
+          ]
+        },
+        "wheels": {
+          "name": "轮毂",
+          "values": [
+            {
+              "id": "standard",
+              "name": "该版本标配",
+              "price": 0
+            },
+            {
+              "id": "af5355edce6e4ebf94381bcb64be2fcc",
+              "name": "18-Inch Black Coal Alloy Wheels",
+              "price": 1600,
+              "trims": [
+                "fe2f2tew",
+                "fe2f5tew",
+                "fe4f8tjw",
+                "fe4f8tknw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "description": "Honda 原厂配件建议零售价；不含安装费用。",
+              "image": "items/vehicles-real/honda-civic-option-af5355edce6e4ebf94381bcb64be2fcc.jpg",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/Build-and-Price/BAP-Modals/Wheels/18-inch_Black_Coal_Alloy_Wheels/MY26_Civic_Sedan_18-inch_Black_Coal_Alloy_Wheels_1x.jpg?sc_lang=en&hash=A62C1DBC9A9EFBE80E34863BBD44F693",
+              "model": {
+                "wheels": "sport"
+              }
+            }
+          ]
+        },
+        "floor": {
+          "name": "脚垫",
+          "values": [
+            {
+              "id": "standard",
+              "name": "不加装原厂全天候脚垫",
+              "price": 0
+            },
+            {
+              "id": "11007b2d592a4575a2c8df9cc8b7bdac",
+              "name": "All-Season Floor Mats",
+              "price": 200,
+              "trims": [
+                "fe2f2tew",
+                "fe2f5tew"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "description": "Honda 原厂配件建议零售价；不含安装费用。",
+              "image": "items/vehicles-real/honda-civic-option-11007b2d592a4575a2c8df9cc8b7bdac.jpg",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/Build-and-Price/BAP-Modals/Interior/High_All_Season_Mat/MY26_Civic_Sedan_High_All_Season_Mat_1x.jpg?sc_lang=en&hash=61F63BDB426B066B47B73B1F8697D188"
+            },
+            {
+              "id": "71315f3a8ead40a983ae321d8464d855",
+              "name": "All-Season Floor Mats",
+              "price": 200,
+              "trims": [
+                "fe4f8tjw",
+                "fe4f8tknw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "description": "Honda 原厂配件建议零售价；不含安装费用。",
+              "image": "items/vehicles-real/honda-civic-option-71315f3a8ead40a983ae321d8464d855.jpg",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/Build-and-Price/BAP-Modals/Interior/All_Season_Floor_Mats_Hybrid/MY26_Civic_Sedan_All_Season_Floor_Mats_Hybrid_1x.jpg?sc_lang=en&hash=4EEE525B59BA25BE0C966A6923127914"
+            }
+          ]
+        },
+        "cargo": {
+          "name": "行李厢配件",
+          "values": [
+            {
+              "id": "standard",
+              "name": "不加装行李网",
+              "price": 0
+            },
+            {
+              "id": "84703e8265674905b3d5d8812ed25b5b",
+              "name": "Cargo Net",
+              "price": 60,
+              "trims": [
+                "fe2f2tew",
+                "fe2f5tew",
+                "fe4f8tjw",
+                "fe4f8tknw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2026/civic-sedan",
+              "description": "Honda 原厂配件建议零售价；不含安装费用。",
+              "image": "items/vehicles-real/honda-civic-option-84703e8265674905b3d5d8812ed25b5b.jpg",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2026/civic-sedan/Build-and-Price/BAP-Modals/Interior/Cargo_Net/MY26_Civic_Sedan_Cargo_Net_1x.jpg?sc_lang=en&hash=CF436D13435CFF7B3874A1794A8094D5"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "vehicle-honda-crv",
+      "primarySources": [
+        "https://automobiles.honda.com/cr-v",
+        "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v"
+      ],
+      "modelYear": 2027,
+      "checkedAt": "2026-09-20",
+      "priceBasis": "Model.MSRP; paint ColorComboList.PriceDelta; accessory NavigationItems.Price; availability BuildAndPriceOptions.NotAvailable/Hidden.",
+      "options": {
+        "trim": {
+          "name": "原厂版本 / 驱动",
+          "values": [
+            {
+              "id": "rs3h2vew",
+              "name": "LX FWD",
+              "price": 0,
+              "totalPrice": 31520,
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "LX FWD"
+                ],
+                [
+                  "动力",
+                  "190 hp · 1.5 L 涡轮汽油"
+                ],
+                [
+                  "标配轮毂",
+                  "17 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-rs3h2vew.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-V15T2WDLX_2027_CrystalBlackPearl_RS3H2VEW_NH-731P.png?w=960",
+              "model": {
+                "roof": "solid",
+                "wheels": "classic"
+              }
+            },
+            {
+              "id": "rs4h2vew",
+              "name": "LX AWD",
+              "price": 1500,
+              "totalPrice": 33020,
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "LX AWD"
+                ],
+                [
+                  "动力",
+                  "190 hp · 1.5 L 涡轮汽油"
+                ],
+                [
+                  "标配轮毂",
+                  "17 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-rs4h2vew.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-V15TAWDLX_2027_CrystalBlackPearl_RS4H2VEW_NH-731P.png?w=960",
+              "model": {
+                "roof": "solid",
+                "wheels": "classic"
+              }
+            },
+            {
+              "id": "rs3h4vjw",
+              "name": "EX FWD",
+              "price": 2030,
+              "totalPrice": 33550,
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "EX FWD"
+                ],
+                [
+                  "动力",
+                  "190 hp · 1.5 L 涡轮汽油"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-rs3h4vjw.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-V15T2WDEX_2027_CrystalBlackPearl_RS3H4VJW_NH-731P.png?w=960",
+              "model": {
+                "roof": "glass",
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "rs4h4vjw",
+              "name": "EX AWD",
+              "price": 3530,
+              "totalPrice": 35050,
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "EX AWD"
+                ],
+                [
+                  "动力",
+                  "190 hp · 1.5 L 涡轮汽油"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-rs4h4vjw.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-V15TAWDEX_2027_CrystalBlackPearl_RS4H4VJW_NH-731P.png?w=960",
+              "model": {
+                "roof": "glass",
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "rs3h7vjw",
+              "name": "EX-L FWD",
+              "price": 4280,
+              "totalPrice": 35800,
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "EX-L FWD"
+                ],
+                [
+                  "动力",
+                  "190 hp · 1.5 L 涡轮汽油"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-rs3h7vjw.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-V15T2WDEX-L_2027_CrystalBlackPearl_RS3H7VJW_NH-731P.png?w=960",
+              "model": {
+                "roof": "glass",
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "rs4h7vjw",
+              "name": "EX-L AWD",
+              "price": 5780,
+              "totalPrice": 37300,
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "EX-L AWD"
+                ],
+                [
+                  "动力",
+                  "190 hp · 1.5 L 涡轮汽油"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-rs4h7vjw.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-V15TAWDEX-L_2027_CrystalBlackPearl_RS4H7VJW_NH-731P.png?w=960",
+              "model": {
+                "roof": "glass",
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "rs5h5vesw",
+              "name": "Sport Hybrid FWD",
+              "price": 4510,
+              "totalPrice": 36030,
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "Sport Hybrid FWD"
+                ],
+                [
+                  "动力",
+                  "204 hp 双电机混动"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-rs5h5vesw.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-VHYBRID2WDSPORT_2027_CrystalBlackPearl_RS5H5VESW_NH-731P.png?w=960",
+              "model": {
+                "roof": "glass",
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "rs6h5vesw",
+              "name": "Sport Hybrid AWD",
+              "price": 6010,
+              "totalPrice": 37530,
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "Sport Hybrid AWD"
+                ],
+                [
+                  "动力",
+                  "204 hp 双电机混动"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-rs6h5vesw.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-VHYBRIDAWDSPORT_2027_CrystalBlackPearl_RS6H5VESW_NH-731P.png?w=960",
+              "model": {
+                "roof": "glass",
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "rs6h6vesw",
+              "name": "TrailSport Hybrid AWD",
+              "price": 7680,
+              "totalPrice": 39200,
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "TrailSport Hybrid AWD"
+                ],
+                [
+                  "动力",
+                  "204 hp 双电机混动"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-rs6h6vesw.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-VHYBAWDTRAILSP_2027_CrystalBlackPearl_RS6H6VESW_NH-731P.png?w=960",
+              "model": {
+                "roof": "glass",
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "rs5h8vesw",
+              "name": "Sport-L Hybrid FWD",
+              "price": 7605,
+              "totalPrice": 39125,
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "Sport-L Hybrid FWD"
+                ],
+                [
+                  "动力",
+                  "204 hp 双电机混动"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-rs5h8vesw.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-VHYB2WDSPORTL_2027_CrystalBlackPearl_RS5H8VESW_NH-731P.png?w=960",
+              "model": {
+                "roof": "glass",
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "rs6h8vesw",
+              "name": "Sport-L Hybrid AWD",
+              "price": 9105,
+              "totalPrice": 40625,
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "Sport-L Hybrid AWD"
+                ],
+                [
+                  "动力",
+                  "204 hp 双电机混动"
+                ],
+                [
+                  "标配轮毂",
+                  "18 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-rs6h8vesw.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-VHYBAWDSPORTL_2027_CrystalBlackPearl_RS6H8VESW_NH-731P.png?w=960",
+              "model": {
+                "roof": "glass",
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "rs6h9vjsw",
+              "name": "Sport Touring Hybrid AWD",
+              "price": 11430,
+              "totalPrice": 42950,
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "Sport Touring Hybrid AWD"
+                ],
+                [
+                  "动力",
+                  "204 hp 双电机混动"
+                ],
+                [
+                  "标配轮毂",
+                  "19 英寸"
+                ]
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-rs6h9vjsw.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-VHYBRIDAWDSPTRG_2027_CrystalBlackPearl_RS6H9VJSW_NH-731P.png?w=960",
+              "model": {
+                "roof": "glass",
+                "wheels": "sport"
+              }
+            }
+          ]
+        },
+        "paint": {
+          "name": "原厂车漆",
+          "values": [
+            {
+              "id": "nh-731p",
+              "name": "Crystal Black",
+              "price": 0,
+              "trims": [
+                "rs3h2vew",
+                "rs4h2vew",
+                "rs3h4vjw",
+                "rs4h4vjw",
+                "rs3h7vjw",
+                "rs4h7vjw",
+                "rs5h5vesw",
+                "rs6h5vesw",
+                "rs6h6vesw",
+                "rs5h8vesw",
+                "rs6h8vesw",
+                "rs6h9vjsw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-paint-nh-731p.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-V15T2WDLX_2027_CrystalBlackPearl_RS3H2VEW_NH-731P.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#000000"
+              }
+            },
+            {
+              "id": "b-640m",
+              "name": "Canyon River Blue",
+              "price": 0,
+              "trims": [
+                "rs3h7vjw",
+                "rs4h7vjw",
+                "rs5h5vesw",
+                "rs6h5vesw",
+                "rs6h6vesw",
+                "rs5h8vesw",
+                "rs6h8vesw",
+                "rs6h9vjsw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-paint-b-640m.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-V15T2WDEX-L_2027_CanyonRiverBlueMetallic_RS3H7VJW_B-640M.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#00132A"
+              }
+            },
+            {
+              "id": "nh-932m",
+              "name": "Solar Silver",
+              "price": 0,
+              "trims": [
+                "rs3h2vew",
+                "rs4h2vew",
+                "rs3h4vjw",
+                "rs4h4vjw",
+                "rs3h7vjw",
+                "rs4h7vjw",
+                "rs5h5vesw",
+                "rs6h5vesw",
+                "rs5h8vesw",
+                "rs6h8vesw",
+                "rs6h9vjsw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-paint-nh-932m.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-V15T2WDLX_2027_SolarSilverMetallic_RS3H2VEW_NH-932M.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#CCD0D3"
+              }
+            },
+            {
+              "id": "nh-904m",
+              "name": "Meteorite Gray",
+              "price": 0,
+              "trims": [
+                "rs3h2vew",
+                "rs4h2vew",
+                "rs3h4vjw",
+                "rs4h4vjw",
+                "rs3h7vjw",
+                "rs4h7vjw",
+                "rs5h5vesw",
+                "rs6h5vesw",
+                "rs5h8vesw",
+                "rs6h8vesw",
+                "rs6h9vjsw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-paint-nh-904m.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-V15T2WDLX_2027_MeteoriteGrayMetallic_RS3H2VEW_NH-904M.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#37424C"
+              }
+            },
+            {
+              "id": "nh-883p",
+              "name": "Platinum White",
+              "price": 455,
+              "trims": [
+                "rs3h2vew",
+                "rs4h2vew",
+                "rs3h4vjw",
+                "rs4h4vjw",
+                "rs3h7vjw",
+                "rs4h7vjw",
+                "rs5h5vesw",
+                "rs6h5vesw",
+                "rs6h6vesw",
+                "rs5h8vesw",
+                "rs6h8vesw",
+                "rs6h9vjsw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-paint-nh-883p.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-V15T2WDLX_2027_PlatinumWhitePearl_RS3H2VEW_NH-883P.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#E5E5E5"
+              }
+            },
+            {
+              "id": "r-569m",
+              "name": "Radiant Red",
+              "price": 455,
+              "trims": [
+                "rs3h2vew",
+                "rs4h2vew",
+                "rs3h4vjw",
+                "rs4h4vjw",
+                "rs3h7vjw",
+                "rs4h7vjw",
+                "rs5h5vesw",
+                "rs6h5vesw",
+                "rs6h6vesw",
+                "rs5h8vesw",
+                "rs6h8vesw",
+                "rs6h9vjsw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-paint-r-569m.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-V15T2WDLX_2027_RadiantRedMetallic_RS3H2VEW_R-569M.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#910D17"
+              }
+            },
+            {
+              "id": "g-545m",
+              "name": "Ash Green",
+              "price": 455,
+              "trims": [
+                "rs6h6vesw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-paint-g-545m.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-VHYBAWDTRAILSP_2027_AshGreenMetallic_RS6H6VESW_G-545M.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#8CA292"
+              }
+            },
+            {
+              "id": "nh-912p",
+              "name": "Urban Gray",
+              "price": 455,
+              "trims": [
+                "rs3h2vew",
+                "rs4h2vew",
+                "rs3h4vjw",
+                "rs4h4vjw",
+                "rs3h7vjw",
+                "rs4h7vjw",
+                "rs5h5vesw",
+                "rs6h5vesw",
+                "rs6h6vesw",
+                "rs5h8vesw",
+                "rs6h8vesw",
+                "rs6h9vjsw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "image": "items/vehicles-real/honda-crv-paint-nh-912p.png",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/cr-v/AW/Carshot/carshot_CR-V_front_CR-V15T2WDLX_2027_UrbanGrayPearl_RS3H2VEW_NH-912P.png?w=960",
+              "description": "官方车漆示意；图中版本见车型照片，颜色可选范围已按版本限制。",
+              "model": {
+                "paint": "#999999"
+              }
+            }
+          ]
+        },
+        "wheels": {
+          "name": "轮毂",
+          "values": [
+            {
+              "id": "standard",
+              "name": "该版本标配",
+              "price": 0
+            },
+            {
+              "id": "0ff3d1cea9134dde82a4b4b50bcc1f9e",
+              "name": "18-Inch Black Alloy Wheels",
+              "price": 2232,
+              "trims": [
+                "rs3h2vew",
+                "rs4h2vew",
+                "rs3h4vjw",
+                "rs4h4vjw",
+                "rs3h7vjw",
+                "rs4h7vjw",
+                "rs5h5vesw",
+                "rs6h5vesw",
+                "rs6h6vesw",
+                "rs5h8vesw",
+                "rs6h8vesw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "description": "Honda 原厂配件建议零售价；不含安装费用。",
+              "image": "items/vehicles-real/honda-crv-option-0ff3d1cea9134dde82a4b4b50bcc1f9e.jpg",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/CR-V/Build-and-Price/BAP-Modals/03-Wheels/18-Inch-Black-Alloy-Wheels/1x/2027-cr-v-18in-black-alloy-wheel.jpg?sc_lang=en&hash=81E5BF3C1F8D9ABECBCA28BD90C42E79",
+              "model": {
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "039ad941128842c5b8acce92cfd0baa7",
+              "name": "18-Inch Rugged Black Alloy Wheels",
+              "price": 1840,
+              "trims": [
+                "rs3h2vew",
+                "rs4h2vew",
+                "rs3h4vjw",
+                "rs4h4vjw",
+                "rs3h7vjw",
+                "rs4h7vjw",
+                "rs5h5vesw",
+                "rs6h5vesw",
+                "rs6h6vesw",
+                "rs5h8vesw",
+                "rs6h8vesw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "description": "Honda 原厂配件建议零售价；不含安装费用。",
+              "image": "items/vehicles-real/honda-crv-option-039ad941128842c5b8acce92cfd0baa7.jpg",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/CR-V/Build-and-Price/BAP-Modals/03-Wheels/18-Inch-Rugged-Black-Alloy-Wheels/1x/2027-cr-v-rugged-black-alloy-wheels.jpg?sc_lang=en&hash=EA97C79B50DABCDC8BFD55CCA237D820",
+              "model": {
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "3e69e6b958f8489b950d52708b7dd566",
+              "name": "18-Inch HPD™ Bronze Alloy Wheels",
+              "price": 1840,
+              "trims": [
+                "rs3h2vew",
+                "rs4h2vew",
+                "rs3h4vjw",
+                "rs4h4vjw",
+                "rs3h7vjw",
+                "rs4h7vjw",
+                "rs5h5vesw",
+                "rs6h5vesw",
+                "rs6h6vesw",
+                "rs5h8vesw",
+                "rs6h8vesw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "description": "Honda 原厂配件建议零售价；不含安装费用。",
+              "image": "items/vehicles-real/honda-crv-option-3e69e6b958f8489b950d52708b7dd566.jpg",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/CR-V/Build-and-Price/BAP-Modals/03-Wheels/18-Inch-HPD-Bronze-Alloy-Wheels/1x/2027-cr-v-18in-hpd-bronze-alloy-wheel.jpg?sc_lang=en&hash=9A10A3213D601FB92F8F3F7F2B2F6F51",
+              "model": {
+                "wheels": "sport"
+              }
+            }
+          ]
+        },
+        "floor": {
+          "name": "脚垫",
+          "values": [
+            {
+              "id": "standard",
+              "name": "不加装原厂全天候脚垫",
+              "price": 0
+            },
+            {
+              "id": "80956d111878425d80d5edec71bb81b2",
+              "name": "All-Season Floor Mats",
+              "price": 204,
+              "trims": [
+                "rs3h2vew",
+                "rs4h2vew",
+                "rs3h4vjw",
+                "rs4h4vjw",
+                "rs3h7vjw",
+                "rs4h7vjw",
+                "rs5h5vesw",
+                "rs6h5vesw",
+                "rs5h8vesw",
+                "rs6h8vesw",
+                "rs6h9vjsw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "description": "Honda 原厂配件建议零售价；不含安装费用。",
+              "image": "items/vehicles-real/honda-crv-option-80956d111878425d80d5edec71bb81b2.jpg",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/CR-V/Build-and-Price/BAP-Modals/05-Interior/All-Season-Floor-Mats/1x/2027-cr-v-all-season-floor-mats.jpg?sc_lang=en&hash=63ECC73FBB86F0D468FAAAC93A614DFF"
+            }
+          ]
+        },
+        "cargo": {
+          "name": "行李厢配件",
+          "values": [
+            {
+              "id": "standard",
+              "name": "不加装行李网",
+              "price": 0
+            },
+            {
+              "id": "b1232436d567459b9e7f8d2ff37f2160",
+              "name": "Cargo Net",
+              "price": 60,
+              "trims": [
+                "rs3h2vew",
+                "rs4h2vew",
+                "rs3h4vjw",
+                "rs4h4vjw",
+                "rs3h7vjw",
+                "rs4h7vjw",
+                "rs5h5vesw",
+                "rs6h5vesw",
+                "rs6h6vesw",
+                "rs5h8vesw",
+                "rs6h8vesw",
+                "rs6h9vjsw"
+              ],
+              "source": "https://automobiles.honda.com/platform/api/v1/vehicles/details/2027/cr-v",
+              "description": "Honda 原厂配件建议零售价；不含安装费用。",
+              "image": "items/vehicles-real/honda-crv-option-b1232436d567459b9e7f8d2ff37f2160.jpg",
+              "imageSource": "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2027/CR-V/Build-and-Price/BAP-Modals/05-Interior/Cargo-Net/1x/2027-cr-v-cargo-net.jpg?sc_lang=en&hash=0C298608DDED7663831F7F301D01F7AC"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "vehicle-porsche-911",
+      "checkedAt": "2026-09-20",
+      "primarySources": [
+        "https://www.porsche.com/usa/models/911/configure/",
+        "https://configurator.porsche.com/en-US/mode/model/9921B2",
+        "https://configurator.porsche.com/en-US/mode/model/9921S2"
+      ],
+      "priceBasis": "Model overview MSRP excludes $2350 delivery fee included in configurator JSON-LD offers.price. Option deltas from offers.addOn, checked separately for each offered trim.",
+      "options": {
+        "trim": {
+          "name": "原厂版本",
+          "values": [
+            {
+              "id": "9921b2",
+              "name": "911 Carrera",
+              "price": 0,
+              "totalPrice": 135500,
+              "source": "https://configurator.porsche.com/en-US/mode/model/9921B2",
+              "image": "items/vehicles-real/porsche-9921b2.webp",
+              "imageSource": "https://images.porsche.com/f/285489813253582/5000x1485/a203ff742b/model-9921b2-side-shot_c0332ade044b4b01b7e09d445787a5f5.png/m/1200x0/smart/filters:format(webp)",
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "911 Carrera"
+                ],
+                [
+                  "驱动",
+                  "后驱"
+                ],
+                [
+                  "动力",
+                  "388 hp"
+                ]
+              ],
+              "model": {
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "9921s2",
+              "name": "911 Carrera S",
+              "price": 20700,
+              "totalPrice": 156200,
+              "source": "https://configurator.porsche.com/en-US/mode/model/9921S2",
+              "image": "items/vehicles-real/porsche-9921s2.webp",
+              "imageSource": "https://images.porsche.com/f/285489813253582/5000x1485/61bca64942/model-9921s2-side-shot_a15913de913b4203ae6d23366d67adae.png/m/1200x0/smart/filters:format(webp)",
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "911 Carrera S"
+                ],
+                [
+                  "驱动",
+                  "后驱"
+                ],
+                [
+                  "动力",
+                  "473 hp"
+                ]
+              ],
+              "model": {
+                "wheels": "sport"
+              }
+            }
+          ]
+        },
+        "paint": {
+          "name": "原厂车漆",
+          "values": [
+            {
+              "id": "standard",
+              "name": "白色（标配）",
+              "price": 0,
+              "model": {
+                "paint": "#eeeeeb"
+              }
+            },
+            {
+              "id": "jet-black-metallic-880",
+              "name": "金属黑",
+              "price": 880,
+              "trims": [
+                "9921b2",
+                "9921s2"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/9921B2",
+              "description": "Jet Black Metallic",
+              "model": {
+                "paint": "#141618"
+              }
+            },
+            {
+              "id": "gt-silver-metallic-880",
+              "name": "GT 银",
+              "price": 880,
+              "trims": [
+                "9921b2",
+                "9921s2"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/9921B2",
+              "description": "GT Silver Metallic",
+              "model": {
+                "paint": "#a8a9a6"
+              }
+            },
+            {
+              "id": "guards-red-1580",
+              "name": "卫红",
+              "price": 1580,
+              "trims": [
+                "9921b2",
+                "9921s2"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/9921B2",
+              "description": "Guards Red",
+              "model": {
+                "paint": "#bf292d"
+              }
+            },
+            {
+              "id": "gentian-blue-metallic-1580",
+              "name": "龙胆蓝",
+              "price": 1580,
+              "trims": [
+                "9921b2",
+                "9921s2"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/9921B2",
+              "description": "Gentian Blue Metallic",
+              "model": {
+                "paint": "#16416a"
+              }
+            }
+          ]
+        },
+        "wheels": {
+          "name": "轮毂",
+          "values": [
+            {
+              "id": "standard",
+              "name": "该版本标配",
+              "price": 0
+            },
+            {
+              "id": "20-21-carrera-s-wheels-1900",
+              "name": "20/21 英寸 Carrera S",
+              "price": 1900,
+              "trims": [
+                "9921b2"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/9921B2",
+              "description": "20\"/21\" Carrera S Wheels",
+              "model": {
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "20-21-carrera-classic-wheels-2590",
+              "name": "20/21 英寸 Carrera Classic",
+              "price": 2590,
+              "trims": [
+                "9921b2"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/9921B2",
+              "description": "20\"/21\" Carrera Classic Wheels",
+              "model": {
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "20-21-carrera-classic-wheels-1330",
+              "name": "20/21 英寸 Carrera Classic",
+              "price": 1330,
+              "trims": [
+                "9921s2"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/9921S2",
+              "description": "20\"/21\" Carrera Classic Wheels",
+              "model": {
+                "wheels": "sport"
+              }
+            }
+          ]
+        },
+        "cabin": {
+          "name": "内饰",
+          "values": [
+            {
+              "id": "standard",
+              "name": "该版本标配内饰",
+              "price": 0
+            },
+            {
+              "id": "leather-interior-in-black-3300",
+              "name": "黑色真皮内饰",
+              "price": 3300,
+              "trims": [
+                "9921b2",
+                "9921s2"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/9921B2",
+              "description": "Leather Interior in Black",
+              "model": {
+                "seat": "#242424"
+              }
+            }
+          ]
+        },
+        "roof": {
+          "name": "车顶",
+          "values": [
+            {
+              "id": "standard",
+              "name": "该版本标配车顶",
+              "price": 0
+            },
+            {
+              "id": "electric-slide-tilt-sunroof-in-glass-2120",
+              "name": "电动玻璃天窗",
+              "price": 2120,
+              "trims": [
+                "9921b2",
+                "9921s2"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/9921B2",
+              "description": "Electric Slide/Tilt Sunroof in Glass",
+              "model": {
+                "roof": "glass"
+              }
+            }
+          ]
+        },
+        "package": {
+          "name": "运动组件",
+          "values": [
+            {
+              "id": "standard",
+              "name": "该版本标配运动配置",
+              "price": 0
+            },
+            {
+              "id": "sport-chrono-package-2540",
+              "name": "Sport Chrono 组件",
+              "price": 2540,
+              "trims": [
+                "9921b2",
+                "9921s2"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/9921B2",
+              "description": "Sport Chrono Package"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "vehicle-porsche-taycan",
+      "checkedAt": "2026-09-20",
+      "primarySources": [
+        "https://www.porsche.com/usa/models/taycan/configure/",
+        "https://configurator.porsche.com/en-US/mode/model/Y1AAI1",
+        "https://configurator.porsche.com/en-US/mode/model/Y1ADJ1"
+      ],
+      "priceBasis": "Model overview MSRP excludes $2350 delivery fee included in configurator JSON-LD offers.price. Option deltas from offers.addOn, checked separately for each offered trim.",
+      "options": {
+        "trim": {
+          "name": "原厂版本",
+          "values": [
+            {
+              "id": "y1aai1",
+              "name": "Taycan",
+              "price": 0,
+              "totalPrice": 111900,
+              "source": "https://configurator.porsche.com/en-US/mode/model/Y1AAI1",
+              "image": "items/vehicles-real/porsche-y1aai1.webp",
+              "imageSource": "https://images.porsche.com/f/285489813253582/5000x1390/beb65163ea/model-y1aai1-side-shot_7a4db2cc59b54248abe75a78b06b9e19.png/m/1200x0/smart/filters:format(webp)",
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "Taycan"
+                ],
+                [
+                  "驱动",
+                  "后驱"
+                ],
+                [
+                  "动力",
+                  "402 hp"
+                ]
+              ],
+              "model": {
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "y1adj1",
+              "name": "Taycan 4S",
+              "price": 19900,
+              "totalPrice": 131800,
+              "source": "https://configurator.porsche.com/en-US/mode/model/Y1ADJ1",
+              "image": "items/vehicles-real/porsche-y1adj1.webp",
+              "imageSource": "https://images.porsche.com/f/285489813253582/5000x1390/cbb6569be9/model-y1adj1-side-shot_e1c0e39dcd7444bd81e1ffbac43285a0.png/m/1200x0/smart/filters:format(webp)",
+              "specs": [
+                [
+                  "年款",
+                  "2027"
+                ],
+                [
+                  "版本",
+                  "Taycan 4S"
+                ],
+                [
+                  "驱动",
+                  "四驱"
+                ],
+                [
+                  "动力",
+                  "536 hp（Launch Control 超增压）"
+                ]
+              ],
+              "model": {
+                "wheels": "sport"
+              }
+            }
+          ]
+        },
+        "paint": {
+          "name": "原厂车漆",
+          "values": [
+            {
+              "id": "standard",
+              "name": "基础车漆（标配）",
+              "price": 0
+            },
+            {
+              "id": "jet-black-metallic-840",
+              "name": "金属黑",
+              "price": 840,
+              "trims": [
+                "y1aai1",
+                "y1adj1"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/Y1AAI1",
+              "description": "Jet Black Metallic",
+              "model": {
+                "paint": "#141618"
+              }
+            },
+            {
+              "id": "dolomite-silver-metallic-840",
+              "name": "白云石银",
+              "price": 840,
+              "trims": [
+                "y1aai1",
+                "y1adj1"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/Y1AAI1",
+              "description": "Dolomite Silver Metallic",
+              "model": {
+                "paint": "#a6a8a5"
+              }
+            },
+            {
+              "id": "frozen-berry-metallic-1500",
+              "name": "冰莓粉",
+              "price": 1500,
+              "trims": [
+                "y1aai1",
+                "y1adj1"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/Y1AAI1",
+              "description": "Frozen Berry Metallic",
+              "model": {
+                "paint": "#a48192"
+              }
+            },
+            {
+              "id": "gentian-blue-metallic-1500",
+              "name": "龙胆蓝",
+              "price": 1500,
+              "trims": [
+                "y1aai1",
+                "y1adj1"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/Y1AAI1",
+              "description": "Gentian Blue Metallic",
+              "model": {
+                "paint": "#16416a"
+              }
+            }
+          ]
+        },
+        "wheels": {
+          "name": "轮毂",
+          "values": [
+            {
+              "id": "standard",
+              "name": "该版本标配",
+              "price": 0
+            },
+            {
+              "id": "20-sport-aero-wheels-2920",
+              "name": "20 英寸 Sport Aero",
+              "price": 2920,
+              "trims": [
+                "y1aai1",
+                "y1adj1"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/Y1AAI1",
+              "description": "20\" Sport Aero Wheels",
+              "model": {
+                "wheels": "sport"
+              }
+            },
+            {
+              "id": "20-taycan-turbo-aero-wheels-2510",
+              "name": "20 英寸 Taycan Turbo Aero",
+              "price": 2510,
+              "trims": [
+                "y1aai1",
+                "y1adj1"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/Y1AAI1",
+              "description": "20\" Taycan Turbo Aero Wheels",
+              "model": {
+                "wheels": "sport"
+              }
+            }
+          ]
+        },
+        "cabin": {
+          "name": "内饰",
+          "values": [
+            {
+              "id": "standard",
+              "name": "该版本标配内饰",
+              "price": 0
+            },
+            {
+              "id": "leather-interior-in-black-4360",
+              "name": "黑色真皮内饰",
+              "price": 4360,
+              "trims": [
+                "y1aai1",
+                "y1adj1"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/Y1AAI1",
+              "description": "Leather Interior in Black",
+              "model": {
+                "seat": "#242424"
+              }
+            }
+          ]
+        },
+        "roof": {
+          "name": "车顶",
+          "values": [
+            {
+              "id": "standard",
+              "name": "该版本标配车顶",
+              "price": 0
+            },
+            {
+              "id": "fixed-panoramic-roof-in-glass-1620",
+              "name": "固定全景玻璃车顶",
+              "price": 1620,
+              "trims": [
+                "y1aai1",
+                "y1adj1"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/Y1AAI1",
+              "description": "Fixed Panoramic Roof in Glass",
+              "model": {
+                "roof": "glass"
+              }
+            }
+          ]
+        },
+        "package": {
+          "name": "运动组件",
+          "values": [
+            {
+              "id": "standard",
+              "name": "该版本标配运动配置",
+              "price": 0
+            },
+            {
+              "id": "sport-chrono-package-1380",
+              "name": "Sport Chrono 组件",
+              "price": 1380,
+              "trims": [
+                "y1aai1"
+              ],
+              "source": "https://configurator.porsche.com/en-US/mode/model/Y1AAI1",
+              "description": "Sport Chrono Package"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "vehicle-toyota-camry",
+      "checkedAt": "2026-09-20",
+      "primarySources": [
+        "https://www.toyota.com/camry/",
+        "https://www.toyota.com/content/dam/toyota/brochures/pdf/2026/camry_ebrochure.pdf"
+      ],
+      "priceBasis": "Official page grade MSRP; exact grade car rendering; no unknown extra-price options.",
+      "options": {
+        "trim": {
+          "name": "原厂版本 / 驱动",
+          "values": [
+            {
+              "id": "le",
+              "name": "LE FWD",
+              "price": 0,
+              "totalPrice": 29600,
+              "source": "https://www.toyota.com/camry/",
+              "image": "items/vehicles-real/toyota-camry-le.png",
+              "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/camry/le/2559/218/1.png?fmt=png-alpha&wid=960&qlt=85",
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "动力",
+                  "225 hp 混动 · 前驱"
+                ],
+                [
+                  "版本",
+                  "LE"
+                ],
+                [
+                  "配置",
+                  "16 英寸合金轮毂 · 8 英寸中控屏"
+                ]
+              ],
+              "model": {
+                "paint": "#16191c",
+                "wheels": "classic",
+                "roof": "solid"
+              }
+            },
+            {
+              "id": "se",
+              "name": "SE FWD",
+              "price": 2500,
+              "totalPrice": 32100,
+              "source": "https://www.toyota.com/camry/",
+              "image": "items/vehicles-real/toyota-camry-se.png",
+              "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/camry/se/2561/218/1.png?fmt=png-alpha&wid=960&qlt=85",
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "动力",
+                  "225 hp 混动 · 前驱"
+                ],
+                [
+                  "版本",
+                  "SE"
+                ],
+                [
+                  "配置",
+                  "18 英寸黑色轮毂 · 运动型 SofTex / 织物座椅"
+                ]
+              ],
+              "model": {
+                "paint": "#16191c",
+                "wheels": "sport",
+                "roof": "solid"
+              }
+            },
+            {
+              "id": "nightshade",
+              "name": "Nightshade FWD",
+              "price": 3500,
+              "totalPrice": 33100,
+              "source": "https://www.toyota.com/camry/",
+              "image": "items/vehicles-real/toyota-camry-nightshade.png",
+              "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/camry/nightshade/2558/218/1.png?fmt=png-alpha&wid=960&qlt=85",
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "动力",
+                  "225 hp 混动 · 前驱"
+                ],
+                [
+                  "版本",
+                  "Nightshade"
+                ],
+                [
+                  "配置",
+                  "19 英寸缎黑轮毂 · 黑色后扰流板"
+                ]
+              ],
+              "model": {
+                "paint": "#16191c",
+                "wheels": "sport",
+                "roof": "solid"
+              }
+            },
+            {
+              "id": "xle",
+              "name": "XLE FWD",
+              "price": 5200,
+              "totalPrice": 34800,
+              "source": "https://www.toyota.com/camry/",
+              "image": "items/vehicles-real/toyota-camry-xle.png",
+              "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/camry/xle/2560/218/1.png?fmt=png-alpha&wid=960&qlt=85",
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "动力",
+                  "225 hp 混动 · 前驱"
+                ],
+                [
+                  "版本",
+                  "XLE"
+                ],
+                [
+                  "配置",
+                  "12.3 英寸中控屏 · 皮革 / 超细纤维加热前座"
+                ]
+              ],
+              "model": {
+                "paint": "#16191c",
+                "wheels": "classic",
+                "roof": "solid"
+              }
+            },
+            {
+              "id": "xse",
+              "name": "XSE FWD",
+              "price": 6400,
+              "totalPrice": 36000,
+              "source": "https://www.toyota.com/camry/",
+              "image": "items/vehicles-real/toyota-camry-xse.png",
+              "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/camry/xse/2557/218/1.png?fmt=png-alpha&wid=960&qlt=85",
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "动力",
+                  "225 hp 混动 · 前驱"
+                ],
+                [
+                  "版本",
+                  "XSE"
+                ],
+                [
+                  "配置",
+                  "19 英寸轮毂 · 运动悬架"
+                ]
+              ],
+              "model": {
+                "paint": "#16191c",
+                "wheels": "sport",
+                "roof": "solid"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "vehicle-toyota-rav4",
+      "checkedAt": "2026-09-20",
+      "primarySources": [
+        "https://www.toyota.com/rav4/",
+        "https://www.toyota.com/content/dam/toyota/brochures/pdf/2026/2026_rav4_brochure_20260612_142557.pdf"
+      ],
+      "priceBasis": "Official page grade MSRP; exact grade car rendering; no unknown extra-price options.",
+      "options": {
+        "trim": {
+          "name": "原厂版本 / 驱动",
+          "values": [
+            {
+              "id": "le",
+              "name": "LE FWD",
+              "price": 0,
+              "totalPrice": 31900,
+              "source": "https://www.toyota.com/rav4/",
+              "image": "items/vehicles-real/toyota-rav4-le.png",
+              "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/le/4521/218/1.png?fmt=png-alpha&wid=960&qlt=85",
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "动力",
+                  "226 hp 混动 · 前驱"
+                ],
+                [
+                  "版本",
+                  "LE"
+                ],
+                [
+                  "配置",
+                  "10.5 英寸中控屏 · Toyota Safety Sense 4.0"
+                ]
+              ],
+              "model": {
+                "paint": "#16191c",
+                "wheels": "classic",
+                "roof": "solid"
+              }
+            },
+            {
+              "id": "se",
+              "name": "SE FWD",
+              "price": 2800,
+              "totalPrice": 34700,
+              "source": "https://www.toyota.com/rav4/",
+              "image": "items/vehicles-real/toyota-rav4-se.png",
+              "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/se/4523/218/1.png?fmt=png-alpha&wid=960&qlt=85",
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "动力",
+                  "226 hp 混动 · 前驱"
+                ],
+                [
+                  "版本",
+                  "SE"
+                ],
+                [
+                  "配置",
+                  "18 英寸黑色轮毂 · 蓝色座椅缝线"
+                ]
+              ],
+              "model": {
+                "paint": "#16191c",
+                "wheels": "sport",
+                "roof": "solid"
+              }
+            },
+            {
+              "id": "xlepremium",
+              "name": "XLE Premium FWD",
+              "price": 4200,
+              "totalPrice": 36100,
+              "source": "https://www.toyota.com/rav4/",
+              "image": "items/vehicles-real/toyota-rav4-xlepremium.png",
+              "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xlepremium/4527/218/1.png?fmt=png-alpha&wid=960&qlt=85",
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "动力",
+                  "226 hp 混动 · 前驱"
+                ],
+                [
+                  "版本",
+                  "XLE Premium"
+                ],
+                [
+                  "配置",
+                  "SofTex 加热前座 · 电动尾门"
+                ]
+              ],
+              "model": {
+                "paint": "#16191c",
+                "wheels": "classic",
+                "roof": "solid"
+              }
+            },
+            {
+              "id": "woodland",
+              "name": "Woodland AWD",
+              "price": 8000,
+              "totalPrice": 39900,
+              "source": "https://www.toyota.com/rav4/",
+              "image": "items/vehicles-real/toyota-rav4-woodland.png",
+              "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/woodland/4437/218/1.png?fmt=png-alpha&wid=960&qlt=85",
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "动力",
+                  "236 hp 混动 · 四驱"
+                ],
+                [
+                  "版本",
+                  "Woodland"
+                ],
+                [
+                  "配置",
+                  "18 英寸全地形轮胎 · 车顶横杆与 LED 雾灯"
+                ]
+              ],
+              "model": {
+                "paint": "#16191c",
+                "wheels": "sport",
+                "roof": "solid"
+              }
+            },
+            {
+              "id": "xse",
+              "name": "XSE AWD",
+              "price": 9400,
+              "totalPrice": 41300,
+              "source": "https://www.toyota.com/rav4/",
+              "image": "items/vehicles-real/toyota-rav4-xse.png",
+              "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/xse/4530/218/1.png?fmt=png-alpha&wid=960&qlt=85",
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "动力",
+                  "236 hp 混动 · 四驱"
+                ],
+                [
+                  "版本",
+                  "XSE"
+                ],
+                [
+                  "配置",
+                  "20 英寸黑色轮毂 · 12.9 英寸中控屏"
+                ]
+              ],
+              "model": {
+                "paint": "#16191c",
+                "wheels": "sport",
+                "roof": "solid"
+              }
+            },
+            {
+              "id": "limited",
+              "name": "Limited AWD",
+              "price": 11400,
+              "totalPrice": 43300,
+              "source": "https://www.toyota.com/rav4/",
+              "image": "items/vehicles-real/toyota-rav4-limited.png",
+              "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/rav4/limited/4534/218/1.png?fmt=png-alpha&wid=960&qlt=85",
+              "specs": [
+                [
+                  "年款",
+                  "2026"
+                ],
+                [
+                  "动力",
+                  "236 hp 混动 · 四驱"
+                ],
+                [
+                  "版本",
+                  "Limited"
+                ],
+                [
+                  "配置",
+                  "全景电动天窗 · JBL 9 扬声器"
+                ]
+              ],
+              "model": {
+                "paint": "#16191c",
+                "wheels": "classic",
+                "roof": "glass"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
