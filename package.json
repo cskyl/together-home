@@ -17,7 +17,8 @@
     "test:rewards": "node tests/rewards-browser.mjs",
     "test:construction": "node tests/construction-browser.mjs",
     "host": "node backend/server.mjs",
-    "test:cats": "node tests/cats-browser.mjs"
+    "test:cats": "node tests/cats-browser.mjs",
+    "test:products": "node tests/real-products-browser.mjs"
   },
   "dependencies": {
     "three": "^0.180.0",

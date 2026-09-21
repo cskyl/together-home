@@ -58,6 +58,62 @@ export function createFurnitureModel(item) {
       case 'bookcase':
         for(const x of [-.52,.52])box(x,.97,0,.055,1.94,.35);box(0,.97,-.17,1.05,1.94,.025,'#bea586');
         for(let i=0;i<6;i++){const y=.045+i*.375;box(0,y,0,1.1,.045,.38);if(i<5){books(-.43,y+.025,-.016,i%2?4:6);if(i%2){cylinder(.3,y+.09,0,.072,.13,'#9daf9b');ball(.3,y+.195,0,.055,.09,.055,'#d2c7ad');}else box(.31,y+.064,.01,.24,.075,.23,'#969f98');}}break;
+      case 'sectional':
+        for(const x of [-1.18,1.18])for(const z of [-.62,.02])cylinder(x,.07,z,.041,.14,dark);for(const x of [.57,1.16])cylinder(x,.07,1.01,.041,.14,dark);box(0,.25,-.3,2.65,.25,.9);box(.88,.25,.32,.88,.25,1.68);for(const x of [-1.25,1.25])box(x,.51,x>0?.25:-.3,.15,.6,x>0?1.78:.99);box(0,.65,-.735,2.62,.77,.17);
+        for(let i=0;i<3;i++){const x=-.84+i*.85;box(x,.45,i===2?.23:-.255,.81,.15,i===2?1.60:.71);box(x,.722,-.598,.81,.51,.12);}
+        for(const [x,c]of[[-1.02,'#c8baa1'],[.47,'#91a9a6']]){const pillow=box(x,.71,-.44,.30,.32,.14,c);pillow.rotation.z=x*.11;}break;
+      case 'ottoman':
+        for(const x of [-.27,.27]){box(x,.035,0,.055,.07,.47,wood);box(x,.165,-.185,.055,.26,.065,wood);box(x,.215,.20,.055,.35,.065,wood);const rail=box(x,.324,.02,.055,.06,.50,wood);rail.rotation.x=-.13;}const ottomanPad=box(0,.366,.012,.64,.10,.50);ottomanPad.rotation.x=-.13;box(0,.425,-.05,.52,.012,.24,linen);break;
+      case 'coffeetable':
+        legs(.78,.45,.41,color,.027);box(0,.447,0,.92,.056,.59);box(0,.16,0,.81,.035,.47);for(let i=0;i<3;i++)box(-.15,.195+i*.028,.025,.26+i*.03,.022,.23,['#a4b09c','#d3c7ae','#b58e73'][i]);cylinder(.24,.492,-.13,.064,.04,linen);break;
+      case 'sidetable':
+        for(let i=0;i<3;i++){const a=i*Math.PI*2/3;cylinder(Math.cos(a)*.16,.265,Math.sin(a)*.16,.012,.53,dark);}cylinder(0,.535,0,.224,.023);const trayRim=ring(0,.555,0,.221,.012);trayRim.rotation.x=Math.PI/2;cylinder(0,.55,0,.209,.004);break;
+      case 'chaise':
+        legs(.76,1.43,.16,metal,.021);box(0,.255,.12,.9,.20,1.58);box(0,.397,.15,.86,.11,1.49);const chaiseBack=box(0,.695,-.64,.89,.64,.14);chaiseBack.rotation.x=-.12;box(0,.485,.51,.78,.018,.67,linen);const chaisePillow=box(-.18,.60,-.41,.37,.27,.15,'#b5c4ba');chaisePillow.rotation.z=.13;break;
+      case 'daybed':
+        legs(1.86,.7,.12,color,.038);box(0,.27,0,2.08,.3,.86);box(0,.493,0,1.99,.15,.79,linen);box(0,.70,-.433,2.08,.76,.053);for(const x of [-1.011,1.011]){box(x,.614,0,.057,.62,.91);box(x,.947,-.04,.079,.04,.96);}for(const x of [-.68,0,.68]){box(x,.252,.449,.658,.235,.035);cylinder(x,.255,.48,.026,.024,dark).rotation.x=Math.PI/2;}for(const x of [-.69,.69])ball(x,.628,-.22,.31,.115,.18,'#b8c3b4');break;
+      case 'bunkbed':
+        for(const x of [-.98,.98])for(const z of [-.43,.43])cylinder(x,.96,z,.024,1.92,metal);for(const y of [.35,1.49]){box(0,y,0,2.0,.056,.92);box(0,y+.096,0,1.95,.135,.87,linen);box(0,y+.17,.17,1.4,.035,.88,'#a6b5ad');ball(-.7,y+.202,-.02,.22,.042,.32,linen);}
+        for(const z of [-.435,.435]){box(0,1.825,z,2.0,.025,.025,metal);box(0,1.655,z,2.0,.025,.025,metal);for(const x of [-.9,-.46,0,.46,.9])box(x,1.74,z,.018,.19,.018,metal);}for(const x of [-.91,-.57])box(x,.85,.516,.025,1.7,.026,metal);for(let i=0;i<6;i++)box(-.74,.12+i*.272,.516,.35,.03,.065,metal);break;
+      case 'vanity':
+        for(const x of [-.565,.565])box(x,.386,0,.048,.772,.41);box(0,.783,0,1.20,.04,.415);box(0,.692,0,1.1,.14,.39);box(0,.691,.206,1.068,.105,.018);handle(0,.714,.223,.22);box(0,.809,0,1.17,.008,.39,'#d7ded6',{metalness:.1,roughness:.3});cylinder(.43,.842,-.09,.031,.064,'#b7a486');cylinder(.33,.83,-.10,.045,.04,'#c4b4ba');break;
+      case 'standingdesk':
+        for(const x of [-.48,.48]){box(x,.03,0,.075,.06,.68,metal);box(x,.445,0,.068,.83,.071,metal);box(x,.867,0,.052,.18,.055,'#a2aaa4');box(x,.985,0,.065,.046,.63,metal);}box(0,.984,0,1.0,.048,.046,metal);box(0,1.025,0,1.2,.047,.8);box(.46,1.004,.415,.12,.035,.027,dark);box(.485,1.006,.431,.027,.01,.003,'#a3c0bc');box(0,.904,-.21,.59,.04,.16,dark);break;
+      case 'filingcabinet':
+        for(const x of [-.112,.112])for(const z of [-.19,.19]){const wheel=cylinder(x,.032,z,.028,.033,dark);wheel.rotation.z=Math.PI/2;box(x,.071,z,.025,.05,.025,metal);}box(0,.38,0,.282,.61,.41);box(0,.7,0,.3,.025,.427);for(let i=0;i<6;i++){const y=.147+i*.09;box(0,y,.218,.258,.077,.017);box(0,y+.009,.229,.063,.025,.012,dark);box(0,y+.009,.237,.044,.012,.003,linen);}break;
+      case 'bookshelfwide':
+        for(const x of [-.727,.727])box(x,.385,0,.04,.77,.39);for(const y of [.021,.385,.749])box(0,y,0,1.49,.042,.39);for(const x of [-.366,0,.366])box(x,.385,0,.029,.705,.39);
+        for(let i=0;i<4;i++){const x=-.55+i*.368;if(i%2){box(x,.188,.025,.28,.285,.32,'#9bab9c');box(x,.2,.192,.065,.025,.013,dark);books(x-.12,.408,-.01,4);}else{books(x-.12,.045,-.012,4);box(x,.54,.017,.28,.245,.32,'#bcae94');box(x,.55,.184,.06,.024,.012,dark);}}break;
+      case 'stool':
+        for(let i=0;i<4;i++){const a=Math.PI/4+i*Math.PI/2,x=Math.cos(a)*.14,z=Math.sin(a)*.14;const leg=cylinder(x,.223,z,.012,.436,dark);leg.rotation.z=-x*.35;leg.rotation.x=z*.35;}cylinder(0,.453,0,.162,.04);for(const [x,z]of[[-.05,-.05],[.05,-.05],[-.05,.05],[.05,.05]])cylinder(x,.475,z,.013,.002,dark);break;
+      case 'barstool':
+        cylinder(0,.039,0,.244,.045,dark,.27);cylinder(0,.36,0,.032,.635,dark);cylinder(0,.68,0,.026,.20,metal);cylinder(0,.802,0,.188,.051);const footRing=ring(0,.27,0,.18,.017,dark);footRing.rotation.x=Math.PI/2;for(const x of [-.11,.11])box(x,.27,0,.22,.026,.026,dark);box(.19,.744,0,.11,.018,.025,dark);break;
+      case 'sideboard':
+        box(0,.055,0,1.25,.11,.44);box(0,.505,-.206,1.29,.86,.044);for(const x of [-.627,0,.627])box(x,.5,0,.032,.87,.45);box(0,.93,0,1.38,.055,.50);for(const x of [-.312,.312]){box(x,.505,.235,.586,.797,.037);box(x,.505,.256,.487,.677,.018,'#c4af96');cylinder(x-Math.sign(x)*.208,.577,.285,.023,.025,dark).rotation.x=Math.PI/2;}break;
+      case 'kitchenisland':
+        for(const x of [-.56,.56])for(const z of [-.295,.295])box(x,.436,z,.054,.87,.054,'#a69981');box(0,.901,0,1.26,.065,.79);for(const y of [.154,.472]){for(let i=0;i<9;i++)box(-.50+i*.125,y,0,.086,.03,.61,'#baa485');box(0,y-.025,-.302,1.13,.045,.036);box(0,y-.025,.302,1.13,.045,.036);}for(let i=0;i<3;i++)box(.31,.498+i*.029,.045,.30,.022,.25,['#ddd6c4','#c1cbbd','#a7b9ac'][i]);bowl(-.35,.93,-.15,linen,'#b7b295');break;
+      case 'kitchencart':
+        for(const x of [-.13,.13])for(const z of [-.20,.20]){const wheel=cylinder(x,.037,z,.032,.033,dark);wheel.rotation.z=Math.PI/2;}for(const x of [-.149,.149]){box(x,.408,-.14,.024,.75,.024,metal);box(x,.408,.14,.024,.75,.024,metal);}for(const y of [.145,.415,.685]){box(0,y,0,.344,.032,.445);for(const x of [-.168,.168])box(x,y+.045,0,.015,.09,.445);for(const z of [-.217,.217])box(0,y+.045,z,.344,.09,.015);}cylinder(-.055,.807,-.08,.046,.12,linen);box(.066,.78,.065,.12,.135,.17,'#c8ba9d');break;
+      case 'wallcabinet':
+        box(0,.06,-.015,.53,.12,.49);box(0,.483,-.285,.61,.75,.028);for(const x of [-.29,.29])box(x,.483,0,.03,.75,.599);for(const y of [.121,.871])box(0,y,0,.64,.037,.625);for(const x of [-.15,.15]){box(x,.481,.308,.292,.696,.026);handle(x-Math.sign(x)*.1,.734,.339,.026);}break;
+      case 'bathvanity':
+        legs(.59,.36,.12,metal,.025);box(0,.43,0,.70,.61,.44);for(const y of [.286,.577]){box(0,y,.231,.659,.259,.025);handle(0,y+.091,.255,.25);}box(0,.76,0,.75,.065,.48,linen);const basin=mesh(new T.LatheGeometry([[0,0],[.17,0],[.245,.09],[.25,.12],[.228,.115],[.15,.032],[0,.028]].map(([r,h])=>new T.Vector2(r,h)),32),linen,0,.79,.01,{roughness:.35});basin.scale.z=.62;cylinder(0,.908,-.164,.016,.20,metal);const tap=mesh(new T.TorusGeometry(.056,.015,9,20,Math.PI),metal,0,.993,-.108);tap.rotation.y=Math.PI/2;cylinder(0,.977,-.052,.014,.044,metal);break;
+      case 'bathshelf':
+        for(const x of [-.161,.161])for(const z of [-.137,.137])box(x,.814,z,.026,1.628,.026);for(let i=0;i<6;i++){const y=.079+i*.288;box(0,y,0,.342,.025,.30);for(let j=0;j<6;j++)box(-.135+j*.054,y+.017,0,.029,.015,.273,wood);if(i===1||i===3)for(let j=0;j<3;j++)box(0,y+.056+j*.039,0,.252,.034,.19,['#e1dccb','#aebfad','#c7c1aa'][j]);if(i===4){cylinder(-.08,y+.117,0,.027,.21,linen);cylinder(.06,y+.09,0,.041,.156,'#b7c5b4');}}break;
+      case 'mirror':
+        for(const x of [-.204,.204])box(x,.747,0,.038,1.494,.039);for(const y of [.019,1.475])box(0,y,0,.446,.038,.039);box(0,.747,.012,.372,1.411,.013,'#b6cccf',{metalness:.15,roughness:.3});for(const [x,y,h]of[[-.035,.89,.74],[.05,.85,.54]]){const glint=box(x,y,.021,.015,h,.003,'#e5efea',{transparent:true,opacity:.55});glint.rotation.z=-.28;}const rearSupport=box(0,.409,-.196,.042,.90,.042,wood);rearSupport.rotation.x=.38;box(0,.011,-.353,.31,.023,.056,wood);box(0,.269,-.138,.027,.023,.29,wood);break;
+      case 'laundrybasket':
+        box(0,.03,0,.355,.06,.355);for(const x of [-.17,.17])box(x,.29,0,.035,.52,.355);for(const z of [-.16,.16])box(0,.29,z,.355,.52,.035);for(let i=0;i<13;i++)for(const z of [-.183,.183])box(0,.07+i*.036,z,.356,.014,.01,'#d0bf9f');for(let i=0;i<9;i++)for(const z of [-.19,.19])box(-.149+i*.037,.292,z,.014,.465,.007,'#a89370');box(0,.566,0,.379,.038,.38);box(0,.581,0,.13,.022,.04,dark);break;
+      case 'shoecabinet':
+        for(const x of [-.235,.235])box(x,.055,-.015,.045,.11,.255);box(0,.518,-.127,.54,.934,.032);for(const x of [-.258,.258])box(x,.518,0,.025,.934,.29);box(0,.996,0,.575,.037,.313);for(let i=0;i<3;i++){const y=.233+i*.303;box(0,y,.149,.505,.284,.025);box(0,y+.09,.17,.17,.024,.015,dark);}break;
+      case 'coatstand':
+        for(let i=0;i<3;i++){const a=i*Math.PI*2/3,leg=cylinder(Math.cos(a)*.093,.83,Math.sin(a)*.093,.017,1.69);leg.rotation.z=Math.cos(a)*.12;leg.rotation.x=-Math.sin(a)*.12;const hook=box(Math.cos(a)*.15,1.625,Math.sin(a)*.15,.023,.026,.29);hook.rotation.y=Math.PI/2-a;ball(Math.cos(a)*.284,1.64,Math.sin(a)*.284,.033,.028,.033);const lowHook=box(Math.cos(a)*.105,1.23,Math.sin(a)*.105,.018,.021,.20);lowHook.rotation.y=Math.PI/2-a;}break;
+      case 'entrybench':
+        for(const x of [-.52,.52])for(const z of [-.175,.175])box(x,.233,z,.038,.466,.038);box(0,.495,0,1.2,.047,.47);for(let i=0;i<8;i++)box(0,.155,-.167+i*.048,1.073,.025,.019);box(-.37,.505,0,.014,.013,.434,wood);box(.37,.505,0,.014,.013,.434,wood);box(.425,.337,0,.235,.277,.407);box(.425,.342,.211,.209,.244,.023);handle(.425,.416,.234,.07);break;
+      case 'outdoorchair':
+        for(const x of [-.247,.247]){const front=box(x,.222,.216,.041,.445,.041);front.rotation.x=-.07;const back=box(x,.386,-.20,.041,.78,.041);back.rotation.x=-.20;box(x,.565,.008,.056,.039,.61);box(x,.459,.215,.032,.193,.032);}for(let i=0;i<6;i++)box(0,.374,-.188+i*.078,.527,.025,.052);for(let i=0;i<5;i++){const slat=box(0,.482+i*.061,-.232-(i*.013),.521,.043,.023);slat.rotation.x=.18;}box(0,.401,-.199,.51,.032,.033);break;
+      case 'outdoortable':
+        for(const x of [-.331,.331])for(const z of [-.331,.331])box(x,.364,z,.044,.728,.044);for(const z of [-.332,.332])box(0,.691,z,.69,.077,.045);for(const x of [-.332,.332])box(x,.691,0,.045,.077,.69);for(let i=0;i<9;i++)box(-.295+i*.074,.75,0,.056,.032,.69);break;
     }
   }else if(item.category==='cats'){
     switch(item.shape){

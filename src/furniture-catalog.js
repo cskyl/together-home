@@ -1,0 +1,30 @@
+// Game prices are deliberately small. Official retail prices live separately
+// in furniture-references.js and never determine a purchase or old saved bill.
+export const furnitureAdditions = [
+  ['sectional','转角布艺沙发',220,'#8c9e9a','living','带转角的大沙发，给客厅多留几个座位。'],
+  ['ottoman','软垫脚凳',45,'#afac9c','living','靠着沙发放，伸腿或者临时坐一下。'],
+  ['coffeetable','双层茶几',55,'#bba585','living','桌上放杯子，下面一层放杂物。'],
+  ['sidetable','圆边几',25,'#b6bba9','living','沙发旁边的小桌，可以单独移动。'],
+  ['chaise','单人贵妃椅',120,'#a2b5b8','living','加长的单人躺位，留一块歇着的地方。'],
+  ['daybed','抽拉式沙发床',150,'#d7d2c5','bedroom','白天当沙发，晚上也能安排睡觉。'],
+  ['bunkbed','双层床',180,'#bfbba9','bedroom','上下两层，适合紧凑一点的卧室。'],
+  ['vanity','梳妆台',90,'#ded9ce','bedroom','细长桌面配抽屉，可以另外搭一面镜子。'],
+  ['standingdesk','升降书桌',150,'#c3b49a','office','宽桌面，可坐可站的书桌参考款。'],
+  ['filingcabinet','带轮文件柜',45,'#b8c0b3','office','桌边放一组抽屉，文具文件都有地方收。'],
+  ['bookshelfwide','格子收纳架',80,'#cec4ad','office','横着摆的格子柜，书和收藏都能放。'],
+  ['stool','圆面小凳',20,'#c4aa86','dining','哪里缺个位子就搬过去。'],
+  ['barstool','高脚餐凳',35,'#b59879','dining','吧台和中岛旁边可以摆一把。'],
+  ['sideboard','餐边收纳柜',100,'#ac937b','dining','餐厅边上的柜子，台面和柜内都能收纳。'],
+  ['kitchenisland','开放式厨房中岛',140,'#c9b494','kitchen','增加一块操作台和开放收纳空间。'],
+  ['kitchencart','三层置物推车',35,'#98aaa0','kitchen','带轮子的三层收纳，厨房浴室都能用。'],
+  ['wallcabinet','厨房地柜',55,'#ddd9cc','kitchen','带门的落地收纳柜，给厨房补点储物空间。'],
+  ['bathvanity','浴室洗手台柜',130,'#d8d5c7','bathroom','洗手盆下方留出抽屉收纳。'],
+  ['bathshelf','浴室层架',30,'#c1b18e','bathroom','窄一点的开放层架，毛巾和洗漱用品分层放。'],
+  ['mirror','全身镜',25,'#bda68b','bedroom','细框落地镜，放在卧室或玄关。'],
+  ['laundrybasket','带盖洗衣篮',20,'#b9ab91','bathroom','换下来的衣服先收进篮子。'],
+  ['shoecabinet','玄关鞋柜',55,'#d9d2bf','entry','关上柜门，门口可以清爽一点。'],
+  ['coatstand','落地衣帽架',20,'#aeb5a6','entry','外套、围巾和随手拿的包挂在这里。'],
+  ['entrybench','玄关长凳',40,'#b99e7d','entry','出门前坐着换鞋，也能当一张额外的长凳。'],
+  ['outdoorchair','户外休闲椅',35,'#b9aa8c','outdoor','阳台、露台或院子里的休闲座位。'],
+  ['outdoortable','户外木桌',55,'#a98e6c','outdoor','可以摆在户外的小桌，配几把椅子就能坐下。']
+].map(([shape,name,price,color,roomGroup,description])=>({id:`furniture-${shape}`,category:'furniture',shape,name,price,color,roomGroup,description}));

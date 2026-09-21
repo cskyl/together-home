@@ -23,7 +23,7 @@ export function purchase(s,{item,config={},person=0},{id=crypto.randomUUID(),rol
   if(![0,1].includes(person))throw Error('购买成员无效。');
   if(inventory(s).length>=300)throw Error('仓库已有 300 件物品，暂时不能继续购买。');
   if(balance(s)<priced.amount)throw Error('游戏资金不足，先记一次学习再来。');
-  const event={id,type:'purchase',person,item,config:priced.config,amount:priced.amount,at:new Date().toISOString()};
+  const event={id,type:'purchase',person,item,config:priced.config,amount:priced.amount,priceVersion:priced.priceVersion,at:new Date().toISOString()};
   if(priced.item.variants)event.variant=priced.item.variants[roll(priced.item.variants.length)].id;
   return {...s,events:[...s.events,event]};
 }
@@ -57,7 +57,7 @@ export function validate(s) {
       const plan=plans.find(p=>p.id===e.plan);
       if(!plan||!Number.isSafeInteger(e.amount)||e.amount<=0||(e.person!==undefined&&![0,1].includes(e.person))||(e.stage!==undefined&&!constructionPhases(plan).some(p=>p.id===e.stage)))throw Error('建设记录无效。');funds-=e.amount;used[e.plan]=(used[e.plan]||0)+e.amount;if(used[e.plan]>constructionTotal(plan))throw Error('建设资金超出房子总价。');
     }else if(e.type==='purchase'){
-      const priced=quote(e.item,e.config);
+      const priced=quote(e.item,e.config,e.priceVersion===undefined?1:e.priceVersion);
       if(![0,1].includes(e.person)||e.amount!==priced.amount||Object.keys(priced.config).some(k=>e.config?.[k]!==priced.config[k])||(priced.item.variants?!priced.item.variants.some(v=>v.id===e.variant):e.variant!==undefined))throw Error('购买记录无效。');
       funds-=e.amount;
     }else throw Error('未知记录。');

@@ -1,0 +1,431 @@
+{
+  "checkedAt": "2026-09-20",
+  "timeZone": "America/New_York",
+  "records": [
+    {
+      "id": "car-coupe",
+      "brand": "Toyota",
+      "name": "2026 GR86 · 6 速手动",
+      "url": "https://www.toyota.com/gr86/2026/",
+      "image": "items/cars-real/gr86.png",
+      "checkedAt": "2026-09-20",
+      "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/gr86/gr86/6253/d4s/1.png?fmt=png-alpha&wid=930&qlt=90",
+      "specs": [
+        [
+          "发动机",
+          "2.4L 自然吸气水平对置四缸"
+        ],
+        [
+          "功率",
+          "228 hp"
+        ],
+        [
+          "扭矩",
+          "184 lb-ft"
+        ],
+        [
+          "变速箱",
+          "6 速手动"
+        ],
+        [
+          "驱动",
+          "后轮驱动"
+        ]
+      ],
+      "retailPrice": {
+        "amount": 31400,
+        "currency": "USD",
+        "note": "美国官网基础 MSRP；税费、运输和选配另计。"
+      },
+      "note": "官方 GR86 展示图；游戏里的外观和选配是简化设计。",
+      "sourceType": "Manufacturer US product page and official CDN imagery",
+      "sources": [
+        {
+          "url": "https://www.toyota.com/gr86/2026/",
+          "facts": [
+            "发动机: 2.4L 自然吸气水平对置四缸",
+            "功率: 228 hp",
+            "扭矩: 184 lb-ft",
+            "变速箱: 6 速手动",
+            "驱动: 后轮驱动"
+          ],
+          "listedRetail": {
+            "amount": 31400,
+            "currency": "USD",
+            "note": "美国官网基础 MSRP；税费、运输和选配另计。"
+          }
+        }
+      ],
+      "asset": {
+        "file": "gr86.png",
+        "url": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/gr86/gr86/6253/d4s/1.png?fmt=png-alpha&wid=930&qlt=90",
+        "bytes": 181792,
+        "contentType": "image/png",
+        "sha256": "58e311d44d4b345e5f7641b415fe9eec06f0e7d53bb26d35df423aaf57870a8c"
+      },
+      "scope": "Reference metadata only. Existing game IDs, game prices, options and simplified 3D are not OEM claims."
+    },
+    {
+      "id": "car-sedan",
+      "brand": "Toyota",
+      "name": "2026 Camry LE · 前驱混动",
+      "url": "https://www.toyota.com/camry/",
+      "image": "items/cars-real/camry.png",
+      "checkedAt": "2026-09-20",
+      "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/camry/le/2559/3u5/1.png?fmt=png-alpha&wid=930&qlt=90",
+      "specs": [
+        [
+          "动力",
+          "2.5L 四缸油电混动"
+        ],
+        [
+          "综合功率",
+          "225 hp"
+        ],
+        [
+          "驱动",
+          "前轮驱动"
+        ],
+        [
+          "座位",
+          "5 座"
+        ],
+        [
+          "中控屏",
+          "8 英寸"
+        ]
+      ],
+      "retailPrice": {
+        "amount": 29600,
+        "currency": "USD",
+        "note": "美国官网 LE 基础 MSRP；税费、运输和选配另计。"
+      },
+      "note": "参数为 LE 前驱版；游戏选配不对应真实原厂配置。",
+      "sourceType": "Manufacturer US product page and official CDN imagery",
+      "sources": [
+        {
+          "url": "https://www.toyota.com/camry/",
+          "facts": [
+            "动力: 2.5L 四缸油电混动",
+            "综合功率: 225 hp",
+            "驱动: 前轮驱动",
+            "座位: 5 座",
+            "中控屏: 8 英寸"
+          ],
+          "listedRetail": {
+            "amount": 29600,
+            "currency": "USD",
+            "note": "美国官网 LE 基础 MSRP；税费、运输和选配另计。"
+          }
+        },
+        {
+          "url": "https://www.toyota.com/camry/camry-vs-accord/",
+          "facts": [
+            "LE FWD 225 hp",
+            "2.5L inline four hybrid",
+            "five seats"
+          ],
+          "note": "Comparison page still quotes $29,300 and older MPG figures. Only unchanged mechanical facts used; retail price is the current product-page $29,600. MPG intentionally omitted because official pages disagree."
+        }
+      ],
+      "asset": {
+        "file": "camry.png",
+        "url": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/camry/le/2559/3u5/1.png?fmt=png-alpha&wid=930&qlt=90",
+        "bytes": 221061,
+        "contentType": "image/png",
+        "sha256": "9ac3f6da72ff6ca2644305cfcaf8d6908ed2b99a5ab02099a2d3e96ef341dc0d"
+      },
+      "scope": "Reference metadata only. Existing game IDs, game prices, options and simplified 3D are not OEM claims."
+    },
+    {
+      "id": "car-suv",
+      "brand": "Toyota",
+      "name": "2026 bZ XLE · 前驱",
+      "url": "https://www.toyota.com/bz/2026/",
+      "image": "items/cars-real/bz.png",
+      "checkedAt": "2026-09-20",
+      "imageSource": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/bz/xle/2873/089/1.png?fmt=png-alpha&wid=930&qlt=90",
+      "specs": [
+        [
+          "动力",
+          "纯电、前轮驱动"
+        ],
+        [
+          "EPA 续航",
+          "236 英里（XLE FWD）"
+        ],
+        [
+          "电池容量",
+          "57.7 kWh"
+        ],
+        [
+          "充电接口",
+          "NACS"
+        ],
+        [
+          "中控屏",
+          "14 英寸"
+        ]
+      ],
+      "retailPrice": {
+        "amount": 34900,
+        "currency": "USD",
+        "note": "美国官网 XLE 基础 MSRP；税费、运输和选配另计。"
+      },
+      "note": "参数为标准 XLE FWD；FWD Plus 和 AWD 的续航及动力不同。游戏选配为简化设计。",
+      "sourceType": "Manufacturer US product page and official CDN imagery",
+      "sources": [
+        {
+          "url": "https://www.toyota.com/bz/2026/",
+          "facts": [
+            "动力: 纯电、前轮驱动",
+            "EPA 续航: 236 英里（XLE FWD）",
+            "电池容量: 57.7 kWh",
+            "充电接口: NACS",
+            "中控屏: 14 英寸"
+          ],
+          "listedRetail": {
+            "amount": 34900,
+            "currency": "USD",
+            "note": "美国官网 XLE 基础 MSRP；税费、运输和选配另计。"
+          }
+        },
+        {
+          "url": "https://engage.toyota.com/static/files/ebrochures/2026/2026_bz_eBrochure.pdf",
+          "facts": [
+            "XLE FWD EPA range 236 miles"
+          ]
+        },
+        {
+          "url": "https://pressroom.toyota.com/toyota-bz-all-electric-suv-adds-range-charging-and-exterior-updates-for-2026/?linkId=100000364856388",
+          "facts": [
+            "XLE FWD battery 57.7 kWh"
+          ],
+          "note": "Early release estimates are not used for EPA range. Product page and final brochure supply the 236-mile figure."
+        }
+      ],
+      "asset": {
+        "file": "bz.png",
+        "url": "https://tmna.aemassets.toyota.com/is/image/toyota/toyota/jellies/max/2026/bz/xle/2873/089/1.png?fmt=png-alpha&wid=930&qlt=90",
+        "bytes": 316801,
+        "contentType": "image/png",
+        "sha256": "724157b7e586f73a689cb7dd7b441b3d619e9cfa7e0f658598f5532ea5379cb9"
+      },
+      "scope": "Reference metadata only. Existing game IDs, game prices, options and simplified 3D are not OEM claims."
+    },
+    {
+      "id": "car-offroad",
+      "brand": "Ford",
+      "name": "2026 Bronco Base · 双门手动",
+      "url": "https://www.ford.com/suvs/bronco/models/base/",
+      "image": "items/cars-real/bronco.png",
+      "checkedAt": "2026-09-20",
+      "imageSource": "https://www.ford.com/acslibs/content/dam/na/ford/en_us/images/bronco/2026/general/26_frd_bro_base_2d_dr34_sblk.png",
+      "specs": [
+        [
+          "发动机",
+          "2.3L EcoBoost 涡轮四缸"
+        ],
+        [
+          "功率",
+          "300 hp（优质汽油测定）"
+        ],
+        [
+          "扭矩",
+          "325 lb-ft（优质汽油测定）"
+        ],
+        [
+          "变速箱",
+          "7 速手动，含 1 个攀爬挡"
+        ],
+        [
+          "驱动",
+          "分时四驱 4×4"
+        ]
+      ],
+      "note": "官方 Base 双门展示图；参数来自 2026 技术手册。游戏选配不对应真实原厂配置。",
+      "sourceType": "Manufacturer US product page and official CDN imagery",
+      "sources": [
+        {
+          "url": "https://www.ford.com/suvs/bronco/models/base/",
+          "facts": [
+            "发动机: 2.3L EcoBoost 涡轮四缸",
+            "功率: 300 hp（优质汽油测定）",
+            "扭矩: 325 lb-ft（优质汽油测定）",
+            "变速箱: 7 速手动，含 1 个攀爬挡",
+            "驱动: 分时四驱 4×4"
+          ]
+        },
+        {
+          "url": "https://www.fromtheroad.ford.com/content/dam/fordmediasite/us/en/library/2026/specs/2026_Ford_Bronco_Technical_Specifications.pdf",
+          "pages": [
+            1,
+            2,
+            3
+          ],
+          "facts": [
+            "Base standard 2.3L I4",
+            "300 hp / 325 lb-ft on premium fuel per SAE J1349",
+            "seven-speed manual includes crawler",
+            "standard part-time electronic 4x4"
+          ],
+          "note": "Official PDF dated 2026-02-18. No readable MSRP on product page, so price omitted."
+        }
+      ],
+      "asset": {
+        "file": "bronco.png",
+        "url": "https://www.ford.com/acslibs/content/dam/na/ford/en_us/images/bronco/2026/general/26_frd_bro_base_2d_dr34_sblk.png",
+        "bytes": 556540,
+        "contentType": "image/png",
+        "sha256": "6e89f3cab7af32dceb34419a51e65f5a79b2611e8f06b5692120799824cc09bf"
+      },
+      "scope": "Reference metadata only. Existing game IDs, game prices, options and simplified 3D are not OEM claims."
+    },
+    {
+      "id": "car-wagon",
+      "brand": "Volvo",
+      "name": "2026 V60 Cross Country",
+      "url": "https://www.volvocars.com/us/cars/v60-cross-country/",
+      "image": "items/cars-real/v60-cross-country.jpg",
+      "checkedAt": "2026-09-20",
+      "imageSource": "https://www.volvocars.com/images/cs/v3/assets/blt0feaa88e629251fc/bltb67a7d8d49721108/6693a2b1518b5e695bede60f/v60-cc-og.jpg?branch=prod_alias&quality=85&format=jpg&h=630&iar=0&w=1200",
+      "specs": [
+        [
+          "动力",
+          "汽油 + 48V 轻混"
+        ],
+        [
+          "最大功率",
+          "247 hp"
+        ],
+        [
+          "驱动",
+          "全轮驱动 AWD"
+        ],
+        [
+          "0–60 mph",
+          "最快 6.6 秒"
+        ],
+        [
+          "EPA 综合油耗",
+          "26 mpg"
+        ]
+      ],
+      "retailPrice": {
+        "amount": 53595,
+        "currency": "USD",
+        "note": "美国官网起价，含 $1,295 目的地费；税费及选配另计。"
+      },
+      "note": "官网展示欧洲规格车及选装车顶箱；图片配置可能高于起价版。游戏外观为简化设计。",
+      "sourceType": "Manufacturer US product page and official CDN imagery",
+      "sources": [
+        {
+          "url": "https://www.volvocars.com/us/cars/v60-cross-country/",
+          "facts": [
+            "动力: 汽油 + 48V 轻混",
+            "最大功率: 247 hp",
+            "驱动: 全轮驱动 AWD",
+            "0–60 mph: 最快 6.6 秒",
+            "EPA 综合油耗: 26 mpg"
+          ],
+          "listedRetail": {
+            "amount": 53595,
+            "currency": "USD",
+            "note": "美国官网起价，含 $1,295 目的地费；税费及选配另计。"
+          }
+        },
+        {
+          "url": "https://www.volvocars.com/us/cars/compare-cars/?models=v60-cross-country",
+          "facts": [
+            "AWD",
+            "247 hp",
+            "6.6 seconds",
+            "26 combined mpg"
+          ]
+        }
+      ],
+      "asset": {
+        "file": "v60-cross-country.jpg",
+        "url": "https://www.volvocars.com/images/cs/v3/assets/blt0feaa88e629251fc/bltb67a7d8d49721108/6693a2b1518b5e695bede60f/v60-cc-og.jpg?branch=prod_alias&quality=85&format=jpg&h=630&iar=0&w=1200",
+        "bytes": 55466,
+        "contentType": "image/jpeg",
+        "sha256": "76f49d6b713cb5dbe11e5e2fc24277455c3e496b8f58f65cc0352214aabe5c03"
+      },
+      "scope": "Reference metadata only. Existing game IDs, game prices, options and simplified 3D are not OEM claims."
+    },
+    {
+      "id": "car-compact",
+      "brand": "MINI",
+      "name": "2027 Cooper S 2 Door",
+      "url": "https://www.miniusa.com/model/2-door/build.html",
+      "image": "items/cars-real/mini-cooper-s.png",
+      "checkedAt": "2026-09-20",
+      "imageSource": "https://www.miniusa.com/content/dam/mini/vehicles/mini-hardtop2door/2027/specs/desktop/F66-BYO-Cosy-Desktop.png.miniusaimg.small.png",
+      "specs": [
+        [
+          "功率",
+          "201 hp"
+        ],
+        [
+          "扭矩",
+          "221 lb-ft"
+        ],
+        [
+          "0–60 mph",
+          "6.3 秒（官方测试值）"
+        ],
+        [
+          "变速箱",
+          "7 速双离合"
+        ],
+        [
+          "车长",
+          "152.6 英寸"
+        ]
+      ],
+      "retailPrice": {
+        "amount": 32800,
+        "currency": "USD",
+        "note": "美国官网 Cooper S 基础 MSRP；图片含选配，官网图示价格 $36,100。"
+      },
+      "note": "官方 Cooper S 展示图；游戏选配不对应真实原厂配置。",
+      "sourceType": "Manufacturer US product page and official CDN imagery",
+      "sources": [
+        {
+          "url": "https://www.miniusa.com/model/2-door/build.html",
+          "facts": [
+            "功率: 201 hp",
+            "扭矩: 221 lb-ft",
+            "0–60 mph: 6.3 秒（官方测试值）",
+            "变速箱: 7 速双离合",
+            "车长: 152.6 英寸"
+          ],
+          "listedRetail": {
+            "amount": 32800,
+            "currency": "USD",
+            "note": "美国官网 Cooper S 基础 MSRP；图片含选配，官网图示价格 $36,100。"
+          }
+        },
+        {
+          "url": "https://www.miniusa.com/model/2-door/specs.html",
+          "facts": [
+            "Cooper S 201 hp",
+            "221 lb-ft",
+            "6.3 seconds",
+            "seven-speed DCT",
+            "152.6-inch length"
+          ],
+          "note": "Official page is explicitly model year 2027. Base Cooper figures and apparent weight typo are not used."
+        }
+      ],
+      "asset": {
+        "file": "mini-cooper-s.png",
+        "url": "https://www.miniusa.com/content/dam/mini/vehicles/mini-hardtop2door/2027/specs/desktop/F66-BYO-Cosy-Desktop.png.miniusaimg.small.png",
+        "bytes": 152655,
+        "contentType": "image/png",
+        "sha256": "8eb54e9e968d21744125b17852ec0b3227c9c612c3cea2e4b08a8c1885e6a14d"
+      },
+      "scope": "Reference metadata only. Existing game IDs, game prices, options and simplified 3D are not OEM claims."
+    }
+  ]
+}
