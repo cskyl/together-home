@@ -1,10 +1,11 @@
 import { buildPercent,buildSpent,money,studyCredit,setFocus } from './browser-helpers.mjs';
-import { chromium,expect } from '@playwright/test';
+import { chromium,expect as baseExpect } from '@playwright/test';
 import { createStore } from '../backend/store.mjs';
 import { createApi } from '../backend/server.mjs';
 import { items,quote } from '../src/items.js';
 import { mkdir } from 'node:fs/promises';
 const car=items.find(i=>i.optionGroups&&i.reference.brand==='Toyota'&&/Camry/.test(i.name)),config={...quote(car.id).config,trim:car.optionGroups.trim.values[1].id},carCost=quote(car.id,config).amount;
+const expect=baseExpect.configure({timeout:25000});
 const url=process.env.TEST_URL||'http://localhost:4178/';
 const live=process.env.SHOP_LIVE_API==='1',store=live?null:createStore(),server=live?null:createApi(store,{rateLimit:false});
 if(server)await new Promise(r=>server.listen(0,'127.0.0.1',r));

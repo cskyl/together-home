@@ -101,7 +101,7 @@ export function createShop({getState,mutate,getPerson,getError,showInRoom,toast}
   function refreshVehicleDetails(item){
     if(!item.optionGroups)return;
     const selected=item.optionGroups.trim?.values.find(v=>v.id===config.trim);
-    const reference={...item.reference,...(selected?{name:item.name+' · '+selected.name,specs:selected.specs||item.reference.specs,image:selected.image||item.reference.image,url:selected.source&&!selected.source.includes('/api/')?selected.source:item.reference.url,retailPrice:{...item.reference.retailPrice,amount:selected.totalPrice??item.price+selected.price}}:{})};
+    const reference={...item.reference,...(selected?{name:item.name+' · '+selected.name,specs:selected.specs||item.reference.specs,image:selected.image||item.reference.image,url:selected.source?.startsWith('https://configurator.porsche.com/')?selected.source:item.reference.url,retailPrice:{...item.reference.retailPrice,amount:selected.totalPrice??item.price+selected.price}}:{})};
     const configured={...item,reference};
     $('#item-product-data').innerHTML=productDetails(configured);
     const wasOpen=$('#item-reference details')?.open||active===null;
