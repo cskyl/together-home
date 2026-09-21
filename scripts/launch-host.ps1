@@ -6,7 +6,13 @@ $supervisorScript = Join-Path $PSScriptRoot 'host-supervisor.ps1'
 $powershellExecutable = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
 New-Item -ItemType Directory -Path $runtimeRoot -Force | Out-Null
 [IO.File]::WriteAllText((Join-Path $runtimeRoot 'host-enabled'), 'enabled', [Text.UTF8Encoding]::new($false))
-if ($Supervise) { & $supervisorScript; return }
+if ($Supervise) {
+  # A nested script's exit code is not automatically the PowerShell process
+  # exit code. Forward it so Task Scheduler can restart a failed supervisor.
+  $global:LASTEXITCODE = 0
+  & $supervisorScript
+  exit $LASTEXITCODE
+}
 $identity = [BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash([Text.Encoding]::UTF8.GetBytes($projectRoot.ToLowerInvariant()))).Replace('-', '').Substring(0, 20)
 $launchMutex = [Threading.Mutex]::new($false, "Local\TogetherHomeLaunch-$identity")
 $locked = $false
