@@ -9,10 +9,16 @@ if (!(Test-Path -LiteralPath $enabledPath -PathType Leaf)) { return }
 $powershellExecutable = Join-Path ([Environment]::GetFolderPath('System')) 'WindowsPowerShell\v1.0\powershell.exe'
 $launchScript = Join-Path $PSScriptRoot 'launch-host.ps1'
 $supervisorScript = Join-Path $PSScriptRoot 'host-supervisor.ps1'
-$expectedArguments = '-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File "' + $launchScript + '" -Supervise'
+$settingsPath = Join-Path $runtimeRoot 'host-settings.json'
+if (!(Test-Path -LiteralPath $settingsPath -PathType Leaf)) { return }
+$hostSettings = Get-Content -LiteralPath $settingsPath -Raw -Encoding UTF8 | ConvertFrom-Json
+$launcherExecutable = [string]$hostSettings.launcherPath
+if (![IO.Path]::IsPathRooted($launcherExecutable)) { return }
+$launcherExecutable = [IO.Path]::GetFullPath($launcherExecutable)
+if ([IO.Path]::GetDirectoryName($launcherExecutable) -ne $runtimeRoot -or [IO.Path]::GetFileName($launcherExecutable) -notmatch '^host-launcher-[a-f0-9]{12}\.exe$' -or !(Test-Path -LiteralPath $launcherExecutable -PathType Leaf)) { return }
 $task = Get-ScheduledTask -TaskPath '\' -TaskName 'Together Home Host' -ErrorAction SilentlyContinue
 if (!$task -or $task.Description -ne "Together Home background host; project=$projectRoot") { return }
-if (@($task.Actions).Count -ne 1 -or $task.Actions[0].Execute -ne $powershellExecutable -or $task.Actions[0].Arguments -ne $expectedArguments) { return }
+if (@($task.Actions).Count -ne 1 -or $task.Actions[0].Execute -ne $launcherExecutable -or $task.Actions[0].Arguments -ne 'supervise') { return }
 
 # A manually launched supervisor also counts. Never rely on a PID alone:
 # Windows may have reused it for another process since the last run.

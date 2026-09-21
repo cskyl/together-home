@@ -5,6 +5,7 @@ $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $launchScript = Join-Path $projectRoot 'scripts\launch-host.ps1'
 $stopScript = Join-Path $projectRoot 'scripts\stop-host.ps1'
 $watchScript = Join-Path $projectRoot 'scripts\watch-host.ps1'
+$buildScript = Join-Path $projectRoot 'scripts\build-host-launcher.ps1'
 $runtimeDirectory = Join-Path $projectRoot 'runtime'
 $powershellExecutable = Join-Path ([Environment]::GetFolderPath('System')) 'WindowsPowerShell\v1.0\powershell.exe'
 $taskName = 'Together Home Host'
@@ -19,7 +20,20 @@ $taskArguments = $launchArguments + ' -Supervise'
 $stopArguments = $commonArguments + '"' + $stopScript + '"'
 $watchArguments = $commonArguments + '"' + $watchScript + '"'
 
-foreach ($requiredPath in @($launchScript, $stopScript, $watchScript, $powershellExecutable)) {
+function Test-ProjectLauncherPath([string]$Path) {
+  try {
+    if (![IO.Path]::IsPathRooted($Path)) { return $false }
+    $absolutePath = [IO.Path]::GetFullPath($Path)
+    return [IO.Path]::GetDirectoryName($absolutePath) -eq $runtimeDirectory -and [IO.Path]::GetFileName($absolutePath) -match '^host-launcher-[a-f0-9]{12}\.exe$'
+  } catch { return $false }
+}
+
+function Test-OwnedInvocation([string]$Executable, [string]$Arguments, [string[]]$LegacyArguments, [string]$Mode) {
+  if ($Executable -eq $powershellExecutable -and $LegacyArguments -contains $Arguments) { return $true }
+  return (Test-ProjectLauncherPath $Executable) -and $Arguments -eq $Mode
+}
+
+foreach ($requiredPath in @($launchScript, $stopScript, $watchScript, $buildScript, $powershellExecutable)) {
   if (!(Test-Path -LiteralPath $requiredPath -PathType Leaf)) {
     throw "Required host file was not found: $requiredPath"
   }
@@ -29,7 +43,7 @@ foreach ($requiredPath in @($launchScript, $stopScript, $watchScript, $powershel
 # executable locations, never credentials, in the ignored runtime directory.
 New-Item -ItemType Directory -Path $runtimeDirectory -Force | Out-Null
 $settingsPath = Join-Path $runtimeDirectory 'host-settings.json'
-$existingSettings = if (Test-Path -LiteralPath $settingsPath) { Get-Content -LiteralPath $settingsPath -Raw | ConvertFrom-Json } else { $null }
+$existingSettings = if (Test-Path -LiteralPath $settingsPath) { Get-Content -LiteralPath $settingsPath -Raw -Encoding UTF8 | ConvertFrom-Json } else { $null }
 $hostSettings = @{}
 foreach ($dependency in @(@{ key='nodePath'; command='node.exe' }, @{ key='ghPath'; command='gh.exe' })) {
   $savedPath = if ($existingSettings) { $existingSettings.($dependency.key) } else { $null }
@@ -42,6 +56,11 @@ foreach ($dependency in @(@{ key='nodePath'; command='node.exe' }, @{ key='ghPat
   }
 }
 if (!(Test-Path -LiteralPath (Join-Path $projectRoot 'tools\cloudflared.exe') -PathType Leaf)) { throw 'Missing tools/cloudflared.exe.' }
+$builtLaunchers = @(& $buildScript)
+if ($builtLaunchers.Count -ne 1) { throw 'The launcher builder did not return exactly one executable path.' }
+$launcherExecutable = [string]$builtLaunchers[0]
+if (!(Test-ProjectLauncherPath $launcherExecutable) -or !(Test-Path -LiteralPath $launcherExecutable -PathType Leaf)) { throw 'The launcher builder returned an invalid executable path.' }
+$hostSettings.launcherPath = $launcherExecutable
 [IO.File]::WriteAllText($settingsPath, ($hostSettings | ConvertTo-Json -Compress), [Text.UTF8Encoding]::new($false))
 
 function Test-AccessDenied($Record) {
@@ -54,14 +73,13 @@ function Test-AccessDenied($Record) {
   return $Record.FullyQualifiedErrorId -match '(^|[, :])(?:AccessDenied|UnauthorizedAccess|0x80070005)([, :]|$)'
 }
 
-function Assert-OwnedShortcut([string]$Path, [string]$ScriptPath) {
+function Assert-OwnedShortcut([string]$Path, [string]$LegacyArguments, [string]$Mode) {
   if (!(Test-Path -LiteralPath $Path)) { return }
   if (!(Test-Path -LiteralPath $Path -PathType Leaf)) { throw "A folder already uses this shortcut path: $Path" }
   $shortcut = $null
   try {
     $shortcut = $shell.CreateShortcut($Path)
-    $fileArgument = '(?i)(?:^|\s)-File\s+"' + [regex]::Escape($ScriptPath) + '"(?:\s|$)'
-    if ($shortcut.TargetPath -ne $powershellExecutable -or $shortcut.Arguments -notmatch $fileArgument) {
+    if (!(Test-OwnedInvocation $shortcut.TargetPath $shortcut.Arguments @($LegacyArguments) $Mode)) {
       throw "An unrelated shortcut already uses this name. It was left unchanged: $Path"
     }
   } finally {
@@ -73,12 +91,12 @@ function Save-HostShortcut([string]$Path, [string]$Arguments, [string]$Descripti
   $shortcut = $null
   try {
     $shortcut = $shell.CreateShortcut($Path)
-    $shortcut.TargetPath = $powershellExecutable
+    $shortcut.TargetPath = $launcherExecutable
     $shortcut.Arguments = $Arguments
     $shortcut.WorkingDirectory = $projectRoot
     $shortcut.WindowStyle = 7
     $shortcut.Description = $Description
-    $shortcut.IconLocation = "$powershellExecutable,0"
+    $shortcut.IconLocation = "$launcherExecutable,0"
     $shortcut.Save()
   } finally {
     if ($null -ne $shortcut) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($shortcut) }
@@ -98,9 +116,9 @@ try {
   $startShortcut = Join-Path $desktopDirectory 'Together Home Start.lnk'
   $stopShortcut = Join-Path $desktopDirectory 'Together Home Stop.lnk'
   $startupShortcut = Join-Path $startupDirectory 'Together Home Host.lnk'
-  Assert-OwnedShortcut $startShortcut $launchScript
-  Assert-OwnedShortcut $stopShortcut $stopScript
-  Assert-OwnedShortcut $startupShortcut $launchScript
+  Assert-OwnedShortcut $startShortcut ($launchArguments + ' -Open') 'start'
+  Assert-OwnedShortcut $stopShortcut $stopArguments 'stop'
+  Assert-OwnedShortcut $startupShortcut $launchArguments 'host'
 
   $mechanism = 'scheduled-task'
   $fallbackReason = $null
@@ -112,17 +130,17 @@ try {
     $existingTask = $existingTasks | Where-Object { $_.TaskName -eq $taskName }
     if ($existingTask) {
       $ownedAction = @($existingTask.Actions | Where-Object {
-        $_.Execute -eq $powershellExecutable -and $_.Arguments -eq $taskArguments
+        Test-OwnedInvocation $_.Execute $_.Arguments @($taskArguments, $launchArguments) 'supervise'
       })
       if ($existingTask.Description -ne $taskDescription -or $ownedAction.Count -ne 1 -or @($existingTask.Actions).Count -ne 1) {
         throw "An unrelated scheduled task already uses the name '$taskName'. It was left unchanged."
       }
     }
     $existingWatchTask = $existingTasks | Where-Object { $_.TaskName -eq $watchTaskName }
-    if ($existingWatchTask -and ($existingWatchTask.Description -ne $watchTaskDescription -or @($existingWatchTask.Actions).Count -ne 1 -or $existingWatchTask.Actions[0].Execute -ne $powershellExecutable -or $existingWatchTask.Actions[0].Arguments -ne $watchArguments)) {
+    if ($existingWatchTask -and ($existingWatchTask.Description -ne $watchTaskDescription -or @($existingWatchTask.Actions).Count -ne 1 -or !(Test-OwnedInvocation $existingWatchTask.Actions[0].Execute $existingWatchTask.Actions[0].Arguments @($watchArguments) 'watch'))) {
       throw "An unrelated scheduled task already uses the name '$watchTaskName'. It was left unchanged."
     }
-    $action = New-ScheduledTaskAction -Execute $powershellExecutable -Argument $taskArguments -WorkingDirectory $projectRoot
+    $action = New-ScheduledTaskAction -Execute $launcherExecutable -Argument 'supervise' -WorkingDirectory $projectRoot
     $trigger = New-ScheduledTaskTrigger -AtLogOn -User $currentUser
     $principal = New-ScheduledTaskPrincipal -UserId $currentUser -LogonType Interactive -RunLevel Limited
     $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit ([TimeSpan]::Zero) -MultipleInstances IgnoreNew -RestartCount 5 -RestartInterval ([TimeSpan]::FromMinutes(1))
@@ -135,7 +153,7 @@ try {
 
   if ($mechanism -eq 'scheduled-task') {
     try {
-      $watchAction = New-ScheduledTaskAction -Execute $powershellExecutable -Argument $watchArguments -WorkingDirectory $projectRoot
+      $watchAction = New-ScheduledTaskAction -Execute $launcherExecutable -Argument 'watch' -WorkingDirectory $projectRoot
       # Omitting RepetitionDuration repeats indefinitely, including future logons.
       $watchTrigger = New-ScheduledTaskTrigger -Once -At ((Get-Date).AddMinutes(1)) -RepetitionInterval ([TimeSpan]::FromMinutes(1))
       $watchSettings = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit ([TimeSpan]::FromMinutes(1)) -MultipleInstances IgnoreNew
@@ -148,18 +166,19 @@ try {
   }
 
   if ($mechanism -eq 'startup-shortcut') {
-    Save-HostShortcut $startupShortcut $launchArguments 'Start Together Home in the background at sign-in.'
+    Save-HostShortcut $startupShortcut 'host' 'Start Together Home in the background at sign-in.'
   } elseif (Test-Path -LiteralPath $startupShortcut) {
     # Ownership was checked above; do not leave two automatic launch entries.
     Remove-Item -LiteralPath $startupShortcut -Force
   }
-  Save-HostShortcut $startShortcut ($launchArguments + ' -Open') 'Start Together Home in the background and open the website.'
-  Save-HostShortcut $stopShortcut $stopArguments 'Stop the Together Home background host.'
+  Save-HostShortcut $startShortcut 'start' 'Start Together Home in the background and open the website.'
+  Save-HostShortcut $stopShortcut 'stop' 'Stop the Together Home background host.'
 
   New-Item -ItemType Directory -Path $runtimeDirectory -Force | Out-Null
   $installInfo = [ordered]@{
     installedAt = [DateTimeOffset]::UtcNow.ToString('o')
     projectRoot = $projectRoot
+    launcherPath = $launcherExecutable
     mechanism = $mechanism
     taskName = $(if ($mechanism -eq 'scheduled-task') { $taskName } else { $null })
     taskPath = $(if ($mechanism -eq 'scheduled-task') { '\' } else { $null })

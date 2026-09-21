@@ -99,13 +99,15 @@ npm ci
 .\scripts\stop-host.ps1
 ```
 
-也可以双击项目中的 `Start Together Home.cmd` / `Stop Together Home.cmd`。正常运行时每 15 秒检查服务，故障时自动恢复；网络暂时不可用会延迟重试。任务计划程序中的 **Together Home Watchdog** 每分钟检查监督进程，异常关闭后会重新启动；手动停止后不会重新拉起。启动任务以当前用户身份运行，不需要管理员权限或保存 Windows 密码；任务注册被系统拒绝时，安装器会改用当前用户的 Startup 快捷方式。
+桌面快捷方式、登录任务和定时检查都通过 GUI 启动器运行，从进程创建时就不分配命令窗口。正常运行时每 15 秒检查服务，故障时自动恢复；网络暂时不可用会延迟重试。任务计划程序中的 **Together Home Watchdog** 每分钟检查监督进程，异常关闭后会重新启动；手动停止后不会重新拉起。启动任务以当前用户身份运行，不需要管理员权限或保存 Windows 密码；任务注册被系统拒绝时，安装器会改用当前用户的 Startup 快捷方式。
 
 后台只通过 GitHub API 更新 `public/cloud-config.json`，不操作工作区或提交其他文件。开发前先 `git pull --ff-only` 获取自动更新的地址。GitHub CLI 需要保持登录；可在忽略的 `runtime/host-settings.json` 中设置 `nodePath` / `ghPath` 的绝对路径。
 
 更新后端或户型目录前，可运行 `node scripts/backup-host.mjs` 在线备份 SQLite；备份位于 `data/backups/`，不会上传 GitHub。备份使用 SQLite 备份接口，包含已提交的 WAL 数据，并执行完整性检查。
 
 运行状态见 `runtime/host-status.json`；主机、隧道及监督进程日志在 `runtime/`。停止后台后，阻止自动休眠的请求也随进程释放。移除登录自启可在 Windows 任务计划程序中禁用 **Together Home Host** 和 **Together Home Watchdog**。
+
+Windows 启动器回归：`powershell -NoProfile -File tests/host-process.ps1`。测试使用独立临时进程，检查无控制台窗口、日志、超时、退出码和启动器转发，不操作正在运行的主机或共享存档。
 
 开发前端：`npm run dev`，然后打开 http://localhost:4178/ 。单独启动后端：`npm run host`（默认仅监听 `127.0.0.1:4180`）。
 

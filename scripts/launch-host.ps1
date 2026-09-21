@@ -29,8 +29,10 @@ try {
     }
   }
   if (!$running) {
-    $arguments = '-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File "' + $supervisorScript + '"'
-    Start-Process -FilePath $powershellExecutable -ArgumentList $arguments -WorkingDirectory $projectRoot -WindowStyle Hidden -RedirectStandardOutput (Join-Path $runtimeRoot 'supervisor.out.log') -RedirectStandardError (Join-Path $runtimeRoot 'supervisor.err.log') | Out-Null
+    . (Join-Path $PSScriptRoot 'host-process.ps1')
+    $arguments = '-NoProfile -NonInteractive -ExecutionPolicy Bypass -WindowStyle Hidden -File "' + $supervisorScript + '"'
+    $supervisorChild = Start-HostProcess -FilePath $powershellExecutable -ArgumentList $arguments -WorkingDirectory $projectRoot -RedirectStandardOutput (Join-Path $runtimeRoot 'supervisor.out.log') -RedirectStandardError (Join-Path $runtimeRoot 'supervisor.err.log')
+    $supervisorChild.Dispose()
     # Only the supervisor that acquires the global mutex writes supervisor.pid.
     # A concurrent logon task may already own it when this child starts.
   }

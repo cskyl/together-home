@@ -6,6 +6,7 @@ New-Item -ItemType Directory -Path $runtimeRoot, (Join-Path $projectRoot 'data')
 $utf8 = [Text.UTF8Encoding]::new($false)
 $settingsPath = Join-Path $runtimeRoot 'host-settings.json'
 $hostSettings = if (Test-Path -LiteralPath $settingsPath) { Get-Content -LiteralPath $settingsPath -Raw | ConvertFrom-Json } else { $null }
+. (Join-Path $PSScriptRoot 'host-process.ps1')
 function Resolve-HostExecutable($setting, $command) {
   if ($setting -and (Test-Path -LiteralPath $setting)) { return [string]$setting }
   $found = Get-Command $command -ErrorAction SilentlyContinue
@@ -26,11 +27,12 @@ function Get-HostProcess($name, $executable, $argument) {
 }
 function Invoke-HostGithub($ghPath, $arguments) {
   $responseFile = Join-Path $runtimeRoot 'github-host-response.json'
-  $ghProcess = Start-Process -FilePath $ghPath -ArgumentList $arguments -WorkingDirectory $projectRoot -WindowStyle Hidden -RedirectStandardOutput $responseFile -RedirectStandardError (Join-Path $runtimeRoot 'github-host-error.log') -PassThru
-  $null = $ghProcess.Handle
-  if (!$ghProcess.WaitForExit(30000)) { $ghProcess.Kill(); throw 'GitHub address update timed out; it will retry automatically.' }
-  if ($ghProcess.ExitCode -ne 0) { throw 'GitHub address update failed; check GitHub sign-in and network connectivity.' }
-  return Get-Content -LiteralPath $responseFile -Raw | ConvertFrom-Json
+  $ghProcess = Start-HostProcess -FilePath $ghPath -ArgumentList $arguments -WorkingDirectory $projectRoot -RedirectStandardOutput $responseFile -RedirectStandardError (Join-Path $runtimeRoot 'github-host-error.log')
+  try {
+    if (!$ghProcess.WaitForExit(30000)) { $ghProcess.Kill(); throw 'GitHub address update timed out; it will retry automatically.' }
+    if ($ghProcess.ExitCode -ne 0) { throw 'GitHub address update failed; check GitHub sign-in and network connectivity.' }
+    return Get-Content -LiteralPath $responseFile -Raw | ConvertFrom-Json
+  } finally { $ghProcess.Dispose() }
 }
 $identity = [BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash([Text.Encoding]::UTF8.GetBytes($projectRoot.ToLowerInvariant()))).Replace('-', '').Substring(0, 20)
 $startMutex = [Threading.Mutex]::new($false, "Local\TogetherHomeStart-$identity")
@@ -48,7 +50,7 @@ try {
   if (!$health) {
     $existingApi = Get-HostProcess 'api' $nodeExecutable $apiScript
     if (!$existingApi) {
-      $apiProcess = Start-Process -FilePath $nodeExecutable -ArgumentList ('"' + $apiScript + '"') -WorkingDirectory $projectRoot -WindowStyle Hidden -RedirectStandardOutput (Join-Path $runtimeRoot 'api.out.log') -RedirectStandardError (Join-Path $runtimeRoot 'api.err.log') -PassThru
+      $apiProcess = Start-HostProcess -FilePath $nodeExecutable -ArgumentList ('"' + $apiScript + '"') -WorkingDirectory $projectRoot -RedirectStandardOutput (Join-Path $runtimeRoot 'api.out.log') -RedirectStandardError (Join-Path $runtimeRoot 'api.err.log')
       [IO.File]::WriteAllText((Join-Path $runtimeRoot 'api.pid'), [string]$apiProcess.Id, $utf8)
     }
     for ($attempt = 0; $attempt -lt 15; $attempt++) {
@@ -70,7 +72,7 @@ try {
           $null = $stalledProcess.Handle
           Stop-Process -InputObject $stalledProcess -Force -ErrorAction Stop
           if (!$stalledProcess.WaitForExit(5000)) { throw 'The unresponsive backend did not exit; recovery will retry.' }
-          $apiProcess = Start-Process -FilePath $nodeExecutable -ArgumentList ('"' + $apiScript + '"') -WorkingDirectory $projectRoot -WindowStyle Hidden -RedirectStandardOutput (Join-Path $runtimeRoot 'api.out.log') -RedirectStandardError (Join-Path $runtimeRoot 'api.err.log') -PassThru
+          $apiProcess = Start-HostProcess -FilePath $nodeExecutable -ArgumentList ('"' + $apiScript + '"') -WorkingDirectory $projectRoot -RedirectStandardOutput (Join-Path $runtimeRoot 'api.out.log') -RedirectStandardError (Join-Path $runtimeRoot 'api.err.log')
           [IO.File]::WriteAllText((Join-Path $runtimeRoot 'api.pid'), [string]$apiProcess.Id, $utf8)
           for ($attempt = 0; $attempt -lt 15; $attempt++) {
             Start-Sleep -Milliseconds 300
@@ -85,7 +87,7 @@ try {
   $tunnelProcess = Get-HostProcess 'tunnel' $tunnelExecutable '--url http://127.0.0.1:4180'
   if (!$tunnelProcess) {
     [IO.File]::WriteAllText((Join-Path $runtimeRoot 'tunnel.err.log'), '', $utf8)
-    $tunnelProcess = Start-Process -FilePath $tunnelExecutable -ArgumentList 'tunnel --url http://127.0.0.1:4180 --no-autoupdate --protocol http2' -WorkingDirectory $projectRoot -WindowStyle Hidden -RedirectStandardOutput (Join-Path $runtimeRoot 'tunnel.out.log') -RedirectStandardError (Join-Path $runtimeRoot 'tunnel.err.log') -PassThru
+    $tunnelProcess = Start-HostProcess -FilePath $tunnelExecutable -ArgumentList 'tunnel --url http://127.0.0.1:4180 --no-autoupdate --protocol http2' -WorkingDirectory $projectRoot -RedirectStandardOutput (Join-Path $runtimeRoot 'tunnel.out.log') -RedirectStandardError (Join-Path $runtimeRoot 'tunnel.err.log')
     [IO.File]::WriteAllText((Join-Path $runtimeRoot 'tunnel.pid'), [string]$tunnelProcess.Id, $utf8)
   }
   $publicApi = $null
