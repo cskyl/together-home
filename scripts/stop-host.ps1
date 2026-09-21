@@ -4,7 +4,10 @@ $runtimeRoot = Join-Path $projectRoot 'runtime'
 $enabledPath = Join-Path $runtimeRoot 'host-enabled'
 if (Test-Path -LiteralPath $enabledPath) { Remove-Item -LiteralPath $enabledPath -Force }
 try {
-  $task = Get-ScheduledTask -TaskName 'Together Home Host' -ErrorAction SilentlyContinue
+  # Stop an in-flight recovery check before stopping the primary task.
+  $watchTask = Get-ScheduledTask -TaskPath '\' -TaskName 'Together Home Watchdog' -ErrorAction SilentlyContinue
+  if ($watchTask -and ($watchTask.Description -eq "Together Home host watchdog; project=$projectRoot")) { Stop-ScheduledTask -InputObject $watchTask -ErrorAction SilentlyContinue }
+  $task = Get-ScheduledTask -TaskPath '\' -TaskName 'Together Home Host' -ErrorAction SilentlyContinue
   if ($task -and ($task.Description -eq "Together Home background host; project=$projectRoot")) { Stop-ScheduledTask -InputObject $task -ErrorAction SilentlyContinue }
 } catch {}
 foreach ($serviceName in @('supervisor','tunnel','api')) {
@@ -27,4 +30,7 @@ if (Test-Path -LiteralPath $runtimeRoot) {
   $status = @{ state='stopped'; updatedAt=[DateTime]::UtcNow.ToString('o'); error=$null } | ConvertTo-Json -Compress
   [IO.File]::WriteAllText((Join-Path $runtimeRoot 'host-status.json'), $status, [Text.UTF8Encoding]::new($false))
 }
+# A recovery launch that was already queued may have recreated the marker.
+# Leave it absent so future watchdog checks respect this explicit stop.
+if (Test-Path -LiteralPath $enabledPath) { Remove-Item -LiteralPath $enabledPath -Force }
 Write-Output 'Hosting stopped. Saved data is unchanged. Automatic startup remains enabled for your next sign-in.'

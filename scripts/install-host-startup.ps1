@@ -4,18 +4,22 @@ $ErrorActionPreference = 'Stop'
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $launchScript = Join-Path $projectRoot 'scripts\launch-host.ps1'
 $stopScript = Join-Path $projectRoot 'scripts\stop-host.ps1'
+$watchScript = Join-Path $projectRoot 'scripts\watch-host.ps1'
 $runtimeDirectory = Join-Path $projectRoot 'runtime'
 $powershellExecutable = Join-Path ([Environment]::GetFolderPath('System')) 'WindowsPowerShell\v1.0\powershell.exe'
 $taskName = 'Together Home Host'
 $taskDescription = "Together Home background host; project=$projectRoot"
+$watchTaskName = 'Together Home Watchdog'
+$watchTaskDescription = "Together Home host watchdog; project=$projectRoot"
 $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
 $currentUser = $identity.Name
 $commonArguments = '-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File '
 $launchArguments = $commonArguments + '"' + $launchScript + '"'
 $taskArguments = $launchArguments + ' -Supervise'
 $stopArguments = $commonArguments + '"' + $stopScript + '"'
+$watchArguments = $commonArguments + '"' + $watchScript + '"'
 
-foreach ($requiredPath in @($launchScript, $stopScript, $powershellExecutable)) {
+foreach ($requiredPath in @($launchScript, $stopScript, $watchScript, $powershellExecutable)) {
   if (!(Test-Path -LiteralPath $requiredPath -PathType Leaf)) {
     throw "Required host file was not found: $requiredPath"
   }
@@ -100,9 +104,12 @@ try {
 
   $mechanism = 'scheduled-task'
   $fallbackReason = $null
+  $watchdogInstalled = $false
+  $watchdogUnavailableReason = $null
   try {
     # Refuse to replace an unrelated task, even if it happens to use our name.
-    $existingTask = Get-ScheduledTask -TaskPath '\' -ErrorAction Stop | Where-Object { $_.TaskName -eq $taskName }
+    $existingTasks = @(Get-ScheduledTask -TaskPath '\' -ErrorAction Stop)
+    $existingTask = $existingTasks | Where-Object { $_.TaskName -eq $taskName }
     if ($existingTask) {
       $ownedAction = @($existingTask.Actions | Where-Object {
         $_.Execute -eq $powershellExecutable -and $_.Arguments -eq $taskArguments
@@ -110,6 +117,10 @@ try {
       if ($existingTask.Description -ne $taskDescription -or $ownedAction.Count -ne 1 -or @($existingTask.Actions).Count -ne 1) {
         throw "An unrelated scheduled task already uses the name '$taskName'. It was left unchanged."
       }
+    }
+    $existingWatchTask = $existingTasks | Where-Object { $_.TaskName -eq $watchTaskName }
+    if ($existingWatchTask -and ($existingWatchTask.Description -ne $watchTaskDescription -or @($existingWatchTask.Actions).Count -ne 1 -or $existingWatchTask.Actions[0].Execute -ne $powershellExecutable -or $existingWatchTask.Actions[0].Arguments -ne $watchArguments)) {
+      throw "An unrelated scheduled task already uses the name '$watchTaskName'. It was left unchanged."
     }
     $action = New-ScheduledTaskAction -Execute $powershellExecutable -Argument $taskArguments -WorkingDirectory $projectRoot
     $trigger = New-ScheduledTaskTrigger -AtLogOn -User $currentUser
@@ -120,6 +131,20 @@ try {
     if (!(Test-AccessDenied $_)) { throw }
     $mechanism = 'startup-shortcut'
     $fallbackReason = 'Task Scheduler denied access; installed a current-user Startup shortcut instead.'
+  }
+
+  if ($mechanism -eq 'scheduled-task') {
+    try {
+      $watchAction = New-ScheduledTaskAction -Execute $powershellExecutable -Argument $watchArguments -WorkingDirectory $projectRoot
+      # Omitting RepetitionDuration repeats indefinitely, including future logons.
+      $watchTrigger = New-ScheduledTaskTrigger -Once -At ((Get-Date).AddMinutes(1)) -RepetitionInterval ([TimeSpan]::FromMinutes(1))
+      $watchSettings = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit ([TimeSpan]::FromMinutes(1)) -MultipleInstances IgnoreNew
+      Register-ScheduledTask -TaskName $watchTaskName -TaskPath '\' -Action $watchAction -Trigger $watchTrigger -Principal $principal -Settings $watchSettings -Description $watchTaskDescription -Force -ErrorAction Stop | Out-Null
+      $watchdogInstalled = $true
+    } catch {
+      if (!(Test-AccessDenied $_)) { throw }
+      $watchdogUnavailableReason = 'Task Scheduler denied watchdog registration; the primary sign-in task remains installed.'
+    }
   }
 
   if ($mechanism -eq 'startup-shortcut') {
@@ -138,6 +163,8 @@ try {
     mechanism = $mechanism
     taskName = $(if ($mechanism -eq 'scheduled-task') { $taskName } else { $null })
     taskPath = $(if ($mechanism -eq 'scheduled-task') { '\' } else { $null })
+    watchdogTaskName = $(if ($watchdogInstalled) { $watchTaskName } else { $null })
+    watchdogUnavailableReason = $watchdogUnavailableReason
     startupShortcut = $(if ($mechanism -eq 'startup-shortcut') { $startupShortcut } else { $null })
     desktopStartShortcut = $startShortcut
     desktopStopShortcut = $stopShortcut
@@ -146,6 +173,7 @@ try {
   [IO.File]::WriteAllText((Join-Path $runtimeDirectory 'startup-install.json'), ($installInfo | ConvertTo-Json -Depth 3), [Text.UTF8Encoding]::new($false))
   Write-Output "Together Home automatic startup installed: $mechanism"
   if ($fallbackReason) { Write-Output $fallbackReason }
+  if ($watchdogUnavailableReason) { Write-Warning $watchdogUnavailableReason }
   Write-Output "Start shortcut: $startShortcut"
   Write-Output "Stop shortcut: $stopShortcut"
   Write-Output 'The host will start at your next sign-in. Use the desktop start shortcut to start it now.'
