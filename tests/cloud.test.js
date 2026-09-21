@@ -31,6 +31,7 @@ test('较晚返回的同一笔重试不能清除下一笔请求，下一笔丢�
     cloud=createCloud({onSnapshot(){},onStatus(){}});await cloud.start();
     const a={type:'study',minutes:25,focus:50,note:'第一笔'},b={type:'study',minutes:30,focus:60,note:'下一笔'};
     const first=cloud.action(a),lateRetry=cloud.retry();
+    await new Promise(resolve=>setImmediate(resolve)); // Retry refreshes the host address before replaying the saved request.
     assert.equal(waiting.length,2);assert.equal(waiting[0].body.requestId,waiting[1].body.requestId);
     waiting[0].resolve();await first;
     const second=cloud.action(b).then(()=>assert.fail('模拟丢失的响应应失败'),error=>error);

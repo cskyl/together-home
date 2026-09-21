@@ -76,30 +76,36 @@
 
 ## 本机后端的运行条件
 
-**保存数据的电脑需要保持开机、联网、不休眠。** 电脑离线时网页仍可打开，但暂停同步；未确认的操作不会显示为已成功，连接恢复后可点击「刷新 / 重试未确认操作」。后端会按操作编号去重，避免重试导致重复入账。
+**保存数据的电脑需要保持开机、联网。** 后台运行时会阻止自动休眠，屏幕可以正常关闭；不会修改系统电源计划。关机、注销或手动休眠期间暂停同步，网页仍可打开并显示已缓存的进度。未确认的操作不会显示为已成功，连接恢复后可点击「刷新 / 重试未确认操作」，同一笔操作只入账一次。
 
-Cloudflare Quick Tunnel 是临时通道，没有持续可用性承诺，重启后域名可能变化。重启脚本会把新地址提交到 GitHub，自动触发 Pages 更新；这个过程通常需要几分钟。网页会定期重新读取联机地址。若用于长期稳定运行，建议之后改为固定域名的命名隧道或云托管后端。
+Cloudflare Quick Tunnel 重启后域名可能变化。后台会自动把新地址更新到 GitHub 并触发 Pages 部署，通常需要几分钟；大家继续使用同一个网页地址。网页会在连接失败时定期重新读取地址，点击重试也会先读取最新地址。
 
 本机数据库为 `data/home.sqlite`，目录不会提交到 GitHub。请保留该文件及 SQLite 的 WAL 文件；不要在服务器运行时仅复制主文件作为数据库备份。
 
 ## 启动、停止
 
-需要 Node.js 24+。从 [Cloudflare 官方发行页](https://github.com/cloudflare/cloudflared/releases) 下载 Windows amd64 可执行文件到 `tools/cloudflared.exe`。
+这台电脑已安装登录自启任务 **Together Home Host**。登录 Windows 后后台自动运行，不需要打开终端或保持网页打开。桌面的 **Together Home Start** 会启动后台并打开网页，**Together Home Stop** 会停止后台，保留全部存档；下次登录仍会自动启动。重复点击启动不会重复运行服务。
+
+重新安装时，需要 Node.js 24+、已登录且有仓库写权限的 GitHub CLI，以及 `tools/cloudflared.exe`。可从 [Cloudflare 官方发行页](https://github.com/cloudflare/cloudflared/releases) 下载 Windows amd64 可执行文件。
 
 ```powershell
 cd <项目目录>
 npm ci
-# 在后台启动 API 与隧道，并将新联机地址提交到 GitHub：
-.\scripts\start-host.ps1 -Publish
-# 停止本项目的 API 与隧道；保留全部数据库记录：
+# 安装当前用户的登录自启任务和两个桌面快捷方式：
+.\scripts\install-host-startup.ps1
+# 立即在后台启动，并打开网页：
+.\scripts\launch-host.ps1 -Open
+# 停止后台，保留数据库和登录自启配置：
 .\scripts\stop-host.ps1
 ```
 
-也可以双击项目中的 `Start Together Home.cmd`。需要此电脑已有仓库推送权限。脚本仅提交 `public/cloud-config.json`，不会提交数据、日志或凭证。
+也可以双击项目中的 `Start Together Home.cmd` / `Stop Together Home.cmd`。正常运行时每 15 秒检查服务，故障时自动恢复；网络暂时不可用会延迟重试。启动任务以当前用户身份运行，不需要管理员权限或保存 Windows 密码；任务注册被系统拒绝时，安装器会改用当前用户的 Startup 快捷方式。
+
+后台只通过 GitHub API 更新 `public/cloud-config.json`，不操作工作区或提交其他文件。开发前先 `git pull --ff-only` 获取自动更新的地址。GitHub CLI 需要保持登录；可在忽略的 `runtime/host-settings.json` 中设置 `nodePath` / `ghPath` 的绝对路径。
 
 更新后端或户型目录前，可运行 `node scripts/backup-host.mjs` 在线备份 SQLite；备份位于 `data/backups/`，不会上传 GitHub。备份使用 SQLite 备份接口，包含已提交的 WAL 数据，并执行完整性检查。
 
-这次配置没有更改电脑休眠设置，也没有安装开机自启服务。电脑重启后，请重新运行启动脚本。查看 `runtime/api.err.log` 和 `runtime/tunnel.err.log` 排查主机或隧道问题。
+运行状态见 `runtime/host-status.json`；主机、隧道及监督进程日志在 `runtime/`。停止后台后，阻止自动休眠的请求也随进程释放。移除登录自启可在 Windows 任务计划程序中禁用 **Together Home Host**。
 
 开发前端：`npm run dev`，然后打开 http://localhost:4178/ 。单独启动后端：`npm run host`（默认仅监听 `127.0.0.1:4180`）。
 

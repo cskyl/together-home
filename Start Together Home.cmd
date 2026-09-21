@@ -1,4 +1,3 @@
 @echo off
 cd /d "%~dp0"
-powershell.exe -NoProfile -File "%~dp0scripts\start-host.ps1" -Publish
-pause
+powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File "%~dp0scripts\launch-host.ps1" -Open

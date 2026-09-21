@@ -1,4 +1,3 @@
 @echo off
 cd /d "%~dp0"
-powershell.exe -NoProfile -File "%~dp0scripts\stop-host.ps1"
-pause
+powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File "%~dp0scripts\stop-host.ps1"
