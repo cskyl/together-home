@@ -1,0 +1,2460 @@
+{
+  "checkedAt": "2026-10-04",
+  "records": [
+    {
+      "id": "furniture-2026-dyvlinge",
+      "category": "furniture",
+      "shape": "armchair",
+      "name": "DYVLINGE 旋转单椅",
+      "color": "#c8baa4",
+      "roomGroup": "living",
+      "description": "米色软包旋转椅，放在客厅一角。",
+      "verifiedPrice": 199,
+      "url": "https://www.ikea.com/us/en/p/dyvlinge-swivel-chair-kelinge-beige-60623859/",
+      "schema": {
+        "name": "DYVLINGE Swivel chair - Kelinge beige",
+        "sku": "606.238.59",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "199",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/dyvlinge-swivel-chair-kelinge-beige-60623859/"
+        },
+        "description": "DYVLINGE Swivel chair - Kelinge beige. DYVLINGE swivel easy chair was launched in our 1967 catalogue with the name MILA. Then, just like now, with a sitting position that is naturally relaxing for the entire body. 10-year limited warranty. Read about the terms in the limited warranty brochure."
+      },
+      "measurements": [
+        {
+          "measure": "29 1/2 \"",
+          "name": "Depth",
+          "type": "00044"
+        },
+        {
+          "measure": "26 3/4 \"",
+          "name": "Height",
+          "type": "00041"
+        },
+        {
+          "measure": "18 1/2 \"",
+          "name": "Seat depth",
+          "type": "00036"
+        },
+        {
+          "measure": "16 7/8 \"",
+          "name": "Seat height",
+          "type": "00039"
+        },
+        {
+          "measure": "24 3/4 \"",
+          "name": "Seat width",
+          "type": "00037"
+        },
+        {
+          "measure": "24 3/4 \"",
+          "name": "Width",
+          "type": "00047"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "100 % polyester (100% recycled)",
+              "part": "Fabric:"
+            },
+            {
+              "material": "100 % polypropylene, Felt liner, Steel, Epoxy/polyester powder coating",
+              "part": "Frame:"
+            },
+            {
+              "material": "Steel, Chrome plated",
+              "part": "Star base:"
+            },
+            {
+              "material": "70% cut polyurethane foam/ 30% polyester fibers",
+              "part": "Filling:"
+            },
+            {
+              "material": "100 % polypropylene",
+              "part": "Lining:"
+            },
+            {
+              "material": "Steel, Epoxy/polyester powder coating",
+              "part": "Rod:"
+            },
+            {
+              "material": "100 % polyester",
+              "part": "Zipper:"
+            },
+            {
+              "material": "100 % nylon",
+              "part": "Hook and loop fastener:"
+            },
+            {
+              "material": "100% polypropylene (min. 30% recycled)",
+              "part": "Fabric:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/dyvlinge-swivel-chair-kelinge-beige__1457402_pe992618_s5.jpg",
+      "image": "products/furniture-2026/dyvlinge.jpg",
+      "imageBytes": 50748,
+      "gamePrice": 139,
+      "reference": {
+        "brand": "IKEA",
+        "name": "DYVLINGE Swivel chair - Kelinge beige",
+        "url": "https://www.ikea.com/us/en/p/dyvlinge-swivel-chair-kelinge-beige-60623859/",
+        "image": "products/furniture-2026/dyvlinge.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/dyvlinge-swivel-chair-kelinge-beige__1457402_pe992618_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 24 3/4 英寸 × 深 29 1/2 英寸 × 高 26 3/4 英寸"
+          ],
+          [
+            "主要材质",
+            "面料为 100% 再生聚酯纤维；钢制框架与镀铬底座"
+          ],
+          [
+            "款式",
+            "Kelinge beige"
+          ],
+          [
+            "产品编号",
+            "606.238.59"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 199,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    },
+    {
+      "id": "furniture-2026-klippan",
+      "category": "furniture",
+      "shape": "sofa",
+      "name": "KLIPPAN 双人沙发",
+      "color": "#343333",
+      "roomGroup": "living",
+      "description": "黑色双人沙发，小客厅也能放。",
+      "verifiedPrice": 449,
+      "url": "https://www.ikea.com/us/en/p/klippan-loveseat-bomstad-black-50399318/",
+      "schema": {
+        "name": "KLIPPAN Loveseat - Bomstad black",
+        "sku": "503.993.18",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "449",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/klippan-loveseat-bomstad-black-50399318/"
+        },
+        "description": "KLIPPAN Loveseat - Bomstad black. Durable metal springs in the seat give the sofa a springy comfort, allowing you to sit, relax and enjoy it for many years. The stationary Bomstad cover is made of a durable material that is both smooth and strong."
+      },
+      "measurements": [
+        {
+          "measure": "69 5/8 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "34 5/8 \"",
+          "name": "Depth",
+          "type": "00044"
+        },
+        {
+          "measure": "26 \"",
+          "name": "Height",
+          "type": "00041"
+        },
+        {
+          "measure": "21 1/4 \"",
+          "name": "Seat depth",
+          "type": "00036"
+        },
+        {
+          "measure": "16 7/8 \"",
+          "name": "Seat height",
+          "type": "00039"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Particleboard, Plywood, Polyurethane foam 1.2 lb/cu.ft., Polyurethane foam 1.5 lb/cu.ft., Polyurethane foam 1.5 lb/cu.ft., Polyurethane foam 2.0 lb/cu.ft., Polyurethane foam 1.5 lb/cu.ft., Solid wood, Laminated veneer lumber, Fiberboard",
+              "part": "Frame:"
+            },
+            {
+              "material": "Steel, Epoxy/polyester powder coating",
+              "part": "Leg:"
+            },
+            {
+              "material": "100 % polyurethane, 75 % polyester, 25 % cotton",
+              "part": "Coated fabric parts:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/klippan-loveseat-bomstad-black__1576940_pe1032837_s5.jpg",
+      "image": "products/furniture-2026/klippan.jpg",
+      "imageBytes": 10050,
+      "gamePrice": 314,
+      "reference": {
+        "brand": "IKEA",
+        "name": "KLIPPAN Loveseat - Bomstad black",
+        "url": "https://www.ikea.com/us/en/p/klippan-loveseat-bomstad-black-50399318/",
+        "image": "products/furniture-2026/klippan.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/klippan-loveseat-bomstad-black__1576940_pe1032837_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 69 5/8 英寸 × 深 34 5/8 英寸 × 高 26 英寸"
+          ],
+          [
+            "主要材质",
+            "人造板、胶合板与实木框架；聚氨酯涂层织物表面"
+          ],
+          [
+            "款式",
+            "Bomstad black"
+          ],
+          [
+            "产品编号",
+            "503.993.18"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 449,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    },
+    {
+      "id": "furniture-2026-vittsjo",
+      "category": "furniture",
+      "shape": "coffeetable",
+      "name": "VITTSJÖ 玻璃套桌",
+      "color": "#3d3c38",
+      "roomGroup": "living",
+      "description": "两张高低套桌，可以叠放。游戏里用茶几示意。",
+      "verifiedPrice": 149.99,
+      "url": "https://www.ikea.com/us/en/p/vittsjoe-nesting-tables-set-of-2-black-brown-glass-80215332/",
+      "schema": {
+        "name": "VITTSJÖ Nesting tables, set of 2 - black-brown/glass 35 3/8x19 5/8 \"",
+        "sku": "802.153.32",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "149.99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/vittsjoe-nesting-tables-set-of-2-black-brown-glass-80215332/"
+        },
+        "description": "VITTSJÖ Nesting tables, set of 2 - black-brown/glass 35 3/8x19 5/8 \". The minimalist design combining metal and glass creates a sophisticated and modern expression. Easy to move around in the room and use together or separately. The table tops in tempered glass are stain resistant and easy to clean."
+      },
+      "measurements": [
+        {
+          "measure": "35 3/8 \"",
+          "name": "Max. length",
+          "type": "00003"
+        },
+        {
+          "measure": "19 5/8 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "19 5/8 \"",
+          "name": "Height",
+          "type": "00041"
+        },
+        {
+          "measure": "22 lb",
+          "name": "Max. load",
+          "type": "00012"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Tempered glass",
+              "part": "Glass panel:"
+            },
+            {
+              "material": "Steel, Epoxy/polyester powder coating",
+              "part": "Underframe:"
+            },
+            {
+              "material": "Particleboard, Melamine foil, Plastic edging",
+              "part": "Panel:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/vittsjoe-nesting-tables-set-of-2-black-brown-glass__1419821_pe977132_s5.jpg",
+      "image": "products/furniture-2026/vittsjo.jpg",
+      "imageBytes": 22017,
+      "gamePrice": 105,
+      "reference": {
+        "brand": "IKEA",
+        "name": "VITTSJÖ Nesting tables, set of 2 - black-brown/glass 35 3/8x19 5/8 \"",
+        "url": "https://www.ikea.com/us/en/p/vittsjoe-nesting-tables-set-of-2-black-brown-glass-80215332/",
+        "image": "products/furniture-2026/vittsjo.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/vittsjoe-nesting-tables-set-of-2-black-brown-glass__1419821_pe977132_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 19 5/8 英寸 × 高 19 5/8 英寸 × 最大长 35 3/8 英寸"
+          ],
+          [
+            "主要材质",
+            "钢化玻璃桌面；粉末涂层钢架；人造板搁板"
+          ],
+          [
+            "款式",
+            "black-brown/glass 35 3/8x19 5/8 \""
+          ],
+          [
+            "产品编号",
+            "802.153.32"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 149.99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。 实物为两张套桌，游戏里合为一个摆放物件。"
+      }
+    },
+    {
+      "id": "furniture-2026-burvik",
+      "category": "furniture",
+      "shape": "sidetable",
+      "name": "BURVIK 手提边桌",
+      "color": "#edece5",
+      "roomGroup": "living",
+      "description": "带提手的白色小圆桌，放杯子或书。",
+      "verifiedPrice": 44.99,
+      "url": "https://www.ikea.com/us/en/p/burvik-side-table-white-60340389/",
+      "schema": {
+        "name": "BURVIK Side table - white 15 \"",
+        "sku": "603.403.89",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "44.99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/burvik-side-table-white-60340389/"
+        },
+        "description": "BURVIK Side table - white 15 \". The side table is light and small enough to lift with one hand, and the handle makes it easy to carry around the home. The handle is bent in a way that gives you a good grip and good balance when carrying things on the table. Easy to assemble without tools or screws."
+      },
+      "measurements": [
+        {
+          "measure": "30 3/4 \"",
+          "name": "Height including handle",
+          "type": "00515"
+        },
+        {
+          "measure": "17 3/4 \"",
+          "name": "Height",
+          "type": "00041"
+        },
+        {
+          "measure": "15 \"",
+          "name": "Diameter",
+          "type": "00042"
+        },
+        {
+          "measure": "22 lb",
+          "name": "Max. load",
+          "type": "00012"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Polyamide, Steel",
+              "part": "Plastic parts:"
+            },
+            {
+              "material": "Steel, Galvanized",
+              "part": "Insert nut:"
+            },
+            {
+              "material": "Steel, Epoxy/polyester powder coating",
+              "part": "Underframe:"
+            },
+            {
+              "material": "Plywood, Birch veneer, Tinted clear acrylic lacquer, Tinted clear acrylic lacquer, Tinted clear acrylic lacquer",
+              "part": "Panel:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/burvik-side-table-white__0551240_pe658473_s5.jpg",
+      "image": "products/furniture-2026/burvik.jpg",
+      "imageBytes": 8967,
+      "gamePrice": 31,
+      "reference": {
+        "brand": "IKEA",
+        "name": "BURVIK Side table - white 15 \"",
+        "url": "https://www.ikea.com/us/en/p/burvik-side-table-white-60340389/",
+        "image": "products/furniture-2026/burvik.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/burvik-side-table-white__0551240_pe658473_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "高 17 3/4 英寸 × 直径 15 英寸 × 含提手高 30 3/4 英寸"
+          ],
+          [
+            "主要材质",
+            "粉末涂层钢架；胶合板与桦木贴面桌板"
+          ],
+          [
+            "款式",
+            "white 15 \""
+          ],
+          [
+            "产品编号",
+            "603.403.89"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 44.99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    },
+    {
+      "id": "furniture-2026-brimnes",
+      "category": "furniture",
+      "shape": "daybed",
+      "name": "BRIMNES 抽屉坐卧床",
+      "color": "#e5e2da",
+      "roomGroup": "bedroom",
+      "description": "白天当沙发，晚上拉开当床；官网价仅含床架。",
+      "verifiedPrice": 299,
+      "url": "https://www.ikea.com/us/en/p/brimnes-daybed-frame-with-2-drawers-white-40228708/",
+      "schema": {
+        "name": "BRIMNES Daybed frame with 2 drawers - white Twin",
+        "sku": "402.287.08",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "299",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/brimnes-daybed-frame-with-2-drawers-white-40228708/"
+        },
+        "description": "BRIMNES Daybed frame with 2 drawers - white Twin. With some soft, fluffy pillows as back support, you easily transform this day-bed into a comfortable sofa or chaise longue. Coordinates with other furniture in the BRIMNES series. Mattress and bedlinens are sold separately."
+      },
+      "measurements": [
+        {
+          "measure": "76 3/4 \"",
+          "name": "Length",
+          "type": "00001"
+        },
+        {
+          "measure": "41 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "22 7/8 \"",
+          "name": "Height",
+          "type": "00041"
+        },
+        {
+          "measure": "31 1/2 \"",
+          "name": "Drawer width (inside)",
+          "type": "00244"
+        },
+        {
+          "measure": "21 1/4 \"",
+          "name": "Drawer depth (inside)",
+          "type": "00202"
+        },
+        {
+          "measure": "6 1/4 \"",
+          "name": "Height of drawer (inside)",
+          "type": "00495"
+        },
+        {
+          "measure": "78 \"",
+          "name": "Bed width",
+          "type": "00030"
+        },
+        {
+          "measure": "76 3/8 \"",
+          "name": "Bed length",
+          "type": "00029"
+        },
+        {
+          "measure": "44 lb",
+          "name": "Maximum load/drawer",
+          "type": "00124"
+        },
+        {
+          "measure": "74 3/8 \"",
+          "name": "Mattress length",
+          "type": "00105"
+        },
+        {
+          "measure": "38 1/4 \"",
+          "name": "Mattress width",
+          "type": "00104"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Particleboard, Paper foil, Plastic edging",
+              "part": "Bed frame panel/ Front frame/ Drawer front panel:"
+            },
+            {
+              "material": "Fiberboard, Paper foil",
+              "part": "Bed end filling:"
+            },
+            {
+              "material": "Particleboard, Paper foil",
+              "part": "Back panel/ Bottom rail:"
+            },
+            {
+              "material": "Solid pine",
+              "part": "Bed base slats:"
+            },
+            {
+              "material": "Particleboard, Plastic foil",
+              "part": "Drawer sides/ Drawer back:"
+            },
+            {
+              "material": "Fiberboard, Acrylic paint",
+              "part": "Drawer bottom:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/brimnes-daybed-frame-with-2-drawers-white__1161827_pe889528_s5.jpg",
+      "image": "products/furniture-2026/brimnes.jpg",
+      "imageBytes": 12523,
+      "gamePrice": 209,
+      "reference": {
+        "brand": "IKEA",
+        "name": "BRIMNES Daybed frame with 2 drawers - white Twin",
+        "url": "https://www.ikea.com/us/en/p/brimnes-daybed-frame-with-2-drawers-white-40228708/",
+        "image": "products/furniture-2026/brimnes.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/brimnes-daybed-frame-with-2-drawers-white__1161827_pe889528_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 41 英寸 × 高 22 7/8 英寸 × 长 76 3/4 英寸"
+          ],
+          [
+            "主要材质",
+            "人造板与纤维板柜体；实心松木床板条"
+          ],
+          [
+            "款式",
+            "white Twin"
+          ],
+          [
+            "产品编号",
+            "402.287.08"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 299,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。 官网价格仅含床架，床垫和床品另售。"
+      }
+    },
+    {
+      "id": "furniture-2026-idanas",
+      "category": "furniture",
+      "shape": "bed",
+      "name": "IDANÄS 米色软包床",
+      "color": "#c8b9a2",
+      "roomGroup": "bedroom",
+      "description": "带软包床头的 Queen 床架，床垫另售。",
+      "verifiedPrice": 649,
+      "url": "https://www.ikea.com/us/en/p/idanaes-upholstered-bed-frame-naggen-beige-00588081/",
+      "schema": {
+        "name": "IDANÄS Upholstered bed frame - Naggen beige Queen",
+        "sku": "005.880.81",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "649",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/idanaes-upholstered-bed-frame-naggen-beige-00588081/"
+        },
+        "description": "IDANÄS Upholstered bed frame - Naggen beige Queen. IDANÄS upholstered bed frame has a thick, sloping headboard that provides comfortable support for your back - perfect for lazy mornings and long evenings when reading a newspaper or a thrilling book in bed."
+      },
+      "measurements": [
+        {
+          "measure": "88 1/4 \"",
+          "name": "Length",
+          "type": "00001"
+        },
+        {
+          "measure": "62 5/8 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "16 1/2 \"",
+          "name": "Footboard height",
+          "type": "00109"
+        },
+        {
+          "measure": "47 5/8 \"",
+          "name": "Headboard height",
+          "type": "00110"
+        },
+        {
+          "measure": "79 1/2 \"",
+          "name": "Mattress length",
+          "type": "00105"
+        },
+        {
+          "measure": "59 7/8 \"",
+          "name": "Mattress width",
+          "type": "00104"
+        },
+        {
+          "measure": "8 1/4 \"",
+          "name": "Free height under bed",
+          "type": "00553"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Particleboard, Solid wood, Fiberboard",
+              "part": "Top frame:"
+            },
+            {
+              "material": "Plywood, Solid wood, Particleboard",
+              "part": "Bottom frame:"
+            },
+            {
+              "material": "Particleboard",
+              "part": "Side rail:"
+            },
+            {
+              "material": "Polyurethane foam 1.2 lb/cu.ft.",
+              "part": "Filling:"
+            },
+            {
+              "material": "Solid wood",
+              "part": "Footboard/ Bedside:"
+            },
+            {
+              "material": "Laminated veneer lumber",
+              "part": "Midbeam:"
+            },
+            {
+              "material": "Solid oak, Oil",
+              "part": "Leg:"
+            },
+            {
+              "material": "100 %polyester",
+              "part": "Fabric/ Wadding:"
+            },
+            {
+              "material": "100 % polypropylene",
+              "part": "Lining/ Lining, underside:"
+            },
+            {
+              "material": "Polyamide",
+              "part": "Hook and loop fastener:"
+            },
+            {
+              "material": "100% polyester (min. 90% recycled)",
+              "part": "Fabric:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/idanaes-upholstered-bed-frame-naggen-beige__1322829_pe942283_s5.jpg",
+      "image": "products/furniture-2026/idanas.jpg",
+      "imageBytes": 10971,
+      "gamePrice": 454,
+      "reference": {
+        "brand": "IKEA",
+        "name": "IDANÄS Upholstered bed frame - Naggen beige Queen",
+        "url": "https://www.ikea.com/us/en/p/idanaes-upholstered-bed-frame-naggen-beige-00588081/",
+        "image": "products/furniture-2026/idanas.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/idanaes-upholstered-bed-frame-naggen-beige__1322829_pe942283_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 62 5/8 英寸 × 长 88 1/4 英寸 × 床头高 47 5/8 英寸"
+          ],
+          [
+            "主要材质",
+            "人造板、胶合板和实木框架；橡木腿；聚酯纤维面料"
+          ],
+          [
+            "款式",
+            "Naggen beige Queen"
+          ],
+          [
+            "产品编号",
+            "005.880.81"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 649,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。 官网价格仅含床架，床垫和床品另售。"
+      }
+    },
+    {
+      "id": "furniture-2026-rakkestad",
+      "category": "furniture",
+      "shape": "wardrobe",
+      "name": "RAKKESTAD 双门衣柜",
+      "color": "#483c30",
+      "roomGroup": "bedroom",
+      "description": "黑棕色双门衣柜，挂衣服和叠放物品。",
+      "verifiedPrice": 199.99,
+      "url": "https://www.ikea.com/us/en/p/rakkestad-wardrobe-with-2-doors-black-brown-40586805/",
+      "schema": {
+        "name": "RAKKESTAD Wardrobe with 2 doors - black-brown 31 1/8x69 1/4 \"",
+        "sku": "405.868.05",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "199.99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/rakkestad-wardrobe-with-2-doors-black-brown-40586805/"
+        },
+        "description": "RAKKESTAD Wardrobe with 2 doors - black-brown 31 1/8x69 1/4 \". Maximize your storage and create a coordinated look by building your own RAKKESTAD wardrobe combination. The clothes rail holds about 20 shirts on hangers. One shelf holds about 20 pairs of folded pants or 40 T-shirts."
+      },
+      "measurements": [
+        {
+          "measure": "31 1/8 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "21 5/8 \"",
+          "name": "Depth",
+          "type": "00044"
+        },
+        {
+          "measure": "69 1/4 \"",
+          "name": "Height",
+          "type": "00041"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Particleboard, Paper foil",
+              "part": "Top panel/ Side panel/ Shelf/ Bottom panel/ Plinth:"
+            },
+            {
+              "material": "Particleboard",
+              "part": "Weight:"
+            },
+            {
+              "material": "Fiberboard, Printed acrylic paint",
+              "part": "Back panel:"
+            },
+            {
+              "material": "Fiberboard, Particleboard, Paper foil",
+              "part": "Door frame:"
+            },
+            {
+              "material": "Fiberboard, Paper foil",
+              "part": "Door panel:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/rakkestad-wardrobe-with-2-doors-black-brown__0780372_pe760493_s5.jpg",
+      "image": "products/furniture-2026/rakkestad.jpg",
+      "imageBytes": 14810,
+      "gamePrice": 140,
+      "reference": {
+        "brand": "IKEA",
+        "name": "RAKKESTAD Wardrobe with 2 doors - black-brown 31 1/8x69 1/4 \"",
+        "url": "https://www.ikea.com/us/en/p/rakkestad-wardrobe-with-2-doors-black-brown-40586805/",
+        "image": "products/furniture-2026/rakkestad.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/rakkestad-wardrobe-with-2-doors-black-brown__0780372_pe760493_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 31 1/8 英寸 × 深 21 5/8 英寸 × 高 69 1/4 英寸"
+          ],
+          [
+            "主要材质",
+            "纸箔饰面刨花板；纤维板背板和门板"
+          ],
+          [
+            "款式",
+            "black-brown 31 1/8x69 1/4 \""
+          ],
+          [
+            "产品编号",
+            "405.868.05"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 199.99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    },
+    {
+      "id": "furniture-2026-alex",
+      "category": "furniture",
+      "shape": "filingcabinet",
+      "name": "ALEX 五抽屉柜",
+      "color": "#eae8e0",
+      "roomGroup": "office",
+      "description": "文具、线材和文件分层收好。",
+      "verifiedPrice": 95,
+      "url": "https://www.ikea.com/us/en/p/alex-drawer-unit-white-00473546/",
+      "schema": {
+        "name": "ALEX Drawer unit - white 14 1/8x27 1/2 \"",
+        "sku": "004.735.46",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "95",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/alex-drawer-unit-white-00473546/"
+        },
+        "description": "ALEX Drawer unit - white 14 1/8x27 1/2 \". Drawer stops prevent the drawer from being pulled out too far. This unit can be placed anywhere in the room because it is finished on the back."
+      },
+      "measurements": [
+        {
+          "measure": "14 1/8 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "22 7/8 \"",
+          "name": "Depth",
+          "type": "00044"
+        },
+        {
+          "measure": "27 1/2 \"",
+          "name": "Height",
+          "type": "00041"
+        },
+        {
+          "measure": "20 1/2 \"",
+          "name": "Drawer depth (inside)",
+          "type": "00202"
+        },
+        {
+          "measure": "9 lb",
+          "name": "Maximum load/drawer",
+          "type": "00124"
+        },
+        {
+          "measure": "26 lb",
+          "name": "Max. load",
+          "type": "00012"
+        },
+        {
+          "measure": "4 lb",
+          "name": "Max. load small drawer",
+          "type": "00758"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Particleboard, Acrylic paint, Paper foil, Plastic edging",
+              "part": "Main parts/ Front:"
+            },
+            {
+              "material": "Particleboard, Plastic foil",
+              "part": "Drawer side/ Drawer back:"
+            },
+            {
+              "material": "Fiberboard, Acrylic paint",
+              "part": "Drawer bottom:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/alex-drawer-unit-white__0977775_pe813763_s5.jpg",
+      "image": "products/furniture-2026/alex.jpg",
+      "imageBytes": 12065,
+      "gamePrice": 67,
+      "reference": {
+        "brand": "IKEA",
+        "name": "ALEX Drawer unit - white 14 1/8x27 1/2 \"",
+        "url": "https://www.ikea.com/us/en/p/alex-drawer-unit-white-00473546/",
+        "image": "products/furniture-2026/alex.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/alex-drawer-unit-white__0977775_pe813763_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 14 1/8 英寸 × 深 22 7/8 英寸 × 高 27 1/2 英寸"
+          ],
+          [
+            "主要材质",
+            "刨花板柜体；丙烯酸漆与纸箔饰面；纤维板抽屉底"
+          ],
+          [
+            "款式",
+            "white 14 1/8x27 1/2 \""
+          ],
+          [
+            "产品编号",
+            "004.735.46"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 95,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    },
+    {
+      "id": "furniture-2026-skruvby",
+      "category": "furniture",
+      "shape": "bookcase",
+      "name": "SKRUVBY 白色书柜",
+      "color": "#e5dfd0",
+      "roomGroup": "office",
+      "description": "木色顶板搭白色柜体，放书和小收藏。",
+      "verifiedPrice": 99,
+      "url": "https://www.ikea.com/us/en/p/skruvby-bookcase-white-40503546/",
+      "schema": {
+        "name": "SKRUVBY Bookcase - white 23 5/8x55 1/8 \"",
+        "sku": "405.035.46",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/skruvby-bookcase-white-40503546/"
+        },
+        "description": "SKRUVBY Bookcase - white 23 5/8x55 1/8 \". The furniture in the SKRUVBY series is designed to go well together. Combine and match them as you like or use each piece of furniture as a beautiful solitaire. The oak look of the top panel creates a warm and natural look."
+      },
+      "measurements": [
+        {
+          "measure": "14 3/4 \"",
+          "name": "Depth",
+          "type": "00044"
+        },
+        {
+          "measure": "55 1/8 \"",
+          "name": "Height",
+          "type": "00041"
+        },
+        {
+          "measure": "29 lb",
+          "name": "Max load/shelf",
+          "type": "00011"
+        },
+        {
+          "measure": "13 \"",
+          "name": "Shelf, depth",
+          "type": "00384"
+        },
+        {
+          "measure": "23 5/8 \"",
+          "name": "Width",
+          "type": "00047"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Particleboard, Paper foil, Plastic edging, Plastic edging",
+              "part": "Top panel/ Bottom panel:"
+            },
+            {
+              "material": "Particleboard, Paper foil",
+              "part": "Side panel/ Shelf:"
+            },
+            {
+              "material": "Fiberboard, Paint, Paper foil",
+              "part": "Back:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/skruvby-bookcase-white__1590276_pe1038915_s5.jpg",
+      "image": "products/furniture-2026/skruvby.jpg",
+      "imageBytes": 10211,
+      "gamePrice": 69,
+      "reference": {
+        "brand": "IKEA",
+        "name": "SKRUVBY Bookcase - white 23 5/8x55 1/8 \"",
+        "url": "https://www.ikea.com/us/en/p/skruvby-bookcase-white-40503546/",
+        "image": "products/furniture-2026/skruvby.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/skruvby-bookcase-white__1590276_pe1038915_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 23 5/8 英寸 × 深 14 3/4 英寸 × 高 55 1/8 英寸"
+          ],
+          [
+            "主要材质",
+            "纸箔饰面刨花板；纤维板背板"
+          ],
+          [
+            "款式",
+            "white 23 5/8x55 1/8 \""
+          ],
+          [
+            "产品编号",
+            "405.035.46"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    },
+    {
+      "id": "furniture-2026-tonstad",
+      "category": "furniture",
+      "shape": "sideboard",
+      "name": "TONSTAD 餐边柜",
+      "color": "#e1daca",
+      "roomGroup": "dining",
+      "description": "抽屉和柜门收纳，餐桌旁多一点可用空间。",
+      "verifiedPrice": 349,
+      "url": "https://www.ikea.com/us/en/p/tonstad-sideboard-off-white-00510006/",
+      "schema": {
+        "name": "TONSTAD Sideboard - off-white 47 1/8x18 1/2x35 3/4 \"",
+        "sku": "005.100.06",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "349",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/tonstad-sideboard-off-white-00510006/"
+        },
+        "description": "TONSTAD Sideboard - off-white 47 1/8x18 1/2x35 3/4 \". The furniture in the TONSTAD series is designed to go well together. Use each piece of furniture as a beautiful solitaire or combine them to create your own personal solution."
+      },
+      "measurements": [
+        {
+          "measure": "18 1/2 \"",
+          "name": "Depth",
+          "type": "00044"
+        },
+        {
+          "measure": "35 3/4 \"",
+          "name": "Height",
+          "type": "00041"
+        },
+        {
+          "measure": "47 1/8 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "35 lb",
+          "name": "Max load/shelf",
+          "type": "00011"
+        },
+        {
+          "measure": "9 lb",
+          "name": "Maximum load/drawer",
+          "type": "00124"
+        },
+        {
+          "measure": "20 5/8 \"",
+          "name": "Drawer width (inside)",
+          "type": "00244"
+        },
+        {
+          "measure": "15 7/8 \"",
+          "name": "Drawer depth (inside)",
+          "type": "00202"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Particleboard, Acrylic paint, Paper foil, Plastic edging",
+              "part": "Top panel:"
+            },
+            {
+              "material": "Particle- and fiberboard with honeycomb paper filling (100% recycled paper), Acrylic paint, Acrylic paint, Plastic edging",
+              "part": "Bottom panel:"
+            },
+            {
+              "material": "Particleboard, Acrylic paint, Acrylic paint, Plastic edging",
+              "part": "Side panel/ Shelf:"
+            },
+            {
+              "material": "Particleboard, Acrylic paint, Plastic edging",
+              "part": "Partition:"
+            },
+            {
+              "material": "Particleboard, Paper foil, Paper foil",
+              "part": "Top/ Bottom:"
+            },
+            {
+              "material": "Fiberboard and honeycomb paper filling (100% recycled paper), Acrylic paint, Acrylic paint, Acrylic paint",
+              "part": "Door:"
+            },
+            {
+              "material": "Fiberboard, Acrylic paint",
+              "part": "Drawer front:"
+            },
+            {
+              "material": "Particleboard",
+              "part": "Drawer side/ Drawer back:"
+            },
+            {
+              "material": "Fiberboard",
+              "part": "Drawer bottom:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/tonstad-sideboard-off-white__1335580_pe947096_s5.jpg",
+      "image": "products/furniture-2026/tonstad.jpg",
+      "imageBytes": 9948,
+      "gamePrice": 244,
+      "reference": {
+        "brand": "IKEA",
+        "name": "TONSTAD Sideboard - off-white 47 1/8x18 1/2x35 3/4 \"",
+        "url": "https://www.ikea.com/us/en/p/tonstad-sideboard-off-white-00510006/",
+        "image": "products/furniture-2026/tonstad.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/tonstad-sideboard-off-white__1335580_pe947096_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 47 1/8 英寸 × 深 18 1/2 英寸 × 高 35 3/4 英寸"
+          ],
+          [
+            "主要材质",
+            "刨花板与纤维板；蜂窝纸填充部件；丙烯酸漆饰面"
+          ],
+          [
+            "款式",
+            "off-white 47 1/8x18 1/2x35 3/4 \""
+          ],
+          [
+            "产品编号",
+            "005.100.06"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 349,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    },
+    {
+      "id": "furniture-2026-forhoja",
+      "category": "furniture",
+      "shape": "kitchencart",
+      "name": "FÖRHÖJA 厨房推车",
+      "color": "#b99b72",
+      "roomGroup": "kitchen",
+      "description": "桦木台面、白色框架，补一点厨房操作空间。",
+      "verifiedPrice": 179.99,
+      "url": "https://www.ikea.com/us/en/p/foerhoeja-kitchen-cart-birch-white-80486724/",
+      "schema": {
+        "name": "FÖRHÖJA Kitchen cart - birch/white 39 3/8x16 7/8 \"",
+        "sku": "804.867.24",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "179.99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/foerhoeja-kitchen-cart-birch-white-80486724/"
+        },
+        "description": "FÖRHÖJA Kitchen cart - birch/white 39 3/8x16 7/8 \". Gives you extra storage in your kitchen. You can quickly view and access what's inside because the drawers can be pulled out from both sides. Open storage with space for 9 bottles on each shelf."
+      },
+      "measurements": [
+        {
+          "measure": "39 3/8 \"",
+          "name": "Length",
+          "type": "00001"
+        },
+        {
+          "measure": "16 7/8 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "35 3/8 \"",
+          "name": "Height",
+          "type": "00041"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Solid birch, Oil",
+              "part": "Work top:"
+            },
+            {
+              "material": "Solid wood, Adhesive, Acrylic paint",
+              "part": "Top rail/ Drawer/ Bar/ Frame/ Leg:"
+            },
+            {
+              "material": "Plywood, Adhesive, Acrylic paint",
+              "part": "Drawer bottom:"
+            },
+            {
+              "material": "Solid birch, Clear acrylic lacquer",
+              "part": "Wheel:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/foerhoeja-kitchen-cart-birch-white__1057905_pe849059_s5.jpg",
+      "image": "products/furniture-2026/forhoja.jpg",
+      "imageBytes": 26686,
+      "gamePrice": 126,
+      "reference": {
+        "brand": "IKEA",
+        "name": "FÖRHÖJA Kitchen cart - birch/white 39 3/8x16 7/8 \"",
+        "url": "https://www.ikea.com/us/en/p/foerhoeja-kitchen-cart-birch-white-80486724/",
+        "image": "products/furniture-2026/forhoja.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/foerhoeja-kitchen-cart-birch-white__1057905_pe849059_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 16 7/8 英寸 × 高 35 3/8 英寸 × 长 39 3/8 英寸"
+          ],
+          [
+            "主要材质",
+            "实心桦木涂油台面；实木框架；胶合板抽屉底"
+          ],
+          [
+            "款式",
+            "birch/white 39 3/8x16 7/8 \""
+          ],
+          [
+            "产品编号",
+            "804.867.24"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 179.99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    },
+    {
+      "id": "furniture-2026-norden",
+      "category": "furniture",
+      "shape": "diningtable",
+      "name": "NORDEN 折叠餐桌",
+      "color": "#e8e6dd",
+      "roomGroup": "dining",
+      "description": "不用时折起桌面，桌中间带收纳抽屉。",
+      "verifiedPrice": 359.99,
+      "url": "https://www.ikea.com/us/en/p/norden-gateleg-table-white-10423886/",
+      "schema": {
+        "name": "NORDEN Gateleg table - white 10 1/4/35/59 7/8x31 1/2 \"",
+        "sku": "104.238.86",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "359.99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/norden-gateleg-table-white-10423886/"
+        },
+        "description": "NORDEN Gateleg table - white 10 1/4/35/59 7/8x31 1/2 \". Small dimensions make the table easy to furnish with, even when space is limited. Table with drop-leaves seats 2-4; makes it possible to adjust the table size according to need. Seats 2-4. Recommended for indoor use only."
+      },
+      "measurements": [
+        {
+          "measure": "35 \"",
+          "name": "Length",
+          "type": "00001"
+        },
+        {
+          "measure": "10 1/4 \"",
+          "name": "Min. length",
+          "type": "00002"
+        },
+        {
+          "measure": "59 7/8 \"",
+          "name": "Max. length",
+          "type": "00003"
+        },
+        {
+          "measure": "31 1/2 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "29 1/8 \"",
+          "name": "Height",
+          "type": "00041"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Particleboard, Melamine foil, Acrylic paint",
+              "part": "Table top:"
+            },
+            {
+              "material": "Particleboard, Melamine foil, Plastic edging, Acrylic paint",
+              "part": "Drop-leaf:"
+            },
+            {
+              "material": "Fiberboard, Acrylic paint",
+              "part": "Drawer front/ Drawer bottom:"
+            },
+            {
+              "material": "Particleboard, Plastic foil, Paper foil",
+              "part": "Drawer side:"
+            },
+            {
+              "material": "Particleboard, Plastic foil",
+              "part": "Drawer back:"
+            },
+            {
+              "material": "Solid wood, Fiberboard, Acrylic paint",
+              "part": "Underframe:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/norden-gateleg-table-white__0737112_pe740886_s5.jpg",
+      "image": "products/furniture-2026/norden.jpg",
+      "imageBytes": 8534,
+      "gamePrice": 252,
+      "reference": {
+        "brand": "IKEA",
+        "name": "NORDEN Gateleg table - white 10 1/4/35/59 7/8x31 1/2 \"",
+        "url": "https://www.ikea.com/us/en/p/norden-gateleg-table-white-10423886/",
+        "image": "products/furniture-2026/norden.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/norden-gateleg-table-white__0737112_pe740886_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 31 1/2 英寸 × 高 29 1/8 英寸 × 长 35 英寸 × 折起长 10 1/4 英寸 × 最大长 59 7/8 英寸"
+          ],
+          [
+            "主要材质",
+            "三聚氰胺饰面刨花板桌面；实木及纤维板底架"
+          ],
+          [
+            "款式",
+            "white 10 1/4/35/59 7/8x31 1/2 \""
+          ],
+          [
+            "产品编号",
+            "104.238.86"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 359.99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    },
+    {
+      "id": "furniture-2026-stig",
+      "category": "furniture",
+      "shape": "barstool",
+      "name": "STIG 带靠背吧凳",
+      "color": "#333737",
+      "roomGroup": "dining",
+      "description": "配厨房吧台的黑色高凳，有靠背和脚踏。",
+      "verifiedPrice": 34.99,
+      "url": "https://www.ikea.com/us/en/p/stig-bar-stool-with-backrest-counter-height-black-black-30498418/",
+      "schema": {
+        "name": "STIG Bar stool with backrest - counter height black/black 24 3/4 \"",
+        "sku": "304.984.18",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStoreOnly",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "34.99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "url": "https://www.ikea.com/us/en/p/stig-bar-stool-with-backrest-counter-height-black-black-30498418/"
+        },
+        "description": "STIG Bar stool with backrest - counter height black/black 24 3/4 \". Stackable, so you can keep several on hand without taking up more space than one bar stool. Comfy footrest enables a relaxed sitting posture. Suitable for bar table and counter heights 34-36\"."
+      },
+      "measurements": [
+        {
+          "measure": "220 lb",
+          "name": "Tested for",
+          "type": "00287"
+        },
+        {
+          "measure": "15 3/4 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "16 1/2 \"",
+          "name": "Depth",
+          "type": "00044"
+        },
+        {
+          "measure": "35 3/8 \"",
+          "name": "Height",
+          "type": "00041"
+        },
+        {
+          "measure": "14 1/8 \"",
+          "name": "Seat width",
+          "type": "00037"
+        },
+        {
+          "measure": "13 3/8 \"",
+          "name": "Seat depth",
+          "type": "00036"
+        },
+        {
+          "measure": "24 3/4 \"",
+          "name": "Seat height",
+          "type": "00039"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Steel, Epoxy/polyester powder coating",
+              "part": "Frame:"
+            },
+            {
+              "material": "Polypropylene plastic (min. 50% recycled), polypropylene (min. 50% recycled)",
+              "part": "Seat/ Back:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/stig-bar-stool-with-backrest-counter-height-black-black__0948110_pe798867_s5.jpg",
+      "image": "products/furniture-2026/stig.jpg",
+      "imageBytes": 14931,
+      "gamePrice": 24,
+      "reference": {
+        "brand": "IKEA",
+        "name": "STIG Bar stool with backrest - counter height black/black 24 3/4 \"",
+        "url": "https://www.ikea.com/us/en/p/stig-bar-stool-with-backrest-counter-height-black-black-30498418/",
+        "image": "products/furniture-2026/stig.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/stig-bar-stool-with-backrest-counter-height-black-black__0948110_pe798867_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 15 3/4 英寸 × 深 16 1/2 英寸 × 高 35 3/8 英寸"
+          ],
+          [
+            "主要材质",
+            "粉末涂层钢架；含至少 50% 再生材料的聚丙烯座面和靠背"
+          ],
+          [
+            "款式",
+            "counter height black/black 24 3/4 \""
+          ],
+          [
+            "产品编号",
+            "304.984.18"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 34.99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    },
+    {
+      "id": "furniture-2026-ranarp",
+      "category": "furniture",
+      "shape": "arclamp",
+      "name": "RANARP 落地阅读灯",
+      "color": "#343632",
+      "roomGroup": "living",
+      "description": "黑色可调节阅读灯，灯泡另售；游戏用落地灯形状示意。",
+      "verifiedPrice": 69.99,
+      "url": "https://www.ikea.com/us/en/p/ranarp-floor-reading-lamp-black-00331383/",
+      "schema": {
+        "name": "RANARP Floor/reading lamp - black",
+        "sku": "003.313.83",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "69.99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/ranarp-floor-reading-lamp-black-00331383/"
+        },
+        "description": "RANARP Floor/reading lamp - black. You can easily direct the light where you want it because the lamp arm and head are adjustable. Provides a directed light that is great for reading. Light bulb sold separately. IKEA recommends LED bulb E26. May be completed with other lamps in the same series."
+      },
+      "measurements": [
+        {
+          "measure": "11 W",
+          "name": "Max.",
+          "type": "00402"
+        },
+        {
+          "measure": "29 7/8 \"",
+          "name": "Length",
+          "type": "00001"
+        },
+        {
+          "measure": "11 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "60 \"",
+          "name": "Height",
+          "type": "00041"
+        },
+        {
+          "measure": "6 ' 1 \"",
+          "name": "Cord length",
+          "type": "00026"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Steel, Powder coating",
+              "part": "Tube/ Base:"
+            },
+            {
+              "material": "Steel, Powder coating, Paint",
+              "part": "Shade:"
+            },
+            {
+              "material": "Polycarbonate plastic",
+              "part": "Adapter:"
+            },
+            {
+              "material": "Concrete, Polyethylene",
+              "part": "Weight:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/ranarp-floor-reading-lamp-black__0606896_pe682604_s5.jpg",
+      "image": "products/furniture-2026/ranarp.jpg",
+      "imageBytes": 8004,
+      "gamePrice": 49,
+      "reference": {
+        "brand": "IKEA",
+        "name": "RANARP Floor/reading lamp - black",
+        "url": "https://www.ikea.com/us/en/p/ranarp-floor-reading-lamp-black-00331383/",
+        "image": "products/furniture-2026/ranarp.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/ranarp-floor-reading-lamp-black__0606896_pe682604_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 11 英寸 × 高 60 英寸 × 长 29 7/8 英寸"
+          ],
+          [
+            "主要材质",
+            "粉末涂层钢制灯杆和灯罩；混凝土配重"
+          ],
+          [
+            "款式",
+            "black"
+          ],
+          [
+            "产品编号",
+            "003.313.83"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 69.99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。 灯泡另售；实物可调节，游戏里灯臂位置固定。"
+      }
+    },
+    {
+      "id": "furniture-2026-jonaxel",
+      "category": "furniture",
+      "shape": "bathshelf",
+      "name": "JONAXEL 浴室置物架",
+      "color": "#eeeae1",
+      "roomGroup": "bathroom",
+      "description": "白色金属层架，适合浴室或洗衣区收纳。",
+      "verifiedPrice": 69.99,
+      "url": "https://www.ikea.com/us/en/p/jonaxel-shelf-unit-white-50419972/",
+      "schema": {
+        "name": "JONAXEL Shelf unit - white 31 1/2x15x63 \"",
+        "sku": "504.199.72",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "69.99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/jonaxel-shelf-unit-white-50419972/"
+        },
+        "description": "JONAXEL Shelf unit - white 31 1/2x15x63 \". Can also be used in bathrooms and other damp indoor areas. The shelf unit is durable, easy to clean and protected from rust, as it is made of powder-coated steel. Recommended for indoor use only."
+      },
+      "measurements": [
+        {
+          "measure": "31 1/2 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "15 \"",
+          "name": "Depth",
+          "type": "00044"
+        },
+        {
+          "measure": "63 \"",
+          "name": "Height",
+          "type": "00041"
+        },
+        {
+          "measure": "55 lb",
+          "name": "Max load/shelf",
+          "type": "00011"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Steel, Epoxy/polyester powder coating"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/jonaxel-shelf-unit-white__0678052_pe719167_s5.jpg",
+      "image": "products/furniture-2026/jonaxel.jpg",
+      "imageBytes": 8959,
+      "gamePrice": 49,
+      "reference": {
+        "brand": "IKEA",
+        "name": "JONAXEL Shelf unit - white 31 1/2x15x63 \"",
+        "url": "https://www.ikea.com/us/en/p/jonaxel-shelf-unit-white-50419972/",
+        "image": "products/furniture-2026/jonaxel.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/jonaxel-shelf-unit-white__0678052_pe719167_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 31 1/2 英寸 × 深 15 英寸 × 高 63 英寸"
+          ],
+          [
+            "主要材质",
+            "环氧树脂／聚酯粉末涂层钢材"
+          ],
+          [
+            "款式",
+            "white 31 1/2x15x63 \""
+          ],
+          [
+            "产品编号",
+            "504.199.72"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 69.99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    },
+    {
+      "id": "furniture-2026-brusali",
+      "category": "furniture",
+      "shape": "shoecabinet",
+      "name": "BRUSALI 三格鞋柜",
+      "color": "#85705a",
+      "roomGroup": "entry",
+      "description": "窄柜体、三层翻门，进门收鞋。",
+      "verifiedPrice": 99.99,
+      "url": "https://www.ikea.com/us/en/p/brusali-shoe-cabinet-with-3-compartments-brown-70267604/",
+      "schema": {
+        "name": "BRUSALI Shoe cabinet with 3 compartments - brown 24x11 3/4x51 1/8 \"",
+        "sku": "702.676.04",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "99.99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/brusali-shoe-cabinet-with-3-compartments-brown-70267604/"
+        },
+        "description": "BRUSALI Shoe cabinet with 3 compartments - brown 24x11 3/4x51 1/8 \". Helps you organize your shoes and saves floor space at the same time. You can easily adjust the space in the shoe compartments by moving or taking away the dividers. This shoe cabinet must be mounted to the wall."
+      },
+      "measurements": [
+        {
+          "measure": "24 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "11 3/4 \"",
+          "name": "Depth",
+          "type": "00044"
+        },
+        {
+          "measure": "51 1/8 \"",
+          "name": "Height",
+          "type": "00041"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Particleboard, Paper foil, Plastic edging",
+              "part": "Top panel/ Bottom panel:"
+            },
+            {
+              "material": "Particleboard, Paper foil",
+              "part": "Side panel/ Shelf:"
+            },
+            {
+              "material": "Fiberboard, Particleboard, Paper foil",
+              "part": "Drawer front:"
+            },
+            {
+              "material": "Polystyrene",
+              "part": "Drawer side:"
+            },
+            {
+              "material": "Particleboard, Plastic foil",
+              "part": "Drawer bottom/ Drawer back:"
+            },
+            {
+              "material": "Fiberboard, Printed and embossed acrylic paint",
+              "part": "Back panel:"
+            },
+            {
+              "material": "Particleboard, Paper foil, Melamine foil",
+              "part": "Back rail:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/brusali-shoe-cabinet-with-3-compartments-brown__0710744_pe727762_s5.jpg",
+      "image": "products/furniture-2026/brusali.jpg",
+      "imageBytes": 22817,
+      "gamePrice": 70,
+      "reference": {
+        "brand": "IKEA",
+        "name": "BRUSALI Shoe cabinet with 3 compartments - brown 24x11 3/4x51 1/8 \"",
+        "url": "https://www.ikea.com/us/en/p/brusali-shoe-cabinet-with-3-compartments-brown-70267604/",
+        "image": "products/furniture-2026/brusali.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/brusali-shoe-cabinet-with-3-compartments-brown__0710744_pe727762_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 24 英寸 × 深 11 3/4 英寸 × 高 51 1/8 英寸"
+          ],
+          [
+            "主要材质",
+            "纸箔饰面刨花板；纤维板背板；聚苯乙烯抽屉侧板"
+          ],
+          [
+            "款式",
+            "brown 24x11 3/4x51 1/8 \""
+          ],
+          [
+            "产品编号",
+            "702.676.04"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 99.99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    },
+    {
+      "id": "furniture-2026-tarno",
+      "category": "furniture",
+      "shape": "outdoortable",
+      "name": "TÄRNÖ 户外折叠桌",
+      "color": "#ac8256",
+      "roomGroup": "outdoor",
+      "description": "小尺寸木桌面和黑色金属腿，阳台也能放。",
+      "verifiedPrice": 39.99,
+      "url": "https://www.ikea.com/us/en/p/taernoe-table-outdoor-black-light-brown-stained-70095429/",
+      "schema": {
+        "name": "TÄRNÖ Table, outdoor - black/light brown stained 21 5/8x21 1/4 \"",
+        "sku": "700.954.29",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "39.99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/taernoe-table-outdoor-black-light-brown-stained-70095429/"
+        },
+        "description": "TÄRNÖ Table, outdoor - black/light brown stained 21 5/8x21 1/4 \". The table folds to be easy to store when not in use – you only need to loosen a screw, no tools required. Seats 2. Only recommended for outdoor use. Possible to separate for recycling or energy recovery if available in your community."
+      },
+      "measurements": [
+        {
+          "measure": "21 5/8 \"",
+          "name": "Length",
+          "type": "00001"
+        },
+        {
+          "measure": "21 1/4 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "27 1/2 \"",
+          "name": "Height",
+          "type": "00041"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Solid acacia wood, Acrylic stain",
+              "part": "Table top:"
+            },
+            {
+              "material": "Steel, Polyester powder coating",
+              "part": "Leg/ Rail/ Support:"
+            },
+            {
+              "material": "Polypropylene",
+              "part": "Feet:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/taernoe-table-outdoor-black-light-brown-stained__0735751_pe740159_s5.jpg",
+      "image": "products/furniture-2026/tarno.jpg",
+      "imageBytes": 23830,
+      "gamePrice": 28,
+      "reference": {
+        "brand": "IKEA",
+        "name": "TÄRNÖ Table, outdoor - black/light brown stained 21 5/8x21 1/4 \"",
+        "url": "https://www.ikea.com/us/en/p/taernoe-table-outdoor-black-light-brown-stained-70095429/",
+        "image": "products/furniture-2026/tarno.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/taernoe-table-outdoor-black-light-brown-stained__0735751_pe740159_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 21 1/4 英寸 × 高 27 1/2 英寸 × 长 21 5/8 英寸"
+          ],
+          [
+            "主要材质",
+            "相思木实木桌面；粉末涂层钢制桌腿"
+          ],
+          [
+            "款式",
+            "black/light brown stained 21 5/8x21 1/4 \""
+          ],
+          [
+            "产品编号",
+            "700.954.29"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 39.99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    },
+    {
+      "id": "cat-2026-utsadd-house",
+      "category": "cats",
+      "shape": "condo",
+      "name": "UTSÅDD 绿色猫屋",
+      "color": "#77936d",
+      "roomGroup": "living",
+      "description": "可折叠的绿色小猫屋，里面的软垫另售。",
+      "verifiedPrice": 9.99,
+      "url": "https://www.ikea.com/us/en/p/utsadd-cat-house-green-50635443/",
+      "schema": {
+        "name": "UTSÅDD Cat house - green 13x15x13 \"",
+        "sku": "506.354.43",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "9.99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/utsadd-cat-house-green-50635443/"
+        },
+        "description": "UTSÅDD Cat house - green 13x15x13 \". Place the cat house into the KALLAX shelving unit for a safe and comfortable sleeping space for your cat - and it comes with a view. Complete with a soft cushion for better comfort, sold separately. May be combined with UTSÅDD pet cushion 13x15 in. For cats."
+      },
+      "measurements": [
+        {
+          "measure": "13 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "15 \"",
+          "name": "Depth",
+          "type": "00044"
+        },
+        {
+          "measure": "13 \"",
+          "name": "Height",
+          "type": "00041"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "100% polyester (min. 90% recycled)",
+              "part": "Main part:"
+            },
+            {
+              "material": "Paperboard (min. 30% recycled)",
+              "part": "Insert:"
+            },
+            {
+              "material": "100 % polypropylene",
+              "part": "Inner fabric:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/utsadd-cat-house-green__1486663_pe1002498_s5.jpg",
+      "image": "products/furniture-2026/utsadd-house.jpg",
+      "imageBytes": 25876,
+      "gamePrice": 7,
+      "reference": {
+        "brand": "IKEA",
+        "name": "UTSÅDD Cat house - green 13x15x13 \"",
+        "url": "https://www.ikea.com/us/en/p/utsadd-cat-house-green-50635443/",
+        "image": "products/furniture-2026/utsadd-house.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/utsadd-cat-house-green__1486663_pe1002498_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 13 英寸 × 深 15 英寸 × 高 13 英寸"
+          ],
+          [
+            "主要材质",
+            "聚酯纤维面料（至少 90% 再生）；纸板内衬（至少 30% 再生）"
+          ],
+          [
+            "款式",
+            "green 13x15x13 \""
+          ],
+          [
+            "产品编号",
+            "506.354.43"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 9.99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。 实物是单层可折叠猫屋，软垫另售；游戏用猫屋模型示意。"
+      }
+    },
+    {
+      "id": "cat-2026-utsadd-cushion",
+      "category": "cats",
+      "shape": "bed",
+      "name": "UTSÅDD 猫咪软垫",
+      "color": "#92a28e",
+      "roomGroup": "living",
+      "description": "灰绿色小软垫，可以单独摆放或放进猫屋。",
+      "verifiedPrice": 5.99,
+      "url": "https://www.ikea.com/us/en/p/utsadd-pet-cushion-gray-green-off-white-90623674/",
+      "schema": {
+        "name": "UTSÅDD Pet cushion - gray-green/off-white 13x15 \"",
+        "sku": "906.236.74",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "5.99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/utsadd-pet-cushion-gray-green-off-white-90623674/"
+        },
+        "description": "UTSÅDD Pet cushion - gray-green/off-white 13x15 \". On this cushion your small pet has a place to curl up to sleep and snuggle, helping your pet relax and feel safe. This cushion fits our UTSÅDD cat houses and can also be used as a floor cushion for smaller pets. Recommended for cats and small dogs."
+      },
+      "measurements": [
+        {
+          "measure": "15 \"",
+          "name": "Length",
+          "type": "00001"
+        },
+        {
+          "measure": "13 \"",
+          "name": "Width",
+          "type": "00047"
+        },
+        {
+          "measure": "3 oz",
+          "name": "Filling weight",
+          "type": "00087"
+        },
+        {
+          "measure": "7 oz",
+          "name": "Total weight",
+          "type": "00091"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "100 % polyester (100% recycled)",
+              "part": "Cushion cover/ Filling:"
+            },
+            {
+              "material": "100 % polypropylene",
+              "part": "Inner fabric:"
+            },
+            {
+              "material": "100 %polyester, Zinc, Acetal plastic",
+              "part": "Zipper:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/utsadd-pet-cushion-gray-green-off-white__1457448_pe992639_s5.jpg",
+      "image": "products/furniture-2026/utsadd-cushion.jpg",
+      "imageBytes": 25153,
+      "gamePrice": 4,
+      "reference": {
+        "brand": "IKEA",
+        "name": "UTSÅDD Pet cushion - gray-green/off-white 13x15 \"",
+        "url": "https://www.ikea.com/us/en/p/utsadd-pet-cushion-gray-green-off-white-90623674/",
+        "image": "products/furniture-2026/utsadd-cushion.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/utsadd-pet-cushion-gray-green-off-white__1457448_pe992639_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "宽 13 英寸 × 长 15 英寸"
+          ],
+          [
+            "主要材质",
+            "垫套和填充物为 100% 再生聚酯纤维；聚丙烯内衬"
+          ],
+          [
+            "款式",
+            "gray-green/off-white 13x15 \""
+          ],
+          [
+            "产品编号",
+            "906.236.74"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 5.99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。 实物为长方形软垫，游戏用猫床模型示意。"
+      }
+    },
+    {
+      "id": "cat-2026-utsadd-bowl",
+      "category": "cats",
+      "shape": "feeder",
+      "name": "UTSÅDD 不锈钢食盆",
+      "color": "#b4bbbb",
+      "roomGroup": "living",
+      "description": "不锈钢宠物食盆，底部带橡胶圈。",
+      "verifiedPrice": 3.99,
+      "url": "https://www.ikea.com/us/en/p/utsadd-pet-bowl-metal-40638833/",
+      "schema": {
+        "name": "UTSÅDD Pet bowl - metal 8 ½ \"",
+        "sku": "406.388.33",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "price": "3.99",
+          "priceCurrency": "USD",
+          "seller": {
+            "@type": "Organization",
+            "name": "IKEA",
+            "url": "https://www.ikea.com/us/en/"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          },
+          "url": "https://www.ikea.com/us/en/p/utsadd-pet-bowl-metal-40638833/"
+        },
+        "description": "UTSÅDD Pet bowl - metal 8 ½ \"."
+      },
+      "measurements": [
+        {
+          "measure": "8 ½ \"",
+          "name": "Diameter",
+          "type": "00042"
+        },
+        {
+          "measure": "2 \"",
+          "name": "Height",
+          "type": "00041"
+        }
+      ],
+      "materials": [
+        {
+          "materials": [
+            {
+              "material": "Stainless steel",
+              "part": "Bowl:"
+            },
+            {
+              "material": "Synthetic rubber",
+              "part": "Foot ring:"
+            }
+          ]
+        }
+      ],
+      "imageSource": "https://www.ikea.com/us/en/images/products/utsadd-pet-bowl-metal__1534416_pe1016150_s5.jpg",
+      "image": "products/furniture-2026/utsadd-bowl.jpg",
+      "imageBytes": 18091,
+      "gamePrice": 3,
+      "reference": {
+        "brand": "IKEA",
+        "name": "UTSÅDD Pet bowl - metal 8 ½ \"",
+        "url": "https://www.ikea.com/us/en/p/utsadd-pet-bowl-metal-40638833/",
+        "image": "products/furniture-2026/utsadd-bowl.jpg",
+        "imageSource": "https://www.ikea.com/us/en/images/products/utsadd-pet-bowl-metal__1534416_pe1016150_s5.jpg",
+        "checkedAt": "2026-10-04",
+        "specs": [
+          [
+            "官网尺寸",
+            "高 2 英寸 × 直径 8 ½ 英寸"
+          ],
+          [
+            "主要材质",
+            "不锈钢盆体；合成橡胶底圈"
+          ],
+          [
+            "款式",
+            "metal 8 ½ \""
+          ],
+          [
+            "产品编号",
+            "406.388.33"
+          ]
+        ],
+        "retailPrice": {
+          "amount": 3.99,
+          "currency": "USD",
+          "note": "美国官网普通售价，未含税费和运费；会员、门店和限时优惠另计。"
+        },
+        "note": "官方图和参数对应这款实物；3D 复用同类家具的简化形状，不是按实物尺寸或结构复刻。"
+      }
+    }
+  ],
+  "policy": {
+    "market": "US",
+    "currency": "USD",
+    "priceBasis": "Regular public product price in live official page JSON-LD, cross-checked with web result; conditional/expired member offers excluded.",
+    "gamePrice": "Math.max(1, Math.round(retailPrice * 0.7))",
+    "model": "Existing illustrative category shape; not an exact product reproduction.",
+    "images": "Official main product photographs downloaded without edits; original URLs recorded.",
+    "excluded": "Catit legacy US store pages redirect to homepage; old indexed prices not used."
+  }
+}

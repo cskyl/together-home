@@ -1,6 +1,6 @@
 import { DatabaseSync } from 'node:sqlite';
 import { createHash, randomUUID, randomInt } from 'node:crypto';
-import { freshState, validate, balance, study, build, purchase, placeItem, saveDesign } from '../src/state.js';
+import { freshState, validate, balance, study, build, purchase, placeItem, saveDesign, setRoomUse } from '../src/state.js';
 import { allPlans } from '../src/plans.js';
 import { studyReward } from '../src/rewards.js';
 
@@ -42,6 +42,7 @@ export function createStore(path=':memory:',{studyRoll=randomInt}={}) {
       else if(action.type==='place'){try{state=placeItem(state,{id:action.id,position:action.position});}catch(e){throw new ApiError(e.message);}}
       else if(action.type==='select'){if(!allPlans(state).some(p=>p.id===action.plan))throw new ApiError('请选择一个有效户型。');state={...state,selected:action.plan};}
       else if(action.type==='design'){try{state=saveDesign(state,{design:action.design,expectedVersion:action.expectedVersion});}catch(e){throw new ApiError(e.message,e.message.includes('对方刚更新')?409:400);}}
+      else if(action.type==='room-use'){try{state=setRoomUse(state,{plan:action.plan,room:action.room,expectedVersion:action.expectedVersion,expectedPlanVersion:action.expectedPlanVersion});}catch(e){throw new ApiError(e.message,e.code==='ROOM_USE_CONFLICT'?409:400);}}
       else if(action.type==='rename'){state={...state,names:state.names.map((n,i)=>i===m.slot?name(action.name):n)};}
       else if(action.type==='undo'){const event=state.events.findLast(e=>e.type==='study'&&e.person===m.slot);if(!event)throw new ApiError('你还没有可以撤销的学习记录。');if(balance(state)<studyReward(event))throw new ApiError('这次学习的资金已投入建设或购买物品，无法撤销。');state={...state,events:state.events.filter(e=>e.id!==event.id)};try{validate(state);}catch{throw new ApiError('这次学习的资金已用于之前的建设或购买物品，无法撤销。');}}
       else throw new ApiError('不支持的操作。');

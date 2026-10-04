@@ -1,0 +1,530 @@
+{
+  "checkedAt": "2026-10-04",
+  "scope": "Official US handbag retail snapshots; game price equals published USD amount, before tax. No cross-market conversions or discounts.",
+  "method": "Official product pages read through web browsing. Images downloaded directly from image links on those pages. CHANEL srcset width descriptors were removed from image URLs; image content was not altered.",
+  "notes": [
+    "CHANEL 25 Small current product page showed USD 7000; older search-index result of USD 6700 was discarded.",
+    "CHANEL AS6248B2403094305 redirected to a category page and was excluded; active AS6244B2402494305 was verified instead.",
+    "CHANEL dimensions preserve the official display order; no axis ordering is inferred.",
+    "Book Tote and Bobby source pages were last crawled 2026-10-02; other final product pages were crawled 2026-10-04.",
+    "Product pages returned HTTP 403 to a normal direct fetch; no bypass was attempted. Official page content and image links were obtained by ordinary web browsing."
+  ],
+  "products": [
+    {
+      "id": "bag-dior-saddle",
+      "brand": "Dior",
+      "name": "Saddle Bag with Strap",
+      "sku": "M0455CBAA_M900",
+      "checkedAt": "2026-10-04",
+      "market": "United States",
+      "currency": "USD",
+      "amount": 4700,
+      "sourceUrl": "https://www.dior.com/en_us/fashion/products/M0455CBAA_M900",
+      "specs": [
+        [
+          "货号",
+          "M0455CBAA_M900"
+        ],
+        [
+          "材质",
+          "粒面小牛皮；山羊皮和小牛皮内衬"
+        ],
+        [
+          "颜色",
+          "黑色；古金色金属"
+        ],
+        [
+          "尺寸（长×高×宽）",
+          "25.5 × 20 × 6.5 cm"
+        ],
+        [
+          "肩带",
+          "可拆卸、可调节；87–103 cm"
+        ]
+      ],
+      "imageSource": "https://assets.christiandior.com/is/image/diorprod/M0455CBAAM900_SBG_E01-2?%24r4x5_raw%24=&bfc=on&crop=0%2C0%2C4000%2C5000&hei=2000&qlt=80&scale=1&wid=1600",
+      "localImage": "products/bags/dior-saddle.jpg",
+      "imageResponse": {
+        "status": 200,
+        "contentType": "image/jpeg",
+        "bytes": 138965,
+        "decodedWidth": 1600,
+        "decodedHeight": 2000,
+        "visualCheck": "Confirmed full same-SKU product image; no placeholder or error response."
+      },
+      "verification": "US official product page directly opened; price, SKU, material, color, dimensions and linked product image matched."
+    },
+    {
+      "id": "bag-dior-small-lady",
+      "brand": "Dior",
+      "name": "Small Lady Dior Bag",
+      "sku": "M0618ONGE_M900",
+      "checkedAt": "2026-10-04",
+      "market": "United States",
+      "currency": "USD",
+      "amount": 6200,
+      "sourceUrl": "https://www.dior.com/en_us/fashion/products/M0618ONGE_M900",
+      "specs": [
+        [
+          "货号",
+          "M0618ONGE_M900"
+        ],
+        [
+          "材质",
+          "羊皮；山羊皮和羊皮内衬"
+        ],
+        [
+          "颜色",
+          "黑色；浅金色金属"
+        ],
+        [
+          "尺寸（长×高×宽）",
+          "20 × 17 × 8 cm"
+        ],
+        [
+          "肩带",
+          "可调节皮肩带 108–118 cm；另配可拆卸链条肩带"
+        ]
+      ],
+      "imageSource": "https://assets.christiandior.com/is/image/diorprod/M0618ONGEM900_E01?%24default_GHC%24=&bfc=on&crop=479%2C510%2C1003%2C1298&hei=2000&qlt=80&scale=0.875&wid=1850",
+      "localImage": "products/bags/dior-small-lady.jpg",
+      "imageResponse": {
+        "status": 200,
+        "contentType": "image/jpeg",
+        "bytes": 142412,
+        "decodedWidth": 1850,
+        "decodedHeight": 2000,
+        "visualCheck": "Confirmed full same-SKU product image; no placeholder or error response."
+      },
+      "verification": "US official product page directly opened; price, SKU, material, color, dimensions and linked product image matched."
+    },
+    {
+      "id": "bag-dior-medium-book-tote",
+      "brand": "Dior",
+      "name": "Medium Dior Book Tote",
+      "sku": "M1296ZRIW_M828",
+      "checkedAt": "2026-10-04",
+      "market": "United States",
+      "currency": "USD",
+      "amount": 3450,
+      "sourceUrl": "https://www.dior.com/en_us/fashion/products/M1296ZRIW_M828",
+      "specs": [
+        [
+          "货号",
+          "M1296ZRIW_M828"
+        ],
+        [
+          "材质",
+          "主体为棉；Dior Oblique 刺绣"
+        ],
+        [
+          "颜色",
+          "米白与蓝色"
+        ],
+        [
+          "尺寸（长×高×宽）",
+          "36 × 27.5 × 16.5 cm"
+        ],
+        [
+          "提手垂直长度",
+          "16 cm"
+        ]
+      ],
+      "imageSource": "https://assets.christiandior.com/is/image/diorprod/M1296ZRIWM828_SBG_E01?%24r9x10_raw%24=&bfc=on&crop=0%2C0%2C4000%2C5000&hei=2000&qlt=80&scale=1&wid=1850",
+      "localImage": "products/bags/dior-medium-book-tote.jpg",
+      "imageResponse": {
+        "status": 200,
+        "contentType": "image/jpeg",
+        "bytes": 330665,
+        "decodedWidth": 1850,
+        "decodedHeight": 2000,
+        "visualCheck": "Confirmed full same-SKU product image; no placeholder or error response."
+      },
+      "verification": "US official product page directly opened; price, SKU, material, color, dimensions and linked product image matched."
+    },
+    {
+      "id": "bag-dior-medium-bobby",
+      "brand": "Dior",
+      "name": "Medium Dior Bobby Bag",
+      "sku": "M9319UMOL_M900",
+      "checkedAt": "2026-10-04",
+      "market": "United States",
+      "currency": "USD",
+      "amount": 3900,
+      "sourceUrl": "https://www.dior.com/en_us/fashion/products/M9319UMOL_M900",
+      "specs": [
+        [
+          "货号",
+          "M9319UMOL_M900"
+        ],
+        [
+          "材质",
+          "Box 小牛皮；羊皮和小牛皮内衬"
+        ],
+        [
+          "颜色",
+          "黑色；古金色金属"
+        ],
+        [
+          "尺寸（长×高×宽）",
+          "22.5 × 17.5 × 6.5 cm"
+        ],
+        [
+          "肩带",
+          "可拆卸、可调节；76–124 cm"
+        ]
+      ],
+      "imageSource": "https://assets.christiandior.com/is/image/diorprod/M9319UMOLM900_SBG_E01-1?%24r9x10_raw%24=&bfc=on&crop=0%2C0%2C4000%2C5000&hei=2000&qlt=80&scale=1&wid=1850",
+      "localImage": "products/bags/dior-medium-bobby.jpg",
+      "imageResponse": {
+        "status": 200,
+        "contentType": "image/jpeg",
+        "bytes": 83624,
+        "decodedWidth": 1850,
+        "decodedHeight": 2000,
+        "visualCheck": "Confirmed full same-SKU product image; no placeholder or error response."
+      },
+      "verification": "US official product page directly opened; price, SKU, material, color, dimensions and linked product image matched."
+    },
+    {
+      "id": "bag-chanel-classic-1112",
+      "brand": "CHANEL",
+      "name": "Classic 11.12 Handbag",
+      "sku": "A01112-Y01295-94305",
+      "checkedAt": "2026-10-04",
+      "market": "United States",
+      "currency": "USD",
+      "amount": 11700,
+      "sourceUrl": "https://www.chanel.com/us/fashion/p/A01112Y0129594305/classic-11-12-handbag-lambskin-gold-tone-metal/",
+      "specs": [
+        [
+          "货号",
+          "A01112-Y01295-94305"
+        ],
+        [
+          "材质",
+          "羊皮与金色金属"
+        ],
+        [
+          "颜色",
+          "黑色"
+        ],
+        [
+          "官网尺寸",
+          "6.1 × 10 × 2.6 in"
+        ]
+      ],
+      "imageSource": "https://www.chanel.com/images///f_auto%2Cq_auto%3Agood%2Cdpr_1.1/w_3200/-9543206305822.jpg",
+      "localImage": "products/bags/chanel-classic-1112.jpg",
+      "imageResponse": {
+        "status": 200,
+        "contentType": "image/jpeg",
+        "bytes": 1284208,
+        "decodedWidth": 3520,
+        "decodedHeight": 4110,
+        "visualCheck": "Confirmed full same-SKU product image; no placeholder or error response."
+      },
+      "verification": "US official product page directly opened; price, SKU, material, color, dimensions and linked product image matched."
+    },
+    {
+      "id": "bag-chanel-22-small",
+      "brand": "CHANEL",
+      "name": "CHANEL 22 Small Handbag",
+      "sku": "AS3260-B19059-94305",
+      "checkedAt": "2026-10-04",
+      "market": "United States",
+      "currency": "USD",
+      "amount": 6100,
+      "sourceUrl": "https://www.chanel.com/us/fashion/p/AS3260B1905994305/chanel-22-small-handbag-shiny-calfskin-gold-tone-metal/",
+      "specs": [
+        [
+          "货号",
+          "AS3260-B19059-94305"
+        ],
+        [
+          "材质",
+          "亮面小牛皮与金色金属"
+        ],
+        [
+          "颜色",
+          "黑色"
+        ],
+        [
+          "官网尺寸",
+          "13.8 × 14.6 × 2.8 in"
+        ]
+      ],
+      "imageSource": "https://www.chanel.com/images/as///f_auto%2Cq_auto%3Agood%2Cdpr_1.1/w_3200/-83612773.jpg",
+      "localImage": "products/bags/chanel-22-small.jpg",
+      "imageResponse": {
+        "status": 200,
+        "contentType": "image/jpeg",
+        "bytes": 1063271,
+        "decodedWidth": 3520,
+        "decodedHeight": 4110,
+        "visualCheck": "Confirmed full same-SKU product image; no placeholder or error response."
+      },
+      "verification": "US official product page directly opened; price, SKU, material, color, dimensions and linked product image matched."
+    },
+    {
+      "id": "bag-chanel-25-small",
+      "brand": "CHANEL",
+      "name": "CHANEL 25 Small Handbag",
+      "sku": "AS5293-B20304-94305",
+      "checkedAt": "2026-10-04",
+      "market": "United States",
+      "currency": "USD",
+      "amount": 7000,
+      "sourceUrl": "https://www.chanel.com/us/fashion/p/AS5293B2030494305/chanel-25-small-handbag-grained-calfskin-gold-tone-metal/",
+      "specs": [
+        [
+          "货号",
+          "AS5293-B20304-94305"
+        ],
+        [
+          "材质",
+          "粒面小牛皮与金色金属"
+        ],
+        [
+          "颜色",
+          "黑色"
+        ],
+        [
+          "官网尺寸",
+          "11.8 × 10.2 × 5.5 in"
+        ]
+      ],
+      "imageSource": "https://www.chanel.com/images/as///f_auto%2Cq_auto%3Agood%2Cdpr_1.1/w_3200/-83612790.jpg",
+      "localImage": "products/bags/chanel-25-small.jpg",
+      "imageResponse": {
+        "status": 200,
+        "contentType": "image/jpeg",
+        "bytes": 733335,
+        "decodedWidth": 3520,
+        "decodedHeight": 4110,
+        "visualCheck": "Confirmed full same-SKU product image; no placeholder or error response."
+      },
+      "verification": "US official product page directly opened; price, SKU, material, color, dimensions and linked product image matched."
+    },
+    {
+      "id": "bag-chanel-small-shopping",
+      "brand": "CHANEL",
+      "name": "Small Shopping Bag",
+      "sku": "AS6244-B24024-94305",
+      "checkedAt": "2026-10-04",
+      "market": "United States",
+      "currency": "USD",
+      "amount": 7500,
+      "sourceUrl": "https://www.chanel.com/us/fashion/p/AS6244B2402494305/small-shopping-bag-grained-calfskin-gold-tone-metal/",
+      "specs": [
+        [
+          "货号",
+          "AS6244-B24024-94305"
+        ],
+        [
+          "材质",
+          "粒面小牛皮与金色金属"
+        ],
+        [
+          "颜色",
+          "黑色"
+        ],
+        [
+          "官网尺寸",
+          "9.4 × 11.8 × 5.3 in"
+        ],
+        [
+          "系列",
+          "Fall-Winter 2026"
+        ]
+      ],
+      "imageSource": "https://www.chanel.com/images/as///f_auto%2Cq_auto%3Agood%2Cdpr_1.1/w_3200/-83807557.jpg",
+      "localImage": "products/bags/chanel-small-shopping.jpg",
+      "imageResponse": {
+        "status": 200,
+        "contentType": "image/jpeg",
+        "bytes": 1038928,
+        "decodedWidth": 3520,
+        "decodedHeight": 4110,
+        "visualCheck": "Confirmed full same-SKU product image; no placeholder or error response."
+      },
+      "verification": "US official product page directly opened; price, SKU, material, color, dimensions and linked product image matched."
+    },
+    {
+      "id": "bag-lv-speedy-bandouliere-25",
+      "brand": "Louis Vuitton",
+      "name": "Speedy Bandoulière 25",
+      "sku": "M46977",
+      "checkedAt": "2026-10-04",
+      "market": "United States",
+      "currency": "USD",
+      "amount": 1980,
+      "sourceUrl": "https://us.louisvuitton.com/eng-us/products/speedy-bandouliere-25-monogram-nvprod5320019v/M46977",
+      "specs": [
+        [
+          "货号",
+          "M46977"
+        ],
+        [
+          "材质",
+          "Monogram 涂层帆布；天然牛皮饰边；织物内衬"
+        ],
+        [
+          "配色",
+          "Monogram；金色金属"
+        ],
+        [
+          "尺寸（长×高×宽）",
+          "9.8 × 7.5 × 5.9 in"
+        ],
+        [
+          "肩带垂直长度",
+          "可拆卸、可调节；18.3–21.7 in"
+        ]
+      ],
+      "imageSource": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-speedy-bandouliere-25--M46977_PM2_Front%20view.jpg",
+      "localImage": "products/bags/lv-speedy-bandouliere-25.png",
+      "imageResponse": {
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 2704216,
+        "decodedWidth": 2000,
+        "decodedHeight": 2000,
+        "visualCheck": "Confirmed full same-SKU product image; no placeholder or error response."
+      },
+      "verification": "US official product page directly opened; price, SKU, material, color, dimensions and linked product image matched."
+    },
+    {
+      "id": "bag-lv-neverfull-mm",
+      "brand": "Louis Vuitton",
+      "name": "Neverfull MM",
+      "sku": "M46987",
+      "checkedAt": "2026-10-04",
+      "market": "United States",
+      "currency": "USD",
+      "amount": 2240,
+      "sourceUrl": "https://us.louisvuitton.com/eng-us/products/neverfull-mm-monogram-nvprod5350101v/M46987/",
+      "specs": [
+        [
+          "货号",
+          "M46987"
+        ],
+        [
+          "材质",
+          "Monogram 涂层帆布；天然牛皮饰边；条纹织物内衬"
+        ],
+        [
+          "配色",
+          "Monogram / Cherry（樱桃红内衬）"
+        ],
+        [
+          "尺寸（长×高×宽）",
+          "18.5 × 11 × 5.5 in"
+        ],
+        [
+          "随包配置",
+          "可拆卸拉链小袋；钩扣闭合"
+        ]
+      ],
+      "imageSource": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-neverfull-mm--M46987_PM2_Front%20view.jpg",
+      "localImage": "products/bags/lv-neverfull-mm.png",
+      "imageResponse": {
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 2148227,
+        "decodedWidth": 2000,
+        "decodedHeight": 2000,
+        "visualCheck": "Confirmed full same-SKU product image; no placeholder or error response."
+      },
+      "verification": "US official product page directly opened; price, SKU, material, color, dimensions and linked product image matched."
+    },
+    {
+      "id": "bag-lv-alma-bb",
+      "brand": "Louis Vuitton",
+      "name": "Alma BB",
+      "sku": "M46990",
+      "checkedAt": "2026-10-04",
+      "market": "United States",
+      "currency": "USD",
+      "amount": 2000,
+      "sourceUrl": "https://us.louisvuitton.com/eng-us/products/alma-bb-monogram-nvprod5190086v/M46990",
+      "specs": [
+        [
+          "货号",
+          "M46990"
+        ],
+        [
+          "材质",
+          "Monogram 涂层帆布；天然牛皮饰边；织物内衬"
+        ],
+        [
+          "配色",
+          "Monogram；金色金属"
+        ],
+        [
+          "尺寸（长×高×宽）",
+          "9.3 × 6.9 × 4.5 in"
+        ],
+        [
+          "肩带垂直长度",
+          "可拆卸、可调节；19.7–24.4 in"
+        ]
+      ],
+      "imageSource": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-alma-bb--M46990_PM2_Front%20view.jpg",
+      "localImage": "products/bags/lv-alma-bb.png",
+      "imageResponse": {
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 1525893,
+        "decodedWidth": 2000,
+        "decodedHeight": 2000,
+        "visualCheck": "Confirmed full same-SKU product image; no placeholder or error response."
+      },
+      "verification": "US official product page directly opened; price, SKU, material, color, dimensions and linked product image matched."
+    },
+    {
+      "id": "bag-lv-noe",
+      "brand": "Louis Vuitton",
+      "name": "Noé",
+      "sku": "M46976",
+      "checkedAt": "2026-10-04",
+      "market": "United States",
+      "currency": "USD",
+      "amount": 2010,
+      "sourceUrl": "https://us.louisvuitton.com/eng-us/products/noe-monogram-nvprod5320004v/M46976",
+      "specs": [
+        [
+          "货号",
+          "M46976"
+        ],
+        [
+          "材质",
+          "Monogram 涂层帆布；天然牛皮饰边；织物内衬"
+        ],
+        [
+          "配色",
+          "Monogram；金色金属"
+        ],
+        [
+          "尺寸（长×高×宽）",
+          "10.8 × 14.2 × 7.9 in"
+        ],
+        [
+          "肩带垂直长度",
+          "可拆卸、可调节；10.2–12.6 in"
+        ]
+      ],
+      "imageSource": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-noe--M46976_PM2_Front%20view.jpg",
+      "localImage": "products/bags/lv-noe.png",
+      "imageResponse": {
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 4069959,
+        "decodedWidth": 2000,
+        "decodedHeight": 2000,
+        "visualCheck": "Confirmed full same-SKU product image; no placeholder or error response."
+      },
+      "verification": "US official product page directly opened; price, SKU, material, color, dimensions and linked product image matched."
+    }
+  ]
+}

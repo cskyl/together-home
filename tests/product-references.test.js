@@ -6,16 +6,18 @@ import * as THREE from 'three';
 import {items,furnitureGroups} from '../src/items.js';
 import {furnitureAdditions} from '../src/furniture-catalog.js';
 import {furnitureExpansion} from '../src/furniture-expansion.js';
+import {furniture2026Items} from '../src/furniture-2026.js';
+import {bagItems} from '../src/bag-catalog.js';
 import {createItemModel,disposeModel} from '../src/item-mesh.js';
 
-test('92件家具、猫用品、装饰和汽车都有官方图片与实物规格，含6辆兼容旧车',()=>{
-  const furniture=items.filter(i=>i.category==='furniture'),cars=items.filter(i=>i.category==='cars'),referenced=items.filter(i=>['furniture','cars','cats','decor'].includes(i.category));
-  assert.equal(furniture.length,58);assert.equal(cars.length,14);assert.equal(items.length,123);
-  assert.equal(items.filter(i=>!i.archived).length,117);assert.equal(referenced.length,92);assert.equal(referenced.filter(i=>!i.archived).length,86);
+test('家具、猫用品、包包、装饰和汽车都有官方图片与实物规格，含6辆兼容旧车',()=>{
+  const furniture=items.filter(i=>i.category==='furniture'),cars=items.filter(i=>i.category==='cars'),referenced=items.filter(i=>['furniture','cars','cats','decor','bags'].includes(i.category)),added=furniture2026Items.length+bagItems.length;
+  assert.equal(furniture.length,58+furniture2026Items.filter(i=>i.category==='furniture').length);assert.equal(cars.length,14);assert.equal(items.length,123+added);
+  assert.equal(items.filter(i=>!i.archived).length,117+added);assert.equal(referenced.length,92+added);assert.equal(referenced.filter(i=>!i.archived).length,86+added);
   for(const item of referenced){
     const r=item.reference;assert.ok(r,item.id+' has a real reference');assert.ok(r.brand&&r.name);assert.equal(new URL(r.url).protocol,'https:');assert.equal(new URL(r.imageSource).protocol,'https:');assert.match(r.checkedAt,/^\d{4}-\d{2}-\d{2}$/);
     assert.ok(r.specs.length>=2,item.id+' has usable specifications');for(const [label,value]of r.specs){assert.ok(typeof label==='string'&&label.trim());assert.ok(typeof value==='string'&&value.trim());}
-    assert.ok(r.image.startsWith('items/'));assert.ok(!r.image.includes('..'));const image=readFileSync(resolve('public',r.image));assert.ok(image.length>1000,item.id+' image is not empty');
+    assert.match(r.image,/^(items|products)\/[a-zA-Z0-9/_-]+\.(jpg|jpeg|png|webp)$/);assert.ok(!r.image.includes('..'));const image=readFileSync(resolve('public',r.image));assert.ok(image.length>1000,item.id+' image is not empty');
     assert.ok(image[0]===0xff&&image[1]===0xd8||image.subarray(1,4).toString()==='PNG'||image.subarray(8,12).toString()==='WEBP',item.id+' uses a real bitmap image');
     if(r.retailPrice){assert.ok(Number.isFinite(r.retailPrice.amount)&&r.retailPrice.amount>0);assert.equal(r.retailPrice.currency,'USD');assert.ok(Number.isSafeInteger(item.price)&&item.price>0);}
   }

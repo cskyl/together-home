@@ -55,5 +55,14 @@ for (const plan of plans) {
   plan.price = {amount:startingPrices[plan.id],currency:'USD',kind:'starting',checkedAt:'2026-09-20',source:plan.source};
   plan.floorFile ||= `${plan.id}-floor.jpg`;
 }
-export const allPlans = state => [...plans,...(state?.customPlans||[]).map(designToPlan)];
-export const getPlan = (id,state) => {const official=plans.find(p=>p.id===id);if(official)return official;const custom=state?.customPlans?.find(p=>p.id===id);return custom?designToPlan(custom):plans[0];};
+export const basePlans = state => [...plans,...(state?.customPlans||[]).map(designToPlan)];
+export const roomOverride = (id,state) => state?.roomOverrides?.find(entry=>entry.plan===id);
+function applyRoomOverride(plan,state){
+  const override=roomOverride(plan.id,state);
+  if(!override?.room)return plan;
+  // Preserve the plan ID, geometry, construction target and original room data.
+  // Purchased objects use the same room ID, so their placement stays intact.
+  return {...plan,rooms:plan.rooms.map(r=>r.id===override.room&&r.type!=='garage'?{...r,name:'猫房',type:'cat',furnished:false,catRoomOverride:true,originalName:r.name,originalType:r.type}:r)};
+}
+export const allPlans = state => basePlans(state).map(plan=>applyRoomOverride(plan,state));
+export const getPlan = (id,state) => applyRoomOverride(basePlans(state).find(p=>p.id===id)||plans[0],state);

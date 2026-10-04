@@ -19,7 +19,9 @@
     "host": "node backend/server.mjs",
     "test:cats": "node tests/cats-browser.mjs",
     "test:products": "node tests/real-products-browser.mjs",
-    "test:vehicles": "node tests/vehicles-browser.mjs"
+    "test:vehicles": "node tests/vehicles-browser.mjs",
+    "test:cat-rooms": "node tests/cat-room-conversion-browser.mjs",
+    "test:catalog": "node tests/october-catalog-browser.mjs"
   },
   "dependencies": {
     "three": "^0.180.0",

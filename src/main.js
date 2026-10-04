@@ -1,14 +1,14 @@
 import './style.css';
-import { plans,getPlan as resolvePlan } from './plans.js';
+import { plans,getPlan as resolvePlan,roomOverride } from './plans.js';
 import { constructionTotal,constructionProgress,progressLabel } from './construction.js';
 import { createLedger } from './ledger.js';
-import { STORAGE_KEY,freshState,validate,balance,invested,study,build,undoStudy,inventory } from './state.js';
+import { STORAGE_KEY,freshState,validate,balance,invested,study,build,undoStudy,inventory,setRoomUse } from './state.js';
 import { createScene } from './scene.js';
 import { createCloud, SESSION_KEY } from './cloud.js';
 import { createShop } from './shop.js';
 import { itemName } from './items.js';
 import { createDesigner } from './designer.js';
-import { designToPlan,planImage } from './designs.js';
+import { planImage } from './designs.js';
 import { DEFAULT_FOCUS,focusLabel,studyReward } from './rewards.js';
 const getPlan=id=>resolvePlan(id,state);
 
@@ -19,7 +19,7 @@ const $=s=>document.querySelector(s);
 let storageIssue=false;
 function read(){try{const raw=localStorage.getItem(STORAGE_KEY);return raw?validate(JSON.parse(raw)):freshState();}catch{storageIssue=true;return freshState();}}
 let state=read(),preview=true,interior=true,labels=false,person=0,selectedRoom=null,flat=false,scene;
-let cloud,networkBusy=false,connectionStatus='loading',shop,designer,ledger,mutationError='',sceneKey='',studyFormBusy=false;
+let cloud,networkBusy=false,connectionStatus='loading',shop,designer,ledger,mutationError='',sceneKey='',studyFormBusy=false,roomUseBusy=false;
 const isCloud=()=>!!cloud?.session?.roomId;
 document.querySelector('#app').innerHTML=`
 <header class="header"><a class="brand" href="#" aria-label="一起盖房主页"><span class="brand-mark">${icon('home',25)}</span><span>一起盖房<small>STUDY & BUILD</small></span></a><nav><span class="nav-active">盖房子</span><button id="history-nav">收支账本</button></nav><div class="header-end"><span class="local-status"><i></i> 本机模式 · 尚未联机</span><button class="icon-button" id="settings" aria-label="设置与存档">${icon('settings')}</button></div></header>
@@ -38,12 +38,28 @@ document.querySelector('#app').innerHTML=`
 function toast(msg){$('#toast').textContent=msg;$('#toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('#toast').classList.remove('show'),4300);}
 function commit(next){validate(next);try{localStorage.setItem(STORAGE_KEY,JSON.stringify(next));}catch{throw Error('浏览器无法保存记录，请检查存储权限或空间。');}state=next;render();}
 async function mutate(fn,action){mutationError='';if(networkBusy){mutationError='上一笔操作正在保存，稍等一下。';return false;}networkBusy=true;try{if(isCloud()){return await cloud.action(action);}else{const raw=localStorage.getItem(STORAGE_KEY);const current=raw?validate(JSON.parse(raw)):state;const next=fn(current);commit(next);return {requestId:next.events.at(-1)?.id};}}catch(e){mutationError=e.message;toast(e.message);return false;}finally{networkBusy=false;}}
-function sceneUpdate(){if(!scene)return;const owned=inventory(state),key=JSON.stringify([state.selected,preview,interior,labels,invested(state),owned,state.placements,state.customPlans?.find(d=>d.id===state.selected)]);if(key!==sceneKey){scene.update(getPlan(state.selected),{preview,interior,labels,amount:invested(state),inventory:owned,placements:state.placements||[]});sceneKey=key;}scene.select(selectedRoom);}
-function selectRoom(id){selectedRoom=id;scene.select(id);const r=getPlan(state.selected).rooms.find(r=>r.id===id);const box=$('#room-detail');if(!r){box.hidden=true;return;}box.hidden=false;box.innerHTML=`<span class="tiny-label">ROOM DETAILS</span><strong>${esc(r.name)}</strong><span>${r.type==='study'?'两张桌子，可以各占一边。':r.type==='living'?'沙发、茶几，学完来这儿歇一会儿。':r.type==='bed'?'放张床，留点走动的空间。':'转个角度，或者放大看看。'}</span><button aria-label="关闭房间信息">×</button>`;box.querySelector('button').onclick=()=>{selectedRoom=null;box.hidden=true;scene.select(null);};}
+function sceneUpdate(){if(!scene)return;const owned=inventory(state),key=JSON.stringify([state.selected,preview,interior,labels,invested(state),owned,state.placements,state.customPlans?.find(d=>d.id===state.selected),roomOverride(state.selected,state)]);if(key!==sceneKey){scene.update(getPlan(state.selected),{preview,interior,labels,amount:invested(state),inventory:owned,placements:state.placements||[]});sceneKey=key;}scene.select(selectedRoom);}
+function selectRoom(id){
+  const plan=getPlan(state.selected),r=plan.rooms.find(r=>r.id===id),box=$('#room-detail');selectedRoom=r?id:null;scene?.select(selectedRoom);$('#room-picker').value=selectedRoom||'';
+  if(!r){box.hidden=true;return;}
+  const converted=!!r.catRoomOverride,canConvert=!['garage','cat'].includes(r.type),override=roomOverride(plan.id,state),pending=isCloud()?cloud.session.pending?.action:null,retry=pending?.type==='room-use'&&pending.plan===plan.id;
+  const description=converted?`原来是${r.originalName}。已买物品和摆放都还在，可以去商店继续布置。`:r.type==='cat'?'猫房可以自己布置。要改原始用途，可以打开户型编辑器。':r.type==='garage'?'车库留着停车。猫房可以选其他房间。':r.type==='study'?'两张桌子，可以各占一边。':r.type==='living'?'沙发、茶几，学完来这儿歇一会儿。':r.type==='bed'?'放张床，留点走动的空间。':'转个角度，或者放大看看。';
+  box.hidden=!interior||flat;box.innerHTML=`<span class="tiny-label">ROOM DETAILS</span><strong>${esc(r.name)}</strong><span class="room-description">${esc(description)}</span><button class="room-close" aria-label="关闭房间信息">×</button>${converted||canConvert?`<button class="room-use-button" id="room-use" ${roomUseBusy?'disabled':''}>${roomUseBusy?'正在保存…':retry?'重试房间设置':converted?'恢复原用途':'设为猫房'}</button><p class="room-use-note">${retry?'上次设置还未确认，点按钮重试，不会重复修改。':converted?'恢复后已买物品仍保留。':override?.room?'每套可改一间，原来的猫房会恢复用途。':'只改房间用途，施工、账目和已买物品都保留。'}</p>`:''}<p id="room-use-error" class="form-error" role="alert"></p>`;
+  box.querySelector('.room-close').onclick=()=>selectRoom(null);
+  const button=box.querySelector('#room-use');if(button)button.onclick=async()=>{
+    if(roomUseBusy)return;
+    const pending=isCloud()?cloud.session.pending?.action:null;
+    const action=pending?.type==='room-use'&&pending.plan===plan.id?pending:{type:'room-use',plan:plan.id,room:converted?null:r.id,expectedVersion:override?.version||0,expectedPlanVersion:plan.custom?plan.version:0};
+    roomUseBusy=true;button.disabled=true;button.textContent='正在保存…';
+    const result=await mutate(s=>setRoomUse(s,action),action);roomUseBusy=false;
+    if(state.selected===plan.id){selectRoom(selectedRoom);if(!result&&$('#room-use-error'))$('#room-use-error').textContent=mutationError;}
+    if(result)toast(action.room===null?'已恢复原用途，施工和物品都保留。':'猫房设置好了。可以去商店挑东西。');
+  };
+}
 function renderCatalog(){
   if($('#custom-plan-cards')){
     $('#custom-plan-label').hidden=!(state.customPlans||[]).length;
-    $('#custom-plan-cards').innerHTML=(state.customPlans||[]).map(d=>{const p=designToPlan(d);return '<article class="custom-plan-card '+(d.id===state.selected?'selected':'')+'"><button data-custom-select="'+d.id+'" aria-pressed="'+(d.id===state.selected)+'"><img alt="自定义户型平面图" src="'+planImage(d)+'"><span><h3>'+esc(d.name)+'</h3><p>'+p.areaM2+' m² · '+d.rooms.length+' 个房间</p></span></button><div class="custom-plan-actions"><button data-custom-edit="'+d.id+'">编辑户型 / 装修</button></div></article>';}).join('');
+    $('#custom-plan-cards').innerHTML=(state.customPlans||[]).map(d=>{const p=getPlan(d.id);return '<article class="custom-plan-card '+(d.id===state.selected?'selected':'')+'"><button data-custom-select="'+d.id+'" aria-pressed="'+(d.id===state.selected)+'"><img alt="自定义户型平面图" src="'+planImage({...d,rooms:p.rooms})+'"><span><h3>'+esc(d.name)+'</h3><p>'+p.areaM2+' m² · '+d.rooms.length+' 个房间</p></span></button><div class="custom-plan-actions"><button data-custom-edit="'+d.id+'">编辑户型 / 装修</button></div></article>';}).join('');
     $('#custom-plan-cards').querySelectorAll('[data-custom-select]').forEach(b=>b.onclick=async()=>{selectedRoom=null;$('#room-detail').hidden=true;if(await mutate(s=>({...s,selected:b.dataset.customSelect}),{type:'select',plan:b.dataset.customSelect})){scene.home();}});
     $('#custom-plan-cards').querySelectorAll('[data-custom-edit]').forEach(b=>b.onclick=()=>designer.open(b.dataset.customEdit));
   }
@@ -60,7 +76,7 @@ $('#plan-sort').onchange=()=>{renderCatalog();$('#plan-cards').scrollTo(0,0);};
 $('#plan-budget').onchange=()=>{renderCatalog();$('#plan-cards').scrollTo(0,0);};
 function render(){const p=getPlan(state.selected),funds=balance(state),amount=invested(state),total=constructionTotal(p),stages=constructionProgress(amount,p);$('#balance').textContent=money(funds);$('#plan-title').textContent=p.name;$('#plan-tagline').textContent=p.title;$('#plan-description').textContent=p.description;
   $('#source-link').hidden=!!p.custom;$('.market-price').hidden=!!p.custom;$('#custom-design-note').hidden=!p.custom;
-  $('#floor-image').src=p.custom?planImage(state.customPlans.find(d=>d.id===p.id)):import.meta.env.BASE_URL+'references/'+p.floorFile;$('#floor-full').href=$('#floor-image').src;$('#floor-image').alt=p.custom?p.name+' 自定义平面图':'M/I Homes '+p.name+' 原始一层平面图';
+  $('#floor-image').src=p.custom?planImage({...state.customPlans.find(d=>d.id===p.id),rooms:p.rooms}):import.meta.env.BASE_URL+'references/'+p.floorFile;$('#floor-full').href=$('#floor-image').src;$('#floor-image').alt=p.custom?p.name+' 自定义平面图':'M/I Homes '+p.name+' 原始一层平面图';
   $('#floor-full').textContent=p.custom?'下载平面图 ↓':'打开大图 ↗';if(p.custom)$('#floor-full').setAttribute('download','my-floorplan.svg');else $('#floor-full').removeAttribute('download');
   $('[data-flat=true]').textContent=p.custom?'我的平面图':'原始平面图';
   $('.source-note').textContent=p.custom?'自定义单层户型 · 房间尺寸以米计。墙体、屋顶和家具为游戏内示意。':'来源：M/I Homes Columbus 公开户型 · 3D 为平面图的简化重建，仅展示一层；层高、家具与外观为示意。';
@@ -79,7 +95,10 @@ function render(){const p=getPlan(state.selected),funds=balance(state),amount=in
   $('#invest').disabled=!next||funds<=0;$('#invest').innerHTML=next?`${icon('home',17)} 投入 ${money(Math.min(funds,next.cost-next.paid))} · ${esc(next.short)}`:`${icon('check',17)} 完工了`;
   $('#mode-badge').innerHTML=`<i></i>${preview?'完工预览 · 不影响进度':'施工进度 · '+percentage} `;$('#toggle-preview span').textContent=preview?'查看施工进度':'看看完工效果';
   const events=state.events.slice(-20).reverse();$('#journal-items').innerHTML=events.length?events.map(e=>`<article class="journal-entry"><div class="entry-icon ${e.type}">${icon(e.type==='study'?'book':e.type==='purchase'?'layers':'home',18)}</div><div><b>${e.type==='study'?`${esc(state.names[e.person])} 学习了 ${e.minutes} 分钟`:e.type==='purchase'?`${esc(state.names[e.person])} 买了 ${esc(itemName(e))}`:`${esc(getPlan(e.plan).name)}：施工投入`}</b><p>${e.type==='study'?esc(e.note||'学习打卡')+(e.rewardVersion===1?`<span class="study-details">${esc(focusLabel(e.focus))} · 投入 ${e.focus}/100 · 本次效率 ${(e.efficiency/100).toFixed(1)}%</span>`:''):e.type==='purchase'?'已放入共同仓库，可以在商店里查看和摆放。':'已从共同余额扣除，施工进度已更新。'}</p></div><div class="entry-meta"><strong>${e.type==='study'?'+ '+money(studyReward(e)):'− '+money(e.amount)}</strong><time>${new Date(e.at).toLocaleString('zh-CN',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}</time></div></article>`).join(''):`<div class="empty-journal">${icon('book',25)}<div><b>还没有记录</b><p>学完记一下，学习、施工和购买记录都会显示在这里。</p></div><button class="text-button" id="first-study">记一笔 ${icon('arrow',15)}</button></div>`;
-  $('#first-study')?.addEventListener('click',openStudy);$('#undo').disabled=!state.events.some(e=>e.type==='study'&&(!isCloud()||e.person===cloud.session.slot));$('#undo').textContent=isCloud()?'撤销我最近一次学习':'撤销最近一次学习';sceneUpdate();shop?.render();designer?.sync();ledger?.render();}
+  $('#room-picker').innerHTML='<option value="">选个房间，查看或调整用途</option>'+p.rooms.map(r=>`<option value="${esc(r.id)}">${esc(r.name)}${r.catRoomOverride?'（原'+esc(r.originalName)+'）':''}</option>`).join('');$('#room-picker').value=selectedRoom||'';
+  $('#first-study')?.addEventListener('click',openStudy);$('#undo').disabled=!state.events.some(e=>e.type==='study'&&(!isCloud()||e.person===cloud.session.slot));$('#undo').textContent=isCloud()?'撤销我最近一次学习':'撤销最近一次学习';sceneUpdate();selectRoom(selectedRoom);shop?.render();designer?.sync();ledger?.render();}
+$('.view-toolbar').insertAdjacentHTML('afterend','<div class="room-use-toolbar"><label for="room-picker">房间用途</label><select id="room-picker" aria-label="选择房间调整用途"></select><p>每套都能选一间改猫房，随时可以恢复。</p></div>');
+$('#room-picker').onchange=()=>{const id=$('#room-picker').value;interior=true;flat=false;$('#flat-view').hidden=true;$('.scene-wrap').classList.remove('is-flat');document.querySelectorAll('[data-flat]').forEach(b=>b.classList.toggle('active',b.dataset.flat==='false'));$('#cutaway').classList.add('active');$('#exterior').classList.remove('active');sceneUpdate();selectRoom(id);};
 $('.catalog-controls').insertAdjacentHTML('beforebegin','<div class="design-entry"><h3>想自己画一个？</h3><p>画房间、开门窗，墙色和地板自己挑，也可以留一间猫房。</p><button id="design-open">＋ 自己设计户型</button></div><p class="custom-plan-label" id="custom-plan-label" hidden>自己设计的户型</p><div id="custom-plan-cards"></div>');
   $('.market-price').insertAdjacentHTML('afterend','<div class="custom-design-note" id="custom-design-note" hidden>这是你们自己设计的户型，没有对应的真实房价。施工总预算可以在编辑器里设置，改布局不会重置进度。<button id="edit-design">编辑布局、墙色和地板 ↗</button><button id="decorate-design">去商店挑东西 / 摆放物品 ↗</button></div>');
 scene=createScene($('#scene'),selectRoom,id=>shop?.openOwned(id));

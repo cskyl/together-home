@@ -16,3 +16,5 @@
 .option-reference{margin-top:6px;font-size:.75rem;font-weight:400;color:#63715d}.option-reference summary{cursor:pointer}.option-reference img{display:block;width:100%;height:150px;object-fit:contain;background:#f4f5ef;margin-top:8px}.option-reference span{display:block;line-height:1.5;margin-top:5px}
 
 .real-vehicle-dialog .item-dialog-grid>div:first-child{display:flex;flex-direction:column}.real-vehicle-dialog #item-reference{order:-1;margin-bottom:14px}.real-vehicle-dialog #item-reference img{max-height:260px;object-fit:contain}.real-vehicle-dialog .item-preview{min-height:220px}.real-vehicle-dialog .preview-hint{flex:none}
+
+.item-art.bags:has(img){background:#fff}.item-art.bags img{object-fit:contain;padding:12px}

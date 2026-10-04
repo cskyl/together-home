@@ -1,0 +1,76 @@
+// Exact US product / material / color snapshots, checked 2026-10-04.
+// Bags use their published USD retail amount as the game price, without a discount.
+// Evidence and downloaded image checks are recorded in research/bag-sources.json.
+const checkedAt = '2026-10-04';
+const note = '官方同款商品图；3D 仅为包型摆放示意，不还原品牌纹样、五金或实物尺寸。';
+function bag({slug,brand,name,model,shape,color,price,description,sku,url,imageSource,specs}) {
+  return {
+    id:`bag-${slug}`,category:'bags',brand,name,shape,color,price,description,
+    reference:{brand,name:model,url,image:`products/bags/${slug}.${brand==='Louis Vuitton'?'png':'jpg'}`,imageSource,checkedAt,
+      retailPrice:{amount:price,currency:'USD',note:brand==='CHANEL'?'美国官网建议零售价；未计税费':'美国官网标价；未计税费'},
+      specs:[['货号',sku],...specs],note}
+  };
+}
+
+export const bagItems = [
+  bag({slug:'dior-saddle',brand:'Dior',name:'Dior Saddle 马鞍包',model:'Saddle Bag with Strap',shape:'bag-saddle',color:'#252526',price:4700,
+    description:'黑色粒面小牛皮马鞍包，配可拆卸细肩带。',sku:'M0455CBAA_M900',
+    url:'https://www.dior.com/en_us/fashion/products/M0455CBAA_M900',
+    imageSource:'https://assets.christiandior.com/is/image/diorprod/M0455CBAAM900_SBG_E01-2?%24r4x5_raw%24=&bfc=on&crop=0%2C0%2C4000%2C5000&hei=2000&qlt=80&scale=1&wid=1600',
+    specs:[['材质','粒面小牛皮；山羊皮和小牛皮内衬'],['颜色','黑色；古金色金属'],['尺寸（长×高×宽）','25.5 × 20 × 6.5 cm'],['肩带','可拆卸、可调节；87–103 cm']]}),
+  bag({slug:'dior-small-lady',brand:'Dior',name:'Dior Small Lady Dior 小号手袋',model:'Small Lady Dior Bag',shape:'bag-tophandle',color:'#232326',price:6200,
+    description:'黑色 Cannage 藤格纹羊皮小号手袋，配皮肩带与链条肩带。',sku:'M0618ONGE_M900',
+    url:'https://www.dior.com/en_us/fashion/products/M0618ONGE_M900',
+    imageSource:'https://assets.christiandior.com/is/image/diorprod/M0618ONGEM900_E01?%24default_GHC%24=&bfc=on&crop=479%2C510%2C1003%2C1298&hei=2000&qlt=80&scale=0.875&wid=1850',
+    specs:[['材质','羊皮；山羊皮和羊皮内衬'],['颜色','黑色；浅金色金属'],['尺寸（长×高×宽）','20 × 17 × 8 cm'],['肩带','可调节皮肩带 108–118 cm；另配可拆卸链条肩带']]}),
+  bag({slug:'dior-medium-book-tote',brand:'Dior',name:'Dior Medium Book Tote 中号托特包',model:'Medium Dior Book Tote',shape:'bag-tote',color:'#4e5668',price:3450,
+    description:'米白与蓝色 Oblique 刺绣款，可放下 13 英寸笔记本。',sku:'M1296ZRIW_M828',
+    url:'https://www.dior.com/en_us/fashion/products/M1296ZRIW_M828',
+    imageSource:'https://assets.christiandior.com/is/image/diorprod/M1296ZRIWM828_SBG_E01?%24r9x10_raw%24=&bfc=on&crop=0%2C0%2C4000%2C5000&hei=2000&qlt=80&scale=1&wid=1850',
+    specs:[['材质','主体为棉；Dior Oblique 刺绣'],['颜色','米白与蓝色'],['尺寸（长×高×宽）','36 × 27.5 × 16.5 cm'],['提手垂直长度','16 cm']]}),
+  bag({slug:'dior-medium-bobby',brand:'Dior',name:'Dior Medium Bobby 中号肩包',model:'Medium Dior Bobby Bag',shape:'bag-hobo',color:'#242528',price:3900,
+    description:'黑色 Box 小牛皮翻盖肩包，配 CD 装饰扣与可调节肩带。',sku:'M9319UMOL_M900',
+    url:'https://www.dior.com/en_us/fashion/products/M9319UMOL_M900',
+    imageSource:'https://assets.christiandior.com/is/image/diorprod/M9319UMOLM900_SBG_E01-1?%24r9x10_raw%24=&bfc=on&crop=0%2C0%2C4000%2C5000&hei=2000&qlt=80&scale=1&wid=1850',
+    specs:[['材质','Box 小牛皮；羊皮和小牛皮内衬'],['颜色','黑色；古金色金属'],['尺寸（长×高×宽）','22.5 × 17.5 × 6.5 cm'],['肩带','可拆卸、可调节；76–124 cm']]}),
+  bag({slug:'chanel-classic-1112',brand:'CHANEL',name:'香奈儿 Classic 11.12 经典手袋',model:'Classic 11.12 Handbag',shape:'bag-flap',color:'#242426',price:11700,
+    description:'黑色羊皮经典翻盖款，搭配金色金属。',sku:'A01112-Y01295-94305',
+    url:'https://www.chanel.com/us/fashion/p/A01112Y0129594305/classic-11-12-handbag-lambskin-gold-tone-metal/',
+    imageSource:'https://www.chanel.com/images///f_auto%2Cq_auto%3Agood%2Cdpr_1.1/w_3200/-9543206305822.jpg',
+    specs:[['材质','羊皮与金色金属'],['颜色','黑色'],['官网尺寸','6.1 × 10 × 2.6 in']]}),
+  bag({slug:'chanel-22-small',brand:'CHANEL',name:'香奈儿 CHANEL 22 小号手袋',model:'CHANEL 22 Small Handbag',shape:'bag-hobo',color:'#222326',price:6100,
+    description:'黑色亮面小牛皮款，软包身配金色金属。',sku:'AS3260-B19059-94305',
+    url:'https://www.chanel.com/us/fashion/p/AS3260B1905994305/chanel-22-small-handbag-shiny-calfskin-gold-tone-metal/',
+    imageSource:'https://www.chanel.com/images/as///f_auto%2Cq_auto%3Agood%2Cdpr_1.1/w_3200/-83612773.jpg',
+    specs:[['材质','亮面小牛皮与金色金属'],['颜色','黑色'],['官网尺寸','13.8 × 14.6 × 2.8 in']]}),
+  bag({slug:'chanel-25-small',brand:'CHANEL',name:'香奈儿 CHANEL 25 小号手袋',model:'CHANEL 25 Small Handbag',shape:'bag-hobo',color:'#232529',price:7000,
+    description:'黑色粒面小牛皮小号款，搭配金色金属。',sku:'AS5293-B20304-94305',
+    url:'https://www.chanel.com/us/fashion/p/AS5293B2030494305/chanel-25-small-handbag-grained-calfskin-gold-tone-metal/',
+    imageSource:'https://www.chanel.com/images/as///f_auto%2Cq_auto%3Agood%2Cdpr_1.1/w_3200/-83612790.jpg',
+    specs:[['材质','粒面小牛皮与金色金属'],['颜色','黑色'],['官网尺寸','11.8 × 10.2 × 5.5 in']]}),
+  bag({slug:'chanel-small-shopping',brand:'CHANEL',name:'香奈儿 Small Shopping Bag 小号购物包',model:'Small Shopping Bag',shape:'bag-tote',color:'#222326',price:7500,
+    description:'2026 秋冬黑色粒面小牛皮购物包，搭配金色金属。',sku:'AS6244-B24024-94305',
+    url:'https://www.chanel.com/us/fashion/p/AS6244B2402494305/small-shopping-bag-grained-calfskin-gold-tone-metal/',
+    imageSource:'https://www.chanel.com/images/as///f_auto%2Cq_auto%3Agood%2Cdpr_1.1/w_3200/-83807557.jpg',
+    specs:[['材质','粒面小牛皮与金色金属'],['颜色','黑色'],['官网尺寸','9.4 × 11.8 × 5.3 in'],['系列','Fall-Winter 2026']]}),
+  bag({slug:'lv-speedy-bandouliere-25',brand:'Louis Vuitton',name:'LV Speedy Bandoulière 25 手袋',model:'Speedy Bandoulière 25',shape:'bag-tophandle',color:'#654631',price:1980,
+    description:'Monogram 帆布款，双提手加可拆卸肩带。',sku:'M46977',
+    url:'https://us.louisvuitton.com/eng-us/products/speedy-bandouliere-25-monogram-nvprod5320019v/M46977',
+    imageSource:'https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-speedy-bandouliere-25--M46977_PM2_Front%20view.jpg',
+    specs:[['材质','Monogram 涂层帆布；天然牛皮饰边；织物内衬'],['配色','Monogram；金色金属'],['尺寸（长×高×宽）','9.8 × 7.5 × 5.9 in'],['肩带垂直长度','可拆卸、可调节；18.3–21.7 in']]}),
+  bag({slug:'lv-neverfull-mm',brand:'Louis Vuitton',name:'LV Neverfull MM 托特包',model:'Neverfull MM',shape:'bag-tote',color:'#654631',price:2240,
+    description:'Monogram 帆布配樱桃红内衬，附可拆卸拉链小袋。',sku:'M46987',
+    url:'https://us.louisvuitton.com/eng-us/products/neverfull-mm-monogram-nvprod5350101v/M46987/',
+    imageSource:'https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-neverfull-mm--M46987_PM2_Front%20view.jpg',
+    specs:[['材质','Monogram 涂层帆布；天然牛皮饰边；条纹织物内衬'],['配色','Monogram / Cherry（樱桃红内衬）'],['尺寸（长×高×宽）','18.5 × 11 × 5.5 in'],['随包配置','可拆卸拉链小袋；钩扣闭合']]}),
+  bag({slug:'lv-alma-bb',brand:'Louis Vuitton',name:'LV Alma BB 手袋',model:'Alma BB',shape:'bag-tophandle',color:'#654631',price:2000,
+    description:'Monogram 帆布小号手提包，配双拉链、挂锁与可拆卸肩带。',sku:'M46990',
+    url:'https://us.louisvuitton.com/eng-us/products/alma-bb-monogram-nvprod5190086v/M46990',
+    imageSource:'https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-alma-bb--M46990_PM2_Front%20view.jpg',
+    specs:[['材质','Monogram 涂层帆布；天然牛皮饰边；织物内衬'],['配色','Monogram；金色金属'],['尺寸（长×高×宽）','9.3 × 6.9 × 4.5 in'],['肩带垂直长度','可拆卸、可调节；19.7–24.4 in']]}),
+  bag({slug:'lv-noe',brand:'Louis Vuitton',name:'LV Noé 水桶包',model:'Noé',shape:'bag-bucket',color:'#654631',price:2010,
+    description:'Monogram 帆布水桶包，抽绳开合，配可调节肩带。',sku:'M46976',
+    url:'https://us.louisvuitton.com/eng-us/products/noe-monogram-nvprod5320004v/M46976',
+    imageSource:'https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-noe--M46976_PM2_Front%20view.jpg',
+    specs:[['材质','Monogram 涂层帆布；天然牛皮饰边；织物内衬'],['配色','Monogram；金色金属'],['尺寸（长×高×宽）','10.8 × 14.2 × 7.9 in'],['肩带垂直长度','可拆卸、可调节；10.2–12.6 in']]})
+];

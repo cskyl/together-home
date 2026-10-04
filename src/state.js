@@ -1,4 +1,4 @@
-import { allPlans, getPlan } from './plans.js';
+import { allPlans, basePlans, getPlan, roomOverride } from './plans.js';
 import { constructionTotal, constructionPhases, constructionProgress } from './construction.js';
 import { getItem, quote, placementRooms, placementSlots } from './items.js';
 import { validateDesign,normalizeDesign,MAX_DESIGNS } from './designs.js';
@@ -45,9 +45,36 @@ export function placeItem(s,{id,position}) {
   }
   return {...s,placements};
 }
+// One optional converted cat room per plan. A null room keeps the version after
+// restoration, preventing a delayed request from overwriting a later decision.
+export function setRoomUse(s,{plan,room,expectedVersion,expectedPlanVersion}){
+  const base=basePlans(s).find(p=>p.id===plan),old=roomOverride(plan,s);
+  if(!base)throw Error('请选择一个有效户型。');
+  if(!Number.isSafeInteger(expectedVersion)||expectedVersion<0||!Number.isSafeInteger(expectedPlanVersion)||expectedPlanVersion<0)throw Error('房间用途版本无效。');
+  if(expectedVersion!==(old?.version||0)||expectedPlanVersion!==(base.custom?base.version:0)){
+    const error=Error('房间或户型刚更新了，已保留最新设置。看一下再操作。');error.code='ROOM_USE_CONFLICT';throw error;
+  }
+  if(room!==null){
+    const target=base.rooms.find(r=>r.id===room);
+    if(!target||target.type==='garage')throw Error('请选择车库以外的房间。');
+    if(target.type==='cat')throw Error('这间本来就是猫房，可以在户型编辑器里调整。');
+  }else if(!old?.room)throw Error('这套户型没有需要恢复的猫房。');
+  if((old?.version||0)>=Number.MAX_SAFE_INTEGER)throw Error('房间用途版本已达到上限。');
+  return {...s,roomOverrides:[...(s.roomOverrides||[]).filter(entry=>entry.plan!==plan),{plan,room,version:(old?.version||0)+1}]};
+}
 export function validate(s) {
   if(!s||s.version!==1||!Array.isArray(s.names)||s.names.length!==2||s.names.some(n=>typeof n!=='string'||!n.trim()||n.length>16)||!Array.isArray(s.events)||s.events.length>100000)throw Error('存档格式不正确。');
   if(s.customPlans!==undefined){if(!Array.isArray(s.customPlans)||s.customPlans.length>MAX_DESIGNS)throw Error('自定义户型数量无效。');const ids=new Set();for(const d of s.customPlans){validateDesign(d,{saved:true});if(ids.has(d.id))throw Error('自定义户型编号重复。');ids.add(d.id);}}
+  if(s.roomOverrides!==undefined){
+    const originals=basePlans(s);
+    if(!Array.isArray(s.roomOverrides)||s.roomOverrides.length>originals.length)throw Error('房间用途存档无效。');
+    const changed=new Set();
+    for(const entry of s.roomOverrides){
+      const plan=originals.find(p=>p.id===entry?.plan),room=plan?.rooms.find(r=>r.id===entry?.room);
+      if(!plan||changed.has(entry.plan)||!Number.isSafeInteger(entry.version)||entry.version<1||(entry.room!==null&&(!room||['garage','cat'].includes(room.type))))throw Error('房间用途存档无效。');
+      changed.add(entry.plan);
+    }
+  }
   const plans=allPlans(s);if(!plans.some(p=>p.id===s.selected))throw Error('存档户型无效。');
   let funds=0;const used={},ids=new Set();
   for(const e of s.events){
@@ -79,6 +106,10 @@ export function saveDesign(s,{design,expectedVersion}){
   if(!old&&(s.customPlans||[]).length>=MAX_DESIGNS)throw Error('最多保存 8 个自定义户型，可以继续编辑已有户型。');
   if(clean.budget<invested(s,clean.id))throw Error('房子总预算不能低于已经投入的施工资金。');
   const saved={...clean,version:(old?.version||0)+1},next={...s,selected:saved.id,customPlans:[...(s.customPlans||[]).filter(d=>d.id!==saved.id),saved]};
+  const override=roomOverride(saved.id,s);
+  if(override?.room&&!saved.rooms.some(r=>r.id===override.room&&!['garage','cat'].includes(r.type))){
+    next.roomOverrides=s.roomOverrides.map(entry=>entry.plan===saved.id?{plan:entry.plan,room:null,version:entry.version+1}:entry);
+  }
   if(s.placements){const plans=allPlans(next);next.placements=s.placements.filter(p=>{if(p.plan!==saved.id)return true;try{validPlacement(next,p,plans);return true;}catch{return false;}});}
   return next;
 }

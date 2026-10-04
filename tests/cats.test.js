@@ -22,7 +22,7 @@ const secret=()=>randomBytes(32).toString('hex');
 const act=(store,token,action,requestId=randomUUID())=>store.action(token,{requestId,action});
 
 test('58件家具和10件猫用品可购买，旧47件历史价格及选配保持兼容',()=>{
-  assert.equal(items.length,123);assert.equal(new Set(items.map(item=>item.id)).size,123);assert.deepEqual(items.filter(i=>i.category==='furniture').map(i=>i.id).sort(),furnitureShapes.map(s=>'furniture-'+s).sort());assert.deepEqual(items.filter(i=>i.category==='cats').map(i=>i.id).sort(),catShapes.map(s=>'cat-'+s).sort());
+  assert.ok(items.length>=123);assert.equal(new Set(items.map(item=>item.id)).size,items.length);assert.deepEqual(items.filter(i=>i.category==='furniture'&&!i.id.startsWith('furniture-2026-')).map(i=>i.id).sort(),furnitureShapes.map(s=>'furniture-'+s).sort());assert.deepEqual(items.filter(i=>i.category==='cats'&&!i.id.startsWith('cat-2026-')).map(i=>i.id).sort(),catShapes.map(s=>'cat-'+s).sort());
   for(const old of oldCatalog.items){const item=getItem(old.id);assert.equal(quote(old.id,{},1).amount,old.price);assert.deepEqual(quote(old.id).config,old.defaultConfig);assert.deepEqual(optionGroups(item),oldCatalog.options[item.category]||{});}
   for(const id of newIds){const item=getItem(id),priced=quote(id);assert.ok(Number.isSafeInteger(item.price)&&item.price>0);assert.equal(priced.amount,item.price);assert.deepEqual(priced.config,{});assert.deepEqual(placementSlots(item),[12,13,14,15]);assert.throws(()=>quote(id,{free:true}),/选配/);}
 });

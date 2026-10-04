@@ -4,6 +4,8 @@ import { pricesV2 } from './prices-v2.js';
 import { furnitureExpansion } from './furniture-expansion.js';
 import { expansionReferences } from './expansion-references.js';
 import { vehicles } from './vehicles.js';
+import { bagItems } from './bag-catalog.js';
+import { furniture2026Items } from './furniture-2026.js';
 import { furnitureAdditions } from './furniture-catalog.js';
 import { furnitureReferences } from './furniture-references.js';
 import { carReferences } from './car-references.js';
@@ -12,7 +14,7 @@ export { GAME_PRICE_VERSION } from './prices.js';
 export const furnitureGroups = [['all','全部家具'],['living','客厅'],['bedroom','卧室'],['office','书房'],['dining','餐厅'],['kitchen','厨房'],['bathroom','卫浴'],['entry','玄关'],['outdoor','户外']];
 const originalRoomGroups={sofa:'living',armchair:'living',bed:'bedroom',wardrobe:'bedroom',dresser:'bedroom',nightstand:'bedroom',desk:'office',officechair:'office',diningtable:'dining',diningchair:'dining',tvstand:'living',bookcase:'office'};
 export const categories = [
-  ['lego','乐高街景'],['cars','车库'],['furniture','家具'],['cats','猫猫家具'],['blind','盲盒'],['plush','娃娃'],['decor','装饰摆件']
+  ['lego','乐高街景'],['cars','车库'],['furniture','家具'],['cats','猫猫家具'],['bags','包包'],['blind','盲盒'],['plush','娃娃'],['decor','装饰摆件']
 ];
 const history = 'https://www.lego.com/en-us/categories/modular-buildings/about';
 const modulars = [
@@ -108,7 +110,9 @@ export const items = [
   ].map(([shape,name,price,color,description])=>({id:`cat-${shape}`,category:'cats',shape,name,price,color,description})),
   ...furnitureAdditions,
   ...furnitureExpansion,
-  ...vehicles
+  ...vehicles,
+  ...bagItems,
+  ...furniture2026Items
 ].map(item=>({...item,price:Object.hasOwn(pricesV2,item.id)&&['furniture','cats','decor'].includes(item.category)?Math.max(5,Math.round(pricesV2[item.id]*.4/5)*5):item.price,...(item.category==='furniture'?{roomGroup:item.roomGroup||originalRoomGroups[item.shape]}:{}),reference:item.reference||expansionReferences[item.id]||furnitureReferences[item.id]||carReferences[item.id]||decorReferences[item.id]}));
 export const getItem = id => items.find(i=>i.id===id);
 export function optionGroups(item) {
@@ -135,11 +139,11 @@ export const itemName = owned => {
 };
 export const configName = owned => Object.entries(optionGroups(getItem(owned.item))).map(([key,group])=>group.values.find(v=>v.id===owned.config[key])?.name).join(' · ');
 export function placementRooms(plan,item) {
-  return plan.rooms.filter(r=>item.category==='cars'?r.type==='garage':plan.custom||['living','bed','study','dining','cat'].includes(r.type));
+  return plan.rooms.filter(r=>item.category==='cars'?r.type==='garage':plan.custom||r.type!=='garage');
 }
 // A shared slot reserves real space: small collectibles use display ledges; furniture uses floor zones.
 export function placementSlots(item) {
   if(item.category==='cars')return [0,1];
-  if(item.category==='lego'||item.category==='blind')return Array.from({length:12},(_,i)=>i);
+  if(['lego','blind','bags'].includes(item.category))return Array.from({length:12},(_,i)=>i);
   return [12,13,14,15];
 }

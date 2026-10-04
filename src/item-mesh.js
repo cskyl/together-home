@@ -2,6 +2,7 @@ import * as T from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { getItem, quote, paintOptions, carOptions, optionGroups } from './items.js';
 import { createFurnitureModel } from './furniture-mesh.js';
+import { createBagModel } from './bag-mesh.js';
 
 export function createItemModel(owned,{displayStand=false}={}) {
   const item=getItem(owned.item||owned.id);let config=quote(item.id,owned.config).config;
@@ -22,6 +23,8 @@ export function createItemModel(owned,{displayStand=false}={}) {
   const cylinder=(x,y,z,rt,rb,h,c)=>mesh(new T.CylinderGeometry(rt,rb,h,16),c,x,y,z);
   if(item.category==='furniture'||item.category==='cats'){
     root.add(createFurnitureModel(item));
+  }else if(item.category==='bags'){
+    root.add(createBagModel(item));
   }else if(item.category==='lego'){
     const wide=[10255,10326,11371].includes(item.set),w=wide?1.48:1.06,d=.79;
     box(0,.03,0,w+.15,.06,d+.22,'#777f78');box(0,.077,.39,w+.15,.045,.18,'#b1b4ab');
@@ -109,7 +112,7 @@ export function createItemModel(owned,{displayStand=false}={}) {
     if(shape==='piano'){box(0,.57,0,1.3,1.14,.36,color);box(0,.72,.3,1.32,.13,.4,color);for(let i=0;i<20;i++){box((i-9.5)*.057,.798,.34,.052,.028,.29,'#ebe7d9');if(i%7!==2&&i%7!==6)box((i-9.5)*.057+.028,.826,.27,.03,.035,.16,'#303a35');}box(0,.3,.84,.65,.07,.32,'#987e62');for(const x of [-.26,.26])box(x,.15,.84,.04,.3,.25,'#686958');}
     if(shape==='aquarium'){box(0,.38,0,.9,.76,.42,'#9b8368');box(0,.79,0,.94,.08,.47,'#626d62');box(0,1.06,0,.88,.47,.41,'#9ac2c3',{transparent:true,opacity:.36,roughness:.08,depthWrite:false});box(0,.85,0,.87,.035,.4,'#d2c3a0');for(let i=0;i<3;i++)ball((i-1)*.2,1.01+(i%2)*.1,.03,.075,.038,.025,['#d49a5c','#d0b981','#929f75'][i]);}
   }
-  if(displayStand&&['lego','blind'].includes(item.category)){
+  if(displayStand&&['lego','blind','bags'].includes(item.category)){
     const holder=new T.Group();holder.add(root);root.position.y=.86;
     const top=new T.Mesh(new T.BoxGeometry(.85,.07,.66),material('#b3936c'));top.position.y=.82;top.receiveShadow=true;holder.add(top);
     for(const x of [-.33,.33])for(const z of [-.24,.24]){const leg=new T.Mesh(new T.BoxGeometry(.045,.79,.045),material('#9a8060'));leg.position.set(x,.395,z);holder.add(leg);}return holder;
